@@ -26,6 +26,18 @@
           "showProcess": true,
           "sm": 12, "md": 6
         },
+        "testBtn": {
+          "type": "sendTo",
+          "command": "testDevices",
+          "jsonData": "{}",
+          "variant": "outlined",
+          "label": {
+            "en": "🔎 Test configured devices (reachable? really zeptrion?)",
+            "de": "🔎 Konfigurierte Geräte testen (erreichbar? wirklich zeptrion?)"
+          },
+          "showProcess": true,
+          "sm": 12, "md": 6
+        },
         "_discoverHint": {
           "type": "staticText",
           "text": {
@@ -51,9 +63,9 @@
               "type": "text",
               "attr": "id",
               "title": "ID",
-              "tooltip": { "en": "a-z, 0-9, _ and - only", "de": "nur a-z, 0-9, _ und -" },
+              "tooltip": { "en": "Leave empty = auto-generated from host. Only a-z, 0-9, _ and -", "de": "Leer lassen = wird automatisch aus dem Host erzeugt. Nur a-z, 0-9, _ und -" },
               "validator": "!data.id || /^[a-zA-Z0-9_-]+$/.test(data.id)",
-              "validatorErrorText": { "en": "Only a-z, 0-9, _ and -", "de": "Nur a-z, 0-9, _ und -" },
+              "validatorErrorText": { "en": "Only a-z, 0-9, _ and - (or leave empty)", "de": "Nur a-z, 0-9, _ und - (oder leer lassen)" },
               "width": "10%"
             },
             {

@@ -123,6 +123,36 @@ class Zeptrion extends utils.Adapter {
         this.requestTimeout = Math.min(Math.max(timeout, 500), 30000);
 
         const devicesCfg = Array.isArray(this.config.devices) ? this.config.devices : [];
+
+        // Auto-ID: Zeilen mit Host aber ohne ID bekommen eine aus dem Host abgeleitete
+        // ID (z.B. "10.195.36.116" -> "zapp_10_195_36_116", "zapp-14150003.local" ->
+        // "zapp_14150003"). Änderung wird einmalig in die Konfiguration zurück-
+        // geschrieben (Adapter startet dadurch neu - passiert nur bei Änderungen).
+        let cfgChanged = false;
+        const usedIds = new Set(devicesCfg.map(d => d && d.id).filter(Boolean));
+        for (const d of devicesCfg) {
+            if (d && d.host && !d.id) {
+                let base = String(d.host).trim().replace(/\.local\.?$/i, '').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+                if (/^\d/.test(base)) base = 'zapp_' + base;
+                let candidate = base || 'device';
+                let i = 2;
+                while (usedIds.has(candidate)) candidate = `${base}_${i++}`;
+                d.id = candidate;
+                usedIds.add(candidate);
+                if (!d.name) d.name = d.host;
+                cfgChanged = true;
+                this.log.info(`Geräte-ID automatisch vergeben: "${candidate}" für Host ${d.host}`);
+            }
+        }
+        if (cfgChanged) {
+            const instObj = await this.getForeignObjectAsync(`system.adapter.${this.namespace}`);
+            if (instObj) {
+                instObj.native.devices = devicesCfg;
+                await this.setForeignObjectAsync(`system.adapter.${this.namespace}`, instObj);
+                return; // Adapter startet durch die Konfig-Änderung neu
+            }
+        }
+
         const active = devicesCfg.filter(d => d && d.enabled !== false && d.id && d.host);
 
         if (!active.length) {
@@ -229,7 +259,7 @@ class Zeptrion extends utils.Adapter {
 
         await this.setObjectNotExistsAsync(id, {
             type: 'device',
-            common: { name: dev.cfg.name },
+            common: { name: dev.cfg.name, icon: '/adapter/zeptrion/zeptrion.png' },
             native: { host: dev.cfg.host, channels: dev.cfg.channels, kind: dev.cfg.kind, pollInterval: dev.cfg.pollInterval }
         });
 
@@ -699,6 +729,21 @@ class Zeptrion extends utils.Adapter {
         const dev = this.devices[id];
         try {
             const idData = await this.zrapGet(id, '/zrap/id');
+
+            // Verifikation: antwortet hier wirklich ein zeptrion-Gerät?
+            if (idData.sys !== undefined && String(idData.sys).toUpperCase() !== 'ZEPTRION') {
+                this.log.warn(`[${id}] Host ${dev.cfg.host} antwortet, meldet aber sys="${idData.sys}" statt "ZEPTRION" - vermutlich falsche IP oder kein zeptrion-Gerät!`);
+            }
+            // Plausibilisierung: Kanalzahl aus dem Gerätetyp ableiten (3340-4-x = 4, 3340-2-x = 2)
+            const typeStr = String(idData.type ?? '');
+            const m = typeStr.match(/^3340-(\d)-/);
+            if (m) {
+                const hwChannels = parseInt(m[1], 10);
+                if (hwChannels !== dev.cfg.channels) {
+                    this.log.warn(`[${id}] Gerätetyp ${typeStr} hat ${hwChannels} Kanäle, konfiguriert sind ${dev.cfg.channels} - bitte in der Instanz-Konfiguration korrigieren.`);
+                }
+            }
+
             await this.setStateAsync(`${id}.info.hw`, { val: String(idData.hw ?? ''), ack: true });
             await this.setStateAsync(`${id}.info.sw`, { val: String(idData.sw ?? ''), ack: true });
             await this.setStateAsync(`${id}.info.boot`, { val: String(idData.boot ?? ''), ack: true });
@@ -723,6 +768,14 @@ class Zeptrion extends utils.Adapter {
                     await this.setStateAsync(`${id}.channels.ch${n}.icon`, { val: String(chData.icon ?? ''), ack: true });
                     await this.setStateAsync(`${id}.channels.ch${n}.type`, { val: String(chData.type ?? ''), ack: true });
                     await this.setStateAsync(`${id}.channels.ch${n}.cat`, { val: String(chData.cat ?? ''), ack: true });
+                    // im Gerät hinterlegter Kanalname als Objektname übernehmen -
+                    // macht Objektbaum und VIS-Auswahl deutlich lesbarer
+                    const chName = String(chData.name ?? '').trim();
+                    if (chName) {
+                        await this.extendObjectAsync(`${id}.channels.ch${n}`, {
+                            common: { name: `Kanal ${n} - ${chName}` }
+                        });
+                    }
                 }
             }
             this.markConnected(id, true);
@@ -1269,6 +1322,50 @@ class Zeptrion extends utils.Adapter {
 
     async onMessage(obj) {
         if (!obj || !obj.command) return;
+
+        if (obj.command === 'testDevices') {
+            const devicesCfg = Array.isArray(this.config.devices) ? this.config.devices : [];
+            const rows = devicesCfg.filter(d => d && d.host);
+            if (!rows.length) {
+                if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'Keine Geräte mit Host in der Tabelle.' }, obj.callback);
+                return;
+            }
+            const lines = [];
+            for (const d of rows) {
+                const host = String(d.host).trim();
+                const label = d.name || d.id || host;
+                // IP-Format grob prüfen (Hostnamen sind auch erlaubt)
+                if (/^\d+\.\d+\.\d+\.\d+$/.test(host)) {
+                    const octets = host.split('.').map(Number);
+                    if (octets.some(o => o > 255)) {
+                        lines.push(`❌ ${label} (${host}): ungültige IP-Adresse`);
+                        continue;
+                    }
+                }
+                try {
+                    const res = await axios.get(`http://${host}/zrap/id`, {
+                        timeout: 3000, responseType: 'text', transformResponse: [x => x]
+                    });
+                    const parsed = xmlParser.parse(res.data || '');
+                    const rootKey = Object.keys(parsed).find(k => !k.startsWith('?'));
+                    const idData = (rootKey && parsed[rootKey]) || {};
+                    if (String(idData.sys ?? '').toUpperCase() === 'ZEPTRION') {
+                        const m = String(idData.type ?? '').match(/^3340-(\d)-/);
+                        const ch = m ? `, ${m[1]} Kanäle` : '';
+                        lines.push(`✅ ${label} (${host}): zeptrion ${idData.type ?? '?'}${ch}, SW ${idData.sw ?? '?'}, SN ${idData.sn ?? '?'}`);
+                    } else {
+                        lines.push(`⚠️ ${label} (${host}): antwortet, aber KEIN zeptrion-Gerät (sys="${idData.sys ?? 'unbekannt'}")`);
+                    }
+                } catch (err) {
+                    const code = err.code || (err.message || '').substring(0, 40);
+                    lines.push(`❌ ${label} (${host}): nicht erreichbar (${code})`);
+                }
+            }
+            const result = lines.join('\n');
+            this.log.info(`Gerätetest:\n${result}`);
+            if (obj.callback) this.sendTo(obj.from, obj.command, { result }, obj.callback);
+            return;
+        }
 
         if (obj.command === 'discover') {
             try {
