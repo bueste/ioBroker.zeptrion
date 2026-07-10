@@ -1,0 +1,50 @@
+name: Test and Release
+
+on:
+    push:
+        branches:
+            - main
+        tags:
+            - 'v*'
+    pull_request: {}
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '18'
+            - run: npm install
+            - run: npm run lint
+
+    test-js:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                node-version: [18.x, 20.x]
+                os: [ubuntu-latest]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - run: npm install
+            - run: npm run test:package
+            - run: npm run test:unit
+
+    release:
+        needs: [lint, test-js]
+        if: contains(github.ref, 'refs/tags/')
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '18'
+                  registry-url: 'https://registry.npmjs.org'
+            - run: npm install
+            - run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

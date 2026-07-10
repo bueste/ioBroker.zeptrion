@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "zeptrion",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "news": {
+      "0.5.1": {
+        "en": "CRITICAL FIX: XML parser skipped payload due to XML declaration key - all GET values (chscan/id/net/chdes/chnotify) stayed null in 0.5.0",
+        "de": "KRITISCHER FIX: XML-Parser übersprang die Nutzdaten wegen des XML-Deklarations-Keys - alle GET-Werte (chscan/id/net/chdes/chnotify) blieben in 0.5.0 null"
+      },
       "0.4.0": {
         "en": "Security hardening: interlocked factory reset (unlock required within 30s), full crash-safe onStateChange, input validation against API byte limits, adapter-managed timers, reduced connection load on embedded webservers (chscan resync only when needed), redesigned admin UI with tabs/EN+DE/validators, chnotify long-poll can be disabled",
         "de": "Security-Härtung: verriegelter Werksreset (unlock binnen 30s erforderlich), vollständig crashsicheres onStateChange, Eingabevalidierung gegen API-Byte-Limits, Adapter-verwaltete Timer, reduzierte Verbindungslast auf den Embedded-Webservern (chscan-Resync nur bei Bedarf), neu gestaltete Admin-UI mit Tabs/EN+DE/Validatoren, chnotify-Long-Poll abschaltbar"

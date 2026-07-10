@@ -30,7 +30,15 @@ try {
     Bonjour = null;
 }
 
-const xmlParser = new XMLParser({ ignoreAttributes: true, trimValues: true });
+const xmlParser = new XMLParser({
+    ignoreAttributes: true,
+    trimValues: true,
+    // WICHTIG: ohne diese beiden Optionen landet die XML-Deklaration (<?xml ...?>)
+    // als eigener Key '?xml' im Ergebnis und Object.keys(parsed)[0] träfe die
+    // Deklaration statt der Nutzdaten (Bug in 0.5.0: alle Werte blieben null).
+    ignoreDeclaration: true,
+    ignorePiTags: true
+});
 
 // gültige einfache chctrl-Kommandos (Kapitel 3.6.3)
 const SIMPLE_CMDS = [
@@ -402,7 +410,10 @@ class Zeptrion extends utils.Adapter {
         if (res.status >= 400) throw new Error(`HTTP ${res.status}`);
         if (!res.data) return {};
         const parsed = xmlParser.parse(res.data);
-        const rootKey = Object.keys(parsed)[0];
+        // Root-Element robust wählen: Keys, die mit '?' beginnen (XML-Deklaration,
+        // Processing Instructions), überspringen - zweite Verteidigungslinie zur
+        // Parser-Option ignoreDeclaration.
+        const rootKey = Object.keys(parsed).find(k => !k.startsWith('?'));
         return (rootKey && parsed[rootKey]) || {};
     }
 
