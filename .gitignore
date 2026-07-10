@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+iobroker-data
+*.log
+.vscode
+.idea
+coverage
+.nyc_output
+*.orig.*
+test/**/tmp
+.DS_Store
+Thumbs.db

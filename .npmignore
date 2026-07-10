@@ -1,0 +1,13 @@
+test
+.github
+.vscode
+.idea
+*.log
+tsconfig.json
+.eslintrc.json
+.editorconfig
+node_modules
+.git
+.gitattributes
+.travis.yml
+appveyor.yml

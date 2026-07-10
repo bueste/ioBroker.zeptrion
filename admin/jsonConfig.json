@@ -1,0 +1,179 @@
+{
+  "type": "tabs",
+  "items": {
+    "tabDevices": {
+      "type": "panel",
+      "label": { "en": "Devices", "de": "Geräte" },
+      "items": {
+        "_infoHeader": {
+          "type": "staticText",
+          "text": {
+            "en": "Feller zeptrion / zApp WLAN actuators (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP address or mDNS name (e.g. zapp-14250034.local).",
+            "de": "Feller zeptrion / zApp WLAN-Aktoren (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP-Adresse oder mDNS-Name (z.B. zapp-14250034.local)."
+          },
+          "sm": 12
+        },
+        "discoverBtn": {
+          "newLine": true,
+          "type": "sendTo",
+          "command": "discover",
+          "jsonData": "{}",
+          "variant": "contained",
+          "label": {
+            "en": "🔍 Scan network for zeptrion devices (mDNS, ~4s)",
+            "de": "🔍 Netzwerk nach zeptrion-Geräten durchsuchen (mDNS, ca. 4s)"
+          },
+          "showProcess": true,
+          "sm": 12, "md": 6
+        },
+        "_discoverHint": {
+          "type": "staticText",
+          "text": {
+            "en": "Found devices are added DISABLED to the table below. Close and reopen this dialog after scanning, then verify each row (name, channel count, kind) and enable it. mDNS only works within the same network segment / VLAN.",
+            "de": "Gefundene Geräte werden DEAKTIVIERT in die Tabelle übernommen. Dialog nach der Suche schliessen und neu öffnen, dann jede Zeile prüfen (Name, Kanalzahl, Art) und aktivieren. mDNS funktioniert nur im gleichen Netzsegment/VLAN."
+          },
+          "sm": 12
+        },
+        "devices": {
+          "newLine": true,
+          "type": "table",
+          "label": { "en": "Devices", "de": "Geräte" },
+          "sm": 12,
+          "items": [
+            {
+              "type": "checkbox",
+              "attr": "enabled",
+              "title": { "en": "Active", "de": "Aktiv" },
+              "default": true,
+              "width": "5%"
+            },
+            {
+              "type": "text",
+              "attr": "id",
+              "title": "ID",
+              "tooltip": { "en": "a-z, 0-9, _ and - only", "de": "nur a-z, 0-9, _ und -" },
+              "validator": "!data.id || /^[a-zA-Z0-9_-]+$/.test(data.id)",
+              "validatorErrorText": { "en": "Only a-z, 0-9, _ and -", "de": "Nur a-z, 0-9, _ und -" },
+              "width": "10%"
+            },
+            {
+              "type": "text",
+              "attr": "name",
+              "title": { "en": "Label", "de": "Bezeichnung" },
+              "width": "14%"
+            },
+            {
+              "type": "text",
+              "attr": "host",
+              "title": { "en": "IP address / hostname", "de": "IP-Adresse / Hostname" },
+              "validator": "!data.host || /^[a-zA-Z0-9.\\-]+$/.test(data.host)",
+              "validatorErrorText": { "en": "Invalid host (no protocol, no spaces)", "de": "Ungültiger Host (kein Protokoll, keine Leerzeichen)" },
+              "width": "16%"
+            },
+            {
+              "type": "number",
+              "attr": "channels",
+              "title": { "en": "Channels", "de": "Kanäle" },
+              "tooltip": { "en": "3340-4-x = 4, 3340-2-x = 2", "de": "3340-4-x = 4, 3340-2-x = 2" },
+              "min": 1, "max": 4, "default": 1,
+              "width": "6%"
+            },
+            {
+              "type": "select",
+              "attr": "kind",
+              "title": { "en": "Kind", "de": "Art" },
+              "tooltip": { "en": "Controls ioBroker object roles for VIS/smart home integrations", "de": "Steuert ioBroker-Objektrollen für VIS/Smart-Home-Integrationen" },
+              "options": [
+                { "value": "unknown", "label": { "en": "unknown/mixed", "de": "unbekannt/gemischt" } },
+                { "value": "blind", "label": { "en": "Blinds/shutters", "de": "Storen/Rolladen" } },
+                { "value": "light", "label": { "en": "Light", "de": "Licht" } }
+              ],
+              "default": "unknown",
+              "width": "12%"
+            },
+            {
+              "type": "number",
+              "attr": "travelTimeSec",
+              "title": { "en": "Motor travel (s)", "de": "Motor-Laufzeit (s)" },
+              "tooltip": {
+                "en": "Full travel time of the shutter motor in seconds. 0 = position estimation and setPosition disabled. Only relevant for kind=Blinds.",
+                "de": "Volle Fahrzeit des Storenmotors in Sekunden. 0 = Positionsschätzung und setPosition deaktiviert. Nur relevant bei Art=Storen."
+              },
+              "min": 0, "max": 300, "default": 0,
+              "width": "9%"
+            },
+            {
+              "type": "number",
+              "attr": "tiltTimeMs",
+              "title": { "en": "Tilt pulse (ms)", "de": "Kipp-Impuls (ms)" },
+              "tooltip": {
+                "en": "Short move pulse for tilting raffstore lamellas via tiltOpen/tiltClose (typically 300-800ms). 0 = disabled. Only relevant for kind=Blinds.",
+                "de": "Kurzer Fahr-Impuls zum Schrägstellen von Rafflamellen via tiltOpen/tiltClose (typisch 300-800ms). 0 = deaktiviert. Nur relevant bei Art=Storen."
+              },
+              "min": 0, "max": 5000, "default": 0,
+              "width": "8%"
+            },
+            {
+              "type": "checkbox",
+              "attr": "smartfront",
+              "title": "Smartfront",
+              "tooltip": {
+                "en": "Only enable if a Feller Smartfront (920-330x.xx.ZS/.ZU) is attached: adds temperature/brightness/humidity sensors and LED control",
+                "de": "Nur aktivieren, wenn ein Feller-Smartfront (920-330x.xx.ZS/.ZU) montiert ist: ergänzt Temperatur/Helligkeit/Feuchte-Sensoren und LED-Steuerung"
+              },
+              "default": false,
+              "width": "8%"
+            },
+            {
+              "type": "number",
+              "attr": "pollInterval",
+              "title": "Poll (s)",
+              "tooltip": {
+                "en": "Interval for RSSI + periodic resync. Real-time channel updates come via long-poll independently.",
+                "de": "Intervall für RSSI + periodischen Resync. Echtzeit-Kanalupdates kommen unabhängig davon per Long-Poll."
+              },
+              "min": 5, "max": 3600, "default": 30,
+              "width": "7%"
+            }
+          ]
+        }
+      }
+    },
+    "tabExpert": {
+      "type": "panel",
+      "label": { "en": "Expert", "de": "Experten" },
+      "items": {
+        "requestTimeout": {
+          "type": "number",
+          "label": { "en": "HTTP timeout (ms)", "de": "HTTP Timeout (ms)" },
+          "help": {
+            "en": "Timeout per request to a device (does not apply to the chnotify long-poll, which uses a fixed 35s).",
+            "de": "Timeout pro Request an ein Gerät (gilt nicht für den chnotify-Long-Poll, der fix 35s verwendet)."
+          },
+          "min": 500, "max": 30000, "default": 4000,
+          "sm": 12, "md": 4
+        },
+        "useNotify": {
+          "newLine": true,
+          "type": "checkbox",
+          "label": { "en": "Use chnotify long-poll (near real-time updates)", "de": "chnotify-Long-Poll verwenden (nahezu Echtzeit-Updates)" },
+          "help": {
+            "en": "Keeps one HTTP connection per device permanently open (device answers within 30s at the latest). Disable only if devices show connection problems; channel states then update only at the poll interval.",
+            "de": "Hält dauerhaft eine HTTP-Verbindung pro Gerät offen (Gerät antwortet spätestens nach 30s). Nur deaktivieren, falls Geräte Verbindungsprobleme zeigen; Kanalzustände aktualisieren dann nur noch im Poll-Intervall."
+          },
+          "default": true,
+          "sm": 12, "md": 8
+        },
+        "_safetyHint": {
+          "newLine": true,
+          "type": "staticText",
+          "text": {
+            "en": "⚠️ Safety: the factory reset button (system.factoryDefault) is interlocked - it only works within 30s after setting system.unlock. This prevents accidental wipes from scripts/VIS.",
+            "de": "⚠️ Sicherheit: der Werksreset-Button (system.factoryDefault) ist verriegelt - er funktioniert nur innerhalb von 30s nach Setzen von system.unlock. Das verhindert versehentliches Löschen durch Scripts/VIS."
+          },
+          "sm": 12
+        }
+      }
+    }
+  }
+}
