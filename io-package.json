@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "zeptrion",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "news": {
+      "0.7.0": {
+        "en": "Scaling for 20+ devices (parallel setup, poll jitter, duplicate detection), strict startup validation of every configured row, CSV bulk import with per-line validation, fixed position estimate after stop during full open/close travel, adapter-managed timer cleanup, leading zeros in chdes codes preserved",
+        "de": "Skalierung für 20+ Geräte (paralleles Setup, Poll-Jitter, Duplikat-Erkennung), strikte Startup-Validierung jeder konfigurierten Zeile, CSV-Massenimport mit Zeilen-Validierung, korrigierte Positionsschätzung bei Stopp während Endlagenfahrt, korrektes Adapter-Timer-Cleanup, führende Nullen in chdes-Codes bleiben erhalten"
+      },
       "0.6.0": {
         "en": "Auto-ID from host, device test button (reachability + zeptrion verification + channel count check), channel object names from device (chdes), new icon, device icons",
         "de": "Auto-ID aus Host, Geräte-Test-Button (Erreichbarkeit + zeptrion-Verifikation + Kanalzahl-Prüfung), Kanal-Objektnamen aus dem Gerät (chdes), neues Icon, Geräte-Icons"

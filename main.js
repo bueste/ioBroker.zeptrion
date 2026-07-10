@@ -37,7 +37,11 @@ const xmlParser = new XMLParser({
     // als eigener Key '?xml' im Ergebnis und Object.keys(parsed)[0] träfe die
     // Deklaration statt der Nutzdaten (Bug in 0.5.0: alle Werte blieben null).
     ignoreDeclaration: true,
-    ignorePiTags: true
+    ignorePiTags: true,
+    // Werte NICHT automatisch in Zahlen wandeln: chdes type/cat sind Codes wie
+    // "0815", die als Zahl ihre führende Null verlieren würden. Numerische Felder
+    // (val, dbm) werden gezielt per parseInt konvertiert.
+    parseTagValue: false
 });
 
 // gültige einfache chctrl-Kommandos (Kapitel 3.6.3)
@@ -155,22 +159,92 @@ class Zeptrion extends utils.Adapter {
 
         const active = devicesCfg.filter(d => d && d.enabled !== false && d.id && d.host);
 
+        // --- Startup-Validierung aller manuell/per Import erfassten Zeilen ---
+        // Ungültige Zeilen werden übersprungen (mit klarer Log-Meldung), nicht nur
+        // stillschweigend falsch verarbeitet. Duplikate (ID oder Host doppelt, auch
+        // nach Sanitisierung) würden sich sonst gegenseitig im Geräte-Registry
+        // überschreiben und Geisterzustände hinterlassen.
+        const seenIds = new Set();
+        const seenHosts = new Set();
+        const validated = [];
+        for (const d of active) {
+            const errs = this.validateDeviceRow(d);
+            const sanId = this.sanitize(d.id);
+            if (seenIds.has(sanId)) errs.push(`ID "${d.id}" (sanitisiert "${sanId}") ist doppelt vergeben`);
+            const hostKey = String(d.host).trim().toLowerCase();
+            if (seenHosts.has(hostKey)) errs.push(`Host "${d.host}" ist doppelt konfiguriert`);
+            if (errs.length) {
+                this.log.error(`Gerät "${d.name || d.id || d.host}" übersprungen: ${errs.join('; ')}`);
+                continue;
+            }
+            seenIds.add(sanId);
+            seenHosts.add(hostKey);
+            validated.push(d);
+        }
+
+        if (!validated.length && active.length) {
+            this.log.error('Alle konfigurierten Geräte sind ungültig - bitte Konfiguration prüfen (Test-Button verwenden).');
+        }
+
+        // --- Paralleles Setup ---
+        // Sequentielles await würde bei vielen (teils offline) Geräten den Start
+        // minutenlang blockieren (jedes Gerät macht mehrere HTTP-Calls mit Timeout).
+        await Promise.allSettled(validated.map(async (dev) => {
+            try {
+                await this.setupDevice(dev);
+            } catch (err) {
+                this.log.error(`Gerät ${dev.id} konnte nicht initialisiert werden: ${err.message || err}`);
+            }
+        }));
+
         if (!active.length) {
             this.log.warn('Keine aktiven zeptrion Geräte konfiguriert. Bitte in der Instanz-Konfiguration Geräte anlegen oder Discovery-Button verwenden.');
         }
 
         await this.createGlobalControlObjects();
 
-        for (const dev of active) {
-            try {
-                await this.setupDevice(dev);
-            } catch (err) {
-                this.log.error(`Gerät ${dev.id} konnte nicht initialisiert werden: ${err.message || err}`);
-            }
-        }
-
         this.subscribeStates('*');
         this.updateGlobalConnection();
+    }
+
+    /** Validiert eine Geräte-Zeile aus der Konfiguration/dem CSV-Import. Gibt eine
+     * Liste menschenlesbarer Fehler zurück (leer = gültig). */
+    validateDeviceRow(d) {
+        const errs = [];
+        const host = String(d.host || '').trim();
+        if (!host) {
+            errs.push('Host fehlt');
+        } else if (!/^[a-zA-Z0-9.-]+$/.test(host)) {
+            errs.push(`Host "${host}" enthält ungültige Zeichen (kein http://, keine Leerzeichen, kein Port)`);
+        } else if (/^\d+\.\d+\.\d+\.\d+$/.test(host)) {
+            const octets = host.split('.').map(Number);
+            if (octets.length !== 4 || octets.some(o => o < 0 || o > 255)) {
+                errs.push(`"${host}" ist keine gültige IPv4-Adresse`);
+            }
+        }
+        if (d.id && !/^[a-zA-Z0-9_-]+$/.test(String(d.id))) {
+            errs.push(`ID "${d.id}" enthält ungültige Zeichen (erlaubt: a-z, 0-9, _, -)`);
+        }
+        const ch = parseInt(d.channels, 10);
+        if (d.channels !== undefined && d.channels !== '' && (isNaN(ch) || ch < 1 || ch > 4)) {
+            errs.push(`Kanäle "${d.channels}" ungültig (1-4)`);
+        }
+        if (d.kind !== undefined && d.kind !== '' && !['unknown', 'blind', 'light'].includes(String(d.kind))) {
+            errs.push(`Art "${d.kind}" ungültig (unknown/blind/light)`);
+        }
+        const tt = parseInt(d.travelTimeSec, 10);
+        if (d.travelTimeSec !== undefined && d.travelTimeSec !== '' && (isNaN(tt) || tt < 0 || tt > 300)) {
+            errs.push(`Laufzeit "${d.travelTimeSec}" ungültig (0-300s)`);
+        }
+        const tp = parseInt(d.tiltTimeMs, 10);
+        if (d.tiltTimeMs !== undefined && d.tiltTimeMs !== '' && (isNaN(tp) || tp < 0 || tp > 5000)) {
+            errs.push(`Kipp-Impuls "${d.tiltTimeMs}" ungültig (0-5000ms)`);
+        }
+        const pi = parseInt(d.pollInterval, 10);
+        if (d.pollInterval !== undefined && d.pollInterval !== '' && (isNaN(pi) || pi < 5 || pi > 3600)) {
+            errs.push(`Poll-Intervall "${d.pollInterval}" ungültig (5-3600s)`);
+        }
+        return errs;
     }
 
     sanitize(str) {
@@ -584,15 +658,19 @@ class Zeptrion extends utils.Adapter {
         };
 
         if (cmd === 'open' || cmd === 'close') {
-            // "open"/"close" fahren laut Doku selbstständig bis zur Endlage - kein
-            // "stop" nötig, daher Zielwert nach voller Laufzeit direkt setzen.
-            dev.moveState[chNum] = null;
+            // "open"/"close" fahren selbstständig bis zur Endlage. Die Fahrt wird
+            // trotzdem als moveState getrackt: ein "stop" mittendrin kann so die
+            // Zwischenposition berechnen, und der Endlagen-Timer feuert dann NICHT
+            // mehr fälschlich (moveState wurde durch stop genullt).
+            const dir = cmd === 'open' ? 'open' : 'close';
             const target = cmd === 'open' ? 100 : 0;
             const startTs = now;
+            dev.moveState[chNum] = { dir, startTs, startPos: cur ?? (dir === 'open' ? 0 : 100) };
             this.setTimeout(() => {
                 if (!this.devices[id]) return;
                 const mv = dev.moveState[chNum];
-                if (mv && mv.startTs > startTs) return; // zwischenzeitlich neuer Befehl
+                if (!mv || mv.startTs !== startTs) return; // gestoppt oder neuer Befehl
+                dev.moveState[chNum] = null;
                 setEstimate(target).catch(() => {});
             }, travel);
         } else if (cmd === 'move_open' || cmd === 'move_close') {
@@ -841,7 +919,10 @@ class Zeptrion extends utils.Adapter {
             const backoff = Math.min(dev.fails, 5) || 1;
             dev.timer = this.setTimeout(loop, dev.cfg.pollInterval * backoff);
         };
-        loop();
+        // Startversatz (0..3s zufällig): desynchronisiert die Poll-Zyklen vieler
+        // Geräte, damit nicht alle 30s ein Request-Burst durchs Netz geht
+        // ("Thundering Herd" bei 20+ Geräten).
+        dev.timer = this.setTimeout(loop, Math.floor(Math.random() * 3000));
     }
 
     /**
@@ -1323,6 +1404,87 @@ class Zeptrion extends utils.Adapter {
     async onMessage(obj) {
         if (!obj || !obj.command) return;
 
+        if (obj.command === 'importCsv') {
+            try {
+                const csv = String((obj.message && obj.message.csv) || '').trim();
+                if (!csv) {
+                    if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'CSV-Feld ist leer. Format: host;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s (nur host ist Pflicht).' }, obj.callback);
+                    return;
+                }
+                const delim = csv.includes(';') ? ';' : ',';
+                const lines = csv.split(/\r?\n/).map(l => l.trim()).filter(l => l && !l.startsWith('#'));
+                // optionale Kopfzeile erkennen und überspringen
+                if (lines.length && /^host\b/i.test(lines[0])) lines.shift();
+
+                const instObj = await this.getForeignObjectAsync(`system.adapter.${this.namespace}`);
+                const devices = Array.isArray(instObj?.native?.devices) ? instObj.native.devices : [];
+                const existingHosts = new Set(devices.map(d => String(d.host || '').trim().toLowerCase()));
+                const existingIds = new Set(devices.map(d => this.sanitize(d.id || '')));
+
+                const report = [];
+                let added = 0;
+                for (let i = 0; i < lines.length; i++) {
+                    const c = lines[i].split(delim).map(x => x.trim());
+                    const row = {
+                        host: c[0] || '',
+                        name: c[1] || '',
+                        channels: c[2] || 1,
+                        kind: (c[3] || 'unknown').toLowerCase(),
+                        travelTimeSec: c[4] || 0,
+                        tiltTimeMs: c[5] || 0,
+                        smartfront: /^(1|true|ja|yes|x)$/i.test(c[6] || ''),
+                        pollInterval: c[7] || 30
+                    };
+                    // Kurzformen für "Art" erlauben
+                    if (['storen', 'rolladen', 'shutter', 'blinds'].includes(row.kind)) row.kind = 'blind';
+                    if (['licht', 'lampe'].includes(row.kind)) row.kind = 'light';
+
+                    const errs = this.validateDeviceRow(row);
+                    if (existingHosts.has(row.host.toLowerCase())) errs.push('Host bereits konfiguriert');
+                    if (errs.length) {
+                        report.push(`❌ Zeile ${i + 1} (${row.host || '?'}): ${errs.join('; ')}`);
+                        continue;
+                    }
+                    // ID aus Host ableiten, Kollisionen auflösen
+                    let base = row.host.replace(/\.local\.?$/i, '').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+                    if (/^\d/.test(base)) base = 'zapp_' + base;
+                    let candidate = base || 'device';
+                    let n = 2;
+                    while (existingIds.has(candidate)) candidate = `${base}_${n++}`;
+
+                    devices.push({
+                        enabled: true,
+                        id: candidate,
+                        name: row.name || row.host,
+                        host: row.host,
+                        channels: parseInt(row.channels, 10) || 1,
+                        kind: row.kind,
+                        travelTimeSec: parseInt(row.travelTimeSec, 10) || 0,
+                        tiltTimeMs: parseInt(row.tiltTimeMs, 10) || 0,
+                        smartfront: row.smartfront,
+                        pollInterval: parseInt(row.pollInterval, 10) || 30
+                    });
+                    existingHosts.add(row.host.toLowerCase());
+                    existingIds.add(candidate);
+                    report.push(`✅ Zeile ${i + 1}: ${row.name || row.host} (${row.host}) als "${candidate}" übernommen`);
+                    added++;
+                }
+
+                if (added > 0 && instObj) {
+                    instObj.native.devices = devices;
+                    await this.setForeignObjectAsync(`system.adapter.${this.namespace}`, instObj);
+                }
+                const result = `${added} von ${lines.length} Zeile(n) importiert.${added ? ' Adapter startet neu; Dialog schliessen und neu öffnen.' : ''}\n\n${report.join('\n')}`;
+                this.log.info(`CSV-Import: ${added}/${lines.length} übernommen`);
+                if (obj.callback) this.sendTo(obj.from, obj.command, { result }, obj.callback);
+            } catch (err) {
+                const msg = `CSV-Import fehlgeschlagen: ${err.message || err}`;
+                this.log.warn(msg);
+                if (obj.callback) this.sendTo(obj.from, obj.command, { error: msg }, obj.callback);
+            }
+            return;
+        }
+
         if (obj.command === 'testDevices') {
             const devicesCfg = Array.isArray(this.config.devices) ? this.config.devices : [];
             const rows = devicesCfg.filter(d => d && d.host);
@@ -1394,8 +1556,8 @@ class Zeptrion extends utils.Adapter {
         try {
             for (const id of Object.keys(this.devices)) {
                 const dev = this.devices[id];
-                if (dev.timer) clearTimeout(dev.timer);
-                if (dev.pendingTimer) clearTimeout(dev.pendingTimer);
+                if (dev.timer) this.clearTimeout(dev.timer);
+                if (dev.pendingTimer) this.clearTimeout(dev.pendingTimer);
                 dev.notifyActive = false;
             }
             this.devices = {};

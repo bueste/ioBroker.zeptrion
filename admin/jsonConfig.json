@@ -151,6 +151,48 @@
         }
       }
     },
+    "tabImport": {
+      "type": "panel",
+      "label": { "en": "CSV import", "de": "CSV-Import" },
+      "items": {
+        "_csvHelp": {
+          "type": "staticText",
+          "text": {
+            "en": "Bulk-add devices. One line per device, semicolon or comma separated:\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s\nOnly host is mandatory. kind: blind/light/unknown (also: storen, licht). smartfront: 1/0. Lines starting with # are ignored, a header line 'host;...' is skipped.\nExample:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "de": "Geräte in Serie anlegen. Eine Zeile pro Gerät, Semikolon oder Komma getrennt:\nhost;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s\nNur host ist Pflicht. art: blind/light/unknown (auch: storen, licht). smartfront: 1/0. Zeilen mit # werden ignoriert, eine Kopfzeile 'host;...' wird übersprungen.\nBeispiel:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30\n10.195.36.117;Storen Wohnen;2;storen;25"
+          },
+          "sm": 12
+        },
+        "csvText": {
+          "newLine": true,
+          "type": "text",
+          "label": { "en": "CSV lines", "de": "CSV-Zeilen" },
+          "minRows": 8,
+          "maxRows": 20,
+          "trim": false,
+          "noClearButton": true,
+          "sm": 12
+        },
+        "importBtn": {
+          "newLine": true,
+          "type": "sendTo",
+          "command": "importCsv",
+          "jsonData": "{\"csv\": ${JSON.stringify(data.csvText)}}",
+          "variant": "contained",
+          "label": { "en": "⬆️ Import (validates every line)", "de": "⬆️ Importieren (validiert jede Zeile)" },
+          "showProcess": true,
+          "sm": 12, "md": 5
+        },
+        "_importHint": {
+          "type": "staticText",
+          "text": {
+            "en": "Valid lines are added ENABLED, invalid lines are reported and skipped. Duplicate hosts are rejected. After import the adapter restarts - close and reopen this dialog to see the new table rows.",
+            "de": "Gültige Zeilen werden AKTIVIERT übernommen, ungültige gemeldet und übersprungen. Doppelte Hosts werden abgelehnt. Nach dem Import startet der Adapter neu - Dialog schliessen und neu öffnen, um die neuen Tabellenzeilen zu sehen."
+          },
+          "sm": 12
+        }
+      }
+    },
     "tabExpert": {
       "type": "panel",
       "label": { "en": "Expert", "de": "Experten" },
