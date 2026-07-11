@@ -649,10 +649,13 @@ class Zeptrion extends utils.Adapter {
             if (chNums.length === 1) {
                 const chNum = chNums[0];
                 await this.zrapPost(id, `/zrap/chctrl/ch${chNum}`, { cmd: cmds[chNum] });
+                this.log.info(`[${id}] Kanalbefehl gesendet: ch${chNum} -> ${cmds[chNum]}`);
             } else {
                 const body = {};
                 for (const chNum of chNums) body[`cmd${chNum}`] = cmds[chNum];
                 await this.zrapPost(id, '/zrap/chctrl', body);
+                const summary = chNums.map(n => `ch${n}->${cmds[n]}`).join(', ');
+                this.log.info(`[${id}] Multicast-Befehl gesendet: ${summary}`);
                 this.log.debug(`[${id}] Multicast-Befehl gebündelt: ${JSON.stringify(body)}`);
             }
             for (const chNum of chNums) {
@@ -661,6 +664,8 @@ class Zeptrion extends utils.Adapter {
             }
             callbacks.forEach(cb => cb.resolve());
         } catch (err) {
+            const summary = chNums.map(n => `ch${n}->${cmds[n]}`).join(', ');
+            this.log.warn(`[${id}] Kanalbefehl fehlgeschlagen (${summary}): ${err.message || err}`);
             callbacks.forEach(cb => cb.reject(err));
         }
     }
