@@ -197,6 +197,12 @@ class Zeptrion extends utils.Adapter {
             }
         }));
 
+        // Verwaiste Geräte-Objekte entfernen: alles unter zeptrion.N.<deviceId>, dessen
+        // <deviceId> nicht (mehr) in der aktiven Konfiguration steht, wird gelöscht.
+        // Verhindert, dass States gelöschter/umbenannter Geräte im Objektbaum liegen
+        // bleiben (Bug: alte Zustände blieben nach Entfernen/Ersetzen eines Geräts).
+        await this.cleanupOrphanedDevices(validated);
+
         if (!active.length) {
             this.log.warn('Keine aktiven zeptrion Geräte konfiguriert. Bitte in der Instanz-Konfiguration Geräte anlegen oder Discovery-Button verwenden.');
         }
@@ -205,6 +211,35 @@ class Zeptrion extends utils.Adapter {
 
         this.subscribeStates('*');
         this.updateGlobalConnection();
+    }
+
+    /**
+     * Löscht Objektbäume von Geräten, die nicht mehr in der aktiven Konfiguration
+     * stehen. getAdapterObjects liefert nur die Objekte dieser Instanz; daraus die
+     * Top-Level-Geräte-IDs ableiten und gegen die konfigurierten IDs abgleichen.
+     * Reservierte Top-Level-Knoten (info, control) werden nie angetastet.
+     */
+    async cleanupOrphanedDevices(validated) {
+        const keepIds = new Set(validated.map(d => this.sanitize(d.id)));
+        const reserved = new Set(['info', 'control']);
+        try {
+            const all = await this.getAdapterObjectsAsync();
+            const prefix = `${this.namespace}.`;
+            const deviceIds = new Set();
+            for (const fullId of Object.keys(all)) {
+                if (!fullId.startsWith(prefix)) continue;
+                const top = fullId.substring(prefix.length).split('.')[0];
+                if (top && !reserved.has(top)) deviceIds.add(top);
+            }
+            for (const devId of deviceIds) {
+                if (!keepIds.has(devId)) {
+                    this.log.info(`Entferne verwaistes Gerät "${devId}" (nicht mehr in der Konfiguration).`);
+                    await this.delObjectAsync(devId, { recursive: true });
+                }
+            }
+        } catch (err) {
+            this.log.warn(`Aufräumen verwaister Objekte fehlgeschlagen: ${err.message || err}`);
+        }
     }
 
     /** Validiert eine Geräte-Zeile aus der Konfiguration/dem CSV-Import. Gibt eine
