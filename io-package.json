@@ -42,7 +42,7 @@
       "de": "Steuerung von Feller zeptrion WLAN-Aktoren (zApp-Gateway / zApp-Booster) für Licht und Storen über die zrap Webservice API. Enthält einen Sammelbefehl zum sofortigen Schliessen aller konfigurierten Storen (z.B. für Hagelalarm)."
     },
     "authors": [
-      "Stefan"
+      "Stefan Bühler <stefan.buehler46@gmail.com>"
     ],
     "keywords": [
       "feller",
@@ -73,7 +73,8 @@
     },
     "messagebox": true,
     "loglevel": "info",
-    "stopBeforeUpdate": true
+    "stopBeforeUpdate": true,
+    "tier": 2
   },
   "native": {
     "requestTimeout": 4000,

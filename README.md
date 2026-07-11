@@ -2,6 +2,11 @@
 
 ![Logo](admin/zeptrion.png)
 
+[![NPM version](https://img.shields.io/npm/v/iobroker.zeptrion.svg)](https://www.npmjs.com/package/iobroker.zeptrion)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.zeptrion.svg)](https://www.npmjs.com/package/iobroker.zeptrion)
+[![Tests](https://github.com/bueste/ioBroker.zeptrion/workflows/Test%20and%20Release/badge.svg)](https://github.com/bueste/ioBroker.zeptrion/actions)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Adapter für Feller **zeptrion / zApp** WLAN-Aktoren (WLAN-Nebenstelle 4K = zApp-Gateway,
 WLAN-Zwischenmodul 2K = zApp-Booster) für Licht- und Storensteuerung, basierend auf der
 zrap Webservice API (Feller-Dokument 10.ZEPAPI-E.1612 / Version 1.0, Firmware ab 01.08.18).
@@ -198,6 +203,25 @@ Kurzer Fahrplan (Details: https://github.com/ioBroker/ioBroker.docs/blob/master/
 
 ## Changelog
 
+### 0.7.0 (2026-07-10)
+- Skalierung für 20+ Geräte: paralleles Setup, Poll-Jitter, Duplikat-Erkennung
+- Strikte Startup-Validierung jeder konfigurierten Geräte-Zeile
+- CSV-Massenimport (eigener Konfig-Tab) mit Zeilen-Validierung und Auto-ID
+- FIX: Positionsschätzung nach Stopp während Endlagenfahrt korrekt
+- FIX: Adapter-Timer-Cleanup (this.clearTimeout), führende Nullen in chdes-Codes bleiben erhalten
+
+### 0.6.0 (2026-07-10)
+- Auto-ID aus Host, Geräte-Test-Button (Erreichbarkeit + zeptrion-Verifikation + Kanalzahl-Prüfung)
+- Kanal-Objektnamen aus dem Gerät (chdes), neues Icon, Geräte-Icons
+
+### 0.5.1 (2026-07-10)
+- KRITISCHER FIX: XML-Parser übersprang die Nutzdaten wegen des XML-Deklarations-Keys - alle GET-Werte blieben in 0.5.0 null
+
+### 0.5.0 (2026-07-07)
+- setPosition: zeitbasierte %-Anfahrt für Storen (Chunking wegen 32s-API-Limit, Referenzfahrt bei unbekannter Position)
+- tiltOpen/tiltClose: Lamellen-Kipp-Impulse (konfigurierbare Impulsdauer)
+- calibrate: Positionsschätzung ohne Fahrt setzen
+
 ### 0.4.0 (2026-07-07) - Security- & Qualitäts-Härtung
 - **Verriegelter Werksreset**: `system.factoryDefault` funktioniert nur noch innerhalb
   von 30s nach Setzen von `system.unlock` - ein einzelner versehentlicher setState aus
@@ -253,7 +277,7 @@ Kurzer Fahrplan (Details: https://github.com/ioBroker/ioBroker.docs/blob/master/
 
 MIT License
 
-Copyright (c) 2026 Stefan
+Copyright (c) 2026 Stefan Bühler
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
