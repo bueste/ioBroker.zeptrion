@@ -1,6 +1,6 @@
 {
   "name": "iobroker.zeptrion",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "ioBroker Adapter für Feller zeptrion / zApp WLAN-Aktoren (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K) über die zrap Webservice API - inkl. Sammelbefehlen für Hagelalarm und mDNS-Discovery",
   "author": {
     "name": "Stefan",

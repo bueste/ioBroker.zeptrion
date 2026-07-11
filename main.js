@@ -271,6 +271,20 @@ class Zeptrion extends utils.Adapter {
         if (d.travelTimeSec !== undefined && d.travelTimeSec !== '' && (isNaN(tt) || tt < 0 || tt > 300)) {
             errs.push(`Laufzeit "${d.travelTimeSec}" ungültig (0-300s)`);
         }
+        if (d.travelTimeSecCh !== undefined && String(d.travelTimeSecCh).trim() !== '') {
+            const parts = String(d.travelTimeSecCh).split(',').map(s => s.trim());
+            if (parts.length > 4) {
+                errs.push(`Laufzeit/Kanal "${d.travelTimeSecCh}": maximal 4 Werte`);
+            }
+            for (const p of parts) {
+                if (p === '') continue; // leerer Eintrag = Fallback auf travelTimeSec
+                const v = parseInt(p, 10);
+                if (isNaN(v) || v < 0 || v > 300 || String(v) !== p) {
+                    errs.push(`Laufzeit/Kanal "${d.travelTimeSecCh}": Wert "${p}" ungültig (0-300, ganzzahlig)`);
+                    break;
+                }
+            }
+        }
         const tp = parseInt(d.tiltTimeMs, 10);
         if (d.tiltTimeMs !== undefined && d.tiltTimeMs !== '' && (isNaN(tp) || tp < 0 || tp > 5000)) {
             errs.push(`Kipp-Impuls "${d.tiltTimeMs}" ungültig (0-5000ms)`);
@@ -322,6 +336,13 @@ class Zeptrion extends utils.Adapter {
         const pollInterval = Math.max(parseInt(devCfg.pollInterval, 10) || 30, 5) * 1000;
         const host = String(devCfg.host).trim();
         const travelTimeMs = Math.max(parseInt(devCfg.travelTimeSec, 10) || 0, 0) * 1000;
+        const travelOverrides = String(devCfg.travelTimeSecCh || '').split(',').map(s => s.trim());
+        const travelTimeMsByCh = {};
+        for (let n = 1; n <= channels; n++) {
+            const raw = travelOverrides[n - 1];
+            const sec = (raw !== undefined && raw !== '') ? parseInt(raw, 10) : NaN;
+            travelTimeMsByCh[n] = (!isNaN(sec) && sec >= 0) ? sec * 1000 : travelTimeMs;
+        }
         const tiltTimeMs = Math.max(parseInt(devCfg.tiltTimeMs, 10) || 0, 0);
         const smartfront = devCfg.smartfront === true;
 
@@ -338,7 +359,7 @@ class Zeptrion extends utils.Adapter {
         });
 
         this.devices[id] = {
-            cfg: { id, name: devCfg.name || id, host, channels, pollInterval, kind: devCfg.kind || 'unknown', travelTimeMs, tiltTimeMs, smartfront },
+            cfg: { id, name: devCfg.name || id, host, channels, pollInterval, kind: devCfg.kind || 'unknown', travelTimeMs, travelTimeMsByCh, tiltTimeMs, smartfront },
             client,
             timer: null,
             notifyActive: false,
@@ -467,7 +488,7 @@ class Zeptrion extends utils.Adapter {
             });
 
             if (kind === 'blind') {
-                const hasTravel = !!dev.cfg.travelTimeMs;
+                const hasTravel = !!dev.cfg.travelTimeMsByCh[n];
                 // extendObject statt setObjectNotExists: Beschreibung und Semantik
                 // hängen von der Konfiguration ab und sollen sich mit aktualisieren.
                 await this.extendObjectAsync(`${ch}.posEstimate`, {
@@ -687,8 +708,8 @@ class Zeptrion extends utils.Adapter {
      */
     async updatePositionEstimate(id, chNum, cmd) {
         const dev = this.devices[id];
-        if (!dev || dev.cfg.kind !== 'blind' || !dev.cfg.travelTimeMs) return;
-        const travel = dev.cfg.travelTimeMs;
+        if (!dev || dev.cfg.kind !== 'blind' || !dev.cfg.travelTimeMsByCh[chNum]) return;
+        const travel = dev.cfg.travelTimeMsByCh[chNum];
         const now = Date.now();
         const cur = dev.posEstimate[chNum];
 
@@ -778,11 +799,11 @@ class Zeptrion extends utils.Adapter {
     async driveToPosition(id, chNum, target) {
         const dev = this.devices[id];
         if (!dev) return;
-        if (dev.cfg.kind !== 'blind' || !dev.cfg.travelTimeMs) {
-            throw new Error('setPosition erfordert Art=Storen und eine konfigurierte Motor-Laufzeit (>0s)');
+        if (dev.cfg.kind !== 'blind' || !dev.cfg.travelTimeMsByCh[chNum]) {
+            throw new Error('setPosition erfordert Art=Storen und eine konfigurierte Motor-Laufzeit (>0s) für diesen Kanal');
         }
         target = Math.max(0, Math.min(100, Math.round(Number(target))));
-        const travel = dev.cfg.travelTimeMs;
+        const travel = dev.cfg.travelTimeMsByCh[chNum];
 
         // laufende Sequenz dieses Kanals abbrechen, eigenes Token registrieren
         const token = Symbol('drive');
@@ -1448,7 +1469,7 @@ class Zeptrion extends utils.Adapter {
             try {
                 const csv = String((obj.message && obj.message.csv) || '').trim();
                 if (!csv) {
-                    if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'CSV-Feld ist leer. Format: host;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s (nur host ist Pflicht).' }, obj.callback);
+                    if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'CSV-Feld ist leer. Format: host;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s;laufzeit_kanal_s (nur host ist Pflicht).' }, obj.callback);
                     return;
                 }
                 const delim = csv.includes(';') ? ';' : ',';
@@ -1473,7 +1494,8 @@ class Zeptrion extends utils.Adapter {
                         travelTimeSec: c[4] || 0,
                         tiltTimeMs: c[5] || 0,
                         smartfront: /^(1|true|ja|yes|x)$/i.test(c[6] || ''),
-                        pollInterval: c[7] || 30
+                        pollInterval: c[7] || 30,
+                        travelTimeSecCh: c[8] || ''
                     };
                     // Kurzformen für "Art" erlauben
                     if (['storen', 'rolladen', 'shutter', 'blinds'].includes(row.kind)) row.kind = 'blind';
@@ -1500,6 +1522,7 @@ class Zeptrion extends utils.Adapter {
                         channels: parseInt(row.channels, 10) || 1,
                         kind: row.kind,
                         travelTimeSec: parseInt(row.travelTimeSec, 10) || 0,
+                        travelTimeSecCh: String(row.travelTimeSecCh || '').trim(),
                         tiltTimeMs: parseInt(row.tiltTimeMs, 10) || 0,
                         smartfront: row.smartfront,
                         pollInterval: parseInt(row.pollInterval, 10) || 30

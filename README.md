@@ -89,7 +89,11 @@ Admin-Oberfläche -> Adapter -> "zeptrion" suchen -> Installieren.
   - `Aktiv`, `ID` (a-z 0-9 _ -), `Bezeichnung`, `IP-Adresse/Hostname`,
     `Kanäle` (1-4), `Art` (Storen/Licht/unbekannt - steuert die ioBroker-Objektrollen,
     siehe unten), `Laufzeit Storenmotor` (Sekunden, 0=deaktiviert - schaltet
-    `posEstimate` frei, siehe unten), `Smartfront` (Checkbox, nur bei angeschlossenem
+    `posEstimate` frei, siehe unten, gilt als Standard für alle Kanäle),
+    `Laufzeit/Kanal` (optional, kommagetrennt, z.B. `22,28` - überschreibt die
+    Standard-Laufzeit einzeln je Kanal; nützlich bei 2K-Geräten, deren beide
+    Kanäle unterschiedliche Motor-Laufzeiten haben; leere Einträge fallen auf
+    die Standard-Laufzeit zurück), `Smartfront` (Checkbox, nur bei angeschlossenem
     Feller-Smartfront-Taster aktivieren), `Poll (s)` (Default 30, für RSSI +
     periodischen chscan-Resync; die eigentlichen Kanalupdates laufen über den
     chnotify-Long-Poll unabhängig davon).

@@ -108,10 +108,22 @@
               "attr": "travelTimeSec",
               "title": { "en": "Motor travel (s)", "de": "Motor-Laufzeit (s)" },
               "tooltip": {
-                "en": "Full travel time of the shutter motor in seconds. 0 = position estimation and setPosition disabled. Only relevant for kind=Blinds.",
-                "de": "Volle Fahrzeit des Storenmotors in Sekunden. 0 = Positionsschätzung und setPosition deaktiviert. Nur relevant bei Art=Storen."
+                "en": "Default travel time in seconds, used for all channels unless overridden per-channel below. 0 = position estimation and setPosition disabled. Only relevant for kind=Blinds.",
+                "de": "Standard-Laufzeit in Sekunden, gilt für alle Kanäle, sofern nicht rechts pro Kanal überschrieben. 0 = Positionsschätzung und setPosition deaktiviert. Nur relevant bei Art=Storen."
               },
               "min": 0, "max": 300, "default": 0,
+              "width": "8%"
+            },
+            {
+              "type": "text",
+              "attr": "travelTimeSecCh",
+              "title": { "en": "Travel/ch (s)", "de": "Laufzeit/Kanal (s)" },
+              "tooltip": {
+                "en": "Optional: comma-separated per-channel override, one value per channel in order (e.g. '22,28' for a 2K device where channel 1 and 2 have different motor travel times). Empty entries fall back to 'Motor travel (s)'. Leave the whole field empty to use the same value for all channels.",
+                "de": "Optional: Kommagetrennte Laufzeit pro Kanal, ein Wert je Kanal in Reihenfolge (z.B. '22,28' für ein 2K-Gerät, bei dem Kanal 1 und 2 unterschiedliche Motor-Laufzeiten haben). Leere Einträge verwenden 'Motor-Laufzeit (s)'. Ganzes Feld leer lassen = gleicher Wert für alle Kanäle."
+              },
+              "validator": "!data.travelTimeSecCh || /^\\s*\\d*\\s*(,\\s*\\d*\\s*){0,3}$/.test(data.travelTimeSecCh)",
+              "validatorErrorText": { "en": "Comma-separated numbers only, max 4 values (e.g. '22,28')", "de": "Nur kommagetrennte Zahlen, max. 4 Werte (z.B. '22,28')" },
               "width": "9%"
             },
             {
@@ -158,8 +170,8 @@
         "_csvHelp": {
           "type": "staticText",
           "text": {
-            "en": "Bulk-add devices. One line per device, semicolon or comma separated:\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s\nOnly host is mandatory. kind: blind/light/unknown (also: storen, licht). smartfront: 1/0. Lines starting with # are ignored, a header line 'host;...' is skipped.\nExample:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30\n10.195.36.117;Storen Wohnen;2;storen;25",
-            "de": "Geräte in Serie anlegen. Eine Zeile pro Gerät, Semikolon oder Komma getrennt:\nhost;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s\nNur host ist Pflicht. art: blind/light/unknown (auch: storen, licht). smartfront: 1/0. Zeilen mit # werden ignoriert, eine Kopfzeile 'host;...' wird übersprungen.\nBeispiel:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30\n10.195.36.117;Storen Wohnen;2;storen;25"
+            "en": "Bulk-add devices. One line per device, semicolon separated (recommended if using the last column, since it contains commas):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nOnly host is mandatory. kind: blind/light/unknown (also: storen, licht). smartfront: 1/0. travel_s_per_channel (optional): comma-separated per-channel override, e.g. '22,28' for a 2K device with different travel times, empty = use travel_s for all channels. Lines starting with # are ignored, a header line 'host;...' is skipped.\nExample:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "de": "Geräte in Serie anlegen. Eine Zeile pro Gerät, Semikolon getrennt (empfohlen bei Nutzung der letzten Spalte, da diese Kommas enthält):\nhost;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s;laufzeit_kanal_s\nNur host ist Pflicht. art: blind/light/unknown (auch: storen, licht). smartfront: 1/0. laufzeit_kanal_s (optional): kommagetrennte Laufzeit pro Kanal, z.B. '22,28' für ein 2K-Gerät mit unterschiedlichen Laufzeiten, leer = laufzeit_s für alle Kanäle. Zeilen mit # werden ignoriert, eine Kopfzeile 'host;...' wird übersprungen.\nBeispiel:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25"
           },
           "sm": 12
         },
