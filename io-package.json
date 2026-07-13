@@ -30,14 +30,6 @@
       "0.4.0": {
         "en": "Security hardening: interlocked factory reset (unlock required within 30s), full crash-safe onStateChange, input validation against API byte limits, adapter-managed timers, reduced connection load on embedded webservers (chscan resync only when needed), redesigned admin UI with tabs/EN+DE/validators, chnotify long-poll can be disabled",
         "de": "Security-Härtung: verriegelter Werksreset (unlock binnen 30s erforderlich), vollständig crashsicheres onStateChange, Eingabevalidierung gegen API-Byte-Limits, Adapter-verwaltete Timer, reduzierte Verbindungslast auf den Embedded-Webservern (chscan-Resync nur bei Bedarf), neu gestaltete Admin-UI mit Tabs/EN+DE/Validatoren, chnotify-Long-Poll abschaltbar"
-      },
-      "0.3.0": {
-        "en": "Multicast command batching (50ms debounce, one HTTP request per device instead of N per channel - major reliability/speed gain for the hail-alarm collective command), optional time-based shutter position estimation (posEstimate), optional Smartfront support (temperature/brightness/humidity sensors, LED background color)",
-        "de": "Multicast-Befehlsbündelung (50ms Debounce, ein HTTP-Request pro Gerät statt N pro Kanal - deutlicher Zuverlässigkeits-/Geschwindigkeitsgewinn beim Hagelalarm-Sammelbefehl), optionale zeitbasierte Storen-Positionsschätzung (posEstimate), optionale Smartfront-Unterstützung (Temperatur-/Helligkeits-/Feuchtigkeitssensoren, LED-Hintergrundfarbe)"
-      },
-      "0.2.0": {
-        "en": "Real-time channel updates via zrap/chnotify long-poll, hardened mDNS discovery (no more uncaught exceptions from foreign devices), standardized roles (level.blind, button.stop/open.blind/close.blind) via new per-device 'kind' setting, structured native metadata",
-        "de": "Echtzeit-Kanalupdates über zrap/chnotify Long-Poll, abgesichertes mDNS-Discovery (keine ungefangenen Exceptions mehr durch fremde Geräte), standardisierte Rollen (level.blind, button.stop/open.blind/close.blind) über neue Geräte-Einstellung 'Art', strukturierte native-Metadaten"
       }
     },
     "titleLang": {
