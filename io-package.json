@@ -38,23 +38,41 @@
       "0.2.0": {
         "en": "Real-time channel updates via zrap/chnotify long-poll, hardened mDNS discovery (no more uncaught exceptions from foreign devices), standardized roles (level.blind, button.stop/open.blind/close.blind) via new per-device 'kind' setting, structured native metadata",
         "de": "Echtzeit-Kanalupdates über zrap/chnotify Long-Poll, abgesichertes mDNS-Discovery (keine ungefangenen Exceptions mehr durch fremde Geräte), standardisierte Rollen (level.blind, button.stop/open.blind/close.blind) über neue Geräte-Einstellung 'Art', strukturierte native-Metadaten"
-      },
-      "0.1.0": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung"
       }
     },
-    "title": "Feller zeptrion / zApp",
     "titleLang": {
       "en": "Feller zeptrion / zApp",
-      "de": "Feller zeptrion / zApp"
+      "de": "Feller zeptrion / zApp",
+      "ru": "Feller zeptrion / zApp",
+      "pt": "Feller zeptrion / zApp",
+      "nl": "Feller zeptrion / zApp",
+      "fr": "Feller zeptrion / zApp",
+      "it": "Feller zeptrion / zApp",
+      "es": "Feller zeptrion / zApp",
+      "pl": "Feller zeptrion / zApp",
+      "uk": "Feller zeptrion / zApp",
+      "zh-cn": "Feller zeptrion / zApp"
     },
     "desc": {
       "en": "Control Feller zeptrion WLAN actuators (zApp-Gateway / zApp-Booster) for lights and shutters via the zrap web service API. Includes a hail-alarm collective command to close all configured shutters at once.",
-      "de": "Steuerung von Feller zeptrion WLAN-Aktoren (zApp-Gateway / zApp-Booster) für Licht und Storen über die zrap Webservice API. Enthält einen Sammelbefehl zum sofortigen Schliessen aller konfigurierten Storen (z.B. für Hagelalarm)."
+      "de": "Steuerung von Feller zeptrion WLAN-Aktoren (zApp-Gateway / zApp-Booster) für Licht und Storen über die zrap Webservice API. Enthält einen Sammelbefehl zum sofortigen Schliessen aller konfigurierten Storen (z.B. für Hagelalarm).",
+      "ru": "Управление WLAN-актуаторами Feller zeptrion (zApp-Gateway / zApp-Booster) для освещения и штор через веб-сервис API zrap. Включает групповую команду тревоги по граду для немедленного закрытия всех настроенных штор.",
+      "pt": "Controlo de atuadores WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) para luzes e estores através da API do serviço web zrap. Inclui um comando coletivo de alarme de granizo para fechar imediatamente todos os estores configurados.",
+      "nl": "Besturing van Feller zeptrion WLAN-actuatoren (zApp-Gateway / zApp-Booster) voor verlichting en zonwering via de zrap webservice-API. Bevat een collectief hagelalarm-commando om alle geconfigureerde zonwering direct te sluiten.",
+      "fr": "Contrôle des actionneurs WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) pour lumières et volets via l'API web service zrap. Inclut une commande collective d'alarme grêle pour fermer tous les volets configurés en une fois.",
+      "it": "Controllo degli attuatori WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) per luci e tapparelle tramite l'API web service zrap. Include un comando collettivo di allarme grandine per chiudere subito tutte le tapparelle configurate.",
+      "es": "Control de actuadores WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) para luces y persianas mediante la API del servicio web zrap. Incluye un comando colectivo de alarma de granizo para cerrar de inmediato todas las persianas configuradas.",
+      "pl": "Sterowanie aktuatorami WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) do oświetlenia i rolet za pomocą interfejsu API usługi sieciowej zrap. Zawiera zbiorczą komendę alarmu gradowego do natychmiastowego zamknięcia wszystkich skonfigurowanych rolet.",
+      "uk": "Керування WLAN-актуаторами Feller zeptrion (zApp-Gateway / zApp-Booster) для освітлення та штор через веб-сервіс API zrap. Містить групову команду тривоги про град для негайного закриття всіх налаштованих штор.",
+      "zh-cn": "通过 zrap 网络服务 API 控制 Feller zeptrion WLAN 执行器(zApp-Gateway / zApp-Booster),用于灯光和卷帘。包含冰雹警报集合指令,可立即关闭所有已配置的卷帘。"
     },
     "authors": [
       "Stefan Bühler <stefan.buehler46@gmail.com>"
+    ],
+    "dependencies": [
+      {
+        "js-controller": ">=5.0.19"
+      }
     ],
     "keywords": [
       "feller",
@@ -70,12 +88,11 @@
       "license": "MIT"
     },
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "zeptrion.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/bueste/ioBroker.zeptrion/main/admin/zeptrion.png",
     "readme": "https://github.com/bueste/ioBroker.zeptrion/blob/main/README.md",
-    "type": "blinds",
+    "type": "household",
     "mode": "daemon",
     "compact": true,
     "connectionType": "local",

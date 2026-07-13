@@ -16,7 +16,7 @@
     "url": "https://github.com/bueste/ioBroker.zeptrion/issues"
   },
   "keywords": [
-    "iobroker",
+    "ioBroker",
     "feller",
     "zeptrion",
     "zapp",
@@ -39,7 +39,7 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.1.6",
+    "@iobroker/adapter-core": "^3.2.2",
     "axios": "^1.7.2",
     "fast-xml-parser": "^4.4.0",
     "bonjour-service": "^1.2.1"
