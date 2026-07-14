@@ -1,6 +1,6 @@
 # Third-party trademarks and assets
 
-## Feller / zeptrion logo (admin/zeptrion.png, zeptrion.png)
+## Feller / zeptrion logo (admin/zeptrion.png)
 
 The adapter icon is the official **Feller zeptrion** logo, © Feller AG (Schneider
 Electric). It is used with **written permission from Feller AG** granted to the adapter

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "zeptrion",
-    "version": "0.8.2",
+    "version": "0.8.3",
     "news": {
+      "0.8.3": {
+        "en": "CI workflow activated (lint + tests on every push/PR via GitHub Actions), removed redundant duplicate icon file at repo root (only admin/zeptrion.png is used), cleaned up outdated publish instructions in README",
+        "de": "CI-Workflow aktiviert (Lint + Tests bei jedem Push/PR via GitHub Actions), redundante doppelte Icon-Datei im Repo-Root entfernt (nur admin/zeptrion.png wird verwendet), veraltete Publish-Anleitung im README bereinigt",
+        "ru": "Активирован CI-воркфлоу (линтинг + тесты при каждом push/PR через GitHub Actions), удалён избыточный дублирующий файл значка в корне репозитория (используется только admin/zeptrion.png), очищены устаревшие инструкции по публикации в README",
+        "pt": "Fluxo de trabalho CI ativado (lint + testes em cada push/PR via GitHub Actions), removido o ficheiro de ícone duplicado redundante na raiz do repositório (apenas admin/zeptrion.png é usado), limpas as instruções de publicação desatualizadas no README",
+        "nl": "CI-workflow geactiveerd (lint + tests bij elke push/PR via GitHub Actions), overbodig dubbel icoonbestand in de repo-root verwijderd (alleen admin/zeptrion.png wordt gebruikt), verouderde publicatie-instructies in de README opgeschoond",
+        "fr": "Workflow CI activé (lint + tests à chaque push/PR via GitHub Actions), suppression du fichier icône dupliqué redondant à la racine du dépôt (seul admin/zeptrion.png est utilisé), nettoyage des instructions de publication obsolètes dans le README",
+        "it": "Workflow CI attivato (lint + test a ogni push/PR tramite GitHub Actions), rimosso il file icona duplicato ridondante nella root del repository (viene usato solo admin/zeptrion.png), ripulite le istruzioni di pubblicazione obsolete nel README",
+        "es": "Flujo de trabajo CI activado (lint + pruebas en cada push/PR mediante GitHub Actions), eliminado el archivo de icono duplicado redundante en la raíz del repositorio (solo se usa admin/zeptrion.png), limpiadas las instrucciones de publicación obsoletas en el README",
+        "pl": "Aktywowano workflow CI (lint + testy przy każdym push/PR przez GitHub Actions), usunięto zbędny zduplikowany plik ikony w katalogu głównym repozytorium (używany jest tylko admin/zeptrion.png), wyczyszczono nieaktualne instrukcje publikacji w README",
+        "uk": "Активовано CI-воркфлоу (лінтинг + тести під час кожного push/PR через GitHub Actions), видалено надлишковий дубльований файл значка в корені репозиторію (використовується лише admin/zeptrion.png), очищено застарілі інструкції з публікації в README",
+        "zh-cn": "启用CI工作流(每次push/PR通过GitHub Actions执行lint和测试),删除仓库根目录下冗余的重复图标文件(仅使用admin/zeptrion.png),清理README中过时的发布说明"
+      },
       "0.8.2": {
         "en": "Per-channel motor travel time override (new 'Travel/ch (s)' column and CSV column): 2K/4K devices where individual channels have different shutter travel times can now be configured correctly - previously only one travel time applied to all channels of a device",
         "de": "Motor-Laufzeit jetzt auch pro Kanal einstellbar (neue Spalte 'Laufzeit/Kanal (s)' und CSV-Spalte): 2K/4K-Geräte, bei denen einzelne Kanäle unterschiedliche Storen-Laufzeiten haben, lassen sich jetzt korrekt konfigurieren - bisher galt nur eine Laufzeit für alle Kanäle eines Geräts",
@@ -67,19 +80,6 @@
         "pl": "Automatyczne ID na podstawie hosta, przycisk testu urządzenia (osiągalność + weryfikacja zeptrion + sprawdzenie liczby kanałów), nazwy obiektów kanałów pobierane z urządzenia (chdes), nowa ikona, ikony urządzeń",
         "uk": "Автоматичний ID на основі хоста, кнопка тестування пристрою (доступність + перевірка zeptrion + перевірка кількості каналів), назви об'єктів каналів з пристрою (chdes), новий значок, значки пристроїв",
         "zh-cn": "根据主机自动生成ID,新增设备测试按钮(可达性检测+zeptrion校验+通道数校验),通道对象名称取自设备本身(chdes),新图标,设备图标"
-      },
-      "0.5.1": {
-        "en": "CRITICAL FIX: XML parser skipped payload due to XML declaration key - all GET values (chscan/id/net/chdes/chnotify) stayed null in 0.5.0",
-        "de": "KRITISCHER FIX: XML-Parser übersprang die Nutzdaten wegen des XML-Deklarations-Keys - alle GET-Werte (chscan/id/net/chdes/chnotify) blieben in 0.5.0 null",
-        "ru": "КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: XML-парсер пропускал полезную нагрузку из-за ключа объявления XML - все значения GET (chscan/id/net/chdes/chnotify) оставались null в версии 0.5.0",
-        "pt": "CORREÇÃO CRÍTICA: o analisador XML ignorava os dados úteis devido à chave de declaração XML - todos os valores GET (chscan/id/net/chdes/chnotify) permaneciam null na 0.5.0",
-        "nl": "KRITIEKE FIX: de XML-parser sloeg de payload over vanwege de XML-declaratiesleutel - alle GET-waarden (chscan/id/net/chdes/chnotify) bleven null in 0.5.0",
-        "fr": "CORRECTION CRITIQUE : l'analyseur XML ignorait les données utiles à cause de la clé de déclaration XML - toutes les valeurs GET (chscan/id/net/chdes/chnotify) restaient nulles dans la 0.5.0",
-        "it": "CORREZIONE CRITICA: il parser XML saltava il payload a causa della chiave di dichiarazione XML - tutti i valori GET (chscan/id/net/chdes/chnotify) restavano null nella 0.5.0",
-        "es": "CORRECCIÓN CRÍTICA: el analizador XML omitía la carga útil debido a la clave de declaración XML - todos los valores GET (chscan/id/net/chdes/chnotify) permanecían en null en la 0.5.0",
-        "pl": "KRYTYCZNA POPRAWKA: parser XML pomijał dane z powodu klucza deklaracji XML - wszystkie wartości GET (chscan/id/net/chdes/chnotify) pozostawały null w wersji 0.5.0",
-        "uk": "КРИТИЧНЕ ВИПРАВЛЕННЯ: XML-парсер пропускав корисне навантаження через ключ оголошення XML - усі значення GET (chscan/id/net/chdes/chnotify) залишалися null у версії 0.5.0",
-        "zh-cn": "重大修复:由于XML声明键的问题,XML解析器会跳过实际数据——0.5.0版本中所有GET数值(chscan/id/net/chdes/chnotify)始终为null"
       }
     },
     "titleLang": {
