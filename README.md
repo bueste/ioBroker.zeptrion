@@ -187,23 +187,6 @@ npm run lint
 npm test              # Package-Konsistenz + Unit-Tests
 npm run test:integration   # startet echten js-controller (dauert länger)
 ```
-
-## Veröffentlichung im ioBroker Adapter-Store
-
-Kurzer Fahrplan (Details: https://github.com/ioBroker/ioBroker.docs/blob/master/docs/de/dev/adaptercreation.md):
-
-1. Autor-E-Mail (`CHANGE_ME@example.com`) in `package.json` eintragen.
-2. Eigenes öffentliches GitHub-Repository `ioBroker.zeptrion` anlegen, Code pushen.
-3. `npx @iobroker/adapter-checker` (bzw. https://adapter-check.iobroker.in/) gegen das
-   Repository laufen lassen und alle Fehler/Warnungen bereinigen.
-4. Ersten Release-Tag setzen (`v0.1.0`), CI-Workflow veröffentlicht bei Bedarf automatisch
-   auf npm (Secret `NPM_TOKEN` in den Repo-Settings hinterlegen) oder manuell `npm publish`.
-5. Pull Request gegen `ioBroker/ioBroker.repositories` (`sources-dist.json`, Eintrag unter
-   `latest`) erstellen.
-6. Nach Review/Merge erscheint der Adapter im Adapter-Store; nach ausreichender Stabilität
-   und positiven Bewertungen kann später ein Antrag auf Aufnahme in den `stable`-Zweig
-   gestellt werden.
-
 ## Changelog
 
 ### 0.7.0 (2026-07-10)
