@@ -259,6 +259,8 @@ npm run test:integration   # startet echten js-controller (dauert länger)
 - Erste Version: Kanalsteuerung, Kanalzustand/-beschreibung, Geräte-/Netzwerkinfo,
   Systembefehle, Standort/NTP/Datum, Sammelbefehle für Hagelalarm, mDNS-Discovery.
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 
 MIT License
