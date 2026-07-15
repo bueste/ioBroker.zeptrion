@@ -1,9 +1,13 @@
 {
+  "i18n": true,
   "type": "tabs",
   "items": {
     "tabDevices": {
       "type": "panel",
-      "label": { "en": "Devices", "de": "Geräte" },
+      "label": {
+        "en": "Devices",
+        "de": "Geräte"
+      },
       "items": {
         "_infoHeader": {
           "type": "staticText",
@@ -11,7 +15,11 @@
             "en": "Feller zeptrion / zApp WLAN actuators (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP address or mDNS name (e.g. zapp-14250034.local).",
             "de": "Feller zeptrion / zApp WLAN-Aktoren (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP-Adresse oder mDNS-Name (z.B. zapp-14250034.local)."
           },
-          "sm": 12
+          "sm": 12,
+          "xs": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "discoverBtn": {
           "newLine": true,
@@ -24,7 +32,11 @@
             "de": "🔍 Netzwerk nach zeptrion-Geräten durchsuchen (mDNS, ca. 4s)"
           },
           "showProcess": true,
-          "sm": 12, "md": 6
+          "sm": 12,
+          "md": 6,
+          "xs": 12,
+          "lg": 6,
+          "xl": 6
         },
         "testBtn": {
           "type": "sendTo",
@@ -36,7 +48,11 @@
             "de": "🔎 Konfigurierte Geräte testen (erreichbar? wirklich zeptrion?)"
           },
           "showProcess": true,
-          "sm": 12, "md": 6
+          "sm": 12,
+          "md": 6,
+          "xs": 12,
+          "lg": 6,
+          "xl": 6
         },
         "_discoverHint": {
           "type": "staticText",
@@ -44,18 +60,28 @@
             "en": "Found devices are added DISABLED to the table below. Close and reopen this dialog after scanning, then verify each row (name, channel count, kind) and enable it. mDNS only works within the same network segment / VLAN.",
             "de": "Gefundene Geräte werden DEAKTIVIERT in die Tabelle übernommen. Dialog nach der Suche schliessen und neu öffnen, dann jede Zeile prüfen (Name, Kanalzahl, Art) und aktivieren. mDNS funktioniert nur im gleichen Netzsegment/VLAN."
           },
-          "sm": 12
+          "sm": 12,
+          "xs": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "devices": {
           "newLine": true,
           "type": "table",
-          "label": { "en": "Devices", "de": "Geräte" },
+          "label": {
+            "en": "Devices",
+            "de": "Geräte"
+          },
           "sm": 12,
           "items": [
             {
               "type": "checkbox",
               "attr": "enabled",
-              "title": { "en": "Active", "de": "Aktiv" },
+              "title": {
+                "en": "Active",
+                "de": "Aktiv"
+              },
               "default": true,
               "width": "5%"
             },
@@ -63,42 +89,83 @@
               "type": "text",
               "attr": "id",
               "title": "ID",
-              "tooltip": { "en": "Leave empty = auto-generated from host. Only a-z, 0-9, _ and -", "de": "Leer lassen = wird automatisch aus dem Host erzeugt. Nur a-z, 0-9, _ und -" },
+              "tooltip": {
+                "en": "Leave empty = auto-generated from host. Only a-z, 0-9, _ and -",
+                "de": "Leer lassen = wird automatisch aus dem Host erzeugt. Nur a-z, 0-9, _ und -"
+              },
               "validator": "!data.id || /^[a-zA-Z0-9_-]+$/.test(data.id)",
-              "validatorErrorText": { "en": "Only a-z, 0-9, _ and - (or leave empty)", "de": "Nur a-z, 0-9, _ und - (oder leer lassen)" },
+              "validatorErrorText": "Only a-z, 0-9, _ and - (or leave empty)",
               "width": "10%"
             },
             {
               "type": "text",
               "attr": "name",
-              "title": { "en": "Label", "de": "Bezeichnung" },
+              "title": {
+                "en": "Label",
+                "de": "Bezeichnung"
+              },
               "width": "14%"
             },
             {
               "type": "text",
               "attr": "host",
-              "title": { "en": "IP address / hostname", "de": "IP-Adresse / Hostname" },
+              "title": {
+                "en": "IP address / hostname",
+                "de": "IP-Adresse / Hostname"
+              },
               "validator": "!data.host || /^[a-zA-Z0-9.\\-]+$/.test(data.host)",
-              "validatorErrorText": { "en": "Invalid host (no protocol, no spaces)", "de": "Ungültiger Host (kein Protokoll, keine Leerzeichen)" },
+              "validatorErrorText": "Invalid host (no protocol, no spaces)",
               "width": "16%"
             },
             {
               "type": "number",
               "attr": "channels",
-              "title": { "en": "Channels", "de": "Kanäle" },
-              "tooltip": { "en": "3340-4-x = 4, 3340-2-x = 2", "de": "3340-4-x = 4, 3340-2-x = 2" },
-              "min": 1, "max": 4, "default": 1,
+              "title": {
+                "en": "Channels",
+                "de": "Kanäle"
+              },
+              "tooltip": {
+                "en": "3340-4-x = 4, 3340-2-x = 2",
+                "de": "3340-4-x = 4, 3340-2-x = 2"
+              },
+              "min": 1,
+              "max": 4,
+              "default": 1,
               "width": "6%"
             },
             {
               "type": "select",
               "attr": "kind",
-              "title": { "en": "Kind", "de": "Art" },
-              "tooltip": { "en": "Controls ioBroker object roles for VIS/smart home integrations", "de": "Steuert ioBroker-Objektrollen für VIS/Smart-Home-Integrationen" },
+              "title": {
+                "en": "Kind",
+                "de": "Art"
+              },
+              "tooltip": {
+                "en": "Controls ioBroker object roles for VIS/smart home integrations",
+                "de": "Steuert ioBroker-Objektrollen für VIS/Smart-Home-Integrationen"
+              },
               "options": [
-                { "value": "unknown", "label": { "en": "unknown/mixed", "de": "unbekannt/gemischt" } },
-                { "value": "blind", "label": { "en": "Blinds/shutters", "de": "Storen/Rolladen" } },
-                { "value": "light", "label": { "en": "Light", "de": "Licht" } }
+                {
+                  "value": "unknown",
+                  "label": {
+                    "en": "unknown/mixed",
+                    "de": "unbekannt/gemischt"
+                  }
+                },
+                {
+                  "value": "blind",
+                  "label": {
+                    "en": "Blinds/shutters",
+                    "de": "Storen/Rolladen"
+                  }
+                },
+                {
+                  "value": "light",
+                  "label": {
+                    "en": "Light",
+                    "de": "Licht"
+                  }
+                }
               ],
               "default": "unknown",
               "width": "12%"
@@ -106,35 +173,48 @@
             {
               "type": "number",
               "attr": "travelTimeSec",
-              "title": { "en": "Motor travel (s)", "de": "Motor-Laufzeit (s)" },
+              "title": {
+                "en": "Motor travel (s)",
+                "de": "Motor-Laufzeit (s)"
+              },
               "tooltip": {
                 "en": "Default travel time in seconds, used for all channels unless overridden per-channel below. 0 = position estimation and setPosition disabled. Only relevant for kind=Blinds.",
                 "de": "Standard-Laufzeit in Sekunden, gilt für alle Kanäle, sofern nicht rechts pro Kanal überschrieben. 0 = Positionsschätzung und setPosition deaktiviert. Nur relevant bei Art=Storen."
               },
-              "min": 0, "max": 300, "default": 0,
+              "min": 0,
+              "max": 300,
+              "default": 0,
               "width": "8%"
             },
             {
               "type": "text",
               "attr": "travelTimeSecCh",
-              "title": { "en": "Travel/ch (s)", "de": "Laufzeit/Kanal (s)" },
+              "title": {
+                "en": "Travel/ch (s)",
+                "de": "Laufzeit/Kanal (s)"
+              },
               "tooltip": {
                 "en": "Optional: comma-separated per-channel override, one value per channel in order (e.g. '22,28' for a 2K device where channel 1 and 2 have different motor travel times). Empty entries fall back to 'Motor travel (s)'. Leave the whole field empty to use the same value for all channels.",
                 "de": "Optional: Kommagetrennte Laufzeit pro Kanal, ein Wert je Kanal in Reihenfolge (z.B. '22,28' für ein 2K-Gerät, bei dem Kanal 1 und 2 unterschiedliche Motor-Laufzeiten haben). Leere Einträge verwenden 'Motor-Laufzeit (s)'. Ganzes Feld leer lassen = gleicher Wert für alle Kanäle."
               },
               "validator": "!data.travelTimeSecCh || /^\\s*\\d*\\s*(,\\s*\\d*\\s*){0,3}$/.test(data.travelTimeSecCh)",
-              "validatorErrorText": { "en": "Comma-separated numbers only, max 4 values (e.g. '22,28')", "de": "Nur kommagetrennte Zahlen, max. 4 Werte (z.B. '22,28')" },
+              "validatorErrorText": "Comma-separated numbers only, max 4 values (e.g. '22,28')",
               "width": "9%"
             },
             {
               "type": "number",
               "attr": "tiltTimeMs",
-              "title": { "en": "Tilt pulse (ms)", "de": "Kipp-Impuls (ms)" },
+              "title": {
+                "en": "Tilt pulse (ms)",
+                "de": "Kipp-Impuls (ms)"
+              },
               "tooltip": {
                 "en": "Short move pulse for tilting raffstore lamellas via tiltOpen/tiltClose (typically 300-800ms). 0 = disabled. Only relevant for kind=Blinds.",
                 "de": "Kurzer Fahr-Impuls zum Schrägstellen von Rafflamellen via tiltOpen/tiltClose (typisch 300-800ms). 0 = deaktiviert. Nur relevant bei Art=Storen."
               },
-              "min": 0, "max": 5000, "default": 0,
+              "min": 0,
+              "max": 5000,
+              "default": 0,
               "width": "8%"
             },
             {
@@ -156,16 +236,25 @@
                 "en": "Interval for RSSI + periodic resync. Real-time channel updates come via long-poll independently.",
                 "de": "Intervall für RSSI + periodischen Resync. Echtzeit-Kanalupdates kommen unabhängig davon per Long-Poll."
               },
-              "min": 5, "max": 3600, "default": 30,
+              "min": 5,
+              "max": 3600,
+              "default": 30,
               "width": "7%"
             }
-          ]
+          ],
+          "xs": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         }
       }
     },
     "tabImport": {
       "type": "panel",
-      "label": { "en": "CSV import", "de": "CSV-Import" },
+      "label": {
+        "en": "CSV import",
+        "de": "CSV-Import"
+      },
       "items": {
         "_csvHelp": {
           "type": "staticText",
@@ -173,17 +262,28 @@
             "en": "Bulk-add devices. One line per device, semicolon separated (recommended if using the last column, since it contains commas):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nOnly host is mandatory. kind: blind/light/unknown (also: storen, licht). smartfront: 1/0. travel_s_per_channel (optional): comma-separated per-channel override, e.g. '22,28' for a 2K device with different travel times, empty = use travel_s for all channels. Lines starting with # are ignored, a header line 'host;...' is skipped.\nExample:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
             "de": "Geräte in Serie anlegen. Eine Zeile pro Gerät, Semikolon getrennt (empfohlen bei Nutzung der letzten Spalte, da diese Kommas enthält):\nhost;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s;laufzeit_kanal_s\nNur host ist Pflicht. art: blind/light/unknown (auch: storen, licht). smartfront: 1/0. laufzeit_kanal_s (optional): kommagetrennte Laufzeit pro Kanal, z.B. '22,28' für ein 2K-Gerät mit unterschiedlichen Laufzeiten, leer = laufzeit_s für alle Kanäle. Zeilen mit # werden ignoriert, eine Kopfzeile 'host;...' wird übersprungen.\nBeispiel:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25"
           },
-          "sm": 12
+          "sm": 12,
+          "xs": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "csvText": {
           "newLine": true,
           "type": "text",
-          "label": { "en": "CSV lines", "de": "CSV-Zeilen" },
+          "label": {
+            "en": "CSV lines",
+            "de": "CSV-Zeilen"
+          },
           "minRows": 8,
           "maxRows": 20,
           "trim": false,
           "noClearButton": true,
-          "sm": 12
+          "sm": 12,
+          "xs": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         },
         "importBtn": {
           "newLine": true,
@@ -191,9 +291,16 @@
           "command": "importCsv",
           "jsonData": "{\"csv\": ${JSON.stringify(data.csvText)}}",
           "variant": "contained",
-          "label": { "en": "⬆️ Import (validates every line)", "de": "⬆️ Importieren (validiert jede Zeile)" },
+          "label": {
+            "en": "⬆️ Import (validates every line)",
+            "de": "⬆️ Importieren (validiert jede Zeile)"
+          },
           "showProcess": true,
-          "sm": 12, "md": 5
+          "sm": 12,
+          "md": 5,
+          "xs": 12,
+          "lg": 5,
+          "xl": 5
         },
         "_importHint": {
           "type": "staticText",
@@ -201,34 +308,57 @@
             "en": "Valid lines are added ENABLED, invalid lines are reported and skipped. Duplicate hosts are rejected. After import the adapter restarts - close and reopen this dialog to see the new table rows.",
             "de": "Gültige Zeilen werden AKTIVIERT übernommen, ungültige gemeldet und übersprungen. Doppelte Hosts werden abgelehnt. Nach dem Import startet der Adapter neu - Dialog schliessen und neu öffnen, um die neuen Tabellenzeilen zu sehen."
           },
-          "sm": 12
+          "sm": 12,
+          "xs": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         }
       }
     },
     "tabExpert": {
       "type": "panel",
-      "label": { "en": "Expert", "de": "Experten" },
+      "label": {
+        "en": "Expert",
+        "de": "Experten"
+      },
       "items": {
         "requestTimeout": {
           "type": "number",
-          "label": { "en": "HTTP timeout (ms)", "de": "HTTP Timeout (ms)" },
+          "label": {
+            "en": "HTTP timeout (ms)",
+            "de": "HTTP Timeout (ms)"
+          },
           "help": {
             "en": "Timeout per request to a device (does not apply to the chnotify long-poll, which uses a fixed 35s).",
             "de": "Timeout pro Request an ein Gerät (gilt nicht für den chnotify-Long-Poll, der fix 35s verwendet)."
           },
-          "min": 500, "max": 30000, "default": 4000,
-          "sm": 12, "md": 4
+          "min": 500,
+          "max": 30000,
+          "default": 4000,
+          "sm": 12,
+          "md": 4,
+          "xs": 12,
+          "lg": 4,
+          "xl": 4
         },
         "useNotify": {
           "newLine": true,
           "type": "checkbox",
-          "label": { "en": "Use chnotify long-poll (near real-time updates)", "de": "chnotify-Long-Poll verwenden (nahezu Echtzeit-Updates)" },
+          "label": {
+            "en": "Use chnotify long-poll (near real-time updates)",
+            "de": "chnotify-Long-Poll verwenden (nahezu Echtzeit-Updates)"
+          },
           "help": {
             "en": "Keeps one HTTP connection per device permanently open (device answers within 30s at the latest). Disable only if devices show connection problems; channel states then update only at the poll interval.",
             "de": "Hält dauerhaft eine HTTP-Verbindung pro Gerät offen (Gerät antwortet spätestens nach 30s). Nur deaktivieren, falls Geräte Verbindungsprobleme zeigen; Kanalzustände aktualisieren dann nur noch im Poll-Intervall."
           },
           "default": true,
-          "sm": 12, "md": 8
+          "sm": 12,
+          "md": 8,
+          "xs": 12,
+          "lg": 8,
+          "xl": 8
         },
         "_safetyHint": {
           "newLine": true,
@@ -237,7 +367,11 @@
             "en": "⚠️ Safety: the factory reset button (system.factoryDefault) is interlocked - it only works within 30s after setting system.unlock. This prevents accidental wipes from scripts/VIS.",
             "de": "⚠️ Sicherheit: der Werksreset-Button (system.factoryDefault) ist verriegelt - er funktioniert nur innerhalb von 30s nach Setzen von system.unlock. Das verhindert versehentliches Löschen durch Scripts/VIS."
           },
-          "sm": 12
+          "sm": 12,
+          "xs": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
         }
       }
     }

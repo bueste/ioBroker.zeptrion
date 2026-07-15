@@ -7,62 +7,62 @@
 [![Tests](https://github.com/bueste/ioBroker.zeptrion/workflows/Test%20and%20Release/badge.svg)](https://github.com/bueste/ioBroker.zeptrion/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Adapter für Feller **zeptrion / zApp** WLAN-Aktoren (WLAN-Nebenstelle 4K = zApp-Gateway,
-WLAN-Zwischenmodul 2K = zApp-Booster) für Licht- und Storensteuerung, basierend auf der
-zrap Webservice API (Feller-Dokument 10.ZEPAPI-E.1612 / Version 1.0, Firmware ab 01.08.18).
+Adapter for Feller **zeptrion / zApp** WLAN actuators (WLAN Nebenstelle 4K = zApp gateway,
+WLAN Zwischenmodul 2K = zApp booster) for light and shutter/blind control, based on the
+zrap web service API (Feller document 10.ZEPAPI-E.1612 / version 1.0, firmware from 01.08.18).
 
+_(Eine deutsche Version dieser README ist verfügbar unter [README_de.md](README_de.md).)_
 
+## Feature overview
 
-## Funktionsumfang
+- **Channel control** (`zrap/chctrl`): on/off/stop/toggle, open/close, move_open/move_close,
+  dim_up/dim_down including timed variants (`_t` in ms), as well as scenes
+  recall_s1-4 / store_s1-4 / delete_s1-4 - both as individual buttons AND as a free-text
+  `command` field.
+- **Channel state** (`zrap/chscan` as a periodic resync + `zrap/chnotify` as a long-poll
+  push for near real-time updates) and **channel description** (`zrap/chdes`,
+  read/write: name, group, icon, type, category).
+- **Device information** (`zrap/id`): hardware/software/bootloader version, serial number,
+  system name, device type.
+- **Signal strength** (`zrap/rssi`, polled).
+- **Network status** (`zrap/net`, read-only): SSID, IP, MAC, mode, encryption,
+  mask, gateway.
+- **System commands** (`zrap/sys`): reboot, factory reset, reset to access-point mode.
+- **Location** (`zrap/loc`), **NTP configuration** (`zrap/ntp`) and **date/time**
+  (`zrap/date`) including one-click synchronization of the device clock with the ioBroker host.
+- **mDNS discovery** (chapter 4 of the API documentation): scans the local network for
+  zeptrion devices and adds finds to the configuration table in a disabled state
+  (discovery combined with manual review/activation).
+- **Bulk commands for hail alerts**: `control.closeAllShutters` / `openAllShutters` /
+  `stopAllShutters` control all configured channels across all active devices at once
+  - thanks to multicast bundling (see below), as a single request per device, not per channel.
+- **Multicast command bundling**: channel commands for the same device that arrive within
+  50ms of each other are automatically bundled into a single `zrap/chctrl` multicast POST
+  (chapter 3.6.5 of the API documentation) instead of several sequential individual requests.
+- **Shutter position estimation** (optional, `posEstimate`): since the hardware, per the
+  documentation, practically always reports `-1` (unknown) for shutter channels, a motor
+  travel time can be configured per device; the adapter estimates the position from this
+  based on direction of movement and elapsed time (best effort, no hardware feedback,
+  manually calibratable).
+- **Smartfront support** (optional, `zapi/smartfront/*`): read temperature/brightness/
+  humidity, set LED background color (only for devices with a connected Feller Smartfront
+  switch, checkbox in the configuration).
+- Robust error handling: distinguishes ECONNREFUSED/timeout/DNS errors, backoff on
+  repeated failures, per-device and global connection status. mDNS discovery is
+  additionally hardened against exceptions caused by malformed/unrelated network packets.
 
-- **Kanalsteuerung** (`zrap/chctrl`): on/off/stop/toggle, open/close, move_open/move_close,
-  dim_up/dim_down inkl. zeitgesteuerter Varianten (`_t` in ms), sowie Szenen
-  recall_s1-4 / store_s1-4 / delete_s1-4 - als einzelne Buttons UND als freies
-  `command`-Textfeld.
-- **Kanalzustand** (`zrap/chscan` als periodischer Resync + `zrap/chnotify` als
-  Long-Poll-Push für nahezu Echtzeit-Updates) und **Kanalbeschreibung** (`zrap/chdes`,
-  read/write: Name, Gruppe, Icon, Typ, Kategorie).
-- **Geräteinformationen** (`zrap/id`): Hardware-/Software-/Bootloader-Version, Seriennummer,
-  Systemname, Gerätetyp.
-- **Signalstärke** (`zrap/rssi`, gepollt).
-- **Netzwerkstatus** (`zrap/net`, read-only): SSID, IP, MAC, Modus, Verschlüsselung,
-  Maske, Gateway.
-- **Systembefehle** (`zrap/sys`): Neustart, Werksreset, Zurücksetzen in Access-Point-Modus.
-- **Standort** (`zrap/loc`), **NTP-Konfiguration** (`zrap/ntp`) und **Datum/Zeit**
-  (`zrap/date`) inkl. Ein-Klick-Synchronisation der Geräte-Uhrzeit mit dem ioBroker-Host.
-- **mDNS-Discovery** (Kapitel 4 der API-Doku): durchsucht das lokale Netz nach
-  zeptrion-Geräten und übernimmt Funde deaktiviert in die Konfigurationstabelle
-  (Discovery kombiniert mit manueller Kontrolle/Aktivierung).
-- **Sammelbefehle für Hagelalarm**: `control.closeAllShutters` / `openAllShutters` /
-  `stopAllShutters` steuern alle konfigurierten Kanäle über alle aktiven Geräte gleichzeitig
-  - dank Multicast-Bündelung (siehe unten) als je EIN Request pro Gerät, nicht pro Kanal.
-- **Multicast-Befehlsbündelung**: Kanalbefehle desselben Geräts, die innerhalb von 50ms
-  eintreffen, werden automatisch zu einem einzigen `zrap/chctrl`-Multicast-POST gebündelt
-  (Kapitel 3.6.5 der API-Doku) statt mehrerer sequentieller Einzelrequests.
-- **Storen-Positionsschätzung** (optional, `posEstimate`): da die Hardware laut Doku für
-  Storenkanäle praktisch immer `-1` (unbekannt) liefert, kann pro Gerät eine
-  Motor-Laufzeit hinterlegt werden; der Adapter schätzt daraus die Position anhand
-  Bewegungsrichtung und verstrichener Zeit (Best Effort, kein Hardware-Feedback,
-  manuell kalibrierbar).
-- **Smartfront-Unterstützung** (optional, `zapi/smartfront/*`): Temperatur/Helligkeit/
-  Luftfeuchtigkeit auslesen, LED-Hintergrundfarbe setzen (nur für Geräte mit
-  angeschlossenem Feller-Smartfront-Taster, Checkbox in der Konfiguration).
-- Robustes Error-Handling: unterscheidet ECONNREFUSED/Timeout/DNS-Fehler, Backoff bei
-  wiederholten Fehlern, pro Gerät und global sichtbarer Verbindungsstatus. mDNS-Discovery
-  ist zusätzlich gegen Exceptions durch fremde/kaputte Netzwerkpakete abgesichert.
-
-Nicht implementiert (siehe "Bekannte Einschränkungen"): Schreibzugriff auf `zrap/net`
-(WLAN-Zugangsdaten ändern), `zrap/scheduler`, Smartbutton-Webhook-Programmierung
+Not implemented (see "Known limitations"): write access to `zrap/net`
+(changing WLAN credentials), `zrap/scheduler`, Smartbutton webhook programming
 (`zapi/smartbt/*`).
 
 ## Installation
 
-### a) Lokal/manuell (vor Store-Veröffentlichung)
+### a) Local/manual (before store publication)
 
 ```bash
 cd /opt/iobroker/node_modules
 mkdir iobroker.zeptrion
-# Dateien dieses Pakets hierhin kopieren
+## copy the files of this package here
 cd iobroker.zeptrion
 npm install --production
 
@@ -71,193 +71,205 @@ iobroker upload zeptrion
 iobroker add zeptrion
 ```
 
-### b) Über den ioBroker Adapter-Store (nach erfolgter Veröffentlichung)
+### b) Via the ioBroker Adapter Store (once published)
 
-Admin-Oberfläche -> Adapter -> "zeptrion" suchen -> Installieren.
+Admin UI -> Adapters -> search for "zeptrion" -> Install.
 
-## Konfiguration
+## Configuration
 
-- **HTTP Timeout**: Timeout pro Request an ein Gerät (Default 4000 ms).
-- **Discovery-Button**: durchsucht das lokale Netz per mDNS (Service-Type `_zapp._tcp`,
-  Fallback `_http._tcp` für Firmware < 01.08.xx anhand des Hostname-Musters
-  `zapp-YYWWNNNN`). Neu gefundene Geräte werden **deaktiviert** in die Tabelle
-  übernommen - Zeile danach prüfen, ID/Name vergeben, Kanalzahl kontrollieren
-  (3340-4-x = 4 Kanäle, 3340-2-x = 2 Kanäle) und aktivieren. mDNS funktioniert nur
-  innerhalb des gleichen Netzsegments/VLANs.
-- **Geräte-Tabelle** (auch komplett manuell befüllbar, ohne Discovery):
-  - `Aktiv`, `ID` (a-z 0-9 _ -), `Bezeichnung`, `IP-Adresse/Hostname`,
-    `Kanäle` (1-4), `Art` (Storen/Licht/unbekannt - steuert die ioBroker-Objektrollen,
-    siehe unten), `Laufzeit Storenmotor` (Sekunden, 0=deaktiviert - schaltet
-    `posEstimate` frei, siehe unten, gilt als Standard für alle Kanäle),
-    `Laufzeit/Kanal` (optional, kommagetrennt, z.B. `22,28` - überschreibt die
-    Standard-Laufzeit einzeln je Kanal; nützlich bei 2K-Geräten, deren beide
-    Kanäle unterschiedliche Motor-Laufzeiten haben; leere Einträge fallen auf
-    die Standard-Laufzeit zurück), `Smartfront` (Checkbox, nur bei angeschlossenem
-    Feller-Smartfront-Taster aktivieren), `Poll (s)` (Default 30, für RSSI +
-    periodischen chscan-Resync; die eigentlichen Kanalupdates laufen über den
-    chnotify-Long-Poll unabhängig davon).
+- **HTTP Timeout**: timeout per request to a device (default 4000 ms).
+- **Discovery button**: scans the local network via mDNS (service type `_zapp._tcp`,
+  fallback `_http._tcp` for firmware < 01.08.xx based on the hostname pattern
+  `zapp-YYWWNNNN`). Newly found devices are added to the table in a **disabled** state
+  - review the row afterwards, assign an ID/name, verify the channel count
+  (3340-4-x = 4 channels, 3340-2-x = 2 channels) and enable it. mDNS only works
+  within the same network segment/VLAN.
+- **Device table** (can also be filled in entirely manually, without discovery):
+  - `Active`, `ID` (a-z 0-9 _ -), `Name`, `IP address/hostname`,
+    `Channels` (1-4), `Kind` (Shutter/Light/unknown - controls the ioBroker object roles,
+    see below), `Shutter motor travel time` (seconds, 0=disabled - enables
+    `posEstimate`, see below, acts as the default for all channels),
+    `Travel time/channel` (optional, comma-separated, e.g. `22,28` - overrides the
+    default travel time individually per channel; useful for 2K devices where the two
+    channels have different motor travel times; empty entries fall back to
+    the default travel time), `Smartfront` (checkbox, only enable if a
+    Feller Smartfront switch is connected), `Poll (s)` (default 30, for RSSI +
+    periodic chscan resync; the actual channel updates run independently
+    via the chnotify long-poll).
 
-## Objektbaum pro Gerät (`zeptrion.0.<id>`)
+## Object tree per device (`zeptrion.0.<id>`)
 
 ```
 <id>.info.connection / lastError / hw / sw / boot / sn / sys / type / oen / rssi / refresh
 <id>.network.ssid / ip / mac / mode / enc / mask / gw / bssid        (read-only)
-<id>.system.reboot / unlock / factoryDefault / networkDefault      (Buttons; factoryDefault erfordert unlock binnen 30s)
+<id>.system.reboot / unlock / factoryDefault / networkDefault      (buttons; factoryDefault requires unlock within 30s)
 <id>.location.name                                                  (read/write)
 <id>.ntp.url / per                                                   (read/write)
-<id>.date.rfc1123 / tz / dst / syncNow                               (read/write + Button)
+<id>.date.rfc1123 / tz / dst / syncNow                               (read/write + button)
 
-<id>.channels.chN.val                                    Kanalzustand 0-100 / -1 (roher Hardwarewert)
-<id>.channels.chN.posEstimate                             nur bei Art=Storen: Software-Positionsschätzung
-                                                           0=zu/100=offen, auch manuell schreibbar (Kalibrierung)
-<id>.channels.chN.name / group / icon / type / cat        Kanalbeschreibung (read/write)
-<id>.channels.chN.command                                 freies Kommando (String)
+<id>.channels.chN.val                                    channel state 0-100 / -1 (raw hardware value)
+<id>.channels.chN.posEstimate                             only for kind=Shutter: software position estimate
+                                                           0=closed/100=open, also manually writable (calibration)
+<id>.channels.chN.name / group / icon / type / cat        channel description (read/write)
+<id>.channels.chN.command                                 free-text command (string)
 <id>.channels.chN.stop / on / off / toggle / open / close /
-                  move_open / move_close / dim_up / dim_down        (Buttons)
-<id>.channels.chN.recall_s1..4 / store_s1..4 / delete_s1..4          (Buttons)
+                  move_open / move_close / dim_up / dim_down        (buttons)
+<id>.channels.chN.recall_s1..4 / store_s1..4 / delete_s1..4          (buttons)
 
-<id>.smartfront.temp / lux / hum       nur wenn "Smartfront" aktiviert (read)
-<id>.smartfront.ledState               aktueller LED-Status als JSON (read)
-<id>.smartfront.ledSet                 LED(s) setzen, JSON-Array (write)
+<id>.smartfront.temp / lux / hum       only if "Smartfront" is enabled (read)
+<id>.smartfront.ledState               current LED status as JSON (read)
+<id>.smartfront.ledSet                 set LED(s), JSON array (write)
 ```
 
 Global:
 
 ```
-info.connection                mind. ein Gerät erreichbar
-control.closeAllShutters       Button: ALLE konfigurierten Kanäle -> "close"
-control.openAllShutters        Button: ALLE konfigurierten Kanäle -> "open"
-control.stopAllShutters        Button: ALLE konfigurierten Kanäle -> "stop"
+info.connection                at least one device reachable
+control.closeAllShutters       button: ALL configured channels -> "close"
+control.openAllShutters        button: ALL configured channels -> "open"
+control.stopAllShutters        button: ALL configured channels -> "stop"
 ```
 
-## Objekt-Rollen und "Art" (kind)
+## Object roles and "kind"
 
-Die zrap-API selbst unterscheidet nicht zwischen Licht- und Storenkanal - das steckt
-allein in der Verkabelung/im Aktor. Damit Visualisierungen (VIS, evtl. spätere
-ioBroker.iot/Alexa-Anbindung) Kanäle trotzdem sinnvoll klassifizieren können, kann pro
-Gerät die "Art" gesetzt werden:
+The zrap API itself does not distinguish between a light and a shutter channel - that
+is purely a matter of wiring/the actuator. So that visualizations (VIS, possibly a
+future ioBroker.iot/Alexa integration) can still classify channels meaningfully, the
+"kind" can be set per device:
 
-| Art | `<ch>.val` Rolle | `stop`/`open`/`close` Rolle |
+| Kind | `<ch>.val` role | `stop`/`open`/`close` role |
 |---|---|---|
-| Storen/Rolladen | `level.blind` | `button.stop` / `button.open.blind` / `button.close.blind` |
-| Licht | `level.dimmer` | generisch `button` |
-| unbekannt (Default) | `value` | generisch `button` |
+| Shutter/blind | `level.blind` | `button.stop` / `button.open.blind` / `button.close.blind` |
+| Light | `level.dimmer` | generic `button` |
+| unknown (default) | `value` | generic `button` |
 
-Wichtig: `level.blind` täuscht **keine** echte Positionsrückmeldung vor - laut Feller-Doku
-liefert `chscan`/`chnotify` für einen Storenkanal so gut wie immer `-1` (unbekannt), da die
-Hardware selbst keine Lamellenposition zurückmeldet. Die Rolle verbessert nur die
-Erkennung durch VIS-Widgets, der Zahlenwert bleibt i.d.R. uninformativ.
+Important: `level.blind` does **not** fake genuine position feedback - per the Feller
+documentation, `chscan`/`chnotify` for a shutter channel almost always returns `-1`
+(unknown), since the hardware itself does not report a blind position. The role only
+improves recognition by VIS widgets; the numeric value generally remains uninformative.
 
-## Hagelalarm-Nutzung
+## Hail alert usage
 
 ```javascript
-// JavaScript-Adapter Beispiel
-on({id: 'wetter.0.warnungen.hagel', val: true}, function () {
+// JavaScript adapter example
+on({id: 'weather.0.warnings.hail', val: true}, function () {
     setState('zeptrion.0.control.closeAllShutters', true);
 });
 ```
 
-Fehler bei einzelnen Geräten (offline etc.) unterbrechen die übrigen Kanäle nicht -
-jeder fehlgeschlagene Kanal wird einzeln geloggt und in `<id>.info.lastError` vermerkt.
+Failures on individual devices (offline, etc.) do not interrupt the remaining channels -
+each failed channel is logged individually and recorded in `<id>.info.lastError`.
 
-## Bekannte Einschränkungen / bewusste Entscheidungen
+## Known limitations / deliberate decisions
 
-- **Smartbutton-Webhook-Programmierung** (`zapi/smartbt/prgm`/`prgn`/`prgs`) ist nicht
-  implementiert: dabei ruft der Taster bei Tastendruck direkt eine URL auf ioBroker auf
-  (echtes Push, ganz ohne Polling). Das würde einen eingehenden HTTP-Server im Adapter
-  voraussetzen, den es aktuell nicht gibt - eine grössere Architekturerweiterung, kein
-  kleiner Zusatz. Bleibt als möglicher zukünftiger Ausbauschritt dokumentiert.
-- **Schreibzugriff auf `zrap/net`** ist nicht implementiert - WLAN-Zugangsdaten eines
-  Aktors per Skript zu ändern ist riskant (Verbindungsverlust, Reboot nötig). Kann bei
-  Bedarf ergänzt werden.
-- **Scheduler (`zrap/scheduler`)** und die **zeptrionAir-Smartfront-Services**
-  (`zapi/smartfront/*`, `zapi/smartbt/*`) sind nicht implementiert, da für den
-  Storen-/Hagel-Use-Case nicht relevant. Die vorhandene `zrapGet`/`zrapPost`-Struktur
-  in `main.js` lässt sich leicht erweitern.
-- `chctrl` liefert laut Doku HTTP 302 ohne Body - Redirects werden bewusst nicht verfolgt
-  (`maxRedirects: 0`), um unnötige Zusatzrequests zu vermeiden.
-- Bei wiederholten Fehlern eines Geräts wird das Poll-Intervall bis maximal das
-  5-fache verlängert (einfacher Backoff).
+- **Smartbutton webhook programming** (`zapi/smartbt/prgm`/`prgn`/`prgs`) is not
+  implemented: this would have the switch call a URL on ioBroker directly on a button
+  press (true push, no polling at all). That would require an incoming HTTP server in
+  the adapter, which does not currently exist - a larger architectural extension, not a
+  small addition. Documented as a possible future enhancement.
+- **Write access to `zrap/net`** is not implemented - changing an actuator's WLAN
+  credentials via script is risky (loss of connection, reboot required). Can be added
+  if needed.
+- **Scheduler (`zrap/scheduler`)** and the **zeptrionAir Smartfront services**
+  (`zapi/smartfront/*`, `zapi/smartbt/*`) are not implemented, as they are not relevant
+  to the shutter/hail use case. The existing `zrapGet`/`zrapPost` structure
+  in `main.js` can easily be extended.
+- Per the documentation, `chctrl` returns HTTP 302 without a body - redirects are
+  deliberately not followed (`maxRedirects: 0`) to avoid unnecessary extra requests.
+- On repeated failures for a device, the poll interval is extended up to a maximum of
+  5x (simple backoff).
 
-## Entwicklung / Tests
+## Development / Tests
 
 ```bash
 npm install
 npm run lint
-npm test              # Package-Konsistenz + Unit-Tests
-npm run test:integration   # startet echten js-controller (dauert länger)
+npm test              # package consistency + unit tests
+npm run test:integration   # starts a real js-controller (takes longer)
 ```
+
 ## Changelog
 
+### 0.8.3 (2026-07-14)
+- CI workflow activated (lint + tests on every push/PR via GitHub Actions), removed redundant duplicate icon file at repo root (only admin/zeptrion.png is used), cleaned up outdated publish instructions in README
+
+### 0.8.2
+- Per-channel motor travel time override (new "Travel/ch (s)" column and CSV column): 2K/4K devices where individual channels have different shutter travel times can now be configured correctly - previously only one travel time applied to all channels of a device
+
+### 0.8.1
+- Channel commands (open/close/stop/dim/...) are now logged at info level on send (single and multicast), including failures on warn level - previously only system commands were logged
+
+### 0.8.0
+- Fixed orphaned states remaining after a device is removed/replaced (objects are now cleaned up on start), official Feller zeptrion logo as icon (used with permission)
+
 ### 0.7.0 (2026-07-10)
-- Skalierung für 20+ Geräte: paralleles Setup, Poll-Jitter, Duplikat-Erkennung
-- Strikte Startup-Validierung jeder konfigurierten Geräte-Zeile
-- CSV-Massenimport (eigener Konfig-Tab) mit Zeilen-Validierung und Auto-ID
-- FIX: Positionsschätzung nach Stopp während Endlagenfahrt korrekt
-- FIX: Adapter-Timer-Cleanup (this.clearTimeout), führende Nullen in chdes-Codes bleiben erhalten
+- Scaling for 20+ devices: parallel setup, poll jitter, duplicate detection
+- Strict startup validation for every configured device row
+- CSV bulk import (dedicated config tab) with row validation and auto-ID
+- FIX: position estimate correctly handled after a stop during an end-position run
+- FIX: adapter timer cleanup (this.clearTimeout), leading zeros in chdes codes are preserved
 
 ### 0.6.0 (2026-07-10)
-- Auto-ID aus Host, Geräte-Test-Button (Erreichbarkeit + zeptrion-Verifikation + Kanalzahl-Prüfung)
-- Kanal-Objektnamen aus dem Gerät (chdes), neues Icon, Geräte-Icons
+- Auto-ID from host, device test button (reachability + zeptrion verification + channel count check)
+- Channel object names taken from the device (chdes), new icon, device icons
 
 ### 0.5.1 (2026-07-10)
-- KRITISCHER FIX: XML-Parser übersprang die Nutzdaten wegen des XML-Deklarations-Keys - alle GET-Werte blieben in 0.5.0 null
+- CRITICAL FIX: the XML parser skipped the payload because of the XML declaration key - all GET values remained null in 0.5.0
 
 ### 0.5.0 (2026-07-07)
-- setPosition: zeitbasierte %-Anfahrt für Storen (Chunking wegen 32s-API-Limit, Referenzfahrt bei unbekannter Position)
-- tiltOpen/tiltClose: Lamellen-Kipp-Impulse (konfigurierbare Impulsdauer)
-- calibrate: Positionsschätzung ohne Fahrt setzen
+- setPosition: time-based %-approach for shutters (chunked due to the 32s API limit, reference run when position is unknown)
+- tiltOpen/tiltClose: slat tilt pulses (configurable pulse duration)
+- calibrate: set the position estimate without moving
 
-### 0.4.0 (2026-07-07) - Security- & Qualitäts-Härtung
-- **Verriegelter Werksreset**: `system.factoryDefault` funktioniert nur noch innerhalb
-  von 30s nach Setzen von `system.unlock` - ein einzelner versehentlicher setState aus
-  Script/VIS kann das Gerät nicht mehr plätten.
-- **Crashsicheres onStateChange**: der komplette Handler (inkl. der Sammelbefehle) läuft
-  jetzt in einer zentralen Fehlerbehandlung - keine Unhandled Promise Rejections mehr
-  möglich.
-- **Eingabevalidierung**: Kanalbeschreibung (32/32/24/4/4 Bytes UTF-8), Standort (32),
-  NTP-URL (32) und NTP-Intervall (0-255) werden vor dem Senden geprüft; klare
-  Fehlermeldung statt HTTP-400 vom Gerät. Umlaute zählen korrekt als 2 Bytes.
-- **Adapter-verwaltete Timer** (`this.setTimeout`) überall - automatische Aufräumung
-  beim Unload gemäss ioBroker-Guidelines.
-- **Verbindungs-Ökonomie**: solange der chnotify-Long-Poll gesund läuft, wird der
-  redundante chscan-Resync nur noch bei jedem 5. Poll ausgeführt (schont die
-  schwachen Embedded-Webserver der Unterputzaktoren).
-- **chnotify abschaltbar** (Experten-Tab) für Umgebungen mit Verbindungsproblemen.
-- **Admin-UI neu**: Tabs (Geräte/Experten), durchgängig EN+DE, Eingabe-Validatoren
-  (ID-Muster, Host-Muster), Tooltips an jeder Spalte, Sicherheitshinweis.
-- ESLint auf Flat Config (v9) migriert, Lint läuft sauber durch; Smoke-Tests für
-  Kommando-Validierung, Byte-Limits, Positionsmathematik und Multicast-Body.
+### 0.4.0 (2026-07-07) - Security & quality hardening
+- **Locked factory reset**: `system.factoryDefault` now only works within
+  30s of setting `system.unlock` - a single accidental setState from a
+  script/VIS can no longer wipe the device.
+- **Crash-safe onStateChange**: the entire handler (including the bulk commands) now
+  runs inside centralized error handling - unhandled promise rejections are
+  no longer possible.
+- **Input validation**: channel description (32/32/24/4/4 bytes UTF-8), location (32),
+  NTP URL (32) and NTP interval (0-255) are validated before sending; a clear
+  error message instead of an HTTP 400 from the device. Umlauts are correctly counted as 2 bytes.
+- **Adapter-managed timers** (`this.setTimeout`) used everywhere - automatic cleanup
+  on unload per the ioBroker guidelines.
+- **Connection economy**: as long as the chnotify long-poll is running healthily, the
+  redundant chscan resync now only runs on every 5th poll (goes easier on the
+  weak embedded web servers of the flush-mounted actuators).
+- **chnotify can be disabled** (Expert tab) for environments with connection issues.
+- **New admin UI**: tabs (Devices/Expert), fully EN+DE, input validators
+  (ID pattern, host pattern), tooltips on every column, security notice.
+- Migrated ESLint to flat config (v9), lint runs cleanly; smoke tests for
+  command validation, byte limits, position math and multicast body.
 
 ### 0.3.0 (2026-07-07)
-- Kanalbefehle desselben Geräts werden innerhalb eines 50ms-Fensters automatisch zu
-  einem einzigen Multicast-POST an `/zrap/chctrl` gebündelt statt sequentiell einzeln
-  gesendet - insbesondere `control.closeAllShutters` (Hagelalarm) profitiert davon
-  massiv (ein Request pro Gerät statt einer pro Kanal).
-- Optionale zeitbasierte Storen-Positionsschätzung (`posEstimate`) anhand konfigurierbarer
-  Motor-Laufzeit, da die Hardware selbst keine Position zurückmeldet.
-- Optionale Smartfront-Unterstützung (`zapi/smartfront/*`): Temperatur/Helligkeit/
-  Feuchtigkeit auslesen, LED-Hintergrundfarbe setzen.
-- Rollen-Korrektur: `level.blind` sitzt jetzt auf der Positionsschätzung statt auf dem
-  rohen (meist -1) Hardwarewert.
+- Channel commands for the same device are automatically bundled within a 50ms window
+  into a single multicast POST to `/zrap/chctrl` instead of being sent sequentially
+  one by one - `control.closeAllShutters` (hail alert) in particular
+  benefits massively from this (one request per device instead of one per channel).
+- Optional time-based shutter position estimate (`posEstimate`) based on a configurable
+  motor travel time, since the hardware itself does not report a position.
+- Optional Smartfront support (`zapi/smartfront/*`): read temperature/brightness/
+  humidity, set LED background color.
+- Role fix: `level.blind` is now applied to the position estimate instead of the
+  raw (usually -1) hardware value.
 
 ### 0.2.0 (2026-07-07)
-- Kanalzustände werden jetzt primär über `zrap/chnotify` (Long-Poll) nahezu in
-  Echtzeit aktualisiert statt nur per Intervall-Polling; `chscan`-Poll bleibt als
-  periodischer Resync/Fallback erhalten.
-- Zusätzliches Sicherheitsnetz (Busy-Window, 5s) verhindert, dass ein zeitgleicher
-  chscan-Resync einen gerade gesendeten Bewegungsbefehl mit einem veralteten Wert
-  überschreibt.
-- mDNS-Discovery-Handler gegen Exceptions durch fremde/kaputte Netzwerkpakete
-  abgesichert (try/catch je Service-Event statt nur um die Subscription herum).
-- Neues Geräte-Feld "Art" (Storen/Licht/unbekannt) steuert Standard-Objektrollen
-  (`level.blind`, `button.stop`, `button.open.blind`, `button.close.blind` bzw.
-  `level.dimmer`) für bessere VIS-/Smart-Home-Integration.
-- Strukturierte `native`-Metadaten (Host, Kanalnummer, Art) an Geräte-/Kanal-Objekten.
+- Channel states are now primarily updated near real-time via `zrap/chnotify`
+  (long-poll) instead of only via interval polling; `chscan` polling remains as a
+  periodic resync/fallback.
+- An additional safety net (busy window, 5s) prevents a concurrent
+  chscan resync from overwriting a just-sent movement command with a stale value.
+- mDNS discovery handler hardened against exceptions caused by malformed/unrelated
+  network packets (try/catch per service event instead of only around the subscription).
+- New device field "kind" (Shutter/Light/unknown) controls the default object roles
+  (`level.blind`, `button.stop`, `button.open.blind`, `button.close.blind` resp.
+  `level.dimmer`) for better VIS/smart-home integration.
+- Structured `native` metadata (host, channel number, kind) on device/channel objects.
 
 ### 0.1.0 (2026-07-07)
-- Erste Version: Kanalsteuerung, Kanalzustand/-beschreibung, Geräte-/Netzwerkinfo,
-  Systembefehle, Standort/NTP/Datum, Sammelbefehle für Hagelalarm, mDNS-Discovery.
+- First version: channel control, channel state/description, device/network info,
+  system commands, location/NTP/date, bulk commands for hail alerts, mDNS discovery.
 
 ## License
 

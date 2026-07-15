@@ -28,58 +28,6 @@
         "pl": "Nadpisanie czasu pracy silnika dla poszczególnych kanałów (nowa kolumna 'Czas/kanał (s)' oraz kolumna CSV): urządzenia 2K/4K, w których poszczególne kanały mają różne czasy pracy rolety, można teraz poprawnie skonfigurować - wcześniej dla wszystkich kanałów urządzenia obowiązywał tylko jeden czas pracy",
         "uk": "Індивідуальний час ходу мотора для кожного каналу (новий стовпець 'Час/канал (с)' та стовпець CSV): пристрої 2K/4K, у яких окремі канали мають різний час ходу штор, тепер можна налаштувати коректно - раніше для всіх каналів пристрою застосовувався лише один час ходу",
         "zh-cn": "支持按通道单独设置电机运行时间(新增\"运行时间/通道(秒)\"列及CSV列):对于各通道卷帘运行时间不同的2K/4K设备,现在可以正确配置——此前一台设备的所有通道只能使用同一个运行时间"
-      },
-      "0.8.1": {
-        "en": "Channel commands (open/close/stop/dim/...) are now logged at info level on send (single and multicast), including failures on warn level - previously only system commands were logged",
-        "de": "Kanalbefehle (open/close/stop/dim/...) werden beim Senden jetzt auf Info-Level geloggt (einzeln und Multicast), Fehlschläge auf Warn-Level - bisher wurden nur Systembefehle geloggt",
-        "ru": "Команды канала (открыть/закрыть/стоп/диммирование/...) теперь логируются на уровне info при отправке (одиночные и multicast), включая ошибки на уровне warn - ранее логировались только системные команды",
-        "pt": "Os comandos de canal (abrir/fechar/parar/regular/...) agora são registados a nível info ao serem enviados (individual e multicast), incluindo falhas a nível warn - anteriormente apenas os comandos de sistema eram registados",
-        "nl": "Kanaalcommando's (openen/sluiten/stop/dimmen/...) worden nu bij verzending gelogd op info-niveau (enkel en multicast), inclusief mislukkingen op warn-niveau - voorheen werden alleen systeemcommando's gelogd",
-        "fr": "Les commandes de canal (ouvrir/fermer/stop/dim/...) sont désormais journalisées au niveau info lors de l'envoi (simple et multicast), y compris les échecs au niveau warn - auparavant, seules les commandes système étaient journalisées",
-        "it": "I comandi di canale (apri/chiudi/stop/dim/...) vengono ora registrati a livello info all'invio (singolo e multicast), inclusi i fallimenti a livello warn - in precedenza venivano registrati solo i comandi di sistema",
-        "es": "Los comandos de canal (abrir/cerrar/detener/atenuar/...) ahora se registran a nivel info al enviarse (individual y multicast), incluidos los fallos a nivel warn - anteriormente solo se registraban los comandos del sistema",
-        "pl": "Polecenia kanału (otwórz/zamknij/stop/ściemnij/...) są teraz rejestrowane na poziomie info podczas wysyłania (pojedynczo i multicast), łącznie z błędami na poziomie warn - wcześniej rejestrowane były tylko polecenia systemowe",
-        "uk": "Команди каналу (відкрити/закрити/стоп/диммування/...) тепер логуються на рівні info під час надсилання (поодинокі та multicast), включно з помилками на рівні warn - раніше логувалися лише системні команди",
-        "zh-cn": "通道指令(开/关/停止/调光等)在发送时(单通道及多播)现在会以info级别记录日志,失败情况以warn级别记录——此前只有系统指令会被记录"
-      },
-      "0.8.0": {
-        "en": "Fixed orphaned states remaining after a device is removed/replaced (objects are now cleaned up on start), official Feller zeptrion logo as icon (used with permission)",
-        "de": "Behoben: verwaiste States blieben nach Entfernen/Ersetzen eines Geräts erhalten (Objekte werden jetzt beim Start aufgeräumt), offizielles Feller-zeptrion-Logo als Icon (mit Genehmigung)",
-        "ru": "Исправлено: осиротевшие состояния оставались после удаления/замены устройства (объекты теперь очищаются при запуске), официальный логотип Feller zeptrion в качестве значка (используется с разрешения)",
-        "pt": "Corrigido: os estados órfãos permaneciam após a remoção/substituição de um dispositivo (os objetos agora são limpos no arranque), logótipo oficial Feller zeptrion como ícone (usado com autorização)",
-        "nl": "Opgelost: verweesde states bleven bestaan na verwijderen/vervangen van een apparaat (objecten worden nu bij het opstarten opgeruimd), officieel Feller zeptrion-logo als icoon (gebruikt met toestemming)",
-        "fr": "Correction : les états orphelins subsistant après la suppression/le remplacement d'un appareil (les objets sont désormais nettoyés au démarrage), logo officiel Feller zeptrion comme icône (utilisé avec autorisation)",
-        "it": "Corretto: gli stati orfani rimanevano dopo la rimozione/sostituzione di un dispositivo (gli oggetti vengono ora ripuliti all'avvio), logo ufficiale Feller zeptrion come icona (usato con autorizzazione)",
-        "es": "Corregido: los estados huérfanos permanecían después de eliminar/sustituir un dispositivo (los objetos ahora se limpian al iniciar), logotipo oficial de Feller zeptrion como icono (usado con permiso)",
-        "pl": "Naprawiono: osierocone stany pozostawały po usunięciu/wymianie urządzenia (obiekty są teraz porządkowane przy starcie), oficjalne logo Feller zeptrion jako ikona (użyte za zgodą)",
-        "uk": "Виправлено: осиротілі стани залишалися після видалення/заміни пристрою (об'єкти тепер очищуються під час запуску), офіційний логотип Feller zeptrion як значок (використовується з дозволу)",
-        "zh-cn": "修复:设备被移除/更换后残留孤立状态的问题(现在会在启动时清理对象),使用Feller zeptrion官方标志作为图标(已获授权使用)"
-      },
-      "0.7.0": {
-        "en": "Scaling for 20+ devices (parallel setup, poll jitter, duplicate detection), strict startup validation of every configured row, CSV bulk import with per-line validation, fixed position estimate after stop during full open/close travel, adapter-managed timer cleanup, leading zeros in chdes codes preserved",
-        "de": "Skalierung für 20+ Geräte (paralleles Setup, Poll-Jitter, Duplikat-Erkennung), strikte Startup-Validierung jeder konfigurierten Zeile, CSV-Massenimport mit Zeilen-Validierung, korrigierte Positionsschätzung bei Stopp während Endlagenfahrt, korrektes Adapter-Timer-Cleanup, führende Nullen in chdes-Codes bleiben erhalten",
-        "ru": "Масштабирование для 20+ устройств (параллельная настройка, джиттер опроса, обнаружение дубликатов), строгая проверка при запуске каждой настроенной строки, массовый импорт CSV с построчной проверкой, исправленная оценка положения после остановки во время полного хода открытия/закрытия, управляемая адаптером очистка таймеров, сохранение ведущих нулей в кодах chdes",
-        "pt": "Escalabilidade para 20+ dispositivos (configuração paralela, jitter de sondagem, deteção de duplicados), validação rigorosa no arranque de cada linha configurada, importação CSV em massa com validação por linha, estimativa de posição corrigida após paragem durante o percurso completo de abertura/fecho, limpeza de temporizadores gerida pelo adaptador, zeros à esquerda nos códigos chdes preservados",
-        "nl": "Schaalbaarheid voor 20+ apparaten (parallelle setup, poll-jitter, duplicaatdetectie), strikte opstartvalidatie van elke geconfigureerde rij, CSV-bulkimport met validatie per regel, gecorrigeerde positieschatting na stoppen tijdens volledige open/dicht-beweging, door de adapter beheerde timer-opruiming, voorloopnullen in chdes-codes blijven behouden",
-        "fr": "Mise à l'échelle pour 20+ appareils (configuration parallèle, gigue de sondage, détection de doublons), validation stricte au démarrage de chaque ligne configurée, import CSV en masse avec validation ligne par ligne, estimation de position corrigée après arrêt pendant une course complète d'ouverture/fermeture, nettoyage des timers géré par l'adaptateur, zéros non significatifs conservés dans les codes chdes",
-        "it": "Scalabilità per 20+ dispositivi (setup parallelo, jitter di polling, rilevamento duplicati), validazione rigorosa all'avvio di ogni riga configurata, importazione CSV in blocco con validazione per riga, stima della posizione corretta dopo l'arresto durante la corsa completa di apertura/chiusura, pulizia dei timer gestita dall'adapter, zeri iniziali nei codici chdes preservati",
-        "es": "Escalabilidad para 20+ dispositivos (configuración en paralelo, jitter de sondeo, detección de duplicados), validación estricta al inicio de cada fila configurada, importación masiva CSV con validación por línea, estimación de posición corregida tras detenerse durante un recorrido completo de apertura/cierre, limpieza de temporizadores gestionada por el adaptador, ceros iniciales en los códigos chdes conservados",
-        "pl": "Skalowanie dla 20+ urządzeń (równoległa konfiguracja, jitter odpytywania, wykrywanie duplikatów), ścisła walidacja przy starcie każdego skonfigurowanego wiersza, masowy import CSV z walidacją każdej linii, poprawiony szacowany stan pozycji po zatrzymaniu podczas pełnego cyklu otwierania/zamykania, zarządzane przez adapter czyszczenie timerów, zachowane zera wiodące w kodach chdes",
-        "uk": "Масштабування для 20+ пристроїв (паралельне налаштування, джитер опитування, виявлення дублікатів), сувора перевірка під час запуску кожного налаштованого рядка, масовий імпорт CSV з перевіркою кожного рядка, виправлена оцінка позиції після зупинки під час повного ходу відкриття/закриття, кероване адаптером очищення таймерів, збережені провідні нулі в кодах chdes",
-        "zh-cn": "支持20+设备的扩展性(并行初始化、轮询抖动、重复检测),对每个已配置行进行严格的启动校验,支持带逐行校验的CSV批量导入,修复了在完整开/关行程中途停止后的位置估算问题,由适配器统一管理定时器清理,保留chdes代码中的前导零"
-      },
-      "0.6.0": {
-        "en": "Auto-ID from host, device test button (reachability + zeptrion verification + channel count check), channel object names from device (chdes), new icon, device icons",
-        "de": "Auto-ID aus Host, Geräte-Test-Button (Erreichbarkeit + zeptrion-Verifikation + Kanalzahl-Prüfung), Kanal-Objektnamen aus dem Gerät (chdes), neues Icon, Geräte-Icons",
-        "ru": "Автоматический ID на основе хоста, кнопка тестирования устройства (доступность + проверка zeptrion + проверка количества каналов), имена объектов каналов из устройства (chdes), новый значок, значки устройств",
-        "pt": "ID automático a partir do host, botão de teste do dispositivo (acessibilidade + verificação zeptrion + verificação do número de canais), nomes de objetos de canal a partir do dispositivo (chdes), novo ícone, ícones de dispositivo",
-        "nl": "Automatische ID op basis van de host, testknop voor apparaten (bereikbaarheid + zeptrion-verificatie + controle van het aantal kanalen), kanaalobjectnamen van het apparaat (chdes), nieuw icoon, apparaaticonen",
-        "fr": "ID automatique à partir de l'hôte, bouton de test d'appareil (accessibilité + vérification zeptrion + contrôle du nombre de canaux), noms d'objets de canal issus de l'appareil (chdes), nouvelle icône, icônes d'appareil",
-        "it": "ID automatico dall'host, pulsante di test del dispositivo (raggiungibilità + verifica zeptrion + controllo numero canali), nomi degli oggetti canale dal dispositivo (chdes), nuova icona, icone dispositivo",
-        "es": "ID automático a partir del host, botón de prueba de dispositivo (accesibilidad + verificación zeptrion + comprobación del número de canales), nombres de objetos de canal desde el dispositivo (chdes), nuevo icono, iconos de dispositivo",
-        "pl": "Automatyczne ID na podstawie hosta, przycisk testu urządzenia (osiągalność + weryfikacja zeptrion + sprawdzenie liczby kanałów), nazwy obiektów kanałów pobierane z urządzenia (chdes), nowa ikona, ikony urządzeń",
-        "uk": "Автоматичний ID на основі хоста, кнопка тестування пристрою (доступність + перевірка zeptrion + перевірка кількості каналів), назви об'єктів каналів з пристрою (chdes), новий значок, значки пристроїв",
-        "zh-cn": "根据主机自动生成ID,新增设备测试按钮(可达性检测+zeptrion校验+通道数校验),通道对象名称取自设备本身(chdes),新图标,设备图标"
       }
     },
     "titleLang": {
@@ -113,7 +61,12 @@
     ],
     "dependencies": [
       {
-        "js-controller": ">=5.0.19"
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.6.20"
       }
     ],
     "keywords": [

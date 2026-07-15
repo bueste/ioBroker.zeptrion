@@ -10,3 +10,6 @@ coverage
 test/**/tmp
 .DS_Store
 Thumbs.db
+
+# release-script leftover file, must never be committed
+.commitinfo

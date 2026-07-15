@@ -1,56 +1,92 @@
 name: Test and Release
 
+# Run this job on all pushes and pull requests
+# as well as tags with a semantic version
 on:
     push:
         branches:
-            - main
+            - '*'
         tags:
-            - 'v*'
+            # normal versions
+            - 'v[0-9]+.[0-9]+.[0-9]+'
+            # pre-releases
+            - 'v[0-9]+.[0-9]+.[0-9]+-**'
     pull_request: {}
 
-jobs:
-    lint:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: '18'
-            - run: npm install
-            - run: npm run lint
+# Cancel previous PR/branch runs when a new commit is pushed
+concurrency:
+    group: ${{ github.ref }}
+    cancel-in-progress: true
 
-    test-js:
+jobs:
+    # Performs quick checks before the expensive test runs
+    check-and-lint:
+        if: contains(github.event.head_commit.message, '[skip ci]') == false
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: ioBroker/testing-action-check@v1
+              with:
+                  node-version: '22.x'
+                  # Uncomment the following line if your adapter cannot be installed using 'npm ci'
+                  # install-command: 'npm install'
+                  lint: true
+
+    # Runs adapter tests on all supported node versions and OSes
+    adapter-tests:
+        needs: check-and-lint
+        if: contains(github.event.head_commit.message, '[skip ci]') == false
+
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
-                node-version: [18.x, 20.x]
-                os: [ubuntu-latest]
+                node-version: [22.x, 24.x]
+                os: [ubuntu-latest, windows-latest, macos-latest]
+
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
+            - uses: ioBroker/testing-action-adapter@v1
               with:
                   node-version: ${{ matrix.node-version }}
-            - run: npm install
-            - run: npm run test:package
-            - run: npm run test:unit
+                  os: ${{ matrix.os }}
+                  # Uncomment the following line if your adapter cannot be installed using 'npm ci'
+                  # install-command: 'npm install'
+# TODO: To enable automatic npm releases, create a token on npmjs.org
+# Enter this token as a GitHub secret (with name NPM_TOKEN) in the repository options
+# Then uncomment the following block:
 
-    # Release-Job deaktiviert: erfordert ein npm Automation-Token als Repo-Secret
-    # NPM_TOKEN (siehe https://docs.npmjs.com/creating-and-viewing-access-tokens,
-    # Token-Typ "Automation" oder Granular Access Token mit "Bypass 2FA" - der
-    # normale Login-Passkey funktioniert in CI nicht interaktiv). Sobald das
-    # Secret gesetzt ist, den folgenden Block einkommentieren:
-    #
-    # release:
-    #     needs: [lint, test-js]
-    #     if: contains(github.ref, 'refs/tags/')
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - uses: actions/checkout@v4
-    #         - uses: actions/setup-node@v4
-    #           with:
-    #               node-version: '18'
-    #               registry-url: 'https://registry.npmjs.org'
-    #         - run: npm install
-    #         - run: npm publish
-    #           env:
-    #               NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+#  # Deploys the final package to NPM
+#  deploy:
+#    needs: [check-and-lint, adapter-tests]
+#
+#    # Trigger this step only when a commit on any branch is tagged with a version number
+#    if: |
+#      contains(github.event.head_commit.message, '[skip ci]') == false &&
+#      github.event_name == 'push' &&
+#      startsWith(github.ref, 'refs/tags/v')
+#
+#    runs-on: ubuntu-latest
+#
+#    # Write permissions are required to create Github releases
+#    permissions:
+#      contents: write
+#
+#    steps:
+#      - uses: ioBroker/testing-action-deploy@v1
+#        with:
+#          node-version: '22.x'
+#          # Uncomment the following line if your adapter cannot be installed using 'npm ci'
+#          # install-command: 'npm install'
+#          npm-token: ${{ secrets.NPM_TOKEN }}
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#
+#          # When using Sentry for error reporting, Sentry can be informed about new releases
+#          # To enable create a API-Token in Sentry (User settings, API keys)
+#          # Enter this token as a GitHub secret (with name SENTRY_AUTH_TOKEN) in the repository options
+#          # Then uncomment and customize the following block:
+#          sentry: true
+#          sentry-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
+#          sentry-project: "iobroker-template"
+#          sentry-version-prefix: "iobroker.template"
+#          # If your sentry project is linked to a GitHub repository, you can enable the following option
+#          # sentry-github-integration: true
