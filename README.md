@@ -189,6 +189,10 @@ npm run test:integration   # startet echten js-controller (dauert länger)
 ```
 ## Changelog
 
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires admin >= 7.8.23 now.
+
 ### 0.7.0 (2026-07-10)
 - Skalierung für 20+ Geräte: paralleles Setup, Poll-Jitter, Duplikat-Erkennung
 - Strikte Startup-Validierung jeder konfigurierten Geräte-Zeile

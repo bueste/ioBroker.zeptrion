@@ -145,7 +145,12 @@
     "messagebox": true,
     "loglevel": "info",
     "stopBeforeUpdate": true,
-    "tier": 2
+    "tier": 2,
+    "globalDependencies": [
+      {
+        "admin": ">=7.8.23"
+      }
+    ]
   },
   "native": {
     "requestTimeout": 4000,
