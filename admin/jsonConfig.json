@@ -1,5 +1,5 @@
 {
-  "i18n": true,
+  "i18n": false,
   "type": "tabs",
   "items": {
     "tabDevices": {
@@ -149,21 +149,48 @@
                   "value": "unknown",
                   "label": {
                     "en": "unknown/mixed",
-                    "de": "unbekannt/gemischt"
+                    "de": "unbekannt/gemischt",
+                    "ru": "неизвестно/смешанно",
+                    "pt": "desconhecido/misto",
+                    "nl": "onbekend/gemengd",
+                    "fr": "inconnu/mixte",
+                    "it": "sconosciuto/misto",
+                    "es": "desconocido/mixto",
+                    "pl": "nieznany/mieszany",
+                    "uk": "невідомо/змішано",
+                    "zh-cn": "未知/混合"
                   }
                 },
                 {
                   "value": "blind",
                   "label": {
                     "en": "Blinds/shutters",
-                    "de": "Storen/Rolladen"
+                    "de": "Storen/Rolladen",
+                    "ru": "Жалюзи/ставни",
+                    "pt": "Estores/persianas",
+                    "nl": "Jaloezieën/rolluiken",
+                    "fr": "Volets/stores",
+                    "it": "Tapparelle/tende",
+                    "es": "Persianas/toldos",
+                    "pl": "Rolety/żaluzje",
+                    "uk": "Жалюзі/ролети",
+                    "zh-cn": "百叶窗/卷帘"
                   }
                 },
                 {
                   "value": "light",
                   "label": {
                     "en": "Light",
-                    "de": "Licht"
+                    "de": "Licht",
+                    "ru": "Свет",
+                    "pt": "Luz",
+                    "nl": "Licht",
+                    "fr": "Lumière",
+                    "it": "Luce",
+                    "es": "Luz",
+                    "pl": "Światło",
+                    "uk": "Світло",
+                    "zh-cn": "灯光"
                   }
                 }
               ],
