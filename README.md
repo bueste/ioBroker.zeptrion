@@ -190,6 +190,13 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 0.8.4 (2026-07-16)
+- Cleanup release addressing the ioBroker adapter store checker findings, no functional/behavioral changes
+- Updated fast-xml-parser 4.5.7 -> 5.9.3, eslint, mocha, chai and the testing-action-check GitHub Action (verified identical XML parsing output for the zrap API response shapes used by this adapter)
+- Removed devDependencies already bundled by @iobroker/testing
+- Fixed jsonConfig.json i18n declaration (was "true" without an admin/i18n directory) and added missing translations for the work area "kind" dropdown options
+- Added package-lock.json and aligned dependabot.yml/auto-merge workflow with the current ioBroker-Bot templates
+
 ### 0.8.3 (2026-07-14)
 - CI workflow activated (lint + tests on every push/PR via GitHub Actions), removed redundant duplicate icon file at repo root (only admin/zeptrion.png is used), cleaned up outdated publish instructions in README
 
