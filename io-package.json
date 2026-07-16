@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "zeptrion",
-    "version": "0.8.4",
+    "version": "0.8.5",
     "news": {
+      "0.8.5": {
+        "en": "Enabled automated npm releases via GitHub Actions using npm Trusted Publishing (OIDC) - no more manual publishing, and this and all future tagged releases are automatically signed with npm provenance. No functional/API changes.",
+        "de": "Automatisierte npm-Releases über GitHub Actions mittels npm Trusted Publishing (OIDC) aktiviert - kein manuelles Veröffentlichen mehr nötig, dieses und alle künftigen getaggten Releases werden automatisch mit npm-Provenance signiert. Keine funktionalen Änderungen/API-Änderungen.",
+        "ru": "Включены автоматические релизы на npm через GitHub Actions с использованием npm Trusted Publishing (OIDC) - больше не требуется ручная публикация, этот и все будущие релизы с тегами автоматически подписываются npm provenance. Без функциональных изменений.",
+        "pt": "Ativados os lançamentos automáticos no npm via GitHub Actions usando npm Trusted Publishing (OIDC) - já não é necessária a publicação manual, esta e todas as futuras versões com tag são automaticamente assinadas com npm provenance. Sem alterações funcionais/de API.",
+        "nl": "Geautomatiseerde npm-releases via GitHub Actions ingeschakeld met npm Trusted Publishing (OIDC) - handmatig publiceren is niet meer nodig, deze en alle toekomstige getagde releases worden automatisch ondertekend met npm provenance. Geen functionele/API-wijzigingen.",
+        "fr": "Publications npm automatisées via GitHub Actions activées grâce à npm Trusted Publishing (OIDC) - plus besoin de publier manuellement, cette version et toutes les futures versions taguées sont automatiquement signées avec la provenance npm. Aucun changement fonctionnel/API.",
+        "it": "Abilitate le release npm automatizzate tramite GitHub Actions usando npm Trusted Publishing (OIDC) - non è più necessaria la pubblicazione manuale, questa e tutte le future release taggate vengono firmate automaticamente con la provenance npm. Nessuna modifica funzionale/API.",
+        "es": "Se habilitaron los lanzamientos automáticos de npm mediante GitHub Actions usando npm Trusted Publishing (OIDC) - ya no es necesario publicar manualmente, esta y todas las futuras versiones etiquetadas se firman automáticamente con la procedencia de npm. Sin cambios funcionales/de API.",
+        "pl": "Włączono automatyczne wydania npm za pośrednictwem GitHub Actions przy użyciu npm Trusted Publishing (OIDC) - ręczna publikacja nie jest już konieczna, to i wszystkie przyszłe otagowane wydania są automatycznie podpisywane provenance npm. Brak zmian funkcjonalnych/API.",
+        "uk": "Увімкнено автоматичні релізи npm через GitHub Actions за допомогою npm Trusted Publishing (OIDC) - ручна публікація більше не потрібна, цей і всі майбутні релізи з тегами автоматично підписуються npm provenance. Без функціональних змін.",
+        "zh-cn": "已通过 GitHub Actions 使用 npm Trusted Publishing（OIDC）启用自动化 npm 发布——不再需要手动发布，此版本及所有未来的带标签版本都将自动附带 npm provenance 签名。无功能/API 变更。"
+      },
       "0.8.4": {
         "en": "Cleanup release addressing the ioBroker adapter store checker findings, no functional/behavioral changes. Updated fast-xml-parser 4.5.7 -> 5.9.3, eslint, mocha, chai and the testing-action-check GitHub Action (verified identical XML parsing output for the zrap API response shapes used by this adapter). Removed devDependencies already bundled by @iobroker/testing. Fixed jsonConfig.json i18n declaration (was 'true' without an admin/i18n directory) and added missing translations for the work area 'kind' dropdown options. Added package-lock.json and aligned dependabot.yml/auto-merge workflow with the current ioBroker-Bot templates.",
         "de": "Aufräum-Release zur Behebung der ioBroker-Store-Checker-Befunde, keine funktionalen/verhaltensändernden Anpassungen. fast-xml-parser 4.5.7 -> 5.9.3, eslint, mocha, chai sowie die testing-action-check GitHub Action aktualisiert (identische XML-Parser-Ausgabe für die von diesem Adapter genutzten zrap-API-Antwortformate verifiziert). Bereits über @iobroker/testing enthaltene devDependencies entfernt. jsonConfig.json-i18n-Deklaration korrigiert (stand auf 'true' ohne admin/i18n-Verzeichnis) und fehlende Übersetzungen der Mähbereich-\"kind\"-Dropdown-Optionen ergänzt. package-lock.json hinzugefügt und dependabot.yml/Auto-Merge-Workflow an die aktuellen ioBroker-Bot-Vorlagen angeglichen.",

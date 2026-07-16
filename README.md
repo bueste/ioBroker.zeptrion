@@ -190,6 +190,9 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 0.8.5 (2026-07-16)
+- Enabled automated npm releases via GitHub Actions using npm Trusted Publishing (OIDC) - no more manual publishing, and this and all future tagged releases are automatically signed with npm provenance. No functional/API changes.
+
 ### 0.8.4 (2026-07-16)
 - Cleanup release addressing the ioBroker adapter store checker findings, no functional/behavioral changes
 - Updated fast-xml-parser 4.5.7 -> 5.9.3, eslint, mocha, chai and the testing-action-check GitHub Action (verified identical XML parsing output for the zrap API response shapes used by this adapter)
