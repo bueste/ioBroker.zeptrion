@@ -2,7 +2,8 @@ node_modules
 npm-debug.log
 iobroker-data
 *.log
-.vscode
+.vscode/*
+!.vscode/settings.json
 .idea
 coverage
 .nyc_output
