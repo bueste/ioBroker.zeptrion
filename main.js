@@ -123,7 +123,7 @@ class Zeptrion extends utils.Adapter {
     async onReady() {
         await this.setStateAsync('info.connection', { val: false, ack: true });
 
-        const timeout = parseInt(this.config.requestTimeout, 10) || 4000;
+        const timeout = parseInt(String(this.config.requestTimeout), 10) || 4000;
         this.requestTimeout = Math.min(Math.max(timeout, 500), 30000);
 
         const devicesCfg = Array.isArray(this.config.devices) ? this.config.devices : [];
@@ -1519,13 +1519,13 @@ class Zeptrion extends utils.Adapter {
                         id: candidate,
                         name: row.name || row.host,
                         host: row.host,
-                        channels: parseInt(row.channels, 10) || 1,
+                        channels: parseInt(String(row.channels), 10) || 1,
                         kind: row.kind,
-                        travelTimeSec: parseInt(row.travelTimeSec, 10) || 0,
+                        travelTimeSec: parseInt(String(row.travelTimeSec), 10) || 0,
                         travelTimeSecCh: String(row.travelTimeSecCh || '').trim(),
-                        tiltTimeMs: parseInt(row.tiltTimeMs, 10) || 0,
+                        tiltTimeMs: parseInt(String(row.tiltTimeMs), 10) || 0,
                         smartfront: row.smartfront,
-                        pollInterval: parseInt(row.pollInterval, 10) || 30
+                        pollInterval: parseInt(String(row.pollInterval), 10) || 30
                     });
                     existingHosts.add(row.host.toLowerCase());
                     existingIds.add(candidate);
