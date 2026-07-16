@@ -6,14 +6,32 @@
       "type": "panel",
       "label": {
         "en": "Devices",
-        "de": "Geräte"
+        "de": "Geräte",
+        "ru": "Устройства",
+        "pt": "Dispositivos",
+        "nl": "Apparaten",
+        "fr": "Appareils",
+        "it": "Dispositivi",
+        "es": "Dispositivos",
+        "pl": "Urządzenia",
+        "uk": "Пристрої",
+        "zh-cn": "设备"
       },
       "items": {
         "_infoHeader": {
           "type": "staticText",
           "text": {
             "en": "Feller zeptrion / zApp WLAN actuators (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP address or mDNS name (e.g. zapp-14250034.local).",
-            "de": "Feller zeptrion / zApp WLAN-Aktoren (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP-Adresse oder mDNS-Name (z.B. zapp-14250034.local)."
+            "de": "Feller zeptrion / zApp WLAN-Aktoren (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP-Adresse oder mDNS-Name (z.B. zapp-14250034.local).",
+            "ru": "WLAN-актуаторы Feller zeptrion / zApp (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP-адрес или имя mDNS (напр. zapp-14250034.local).",
+            "pt": "Atuadores WLAN Feller zeptrion / zApp (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = endereço IP ou nome mDNS (ex. zapp-14250034.local).",
+            "nl": "Feller zeptrion / zApp WLAN-actuatoren (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP-adres of mDNS-naam (bijv. zapp-14250034.local).",
+            "fr": "Actionneurs WLAN Feller zeptrion / zApp (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = adresse IP ou nom mDNS (p. ex. zapp-14250034.local).",
+            "it": "Attuatori WLAN Feller zeptrion / zApp (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = indirizzo IP o nome mDNS (es. zapp-14250034.local).",
+            "es": "Actuadores WLAN Feller zeptrion / zApp (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = dirección IP o nombre mDNS (p. ej. zapp-14250034.local).",
+            "pl": "Aktuatory WLAN Feller zeptrion / zApp (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = adres IP lub nazwa mDNS (np. zapp-14250034.local).",
+            "uk": "WLAN-актуатори Feller zeptrion / zApp (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K). Host = IP-адреса або ім'я mDNS (напр. zapp-14250034.local).",
+            "zh-cn": "Feller zeptrion / zApp WLAN 执行器（WLAN-Nebenstelle 4K、WLAN-Zwischenmodul 2K）。Host = IP 地址或 mDNS 名称（例如 zapp-14250034.local）。"
           },
           "sm": 12,
           "xs": 12,
@@ -29,7 +47,16 @@
           "variant": "contained",
           "label": {
             "en": "🔍 Scan network for zeptrion devices (mDNS, ~4s)",
-            "de": "🔍 Netzwerk nach zeptrion-Geräten durchsuchen (mDNS, ca. 4s)"
+            "de": "🔍 Netzwerk nach zeptrion-Geräten durchsuchen (mDNS, ca. 4s)",
+            "ru": "🔍 Поиск устройств zeptrion в сети (mDNS, ~4с)",
+            "pt": "🔍 Procurar dispositivos zeptrion na rede (mDNS, ~4s)",
+            "nl": "🔍 Netwerk scannen naar zeptrion-apparaten (mDNS, ~4s)",
+            "fr": "🔍 Rechercher les appareils zeptrion sur le réseau (mDNS, ~4s)",
+            "it": "🔍 Cerca dispositivi zeptrion nella rete (mDNS, ~4s)",
+            "es": "🔍 Buscar dispositivos zeptrion en la red (mDNS, ~4s)",
+            "pl": "🔍 Skanuj sieć w poszukiwaniu urządzeń zeptrion (mDNS, ~4s)",
+            "uk": "🔍 Пошук пристроїв zeptrion у мережі (mDNS, ~4с)",
+            "zh-cn": "🔍 扫描网络中的 zeptrion 设备（mDNS，约 4 秒）"
           },
           "showProcess": true,
           "sm": 12,
@@ -45,7 +72,16 @@
           "variant": "outlined",
           "label": {
             "en": "🔎 Test configured devices (reachable? really zeptrion?)",
-            "de": "🔎 Konfigurierte Geräte testen (erreichbar? wirklich zeptrion?)"
+            "de": "🔎 Konfigurierte Geräte testen (erreichbar? wirklich zeptrion?)",
+            "ru": "🔎 Проверить настроенные устройства (доступны? действительно zeptrion?)",
+            "pt": "🔎 Testar dispositivos configurados (acessíveis? realmente zeptrion?)",
+            "nl": "🔎 Geconfigureerde apparaten testen (bereikbaar? echt zeptrion?)",
+            "fr": "🔎 Tester les appareils configurés (accessibles ? vraiment zeptrion ?)",
+            "it": "🔎 Verifica dispositivi configurati (raggiungibili? realmente zeptrion?)",
+            "es": "🔎 Probar dispositivos configurados (¿accesibles? ¿realmente zeptrion?)",
+            "pl": "🔎 Testuj skonfigurowane urządzenia (dostępne? rzeczywiście zeptrion?)",
+            "uk": "🔎 Перевірити налаштовані пристрої (доступні? дійсно zeptrion?)",
+            "zh-cn": "🔎 测试已配置的设备（是否可达？是否确为 zeptrion？）"
           },
           "showProcess": true,
           "sm": 12,
@@ -58,7 +94,16 @@
           "type": "staticText",
           "text": {
             "en": "Found devices are added DISABLED to the table below. Close and reopen this dialog after scanning, then verify each row (name, channel count, kind) and enable it. mDNS only works within the same network segment / VLAN.",
-            "de": "Gefundene Geräte werden DEAKTIVIERT in die Tabelle übernommen. Dialog nach der Suche schliessen und neu öffnen, dann jede Zeile prüfen (Name, Kanalzahl, Art) und aktivieren. mDNS funktioniert nur im gleichen Netzsegment/VLAN."
+            "de": "Gefundene Geräte werden DEAKTIVIERT in die Tabelle übernommen. Dialog nach der Suche schliessen und neu öffnen, dann jede Zeile prüfen (Name, Kanalzahl, Art) und aktivieren. mDNS funktioniert nur im gleichen Netzsegment/VLAN.",
+            "ru": "Найденные устройства добавляются в таблицу ниже в ОТКЛЮЧЁННОМ состоянии. Закройте и снова откройте этот диалог после поиска, затем проверьте каждую строку (имя, число каналов, тип) и включите её. mDNS работает только в пределах одного сегмента сети / VLAN.",
+            "pt": "Os dispositivos encontrados são adicionados DESATIVADOS à tabela abaixo. Feche e reabra este diálogo após a pesquisa, depois verifique cada linha (nome, número de canais, tipo) e ative-a. O mDNS só funciona dentro do mesmo segmento de rede / VLAN.",
+            "nl": "Gevonden apparaten worden UITGESCHAKELD aan de onderstaande tabel toegevoegd. Sluit dit dialoogvenster na het scannen en open het opnieuw, controleer dan elke rij (naam, aantal kanalen, type) en schakel deze in. mDNS werkt alleen binnen hetzelfde netwerksegment / VLAN.",
+            "fr": "Les appareils trouvés sont ajoutés DÉSACTIVÉS au tableau ci-dessous. Fermez et rouvrez cette boîte de dialogue après la recherche, puis vérifiez chaque ligne (nom, nombre de canaux, type) et activez-la. mDNS fonctionne uniquement au sein du même segment réseau / VLAN.",
+            "it": "I dispositivi trovati vengono aggiunti DISABILITATI alla tabella sottostante. Chiudi e riapri questa finestra dopo la scansione, quindi verifica ogni riga (nome, numero di canali, tipo) e abilitala. mDNS funziona solo all'interno dello stesso segmento di rete / VLAN.",
+            "es": "Los dispositivos encontrados se añaden DESACTIVADOS a la tabla siguiente. Cierre y vuelva a abrir este diálogo tras la búsqueda, luego verifique cada fila (nombre, número de canales, tipo) y actívela. mDNS solo funciona dentro del mismo segmento de red / VLAN.",
+            "pl": "Znalezione urządzenia są dodawane do poniższej tabeli jako WYŁĄCZONE. Zamknij i ponownie otwórz to okno po wyszukiwaniu, następnie sprawdź każdy wiersz (nazwa, liczba kanałów, rodzaj) i włącz go. mDNS działa tylko w obrębie tego samego segmentu sieci / VLAN.",
+            "uk": "Знайдені пристрої додаються до таблиці нижче у ВИМКНЕНОМУ стані. Закрийте і знову відкрийте це діалогове вікно після пошуку, потім перевірте кожен рядок (назва, кількість каналів, тип) і увімкніть його. mDNS працює лише в межах одного сегмента мережі / VLAN.",
+            "zh-cn": "找到的设备会以「禁用」状态添加到下方表格中。扫描完成后请关闭并重新打开此对话框，然后检查每一行（名称、通道数、类型）并启用它。mDNS 仅在同一网络段/VLAN 内有效。"
           },
           "sm": 12,
           "xs": 12,
@@ -71,7 +116,16 @@
           "type": "table",
           "label": {
             "en": "Devices",
-            "de": "Geräte"
+            "de": "Geräte",
+            "ru": "Устройства",
+            "pt": "Dispositivos",
+            "nl": "Apparaten",
+            "fr": "Appareils",
+            "it": "Dispositivi",
+            "es": "Dispositivos",
+            "pl": "Urządzenia",
+            "uk": "Пристрої",
+            "zh-cn": "设备"
           },
           "sm": 12,
           "items": [
@@ -91,7 +145,16 @@
               "title": "ID",
               "tooltip": {
                 "en": "Leave empty = auto-generated from host. Only a-z, 0-9, _ and -",
-                "de": "Leer lassen = wird automatisch aus dem Host erzeugt. Nur a-z, 0-9, _ und -"
+                "de": "Leer lassen = wird automatisch aus dem Host erzeugt. Nur a-z, 0-9, _ und -",
+                "ru": "Оставьте пустым = будет создано автоматически из host. Только a-z, 0-9, _ и -",
+                "pt": "Deixe vazio = gerado automaticamente a partir do host. Apenas a-z, 0-9, _ e -",
+                "nl": "Leeg laten = automatisch gegenereerd op basis van host. Alleen a-z, 0-9, _ en -",
+                "fr": "Laisser vide = généré automatiquement à partir de l'hôte. Uniquement a-z, 0-9, _ et -",
+                "it": "Lascia vuoto = generato automaticamente dall'host. Solo a-z, 0-9, _ e -",
+                "es": "Dejar vacío = generado automáticamente a partir del host. Solo a-z, 0-9, _ y -",
+                "pl": "Pozostaw puste = generowane automatycznie z hosta. Tylko a-z, 0-9, _ i -",
+                "uk": "Залиште порожнім = буде згенеровано автоматично з host. Лише a-z, 0-9, _ та -",
+                "zh-cn": "留空 = 根据 host 自动生成。仅允许 a-z、0-9、_ 和 -"
               },
               "validator": "!data.id || /^[a-zA-Z0-9_-]+$/.test(data.id)",
               "validatorErrorText": "Only a-z, 0-9, _ and - (or leave empty)",
@@ -126,7 +189,16 @@
               },
               "tooltip": {
                 "en": "3340-4-x = 4, 3340-2-x = 2",
-                "de": "3340-4-x = 4, 3340-2-x = 2"
+                "de": "3340-4-x = 4, 3340-2-x = 2",
+                "ru": "3340-4-x = 4, 3340-2-x = 2",
+                "pt": "3340-4-x = 4, 3340-2-x = 2",
+                "nl": "3340-4-x = 4, 3340-2-x = 2",
+                "fr": "3340-4-x = 4, 3340-2-x = 2",
+                "it": "3340-4-x = 4, 3340-2-x = 2",
+                "es": "3340-4-x = 4, 3340-2-x = 2",
+                "pl": "3340-4-x = 4, 3340-2-x = 2",
+                "uk": "3340-4-x = 4, 3340-2-x = 2",
+                "zh-cn": "3340-4-x = 4，3340-2-x = 2"
               },
               "min": 1,
               "max": 4,
@@ -142,7 +214,16 @@
               },
               "tooltip": {
                 "en": "Controls ioBroker object roles for VIS/smart home integrations",
-                "de": "Steuert ioBroker-Objektrollen für VIS/Smart-Home-Integrationen"
+                "de": "Steuert ioBroker-Objektrollen für VIS/Smart-Home-Integrationen",
+                "ru": "Определяет роли объектов ioBroker для интеграции с VIS/умным домом",
+                "pt": "Controla os papéis de objeto do ioBroker para integrações VIS/casa inteligente",
+                "nl": "Bepaalt ioBroker-objectrollen voor VIS/smarthome-integraties",
+                "fr": "Contrôle les rôles d'objet ioBroker pour les intégrations VIS/domotique",
+                "it": "Controlla i ruoli oggetto di ioBroker per le integrazioni VIS/smart home",
+                "es": "Controla los roles de objeto de ioBroker para integraciones VIS/domótica",
+                "pl": "Steruje rolami obiektów ioBroker dla integracji VIS/smart home",
+                "uk": "Керує ролями об'єктів ioBroker для інтеграцій VIS/розумного дому",
+                "zh-cn": "控制用于 VIS/智能家居集成的 ioBroker 对象角色"
               },
               "options": [
                 {
@@ -206,7 +287,16 @@
               },
               "tooltip": {
                 "en": "Default travel time in seconds, used for all channels unless overridden per-channel below. 0 = position estimation and setPosition disabled. Only relevant for kind=Blinds.",
-                "de": "Standard-Laufzeit in Sekunden, gilt für alle Kanäle, sofern nicht rechts pro Kanal überschrieben. 0 = Positionsschätzung und setPosition deaktiviert. Nur relevant bei Art=Storen."
+                "de": "Standard-Laufzeit in Sekunden, gilt für alle Kanäle, sofern nicht rechts pro Kanal überschrieben. 0 = Positionsschätzung und setPosition deaktiviert. Nur relevant bei Art=Storen.",
+                "ru": "Время хода по умолчанию в секундах, применяется ко всем каналам, если не переопределено ниже для отдельного канала. 0 = оценка позиции и setPosition отключены. Актуально только для type=Blinds.",
+                "pt": "Tempo de percurso padrão em segundos, usado para todos os canais salvo substituição por canal abaixo. 0 = estimativa de posição e setPosition desativados. Relevante apenas para kind=Blinds.",
+                "nl": "Standaard looptijd in seconden, geldt voor alle kanalen tenzij hieronder per kanaal overschreven. 0 = positieschatting en setPosition uitgeschakeld. Alleen relevant bij kind=Blinds.",
+                "fr": "Temps de course par défaut en secondes, utilisé pour tous les canaux sauf remplacement par canal ci-dessous. 0 = estimation de position et setPosition désactivés. Pertinent uniquement pour kind=Blinds.",
+                "it": "Tempo di corsa predefinito in secondi, usato per tutti i canali salvo override per canale sotto. 0 = stima della posizione e setPosition disabilitati. Rilevante solo per kind=Blinds.",
+                "es": "Tiempo de recorrido predeterminado en segundos, se usa para todos los canales salvo que se sobrescriba por canal más abajo. 0 = estimación de posición y setPosition desactivados. Solo relevante para kind=Blinds.",
+                "pl": "Domyślny czas przejazdu w sekundach, stosowany do wszystkich kanałów, chyba że zostanie nadpisany poniżej dla poszczególnych kanałów. 0 = szacowanie pozycji i setPosition wyłączone. Istotne tylko dla kind=Blinds.",
+                "uk": "Час ходу за замовчуванням у секундах, застосовується до всіх каналів, якщо не перевизначено нижче для окремого каналу. 0 = оцінка позиції та setPosition вимкнено. Актуально лише для kind=Blinds.",
+                "zh-cn": "默认运行时间（秒），适用于所有通道，除非下方针对单个通道进行了覆盖设置。0 = 禁用位置估算和 setPosition。仅在 kind=Blinds 时适用。"
               },
               "min": 0,
               "max": 300,
@@ -222,7 +312,16 @@
               },
               "tooltip": {
                 "en": "Optional: comma-separated per-channel override, one value per channel in order (e.g. '22,28' for a 2K device where channel 1 and 2 have different motor travel times). Empty entries fall back to 'Motor travel (s)'. Leave the whole field empty to use the same value for all channels.",
-                "de": "Optional: Kommagetrennte Laufzeit pro Kanal, ein Wert je Kanal in Reihenfolge (z.B. '22,28' für ein 2K-Gerät, bei dem Kanal 1 und 2 unterschiedliche Motor-Laufzeiten haben). Leere Einträge verwenden 'Motor-Laufzeit (s)'. Ganzes Feld leer lassen = gleicher Wert für alle Kanäle."
+                "de": "Optional: Kommagetrennte Laufzeit pro Kanal, ein Wert je Kanal in Reihenfolge (z.B. '22,28' für ein 2K-Gerät, bei dem Kanal 1 und 2 unterschiedliche Motor-Laufzeiten haben). Leere Einträge verwenden 'Motor-Laufzeit (s)'. Ganzes Feld leer lassen = gleicher Wert für alle Kanäle.",
+                "ru": "Необязательно: переопределение по каналам через запятую, одно значение на канал по порядку (напр. '22,28' для устройства 2K, где каналы 1 и 2 имеют разное время хода). Пустые значения используют 'Motor travel (s)'. Оставьте всё поле пустым, чтобы использовать одно значение для всех каналов.",
+                "pt": "Opcional: substituição por canal separada por vírgulas, um valor por canal em ordem (ex. '22,28' para um dispositivo 2K onde os canais 1 e 2 têm tempos de percurso diferentes). Entradas vazias usam 'Motor travel (s)'. Deixe o campo inteiro vazio para usar o mesmo valor em todos os canais.",
+                "nl": "Optioneel: door komma's gescheiden override per kanaal, één waarde per kanaal in volgorde (bijv. '22,28' voor een 2K-apparaat waarbij kanaal 1 en 2 verschillende looptijden hebben). Lege items vallen terug op 'Motor travel (s)'. Laat het hele veld leeg om dezelfde waarde voor alle kanalen te gebruiken.",
+                "fr": "Facultatif : remplacement par canal séparé par des virgules, une valeur par canal dans l'ordre (p. ex. '22,28' pour un appareil 2K où les canaux 1 et 2 ont des temps de course différents). Les entrées vides utilisent 'Motor travel (s)'. Laissez tout le champ vide pour utiliser la même valeur pour tous les canaux.",
+                "it": "Facoltativo: override per canale separato da virgole, un valore per canale in ordine (es. '22,28' per un dispositivo 2K in cui i canali 1 e 2 hanno tempi di corsa diversi). Le voci vuote usano 'Motor travel (s)'. Lascia l'intero campo vuoto per usare lo stesso valore per tutti i canali.",
+                "es": "Opcional: anulación por canal separada por comas, un valor por canal en orden (p. ej. '22,28' para un dispositivo 2K donde los canales 1 y 2 tienen tiempos de recorrido diferentes). Las entradas vacías usan 'Motor travel (s)'. Deje todo el campo vacío para usar el mismo valor en todos los canales.",
+                "pl": "Opcjonalnie: nadpisanie dla poszczególnych kanałów, oddzielone przecinkami, jedna wartość na kanał w kolejności (np. '22,28' dla urządzenia 2K, gdzie kanały 1 i 2 mają różny czas przejazdu). Puste wpisy korzystają z 'Motor travel (s)'. Pozostaw całe pole puste, aby użyć tej samej wartości dla wszystkich kanałów.",
+                "uk": "Необов'язково: перевизначення по каналах через кому, одне значення на канал за порядком (напр. '22,28' для пристрою 2K, де канали 1 і 2 мають різний час ходу). Порожні значення використовують 'Motor travel (s)'. Залиште все поле порожнім, щоб використовувати одне значення для всіх каналів.",
+                "zh-cn": "可选：以逗号分隔的按通道覆盖设置，按顺序每个通道一个值（例如 2K 设备中通道 1 和 2 的运行时间不同，可填 \"22,28\"）。留空的项将使用 \"Motor travel (s)\"。将整个字段留空则所有通道使用相同的值。"
               },
               "validator": "!data.travelTimeSecCh || /^\\s*\\d*\\s*(,\\s*\\d*\\s*){0,3}$/.test(data.travelTimeSecCh)",
               "validatorErrorText": "Comma-separated numbers only, max 4 values (e.g. '22,28')",
@@ -237,7 +336,16 @@
               },
               "tooltip": {
                 "en": "Short move pulse for tilting raffstore lamellas via tiltOpen/tiltClose (typically 300-800ms). 0 = disabled. Only relevant for kind=Blinds.",
-                "de": "Kurzer Fahr-Impuls zum Schrägstellen von Rafflamellen via tiltOpen/tiltClose (typisch 300-800ms). 0 = deaktiviert. Nur relevant bei Art=Storen."
+                "de": "Kurzer Fahr-Impuls zum Schrägstellen von Rafflamellen via tiltOpen/tiltClose (typisch 300-800ms). 0 = deaktiviert. Nur relevant bei Art=Storen.",
+                "ru": "Короткий импульс движения для наклона ламелей жалюзи через tiltOpen/tiltClose (обычно 300-800мс). 0 = отключено. Актуально только для type=Blinds.",
+                "pt": "Pulso de movimento curto para inclinar as lâminas via tiltOpen/tiltClose (normalmente 300-800ms). 0 = desativado. Relevante apenas para kind=Blinds.",
+                "nl": "Korte beweegimpuls voor het kantelen van lamellen via tiltOpen/tiltClose (doorgaans 300-800ms). 0 = uitgeschakeld. Alleen relevant bij kind=Blinds.",
+                "fr": "Impulsion de mouvement courte pour incliner les lamelles via tiltOpen/tiltClose (généralement 300-800ms). 0 = désactivé. Pertinent uniquement pour kind=Blinds.",
+                "it": "Breve impulso di movimento per inclinare le lamelle tramite tiltOpen/tiltClose (tipicamente 300-800ms). 0 = disabilitato. Rilevante solo per kind=Blinds.",
+                "es": "Pulso de movimiento corto para inclinar las lamas mediante tiltOpen/tiltClose (típicamente 300-800ms). 0 = desactivado. Solo relevante para kind=Blinds.",
+                "pl": "Krótki impuls ruchu do przechylania lamel przez tiltOpen/tiltClose (zwykle 300-800ms). 0 = wyłączone. Istotne tylko dla kind=Blinds.",
+                "uk": "Короткий імпульс руху для нахилу ламелей через tiltOpen/tiltClose (зазвичай 300-800мс). 0 = вимкнено. Актуально лише для kind=Blinds.",
+                "zh-cn": "通过 tiltOpen/tiltClose 使百叶倾斜的短脉冲运行时间（通常为 300-800 毫秒）。0 = 禁用。仅在 kind=Blinds 时适用。"
               },
               "min": 0,
               "max": 5000,
@@ -250,7 +358,16 @@
               "title": "Smartfront",
               "tooltip": {
                 "en": "Only enable if a Feller Smartfront (920-330x.xx.ZS/.ZU) is attached: adds temperature/brightness/humidity sensors and LED control",
-                "de": "Nur aktivieren, wenn ein Feller-Smartfront (920-330x.xx.ZS/.ZU) montiert ist: ergänzt Temperatur/Helligkeit/Feuchte-Sensoren und LED-Steuerung"
+                "de": "Nur aktivieren, wenn ein Feller-Smartfront (920-330x.xx.ZS/.ZU) montiert ist: ergänzt Temperatur/Helligkeit/Feuchte-Sensoren und LED-Steuerung",
+                "ru": "Включайте только если установлен Feller Smartfront (920-330x.xx.ZS/.ZU): добавляет датчики температуры/яркости/влажности и управление LED",
+                "pt": "Ative apenas se um Feller Smartfront (920-330x.xx.ZS/.ZU) estiver instalado: adiciona sensores de temperatura/brilho/humidade e controlo de LED",
+                "nl": "Alleen inschakelen als een Feller Smartfront (920-330x.xx.ZS/.ZU) is aangesloten: voegt temperatuur-/helderheids-/vochtigheidssensoren en LED-besturing toe",
+                "fr": "À activer uniquement si un Feller Smartfront (920-330x.xx.ZS/.ZU) est installé : ajoute des capteurs de température/luminosité/humidité et le contrôle LED",
+                "it": "Attiva solo se è collegato un Feller Smartfront (920-330x.xx.ZS/.ZU): aggiunge sensori di temperatura/luminosità/umidità e controllo LED",
+                "es": "Active solo si hay un Feller Smartfront (920-330x.xx.ZS/.ZU) conectado: añade sensores de temperatura/brillo/humedad y control LED",
+                "pl": "Włączaj tylko wtedy, gdy podłączony jest Feller Smartfront (920-330x.xx.ZS/.ZU): dodaje czujniki temperatury/jasności/wilgotności oraz sterowanie LED",
+                "uk": "Вмикайте лише якщо підключено Feller Smartfront (920-330x.xx.ZS/.ZU): додає датчики температури/яскравості/вологості та керування LED",
+                "zh-cn": "仅在连接了 Feller Smartfront（920-330x.xx.ZS/.ZU）时启用：增加温度/亮度/湿度传感器和 LED 控制"
               },
               "default": false,
               "width": "8%"
@@ -261,7 +378,16 @@
               "title": "Poll (s)",
               "tooltip": {
                 "en": "Interval for RSSI + periodic resync. Real-time channel updates come via long-poll independently.",
-                "de": "Intervall für RSSI + periodischen Resync. Echtzeit-Kanalupdates kommen unabhängig davon per Long-Poll."
+                "de": "Intervall für RSSI + periodischen Resync. Echtzeit-Kanalupdates kommen unabhängig davon per Long-Poll.",
+                "ru": "Интервал для RSSI + периодической ресинхронизации. Обновления каналов в реальном времени приходят независимо через long-poll.",
+                "pt": "Intervalo para RSSI + ressincronização periódica. As atualizações de canal em tempo real chegam independentemente via long-poll.",
+                "nl": "Interval voor RSSI + periodieke resync. Realtime kanaalupdates komen onafhankelijk daarvan via long-poll binnen.",
+                "fr": "Intervalle pour le RSSI + resynchronisation périodique. Les mises à jour de canal en temps réel arrivent indépendamment via long-poll.",
+                "it": "Intervallo per RSSI + risincronizzazione periodica. Gli aggiornamenti dei canali in tempo reale arrivano indipendentemente tramite long-poll.",
+                "es": "Intervalo para RSSI + resincronización periódica. Las actualizaciones de canal en tiempo real llegan de forma independiente mediante long-poll.",
+                "pl": "Interwał dla RSSI + okresowej resynchronizacji. Aktualizacje kanałów w czasie rzeczywistym docierają niezależnie przez long-poll.",
+                "uk": "Інтервал для RSSI + періодичної ресинхронізації. Оновлення каналів у реальному часі надходять незалежно через long-poll.",
+                "zh-cn": "用于 RSSI 及周期性重新同步的间隔。实时通道更新通过长轮询独立到达。"
               },
               "min": 5,
               "max": 3600,
@@ -280,14 +406,32 @@
       "type": "panel",
       "label": {
         "en": "CSV import",
-        "de": "CSV-Import"
+        "de": "CSV-Import",
+        "ru": "Импорт CSV",
+        "pt": "Importação CSV",
+        "nl": "CSV-import",
+        "fr": "Import CSV",
+        "it": "Importazione CSV",
+        "es": "Importación CSV",
+        "pl": "Import CSV",
+        "uk": "Імпорт CSV",
+        "zh-cn": "CSV 导入"
       },
       "items": {
         "_csvHelp": {
           "type": "staticText",
           "text": {
             "en": "Bulk-add devices. One line per device, semicolon separated (recommended if using the last column, since it contains commas):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nOnly host is mandatory. kind: blind/light/unknown (also: storen, licht). smartfront: 1/0. travel_s_per_channel (optional): comma-separated per-channel override, e.g. '22,28' for a 2K device with different travel times, empty = use travel_s for all channels. Lines starting with # are ignored, a header line 'host;...' is skipped.\nExample:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
-            "de": "Geräte in Serie anlegen. Eine Zeile pro Gerät, Semikolon getrennt (empfohlen bei Nutzung der letzten Spalte, da diese Kommas enthält):\nhost;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s;laufzeit_kanal_s\nNur host ist Pflicht. art: blind/light/unknown (auch: storen, licht). smartfront: 1/0. laufzeit_kanal_s (optional): kommagetrennte Laufzeit pro Kanal, z.B. '22,28' für ein 2K-Gerät mit unterschiedlichen Laufzeiten, leer = laufzeit_s für alle Kanäle. Zeilen mit # werden ignoriert, eine Kopfzeile 'host;...' wird übersprungen.\nBeispiel:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25"
+            "de": "Geräte in Serie anlegen. Eine Zeile pro Gerät, Semikolon getrennt (empfohlen bei Nutzung der letzten Spalte, da diese Kommas enthält):\nhost;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s;laufzeit_kanal_s\nNur host ist Pflicht. art: blind/light/unknown (auch: storen, licht). smartfront: 1/0. laufzeit_kanal_s (optional): kommagetrennte Laufzeit pro Kanal, z.B. '22,28' für ein 2K-Gerät mit unterschiedlichen Laufzeiten, leer = laufzeit_s für alle Kanäle. Zeilen mit # werden ignoriert, eine Kopfzeile 'host;...' wird übersprungen.\nBeispiel:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "ru": "Массовое добавление устройств. Одна строка на устройство, разделитель точка с запятой (рекомендуется при использовании последнего столбца, так как он содержит запятые):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nОбязателен только host. kind: blind/light/unknown (также: storen, licht). smartfront: 1/0. travel_s_per_channel (необязательно): переопределение по каналам через запятую, напр. '22,28' для устройства 2K с разным временем хода, пусто = travel_s для всех каналов. Строки, начинающиеся с #, игнорируются, строка заголовка 'host;...' пропускается.\nПример:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "pt": "Adicionar dispositivos em massa. Uma linha por dispositivo, separada por ponto e vírgula (recomendado ao usar a última coluna, pois contém vírgulas):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nApenas host é obrigatório. kind: blind/light/unknown (também: storen, licht). smartfront: 1/0. travel_s_per_channel (opcional): substituição por canal separada por vírgulas, ex. '22,28' para um dispositivo 2K com tempos diferentes, vazio = travel_s para todos os canais. Linhas iniciadas com # são ignoradas, uma linha de cabeçalho 'host;...' é ignorada.\nExemplo:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "nl": "Apparaten in bulk toevoegen. Eén regel per apparaat, gescheiden door puntkomma (aanbevolen bij gebruik van de laatste kolom, aangezien deze komma's bevat):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nAlleen host is verplicht. kind: blind/light/unknown (ook: storen, licht). smartfront: 1/0. travel_s_per_channel (optioneel): door komma's gescheiden override per kanaal, bijv. '22,28' voor een 2K-apparaat met verschillende looptijden, leeg = travel_s voor alle kanalen. Regels die beginnen met # worden genegeerd, een kopregel 'host;...' wordt overgeslagen.\nVoorbeeld:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "fr": "Ajout groupé d'appareils. Une ligne par appareil, séparée par des points-virgules (recommandé si vous utilisez la dernière colonne, car elle contient des virgules) :\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nSeul host est obligatoire. kind : blind/light/unknown (aussi : storen, licht). smartfront : 1/0. travel_s_per_channel (facultatif) : remplacement par canal séparé par des virgules, p. ex. '22,28' pour un appareil 2K avec des temps différents, vide = travel_s pour tous les canaux. Les lignes commençant par # sont ignorées, une ligne d'en-tête 'host;...' est ignorée.\nExemple :\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "it": "Aggiunta massiva di dispositivi. Una riga per dispositivo, separata da punto e virgola (consigliato se si usa l'ultima colonna, poiché contiene virgole):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nSolo host è obbligatorio. kind: blind/light/unknown (anche: storen, licht). smartfront: 1/0. travel_s_per_channel (opzionale): override per canale separato da virgole, es. '22,28' per un dispositivo 2K con tempi diversi, vuoto = travel_s per tutti i canali. Le righe che iniziano con # vengono ignorate, una riga di intestazione 'host;...' viene saltata.\nEsempio:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "es": "Añadir dispositivos en masa. Una línea por dispositivo, separada por punto y coma (recomendado si se usa la última columna, ya que contiene comas):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nSolo host es obligatorio. kind: blind/light/unknown (también: storen, licht). smartfront: 1/0. travel_s_per_channel (opcional): anulación por canal separada por comas, p. ej. '22,28' para un dispositivo 2K con tiempos diferentes, vacío = travel_s para todos los canales. Las líneas que empiezan por # se ignoran, se omite una línea de cabecera 'host;...'.\nEjemplo:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "pl": "Masowe dodawanie urządzeń. Jedna linia na urządzenie, rozdzielona średnikiem (zalecane przy użyciu ostatniej kolumny, ponieważ zawiera przecinki):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nTylko host jest wymagany. kind: blind/light/unknown (także: storen, licht). smartfront: 1/0. travel_s_per_channel (opcjonalnie): nadpisanie dla poszczególnych kanałów rozdzielone przecinkami, np. '22,28' dla urządzenia 2K z różnym czasem przejazdu, puste = travel_s dla wszystkich kanałów. Linie zaczynające się od # są ignorowane, wiersz nagłówka 'host;...' jest pomijany.\nPrzykład:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "uk": "Масове додавання пристроїв. Один рядок на пристрій, розділювач крапка з комою (рекомендовано при використанні останнього стовпця, оскільки він містить коми):\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\nОбов'язковий лише host. kind: blind/light/unknown (також: storen, licht). smartfront: 1/0. travel_s_per_channel (необов'язково): перевизначення по каналах через кому, напр. '22,28' для пристрою 2K з різним часом ходу, порожньо = travel_s для всіх каналів. Рядки, що починаються з #, ігноруються, рядок заголовка 'host;...' пропускається.\nПриклад:\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25",
+            "zh-cn": "批量添加设备。每台设备一行，使用分号分隔（如使用最后一列建议如此，因为该列包含逗号）：\nhost;name;channels;kind;travel_s;tilt_ms;smartfront;poll_s;travel_s_per_channel\n仅 host 为必填项。kind：blind/light/unknown（也可用 storen、licht）。smartfront：1/0。travel_s_per_channel（可选）：以逗号分隔的按通道覆盖值，例如 2K 设备中运行时间不同可填 \"22,28\"，留空则所有通道使用 travel_s。以 # 开头的行将被忽略，标题行 \"host;...\" 将被跳过。\n示例：\n10.195.36.116;Storen Büro;2;blind;22;500;0;30;22,28\n10.195.36.117;Storen Wohnen;2;storen;25"
           },
           "sm": 12,
           "xs": 12,
@@ -300,7 +444,16 @@
           "type": "text",
           "label": {
             "en": "CSV lines",
-            "de": "CSV-Zeilen"
+            "de": "CSV-Zeilen",
+            "ru": "Строки CSV",
+            "pt": "Linhas CSV",
+            "nl": "CSV-regels",
+            "fr": "Lignes CSV",
+            "it": "Righe CSV",
+            "es": "Líneas CSV",
+            "pl": "Linie CSV",
+            "uk": "Рядки CSV",
+            "zh-cn": "CSV 行"
           },
           "minRows": 8,
           "maxRows": 20,
@@ -320,7 +473,16 @@
           "variant": "contained",
           "label": {
             "en": "⬆️ Import (validates every line)",
-            "de": "⬆️ Importieren (validiert jede Zeile)"
+            "de": "⬆️ Importieren (validiert jede Zeile)",
+            "ru": "⬆️ Импортировать (проверяет каждую строку)",
+            "pt": "⬆️ Importar (valida cada linha)",
+            "nl": "⬆️ Importeren (valideert elke regel)",
+            "fr": "⬆️ Importer (valide chaque ligne)",
+            "it": "⬆️ Importa (convalida ogni riga)",
+            "es": "⬆️ Importar (valida cada línea)",
+            "pl": "⬆️ Importuj (waliduje każdą linię)",
+            "uk": "⬆️ Імпортувати (перевіряє кожен рядок)",
+            "zh-cn": "⬆️ 导入（校验每一行）"
           },
           "showProcess": true,
           "sm": 12,
@@ -333,7 +495,16 @@
           "type": "staticText",
           "text": {
             "en": "Valid lines are added ENABLED, invalid lines are reported and skipped. Duplicate hosts are rejected. After import the adapter restarts - close and reopen this dialog to see the new table rows.",
-            "de": "Gültige Zeilen werden AKTIVIERT übernommen, ungültige gemeldet und übersprungen. Doppelte Hosts werden abgelehnt. Nach dem Import startet der Adapter neu - Dialog schliessen und neu öffnen, um die neuen Tabellenzeilen zu sehen."
+            "de": "Gültige Zeilen werden AKTIVIERT übernommen, ungültige gemeldet und übersprungen. Doppelte Hosts werden abgelehnt. Nach dem Import startet der Adapter neu - Dialog schliessen und neu öffnen, um die neuen Tabellenzeilen zu sehen.",
+            "ru": "Корректные строки добавляются ВКЛЮЧЁННЫМИ, некорректные сообщаются и пропускаются. Дублирующиеся host отклоняются. После импорта адаптер перезапускается - закройте и снова откройте этот диалог, чтобы увидеть новые строки таблицы.",
+            "pt": "As linhas válidas são adicionadas ATIVADAS, as inválidas são reportadas e ignoradas. Hosts duplicados são rejeitados. Após a importação, o adaptador reinicia - feche e reabra este diálogo para ver as novas linhas da tabela.",
+            "nl": "Geldige regels worden INGESCHAKELD toegevoegd, ongeldige regels worden gemeld en overgeslagen. Dubbele hosts worden geweigerd. Na het importeren start de adapter opnieuw - sluit dit dialoogvenster en open het opnieuw om de nieuwe tabelrijen te zien.",
+            "fr": "Les lignes valides sont ajoutées ACTIVÉES, les lignes non valides sont signalées et ignorées. Les hôtes en double sont rejetés. Après l'import, l'adaptateur redémarre - fermez et rouvrez cette boîte de dialogue pour voir les nouvelles lignes du tableau.",
+            "it": "Le righe valide vengono aggiunte ABILITATE, quelle non valide vengono segnalate e saltate. Gli host duplicati vengono rifiutati. Dopo l'importazione l'adattatore si riavvia - chiudi e riapri questa finestra per vedere le nuove righe della tabella.",
+            "es": "Las líneas válidas se añaden ACTIVADAS, las no válidas se notifican y se omiten. Los hosts duplicados se rechazan. Tras la importación, el adaptador se reinicia - cierre y vuelva a abrir este diálogo para ver las nuevas filas de la tabla.",
+            "pl": "Prawidłowe linie są dodawane jako WŁĄCZONE, nieprawidłowe są zgłaszane i pomijane. Zduplikowane hosty są odrzucane. Po imporcie adapter uruchamia się ponownie - zamknij i ponownie otwórz to okno, aby zobaczyć nowe wiersze tabeli.",
+            "uk": "Коректні рядки додаються УВІМКНЕНИМИ, некоректні повідомляються та пропускаються. Дубльовані host відхиляються. Після імпорту адаптер перезапускається - закрийте і знову відкрийте це діалогове вікно, щоб побачити нові рядки таблиці.",
+            "zh-cn": "有效行将以「启用」状态添加，无效行将被报告并跳过。重复的 host 将被拒绝。导入后适配器会重启 - 请关闭并重新打开此对话框以查看新的表格行。"
           },
           "sm": 12,
           "xs": 12,
@@ -347,18 +518,45 @@
       "type": "panel",
       "label": {
         "en": "Expert",
-        "de": "Experten"
+        "de": "Experten",
+        "ru": "Эксперт",
+        "pt": "Especialista",
+        "nl": "Expert",
+        "fr": "Expert",
+        "it": "Esperto",
+        "es": "Experto",
+        "pl": "Ekspert",
+        "uk": "Експерт",
+        "zh-cn": "专家模式"
       },
       "items": {
         "requestTimeout": {
           "type": "number",
           "label": {
             "en": "HTTP timeout (ms)",
-            "de": "HTTP Timeout (ms)"
+            "de": "HTTP Timeout (ms)",
+            "ru": "HTTP таймаут (мс)",
+            "pt": "Tempo limite HTTP (ms)",
+            "nl": "HTTP-timeout (ms)",
+            "fr": "Délai HTTP (ms)",
+            "it": "Timeout HTTP (ms)",
+            "es": "Tiempo de espera HTTP (ms)",
+            "pl": "Limit czasu HTTP (ms)",
+            "uk": "HTTP тайм-аут (мс)",
+            "zh-cn": "HTTP 超时（毫秒）"
           },
           "help": {
             "en": "Timeout per request to a device (does not apply to the chnotify long-poll, which uses a fixed 35s).",
-            "de": "Timeout pro Request an ein Gerät (gilt nicht für den chnotify-Long-Poll, der fix 35s verwendet)."
+            "de": "Timeout pro Request an ein Gerät (gilt nicht für den chnotify-Long-Poll, der fix 35s verwendet).",
+            "ru": "Таймаут для каждого запроса к устройству (не применяется к long-poll chnotify, который использует фиксированные 35с).",
+            "pt": "Tempo limite por pedido a um dispositivo (não se aplica ao long-poll chnotify, que usa 35s fixos).",
+            "nl": "Timeout per verzoek naar een apparaat (geldt niet voor de chnotify long-poll, die een vaste 35s gebruikt).",
+            "fr": "Délai par requête vers un appareil (ne s'applique pas au long-poll chnotify, qui utilise un délai fixe de 35s).",
+            "it": "Timeout per richiesta a un dispositivo (non si applica al long-poll chnotify, che usa un valore fisso di 35s).",
+            "es": "Tiempo de espera por solicitud a un dispositivo (no se aplica al long-poll chnotify, que usa 35s fijos).",
+            "pl": "Limit czasu na żądanie do urządzenia (nie dotyczy long-poll chnotify, który używa stałych 35s).",
+            "uk": "Тайм-аут для кожного запиту до пристрою (не застосовується до long-poll chnotify, який використовує фіксовані 35с).",
+            "zh-cn": "每次请求设备的超时时间（不适用于固定使用 35 秒的 chnotify 长轮询）。"
           },
           "min": 500,
           "max": 30000,
@@ -374,11 +572,29 @@
           "type": "checkbox",
           "label": {
             "en": "Use chnotify long-poll (near real-time updates)",
-            "de": "chnotify-Long-Poll verwenden (nahezu Echtzeit-Updates)"
+            "de": "chnotify-Long-Poll verwenden (nahezu Echtzeit-Updates)",
+            "ru": "Использовать long-poll chnotify (обновления почти в реальном времени)",
+            "pt": "Usar long-poll chnotify (atualizações quase em tempo real)",
+            "nl": "chnotify long-poll gebruiken (bijna realtime updates)",
+            "fr": "Utiliser le long-poll chnotify (mises à jour quasi temps réel)",
+            "it": "Usa long-poll chnotify (aggiornamenti quasi in tempo reale)",
+            "es": "Usar long-poll chnotify (actualizaciones casi en tiempo real)",
+            "pl": "Użyj long-poll chnotify (aktualizacje niemal w czasie rzeczywistym)",
+            "uk": "Використовувати long-poll chnotify (оновлення майже в реальному часі)",
+            "zh-cn": "使用 chnotify 长轮询（近实时更新）"
           },
           "help": {
             "en": "Keeps one HTTP connection per device permanently open (device answers within 30s at the latest). Disable only if devices show connection problems; channel states then update only at the poll interval.",
-            "de": "Hält dauerhaft eine HTTP-Verbindung pro Gerät offen (Gerät antwortet spätestens nach 30s). Nur deaktivieren, falls Geräte Verbindungsprobleme zeigen; Kanalzustände aktualisieren dann nur noch im Poll-Intervall."
+            "de": "Hält dauerhaft eine HTTP-Verbindung pro Gerät offen (Gerät antwortet spätestens nach 30s). Nur deaktivieren, falls Geräte Verbindungsprobleme zeigen; Kanalzustände aktualisieren dann nur noch im Poll-Intervall.",
+            "ru": "Постоянно держит одно HTTP-соединение на устройство открытым (устройство отвечает не позднее чем через 30с). Отключайте только если устройства показывают проблемы соединения; тогда состояния каналов обновляются лишь по интервалу опроса.",
+            "pt": "Mantém uma ligação HTTP por dispositivo permanentemente aberta (o dispositivo responde no máximo em 30s). Desative apenas se os dispositivos apresentarem problemas de ligação; os estados dos canais então só se atualizam no intervalo de sondagem.",
+            "nl": "Houdt permanent één HTTP-verbinding per apparaat open (apparaat antwoordt uiterlijk na 30s). Alleen uitschakelen als apparaten verbindingsproblemen vertonen; kanaaltoestanden worden dan alleen bijgewerkt volgens het poll-interval.",
+            "fr": "Maintient une connexion HTTP par appareil ouverte en permanence (l'appareil répond au plus tard après 30s). À désactiver uniquement si les appareils présentent des problèmes de connexion ; les états des canaux ne se mettent alors à jour qu'à l'intervalle d'interrogation.",
+            "it": "Mantiene aperta permanentemente una connessione HTTP per dispositivo (il dispositivo risponde entro 30s al massimo). Disabilita solo se i dispositivi mostrano problemi di connessione; gli stati dei canali si aggiornano quindi solo all'intervallo di polling.",
+            "es": "Mantiene abierta permanentemente una conexión HTTP por dispositivo (el dispositivo responde como máximo en 30s). Desactive solo si los dispositivos muestran problemas de conexión; los estados de canal entonces solo se actualizan según el intervalo de sondeo.",
+            "pl": "Utrzymuje stale otwarte jedno połączenie HTTP na urządzenie (urządzenie odpowiada najpóźniej po 30s). Wyłączaj tylko wtedy, gdy urządzenia wykazują problemy z połączeniem; wówczas stany kanałów aktualizują się jedynie zgodnie z interwałem odpytywania.",
+            "uk": "Постійно тримає одне HTTP-з'єднання на пристрій відкритим (пристрій відповідає не пізніше ніж за 30с). Вимикайте лише якщо пристрої мають проблеми зі з'єднанням; тоді стани каналів оновлюються лише за інтервалом опитування.",
+            "zh-cn": "为每台设备永久保持一个 HTTP 连接开启（设备最迟 30 秒内响应）。仅在设备出现连接问题时才禁用；禁用后通道状态将仅按轮询间隔更新。"
           },
           "default": true,
           "sm": 12,
@@ -392,7 +608,16 @@
           "type": "staticText",
           "text": {
             "en": "⚠️ Safety: the factory reset button (system.factoryDefault) is interlocked - it only works within 30s after setting system.unlock. This prevents accidental wipes from scripts/VIS.",
-            "de": "⚠️ Sicherheit: der Werksreset-Button (system.factoryDefault) ist verriegelt - er funktioniert nur innerhalb von 30s nach Setzen von system.unlock. Das verhindert versehentliches Löschen durch Scripts/VIS."
+            "de": "⚠️ Sicherheit: der Werksreset-Button (system.factoryDefault) ist verriegelt - er funktioniert nur innerhalb von 30s nach Setzen von system.unlock. Das verhindert versehentliches Löschen durch Scripts/VIS.",
+            "ru": "⚠️ Безопасность: кнопка сброса к заводским настройкам (system.factoryDefault) заблокирована - она работает только в течение 30с после установки system.unlock. Это предотвращает случайное удаление данных через скрипты/VIS.",
+            "pt": "⚠️ Segurança: o botão de reposição de fábrica (system.factoryDefault) está bloqueado - só funciona nos 30s seguintes à definição de system.unlock. Isto evita apagamentos acidentais por scripts/VIS.",
+            "nl": "⚠️ Veiligheid: de fabrieksresetknop (system.factoryDefault) is vergrendeld - werkt alleen binnen 30s na het instellen van system.unlock. Dit voorkomt onbedoeld wissen door scripts/VIS.",
+            "fr": "⚠️ Sécurité : le bouton de réinitialisation d'usine (system.factoryDefault) est verrouillé - il ne fonctionne que dans les 30s suivant la définition de system.unlock. Cela évite les effacements accidentels par des scripts/VIS.",
+            "it": "⚠️ Sicurezza: il pulsante di ripristino di fabbrica (system.factoryDefault) è bloccato - funziona solo entro 30s dall'impostazione di system.unlock. Questo previene cancellazioni accidentali da script/VIS.",
+            "es": "⚠️ Seguridad: el botón de restablecimiento de fábrica (system.factoryDefault) está bloqueado - solo funciona dentro de los 30s posteriores a establecer system.unlock. Esto evita borrados accidentales desde scripts/VIS.",
+            "pl": "⚠️ Bezpieczeństwo: przycisk przywracania ustawień fabrycznych (system.factoryDefault) jest zablokowany - działa tylko w ciągu 30s od ustawienia system.unlock. Zapobiega to przypadkowemu wyczyszczeniu przez skrypty/VIS.",
+            "uk": "⚠️ Безпека: кнопка скидання до заводських налаштувань (system.factoryDefault) заблокована - вона працює лише протягом 30с після встановлення system.unlock. Це запобігає випадковому видаленню через скрипти/VIS.",
+            "zh-cn": "⚠️ 安全提示：恢复出厂设置按钮（system.factoryDefault）已加锁 - 仅在设置 system.unlock 后的 30 秒内有效。这可防止脚本/VIS 意外触发清除操作。"
           },
           "sm": 12,
           "xs": 12,
