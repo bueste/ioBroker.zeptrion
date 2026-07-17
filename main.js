@@ -120,7 +120,66 @@ class Zeptrion extends utils.Adapter {
 
     // ---------------------------------------------------------------- ready
 
+    // Force-corrects a small set of known-bad object roles/names left over from before this fix.
+    // Only touches an object if it still holds the exact old, known-bad value, so it never
+    // clobbers anything a user might have customized in the meantime. Role fixes are matched by
+    // ID suffix (calibrate/ntp.per are always per-device, unambiguous); the info.connection name
+    // fix is matched by its exact old string value instead of by ID, since the adapter's own
+    // built-in root "info.connection" object (not created by ensureState, must not be touched)
+    // would otherwise be hard to tell apart from the per-device one by ID pattern alone.
+    async migrateObjectRoles() {
+        try {
+            const objects = await this.getAdapterObjectsAsync();
+            let fixedCount = 0;
+            for (const id of Object.keys(objects)) {
+                const obj = objects[id];
+                if (!obj || obj.type !== 'state' || !obj.common) {
+                    continue;
+                }
+                if (/\.calibrate$/.test(id) && obj.common.role === 'value') {
+                    await this.extendObjectAsync(id, { common: { role: 'level' } });
+                    fixedCount++;
+                } else if (/\.ntp\.per$/.test(id) && obj.common.role === 'value') {
+                    await this.extendObjectAsync(id, { common: { role: 'level' } });
+                    fixedCount++;
+                } else if (/\.info\.connection$/.test(id) && obj.common.name === 'Verbindung OK') {
+                    await this.extendObjectAsync(id, {
+                        common: {
+                            name: {
+                                en: 'Connection OK',
+                                de: 'Verbindung OK',
+                                ru: 'Соединение в порядке',
+                                pt: 'Ligação OK',
+                                nl: 'Verbinding OK',
+                                fr: 'Connexion OK',
+                                it: 'Connessione OK',
+                                es: 'Conexión OK',
+                                pl: 'Połączenie OK',
+                                uk: "З'єднання в порядку",
+                                'zh-cn': '连接正常'
+                            }
+                        }
+                    });
+                    fixedCount++;
+                }
+            }
+            if (fixedCount > 0) {
+                this.log.info(`Migration: corrected role/name on ${fixedCount} existing object(s) created by an older version.`);
+            }
+        } catch (e) {
+            // Never let a migration failure block adapter startup.
+            this.log.warn(`Migration of object roles/names failed (non-fatal, adapter will continue starting): ${e}`);
+        }
+    }
+
     async onReady() {
+        // One-time (cheap-and-idempotent-every-startup) fix for role/name mistakes present in
+        // objects created before this fix (see CHANGELOG). ensureState()/setObjectNotExistsAsync()
+        // never touches an object that already exists, so simply updating the adapter does not
+        // correct objects an already-running installation had already created - this actively
+        // force-corrects them via extendObjectAsync() instead.
+        await this.migrateObjectRoles();
+
         await this.setStateAsync('info.connection', { val: false, ack: true });
 
         const timeout = parseInt(String(this.config.requestTimeout), 10) || 4000;

@@ -190,6 +190,10 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.0 (2026-07-17)
+- First 1.0 release - the adapter has reached a stable, complete feature set (multicast command bundling, mDNS discovery, hail bulk commands, position estimation, Smartfront support, CSV import, full i18n).
+- FIX: the previous release corrected calibrate/ntp.per roles and the info.connection translation, but ensureState() never updates an object that already exists - so installations updated from an older version kept the old, incorrect objects forever. Added a one-time startup migration that force-corrects exactly those known objects via extendObjectAsync(), without touching anything else (including the adapter's own built-in root info.connection object).
+
 ### 0.8.6 (2026-07-17)
 - Corrected object role/type mismatches found by the ioBroker store submission's object structure check: calibrate and ntp.per used role 'value', which strictly requires read=true/write=false and does not fit these intentionally writable states - changed to role 'level'. Also added the missing full i18n translation for info.connection.
 
