@@ -395,7 +395,22 @@ class Zeptrion extends utils.Adapter {
 
         // --- info ---
         await this.setObjectNotExistsAsync(`${id}.info`, { type: 'channel', common: { name: 'Geräteinformationen' }, native: {} });
-        await this.ensureState(`${id}.info.connection`, { name: 'Verbindung OK', type: 'boolean', role: 'indicator.reachable', read: true, write: false, def: false });
+        await this.ensureState(`${id}.info.connection`, {
+            name: {
+                en: 'Connection OK',
+                de: 'Verbindung OK',
+                ru: 'Соединение в порядке',
+                pt: 'Ligação OK',
+                nl: 'Verbinding OK',
+                fr: 'Connexion OK',
+                it: 'Connessione OK',
+                es: 'Conexión OK',
+                pl: 'Połączenie OK',
+                uk: "З'єднання в порядку",
+                'zh-cn': '连接正常'
+            },
+            type: 'boolean', role: 'indicator.reachable', read: true, write: false, def: false
+        });
         await this.ensureState(`${id}.info.lastError`, { name: 'Letzter Fehler', type: 'string', role: 'text', read: true, write: false, def: '' });
         await this.ensureState(`${id}.info.hw`, { name: 'Hardware-Version', type: 'string', role: 'info.hardware', read: true, write: false });
         await this.ensureState(`${id}.info.sw`, { name: 'Software-Version', type: 'string', role: 'info.firmware', read: true, write: false });
@@ -435,7 +450,7 @@ class Zeptrion extends utils.Adapter {
         // --- ntp (zrap/ntp) ---
         await this.setObjectNotExistsAsync(`${id}.ntp`, { type: 'channel', common: { name: 'NTP' }, native: {} });
         await this.ensureState(`${id}.ntp.url`, { name: 'NTP-Server (URL/IP, max. 32 Zeichen)', type: 'string', role: 'text', read: true, write: true });
-        await this.ensureState(`${id}.ntp.per`, { name: 'Abfrageintervall in Stunden (0=deaktiviert)', type: 'number', role: 'value', read: true, write: true, min: 0, max: 255 });
+        await this.ensureState(`${id}.ntp.per`, { name: 'Abfrageintervall in Stunden (0=deaktiviert)', type: 'number', role: 'level', read: true, write: true, min: 0, max: 255 });
 
         // --- date (zrap/date) ---
         await this.setObjectNotExistsAsync(`${id}.date`, { type: 'channel', common: { name: 'Datum/Zeit' }, native: {} });
@@ -513,7 +528,7 @@ class Zeptrion extends utils.Adapter {
                 });
                 await this.ensureState(`${ch}.calibrate`, {
                     name: 'Schätzung setzen OHNE Fahrt (z.B. nach manueller Bedienung am Wandtaster): aktuellen Ist-Zustand in % eintragen',
-                    type: 'number', role: 'value', min: 0, max: 100, read: false, write: true
+                    type: 'number', role: 'level', min: 0, max: 100, read: false, write: true
                 });
                 await this.extendObjectAsync(`${ch}.tiltOpen`, {
                     type: 'state',
