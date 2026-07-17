@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "zeptrion",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "news": {
+      "1.0.1": {
+        "en": "FIX: calibrate declared role 'level' but read=false - role 'level' requires read=true per the ioBroker role catalogue. Changed to read=true and extended the startup migration to also correct existing objects still holding the old read=false. Added the missing translations for the global info.connection object (was only en/de).",
+        "de": "FIX: calibrate deklarierte Rolle 'level', aber read=false - die Rolle 'level' erfordert laut ioBroker-Rollenkatalog read=true. Auf read=true geändert und die Start-Migration erweitert, damit auch bestehende Objekte mit dem alten read=false korrigiert werden. Fehlende Übersetzungen für das globale info.connection-Objekt ergänzt (waren nur en/de).",
+        "ru": "ИСПРАВЛЕНИЕ: calibrate объявлял роль 'level', но read=false - роль 'level' требует read=true согласно каталогу ролей ioBroker. Изменено на read=true, миграция при запуске расширена. Добавлены отсутствующие переводы для глобального объекта info.connection.",
+        "pt": "CORREÇÃO: calibrate declarava a função 'level', mas read=false - a função 'level' exige read=true segundo o catálogo de funções do ioBroker. Alterado para read=true, migração de arranque estendida. Adicionadas as traduções em falta para o objeto global info.connection.",
+        "nl": "FIX: calibrate declareerde rol 'level', maar read=false - rol 'level' vereist read=true volgens de ioBroker-rolcatalogus. Gewijzigd naar read=true, opstartmigratie uitgebreid. Ontbrekende vertalingen voor het globale info.connection-object toegevoegd.",
+        "fr": "CORRECTIF : calibrate déclarait le rôle 'level', mais read=false - le rôle 'level' nécessite read=true selon le catalogue de rôles ioBroker. Changé en read=true, migration au démarrage étendue. Traductions manquantes pour l'objet global info.connection ajoutées.",
+        "it": "CORREZIONE: calibrate dichiarava il ruolo 'level', ma read=false - il ruolo 'level' richiede read=true secondo il catalogo dei ruoli di ioBroker. Cambiato in read=true, migrazione all'avvio estesa. Aggiunte le traduzioni mancanti per l'oggetto globale info.connection.",
+        "es": "CORRECCIÓN: calibrate declaraba el rol 'level', pero read=false - el rol 'level' requiere read=true según el catálogo de roles de ioBroker. Cambiado a read=true, migración de inicio ampliada. Se añadieron las traducciones faltantes para el objeto global info.connection.",
+        "pl": "POPRAWKA: calibrate deklarował rolę 'level', ale read=false - rola 'level' wymaga read=true zgodnie z katalogiem ról ioBroker. Zmieniono na read=true, rozszerzono migrację przy starcie. Dodano brakujące tłumaczenia dla globalnego obiektu info.connection.",
+        "uk": "ВИПРАВЛЕННЯ: calibrate декларував роль 'level', але read=false - роль 'level' вимагає read=true згідно з каталогом ролей ioBroker. Змінено на read=true, розширено міграцію під час запуску. Додано відсутні переклади для глобального об'єкта info.connection.",
+        "zh-cn": "修复：calibrate 声明角色为 'level'，但 read=false——根据 ioBroker 角色目录，角色 'level' 要求 read=true。已更改为 read=true，并扩展了启动迁移。补充了全局 info.connection 对象缺失的翻译。"
+      },
       "1.0.0": {
         "en": "First 1.0 release. FIX: the previous release corrected calibrate/ntp.per roles and the info.connection translation, but ensureState() never updates an object that already exists - so installations updated from an older version kept the old, incorrect objects forever. Added a one-time startup migration that force-corrects exactly those known objects via extendObjectAsync(), without touching anything else (including the adapter's own built-in root info.connection object). No other functional changes since 0.8.6 - the version bump to 1.0.0 reflects that the adapter has reached a stable, complete feature set (multicast command bundling, mDNS discovery, hail bulk commands, position estimation, Smartfront support, CSV import, full i18n).",
         "de": "Erstes 1.0-Release. FIX: Das vorherige Release hat die calibrate/ntp.per-Rollen und die info.connection-Übersetzung korrigiert, aber ensureState() aktualisiert nie ein bereits existierendes Objekt - Installationen, die von einer älteren Version aktualisiert haben, behielten die alten, falschen Objekte dauerhaft. Eine einmalige Start-Migration ergänzt, die genau diese bekannten Objekte per extendObjectAsync() zwangskorrigiert, ohne sonst etwas anzufassen (auch nicht das adaptereigene, eingebaute root-info.connection-Objekt). Keine weiteren funktionalen Änderungen seit 0.8.6 - der Sprung auf 1.0.0 spiegelt wider, dass der Adapter einen stabilen, vollständigen Funktionsumfang erreicht hat (Multicast-Befehlsbündelung, mDNS-Discovery, Hagel-Sammelbefehle, Positionsschätzung, Smartfront-Unterstützung, CSV-Import, vollständige i18n).",
@@ -177,7 +190,16 @@
         "role": "indicator.connected",
         "name": {
           "en": "At least one device reachable",
-          "de": "Mindestens ein Gerät erreichbar"
+          "de": "Mindestens ein Gerät erreichbar",
+          "ru": "Доступно хотя бы одно устройство",
+          "pt": "Pelo menos um dispositivo acessível",
+          "nl": "Ten minste één apparaat bereikbaar",
+          "fr": "Au moins un appareil accessible",
+          "it": "Almeno un dispositivo raggiungibile",
+          "es": "Al menos un dispositivo accesible",
+          "pl": "Co najmniej jedno urządzenie dostępne",
+          "uk": "Принаймні один пристрій доступний",
+          "zh-cn": "至少有一个设备可访问"
         },
         "type": "boolean",
         "read": true,

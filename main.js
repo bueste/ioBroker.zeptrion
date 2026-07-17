@@ -136,8 +136,8 @@ class Zeptrion extends utils.Adapter {
                 if (!obj || obj.type !== 'state' || !obj.common) {
                     continue;
                 }
-                if (/\.calibrate$/.test(id) && obj.common.role === 'value') {
-                    await this.extendObjectAsync(id, { common: { role: 'level' } });
+                if (/\.calibrate$/.test(id) && (obj.common.role === 'value' || obj.common.read === false)) {
+                    await this.extendObjectAsync(id, { common: { role: 'level', read: true } });
                     fixedCount++;
                 } else if (/\.ntp\.per$/.test(id) && obj.common.role === 'value') {
                     await this.extendObjectAsync(id, { common: { role: 'level' } });
@@ -587,7 +587,7 @@ class Zeptrion extends utils.Adapter {
                 });
                 await this.ensureState(`${ch}.calibrate`, {
                     name: 'Schätzung setzen OHNE Fahrt (z.B. nach manueller Bedienung am Wandtaster): aktuellen Ist-Zustand in % eintragen',
-                    type: 'number', role: 'level', min: 0, max: 100, read: false, write: true
+                    type: 'number', role: 'level', min: 0, max: 100, read: true, write: true
                 });
                 await this.extendObjectAsync(`${ch}.tiltOpen`, {
                     type: 'state',

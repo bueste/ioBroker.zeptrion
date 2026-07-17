@@ -190,6 +190,10 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.1 (2026-07-17)
+- FIX: calibrate declared role 'level' but read=false - role 'level' requires read=true per the ioBroker role catalogue. Changed to read=true and extended the startup migration to also correct existing objects still holding the old read=false.
+- Added the missing translations for the global info.connection object (was only en/de).
+
 ### 1.0.0 (2026-07-17)
 - First 1.0 release - the adapter has reached a stable, complete feature set (multicast command bundling, mDNS discovery, hail bulk commands, position estimation, Smartfront support, CSV import, full i18n).
 - FIX: the previous release corrected calibrate/ntp.per roles and the info.connection translation, but ensureState() never updates an object that already exists - so installations updated from an older version kept the old, incorrect objects forever. Added a one-time startup migration that force-corrects exactly those known objects via extendObjectAsync(), without touching anything else (including the adapter's own built-in root info.connection object).
