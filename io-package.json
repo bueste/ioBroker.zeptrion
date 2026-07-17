@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "zeptrion",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "news": {
+      "1.0.2": {
+        "en": "FIX: the global (adapter-level) info.connection translations added in 1.0.1 are only synced automatically by js-controller on certain update paths (e.g. 'iobroker upgrade'), not reliably when installing via 'iobroker url' - added this to the startup migration too, so it no longer depends on that.",
+        "de": "FIX: die in 1.0.1 ergänzten Übersetzungen für das globale (adapter-eigene) info.connection werden von js-controller nur bei bestimmten Update-Wegen (z.B. 'iobroker upgrade') automatisch synchronisiert, nicht zuverlässig bei Installation via 'iobroker url' - auch in die Start-Migration aufgenommen, damit das nicht mehr davon abhängt.",
+        "ru": "ИСПРАВЛЕНИЕ: глобальные переводы info.connection, добавленные в 1.0.1, синхронизируются js-controller автоматически только при определённых способах обновления, ненадёжно при установке через 'iobroker url' - добавлено также в миграцию при запуске.",
+        "pt": "CORREÇÃO: as traduções globais de info.connection adicionadas na 1.0.1 só são sincronizadas automaticamente pelo js-controller em determinados caminhos de atualização, não de forma fiável ao instalar via 'iobroker url' - adicionado também à migração de arranque.",
+        "nl": "FIX: de globale info.connection-vertalingen toegevoegd in 1.0.1 worden alleen automatisch gesynchroniseerd door js-controller bij bepaalde update-paden, niet betrouwbaar bij installatie via 'iobroker url' - ook toegevoegd aan de opstartmigratie.",
+        "fr": "CORRECTIF : les traductions globales info.connection ajoutées en 1.0.1 ne sont synchronisées automatiquement par js-controller que sur certains chemins de mise à jour, pas de manière fiable lors d'une installation via 'iobroker url' - ajouté également à la migration au démarrage.",
+        "it": "CORREZIONE: le traduzioni globali di info.connection aggiunte nella 1.0.1 vengono sincronizzate automaticamente da js-controller solo su determinati percorsi di aggiornamento, non in modo affidabile quando si installa tramite 'iobroker url' - aggiunto anche alla migrazione all'avvio.",
+        "es": "CORRECCIÓN: las traducciones globales de info.connection añadidas en 1.0.1 solo se sincronizan automáticamente mediante js-controller en determinadas rutas de actualización, no de forma fiable al instalar mediante 'iobroker url' - añadido también a la migración de inicio.",
+        "pl": "POPRAWKA: globalne tłumaczenia info.connection dodane w 1.0.1 są automatycznie synchronizowane przez js-controller tylko przy określonych ścieżkach aktualizacji, niewiarygodnie przy instalacji przez 'iobroker url' - dodano również do migracji przy starcie.",
+        "uk": "ВИПРАВЛЕННЯ: глобальні переклади info.connection, додані в 1.0.1, синхронізуються js-controller автоматично лише за певних шляхів оновлення, ненадійно при встановленні через 'iobroker url' - додано також до міграції під час запуску.",
+        "zh-cn": "修复：1.0.1 中添加的全局 info.connection 翻译仅在特定更新路径（例如 'iobroker upgrade'）下由 js-controller 自动同步，通过 'iobroker url' 安装时并不可靠——现已同样加入启动迁移中。"
+      },
       "1.0.1": {
         "en": "FIX: calibrate declared role 'level' but read=false - role 'level' requires read=true per the ioBroker role catalogue. Changed to read=true and extended the startup migration to also correct existing objects still holding the old read=false. Added the missing translations for the global info.connection object (was only en/de).",
         "de": "FIX: calibrate deklarierte Rolle 'level', aber read=false - die Rolle 'level' erfordert laut ioBroker-Rollenkatalog read=true. Auf read=true geändert und die Start-Migration erweitert, damit auch bestehende Objekte mit dem alten read=false korrigiert werden. Fehlende Übersetzungen für das globale info.connection-Objekt ergänzt (waren nur en/de).",

@@ -190,6 +190,9 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.2 (2026-07-17)
+- FIX: the global (adapter-level) info.connection translations added in 1.0.1 are only synced automatically by js-controller on certain update paths (e.g. 'iobroker upgrade'), not reliably when installing via 'iobroker url' - added this to the startup migration too, so it no longer depends on that.
+
 ### 1.0.1 (2026-07-17)
 - FIX: calibrate declared role 'level' but read=false - role 'level' requires read=true per the ioBroker role catalogue. Changed to read=true and extended the startup migration to also correct existing objects still holding the old read=false.
 - Added the missing translations for the global info.connection object (was only en/de).

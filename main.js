@@ -161,6 +161,35 @@ class Zeptrion extends utils.Adapter {
                         }
                     });
                     fixedCount++;
+                } else if (
+                    (id === 'info.connection' || /^[^.]+\.\d+\.info\.connection$/.test(id)) &&
+                    obj.common.name &&
+                    typeof obj.common.name === 'object' &&
+                    !obj.common.name.ru
+                ) {
+                    // The global (adapter-level, not per-device) info.connection instanceObject:
+                    // io-package.json has the full translation since 1.0.1, but instanceObjects are
+                    // only synced by js-controller on certain update paths (e.g. 'iobroker upgrade')
+                    // - not reliably when installing via 'iobroker url', which some users do. Force
+                    // it here too so it doesn't depend on that.
+                    await this.extendObjectAsync(id, {
+                        common: {
+                            name: {
+                                en: 'At least one device reachable',
+                                de: 'Mindestens ein Gerät erreichbar',
+                                ru: 'Доступно хотя бы одно устройство',
+                                pt: 'Pelo menos um dispositivo acessível',
+                                nl: 'Ten minste één apparaat bereikbaar',
+                                fr: 'Au moins un appareil accessible',
+                                it: 'Almeno un dispositivo raggiungibile',
+                                es: 'Al menos un dispositivo accesible',
+                                pl: 'Co najmniej jedno urządzenie dostępne',
+                                uk: 'Принаймні один пристрій доступний',
+                                'zh-cn': '至少有一个设备可访问'
+                            }
+                        }
+                    });
+                    fixedCount++;
                 }
             }
             if (fixedCount > 0) {
