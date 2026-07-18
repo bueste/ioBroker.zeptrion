@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "zeptrion",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "news": {
+      "1.0.3": {
+        "en": "Documentation only: fixed the PayPal donate link in README (en/de), which previously used the wrong URL format and did not work. No functional/object changes.",
+        "de": "Nur Dokumentation: den PayPal-Spenden-Link im README (en/de) korrigiert, der zuvor das falsche URL-Format hatte und nicht funktionierte. Keine funktionalen Änderungen/Objektänderungen.",
+        "ru": "Только документация: исправлена ссылка для пожертвований PayPal в README (en/de), которая ранее имела неверный формат URL и не работала. Без функциональных изменений.",
+        "pt": "Apenas documentação: corrigido o link de doação PayPal no README (en/de), que anteriormente tinha o formato de URL errado e não funcionava. Sem alterações funcionais.",
+        "nl": "Alleen documentatie: de PayPal-donatielink in README (en/de) gecorrigeerd, die voorheen het verkeerde URL-formaat had en niet werkte. Geen functionele wijzigingen.",
+        "fr": "Documentation uniquement : correction du lien de don PayPal dans le README (en/de), qui avait auparavant le mauvais format d'URL et ne fonctionnait pas. Aucun changement fonctionnel.",
+        "it": "Solo documentazione: corretto il link di donazione PayPal nel README (en/de), che in precedenza aveva il formato URL errato e non funzionava. Nessuna modifica funzionale.",
+        "es": "Solo documentación: se corrigió el enlace de donación de PayPal en el README (en/de), que anteriormente tenía el formato de URL incorrecto y no funcionaba. Sin cambios funcionales.",
+        "pl": "Tylko dokumentacja: naprawiono link do darowizn PayPal w README (en/de), który wcześniej miał zły format URL i nie działał. Brak zmian funkcjonalnych.",
+        "uk": "Лише документація: виправлено посилання для пожертв PayPal у README (en/de), яке раніше мало неправильний формат URL і не працювало. Без функціональних змін.",
+        "zh-cn": "仅文档：修正了 README（en/de）中的 PayPal 捐赠链接，此前该链接使用了错误的 URL 格式且无法正常使用。无功能变更。"
+      },
       "1.0.2": {
         "en": "FIX: the global (adapter-level) info.connection translations added in 1.0.1 are only synced automatically by js-controller on certain update paths (e.g. 'iobroker upgrade'), not reliably when installing via 'iobroker url' - added this to the startup migration too, so it no longer depends on that.",
         "de": "FIX: die in 1.0.1 ergänzten Übersetzungen für das globale (adapter-eigene) info.connection werden von js-controller nur bei bestimmten Update-Wegen (z.B. 'iobroker upgrade') automatisch synchronisiert, nicht zuverlässig bei Installation via 'iobroker url' - auch in die Start-Migration aufgenommen, damit das nicht mehr davon abhängt.",
