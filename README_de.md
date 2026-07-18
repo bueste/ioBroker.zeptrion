@@ -6,7 +6,7 @@
 [![Downloads](https://img.shields.io/npm/dm/iobroker.zeptrion.svg)](https://www.npmjs.com/package/iobroker.zeptrion)
 [![Tests](https://github.com/bueste/ioBroker.zeptrion/workflows/Test%20and%20Release/badge.svg)](https://github.com/bueste/ioBroker.zeptrion/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Spenden](https://img.shields.io/badge/Spenden-PayPal-blue.svg)](https://www.paypal.com/donate?hosted_button_id=8QZKPB9JEVWKY)
+[![Spenden](https://img.shields.io/badge/Spenden-PayPal-blue.svg)](https://www.paypal.com/ncp/payment/TT6MTBLXX9L9U)
 
 Adapter für Feller **zeptrion / zApp** WLAN-Aktoren (WLAN-Nebenstelle 4K = zApp-Gateway,
 WLAN-Zwischenmodul 2K = zApp-Booster) für Licht- und Storensteuerung, basierend auf der
