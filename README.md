@@ -192,6 +192,9 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.4 (2026-07-21)
+- Documentation only: added a Buy Me a Coffee link next to the PayPal donate badge. No functional changes.
+
 ### 1.0.3 (2026-07-17)
 - Documentation only: fixed the PayPal donate link, which previously used the wrong URL format and did not work.
 

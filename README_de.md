@@ -191,6 +191,9 @@ npm run test:integration   # startet echten js-controller (dauert länger)
 ```
 ## Changelog
 
+### 1.0.4 (2026-07-21)
+- Nur Dokumentation: Buy-Me-a-Coffee-Link neben dem PayPal-Spenden-Badge ergänzt. Keine funktionalen Änderungen.
+
 ### 0.7.0 (2026-07-10)
 - Skalierung für 20+ Geräte: paralleles Setup, Poll-Jitter, Duplikat-Erkennung
 - Strikte Startup-Validierung jeder konfigurierten Geräte-Zeile

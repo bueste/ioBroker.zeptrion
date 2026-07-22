@@ -1,249 +1,223 @@
 {
-  "common": {
-    "name": "zeptrion",
-    "version": "1.0.3",
-    "news": {
-      "1.0.3": {
-        "en": "Documentation only: fixed the PayPal donate link in README (en/de), which previously used the wrong URL format and did not work. No functional/object changes.",
-        "de": "Nur Dokumentation: den PayPal-Spenden-Link im README (en/de) korrigiert, der zuvor das falsche URL-Format hatte und nicht funktionierte. Keine funktionalen Änderungen/Objektänderungen.",
-        "ru": "Только документация: исправлена ссылка для пожертвований PayPal в README (en/de), которая ранее имела неверный формат URL и не работала. Без функциональных изменений.",
-        "pt": "Apenas documentação: corrigido o link de doação PayPal no README (en/de), que anteriormente tinha o formato de URL errado e não funcionava. Sem alterações funcionais.",
-        "nl": "Alleen documentatie: de PayPal-donatielink in README (en/de) gecorrigeerd, die voorheen het verkeerde URL-formaat had en niet werkte. Geen functionele wijzigingen.",
-        "fr": "Documentation uniquement : correction du lien de don PayPal dans le README (en/de), qui avait auparavant le mauvais format d'URL et ne fonctionnait pas. Aucun changement fonctionnel.",
-        "it": "Solo documentazione: corretto il link di donazione PayPal nel README (en/de), che in precedenza aveva il formato URL errato e non funzionava. Nessuna modifica funzionale.",
-        "es": "Solo documentación: se corrigió el enlace de donación de PayPal en el README (en/de), que anteriormente tenía el formato de URL incorrecto y no funcionaba. Sin cambios funcionales.",
-        "pl": "Tylko dokumentacja: naprawiono link do darowizn PayPal w README (en/de), który wcześniej miał zły format URL i nie działał. Brak zmian funkcjonalnych.",
-        "uk": "Лише документація: виправлено посилання для пожертв PayPal у README (en/de), яке раніше мало неправильний формат URL і не працювало. Без функціональних змін.",
-        "zh-cn": "仅文档：修正了 README（en/de）中的 PayPal 捐赠链接，此前该链接使用了错误的 URL 格式且无法正常使用。无功能变更。"
-      },
-      "1.0.2": {
-        "en": "FIX: the global (adapter-level) info.connection translations added in 1.0.1 are only synced automatically by js-controller on certain update paths (e.g. 'iobroker upgrade'), not reliably when installing via 'iobroker url' - added this to the startup migration too, so it no longer depends on that.",
-        "de": "FIX: die in 1.0.1 ergänzten Übersetzungen für das globale (adapter-eigene) info.connection werden von js-controller nur bei bestimmten Update-Wegen (z.B. 'iobroker upgrade') automatisch synchronisiert, nicht zuverlässig bei Installation via 'iobroker url' - auch in die Start-Migration aufgenommen, damit das nicht mehr davon abhängt.",
-        "ru": "ИСПРАВЛЕНИЕ: глобальные переводы info.connection, добавленные в 1.0.1, синхронизируются js-controller автоматически только при определённых способах обновления, ненадёжно при установке через 'iobroker url' - добавлено также в миграцию при запуске.",
-        "pt": "CORREÇÃO: as traduções globais de info.connection adicionadas na 1.0.1 só são sincronizadas automaticamente pelo js-controller em determinados caminhos de atualização, não de forma fiável ao instalar via 'iobroker url' - adicionado também à migração de arranque.",
-        "nl": "FIX: de globale info.connection-vertalingen toegevoegd in 1.0.1 worden alleen automatisch gesynchroniseerd door js-controller bij bepaalde update-paden, niet betrouwbaar bij installatie via 'iobroker url' - ook toegevoegd aan de opstartmigratie.",
-        "fr": "CORRECTIF : les traductions globales info.connection ajoutées en 1.0.1 ne sont synchronisées automatiquement par js-controller que sur certains chemins de mise à jour, pas de manière fiable lors d'une installation via 'iobroker url' - ajouté également à la migration au démarrage.",
-        "it": "CORREZIONE: le traduzioni globali di info.connection aggiunte nella 1.0.1 vengono sincronizzate automaticamente da js-controller solo su determinati percorsi di aggiornamento, non in modo affidabile quando si installa tramite 'iobroker url' - aggiunto anche alla migrazione all'avvio.",
-        "es": "CORRECCIÓN: las traducciones globales de info.connection añadidas en 1.0.1 solo se sincronizan automáticamente mediante js-controller en determinadas rutas de actualización, no de forma fiable al instalar mediante 'iobroker url' - añadido también a la migración de inicio.",
-        "pl": "POPRAWKA: globalne tłumaczenia info.connection dodane w 1.0.1 są automatycznie synchronizowane przez js-controller tylko przy określonych ścieżkach aktualizacji, niewiarygodnie przy instalacji przez 'iobroker url' - dodano również do migracji przy starcie.",
-        "uk": "ВИПРАВЛЕННЯ: глобальні переклади info.connection, додані в 1.0.1, синхронізуються js-controller автоматично лише за певних шляхів оновлення, ненадійно при встановленні через 'iobroker url' - додано також до міграції під час запуску.",
-        "zh-cn": "修复：1.0.1 中添加的全局 info.connection 翻译仅在特定更新路径（例如 'iobroker upgrade'）下由 js-controller 自动同步，通过 'iobroker url' 安装时并不可靠——现已同样加入启动迁移中。"
-      },
-      "1.0.1": {
-        "en": "FIX: calibrate declared role 'level' but read=false - role 'level' requires read=true per the ioBroker role catalogue. Changed to read=true and extended the startup migration to also correct existing objects still holding the old read=false. Added the missing translations for the global info.connection object (was only en/de).",
-        "de": "FIX: calibrate deklarierte Rolle 'level', aber read=false - die Rolle 'level' erfordert laut ioBroker-Rollenkatalog read=true. Auf read=true geändert und die Start-Migration erweitert, damit auch bestehende Objekte mit dem alten read=false korrigiert werden. Fehlende Übersetzungen für das globale info.connection-Objekt ergänzt (waren nur en/de).",
-        "ru": "ИСПРАВЛЕНИЕ: calibrate объявлял роль 'level', но read=false - роль 'level' требует read=true согласно каталогу ролей ioBroker. Изменено на read=true, миграция при запуске расширена. Добавлены отсутствующие переводы для глобального объекта info.connection.",
-        "pt": "CORREÇÃO: calibrate declarava a função 'level', mas read=false - a função 'level' exige read=true segundo o catálogo de funções do ioBroker. Alterado para read=true, migração de arranque estendida. Adicionadas as traduções em falta para o objeto global info.connection.",
-        "nl": "FIX: calibrate declareerde rol 'level', maar read=false - rol 'level' vereist read=true volgens de ioBroker-rolcatalogus. Gewijzigd naar read=true, opstartmigratie uitgebreid. Ontbrekende vertalingen voor het globale info.connection-object toegevoegd.",
-        "fr": "CORRECTIF : calibrate déclarait le rôle 'level', mais read=false - le rôle 'level' nécessite read=true selon le catalogue de rôles ioBroker. Changé en read=true, migration au démarrage étendue. Traductions manquantes pour l'objet global info.connection ajoutées.",
-        "it": "CORREZIONE: calibrate dichiarava il ruolo 'level', ma read=false - il ruolo 'level' richiede read=true secondo il catalogo dei ruoli di ioBroker. Cambiato in read=true, migrazione all'avvio estesa. Aggiunte le traduzioni mancanti per l'oggetto globale info.connection.",
-        "es": "CORRECCIÓN: calibrate declaraba el rol 'level', pero read=false - el rol 'level' requiere read=true según el catálogo de roles de ioBroker. Cambiado a read=true, migración de inicio ampliada. Se añadieron las traducciones faltantes para el objeto global info.connection.",
-        "pl": "POPRAWKA: calibrate deklarował rolę 'level', ale read=false - rola 'level' wymaga read=true zgodnie z katalogiem ról ioBroker. Zmieniono na read=true, rozszerzono migrację przy starcie. Dodano brakujące tłumaczenia dla globalnego obiektu info.connection.",
-        "uk": "ВИПРАВЛЕННЯ: calibrate декларував роль 'level', але read=false - роль 'level' вимагає read=true згідно з каталогом ролей ioBroker. Змінено на read=true, розширено міграцію під час запуску. Додано відсутні переклади для глобального об'єкта info.connection.",
-        "zh-cn": "修复：calibrate 声明角色为 'level'，但 read=false——根据 ioBroker 角色目录，角色 'level' 要求 read=true。已更改为 read=true，并扩展了启动迁移。补充了全局 info.connection 对象缺失的翻译。"
-      },
-      "1.0.0": {
-        "en": "First 1.0 release. FIX: the previous release corrected calibrate/ntp.per roles and the info.connection translation, but ensureState() never updates an object that already exists - so installations updated from an older version kept the old, incorrect objects forever. Added a one-time startup migration that force-corrects exactly those known objects via extendObjectAsync(), without touching anything else (including the adapter's own built-in root info.connection object). No other functional changes since 0.8.6 - the version bump to 1.0.0 reflects that the adapter has reached a stable, complete feature set (multicast command bundling, mDNS discovery, hail bulk commands, position estimation, Smartfront support, CSV import, full i18n).",
-        "de": "Erstes 1.0-Release. FIX: Das vorherige Release hat die calibrate/ntp.per-Rollen und die info.connection-Übersetzung korrigiert, aber ensureState() aktualisiert nie ein bereits existierendes Objekt - Installationen, die von einer älteren Version aktualisiert haben, behielten die alten, falschen Objekte dauerhaft. Eine einmalige Start-Migration ergänzt, die genau diese bekannten Objekte per extendObjectAsync() zwangskorrigiert, ohne sonst etwas anzufassen (auch nicht das adaptereigene, eingebaute root-info.connection-Objekt). Keine weiteren funktionalen Änderungen seit 0.8.6 - der Sprung auf 1.0.0 spiegelt wider, dass der Adapter einen stabilen, vollständigen Funktionsumfang erreicht hat (Multicast-Befehlsbündelung, mDNS-Discovery, Hagel-Sammelbefehle, Positionsschätzung, Smartfront-Unterstützung, CSV-Import, vollständige i18n).",
-        "ru": "Первый релиз 1.0. ИСПРАВЛЕНИЕ: предыдущий релиз исправил роли calibrate/ntp.per и перевод info.connection, но ensureState() никогда не обновляет уже существующий объект - поэтому установки, обновлённые с более старой версии, навсегда сохраняли старые, неверные объекты. Добавлена одноразовая миграция при запуске, принудительно исправляющая именно эти известные объекты.",
-        "pt": "Primeiro lançamento 1.0. CORREÇÃO: o lançamento anterior corrigiu as funções calibrate/ntp.per e a tradução info.connection, mas ensureState() nunca atualiza um objeto já existente - por isso as instalações atualizadas de uma versão mais antiga mantinham para sempre os objetos antigos incorretos. Adicionada uma migração única no arranque.",
-        "nl": "Eerste 1.0-release. FIX: de vorige release corrigeerde de calibrate/ntp.per-rollen en de info.connection-vertaling, maar ensureState() werkt nooit een reeds bestaand object bij - installaties bijgewerkt vanaf een oudere versie behielden dus permanent de oude, onjuiste objecten. Eenmalige opstartmigratie toegevoegd.",
-        "fr": "Première version 1.0. CORRECTIF : la version précédente a corrigé les rôles calibrate/ntp.per et la traduction info.connection, mais ensureState() ne met jamais à jour un objet déjà existant - les installations mises à jour depuis une version plus ancienne conservaient donc indéfiniment les anciens objets incorrects. Migration unique au démarrage ajoutée.",
-        "it": "Prima versione 1.0. CORREZIONE: la versione precedente ha corretto i ruoli calibrate/ntp.per e la traduzione info.connection, ma ensureState() non aggiorna mai un oggetto già esistente - le installazioni aggiornate da una versione precedente mantenevano quindi per sempre i vecchi oggetti errati. Aggiunta una migrazione una tantum all'avvio.",
-        "es": "Primera versión 1.0. CORRECCIÓN: la versión anterior corrigió los roles calibrate/ntp.per y la traducción de info.connection, pero ensureState() nunca actualiza un objeto ya existente, por lo que las instalaciones actualizadas desde una versión anterior conservaban para siempre los objetos antiguos incorrectos. Se añadió una migración única al inicio.",
-        "pl": "Pierwsze wydanie 1.0. POPRAWKA: poprzednie wydanie naprawiło role calibrate/ntp.per oraz tłumaczenie info.connection, ale ensureState() nigdy nie aktualizuje już istniejącego obiektu - instalacje zaktualizowane ze starszej wersji na stałe zachowywały więc stare, błędne obiekty. Dodano jednorazową migrację przy starcie.",
-        "uk": "Перший реліз 1.0. ВИПРАВЛЕННЯ: попередній реліз виправив ролі calibrate/ntp.per та переклад info.connection, але ensureState() ніколи не оновлює вже існуючий об'єкт - тому інсталяції, оновлені зі старішої версії, назавжди зберігали старі, неправильні об'єкти. Додано одноразову міграцію під час запуску.",
-        "zh-cn": "首个 1.0 版本。修复：上一版本修正了 calibrate/ntp.per 角色和 info.connection 翻译，但 ensureState() 从不更新已存在的对象——因此从旧版本升级的安装会永久保留旧的、不正确的对象。新增了一次性启动迁移来强制修正这些已知对象。"
-      },
-      "0.8.6": {
-        "en": "Corrected object role/type mismatches found by the ioBroker store submission's object structure check: calibrate and ntp.per used role 'value', which strictly requires read=true/write=false and does not fit these intentionally writable states - changed to role 'level'. Also added the missing full i18n translation for info.connection. No functional/API changes - purely metadata (common.role/common.name) corrections.",
-        "de": "Objekt-Rollen-/Typ-Abweichungen behoben, die beim Objektstruktur-Check der ioBroker-Store-Einreichung gefunden wurden: calibrate und ntp.per nutzten die Rolle 'value', die zwingend read=true/write=false erfordert und nicht zu diesen bewusst schreibbaren States passt - auf Rolle 'level' umgestellt. Zusätzlich die fehlende vollständige i18n-Übersetzung für info.connection ergänzt. Keine funktionalen/API-Änderungen - reine Metadaten-Korrekturen (common.role/common.name).",
-        "ru": "Исправлены несоответствия ролей/типов объектов, найденных при проверке структуры объектов для подачи в магазин ioBroker: calibrate и ntp.per использовали роль 'value', которая строго требует read=true/write=false и не подходит для этих намеренно записываемых состояний - изменено на роль 'level'. Также добавлен отсутствующий полный перевод i18n для info.connection.",
-        "pt": "Corrigidas incompatibilidades de função/tipo de objeto encontradas na verificação da estrutura de objetos da submissão à loja ioBroker: calibrate e ntp.per usavam a função 'value', que exige estritamente read=true/write=false e não se adequa a estes estados intencionalmente graváveis - alterado para a função 'level'. Também foi adicionada a tradução i18n completa em falta para info.connection.",
-        "nl": "Object rol/type-mismatches gecorrigeerd die zijn gevonden bij de objectstructuurcontrole van de ioBroker store-inzending: calibrate en ntp.per gebruikten de rol 'value', die strikt read=true/write=false vereist en niet past bij deze bewust schrijfbare states - gewijzigd naar rol 'level'. Ook de ontbrekende volledige i18n-vertaling voor info.connection toegevoegd.",
-        "fr": "Correction des incohérences de rôle/type d'objet détectées lors de la vérification de la structure des objets pour la soumission au store ioBroker : calibrate et ntp.per utilisaient le rôle 'value', qui exige strictement read=true/write=false et ne convient pas à ces états volontairement modifiables - changé en rôle 'level'. La traduction i18n complète manquante pour info.connection a également été ajoutée.",
-        "it": "Corrette le discrepanze di ruolo/tipo degli oggetti riscontrate durante il controllo della struttura degli oggetti per l'invio allo store ioBroker: calibrate e ntp.per utilizzavano il ruolo 'value', che richiede rigorosamente read=true/write=false e non si adatta a questi stati intenzionalmente scrivibili - cambiato in ruolo 'level'. Aggiunta anche la traduzione i18n completa mancante per info.connection.",
-        "es": "Se corrigieron discrepancias de rol/tipo de objeto encontradas en la verificación de estructura de objetos del envío a la tienda ioBroker: calibrate y ntp.per usaban el rol 'value', que requiere estrictamente read=true/write=false y no encaja con estos estados intencionalmente escribibles - cambiado a rol 'level'. También se añadió la traducción i18n completa faltante para info.connection.",
-        "pl": "Naprawiono niezgodności ról/typów obiektów wykryte podczas sprawdzania struktury obiektów zgłoszenia do sklepu ioBroker: calibrate i ntp.per używały roli 'value', która wymaga ściśle read=true/write=false i nie pasuje do tych celowo zapisywalnych stanów - zmieniono na rolę 'level'. Dodano również brakujące pełne tłumaczenie i18n dla info.connection.",
-        "uk": "Виправлено невідповідності ролей/типів об'єктів, знайдені під час перевірки структури об'єктів для подання до магазину ioBroker: calibrate і ntp.per використовували роль 'value', яка суворо вимагає read=true/write=false і не підходить для цих навмисно записуваних станів - змінено на роль 'level'. Також додано відсутній повний переклад i18n для info.connection.",
-        "zh-cn": "修复了在 ioBroker 商店提交的对象结构检查中发现的对象角色/类型不匹配问题：calibrate 和 ntp.per 使用了角色 'value'，该角色严格要求 read=true/write=false，不适合这些故意可写的状态——已更改为角色 'level'。同时还补充了 info.connection 缺失的完整 i18n 翻译。"
-      },
-      "0.8.5": {
-        "en": "Enabled automated npm releases via GitHub Actions using npm Trusted Publishing (OIDC) - no more manual publishing, and this and all future tagged releases are automatically signed with npm provenance. No functional/API changes.",
-        "de": "Automatisierte npm-Releases über GitHub Actions mittels npm Trusted Publishing (OIDC) aktiviert - kein manuelles Veröffentlichen mehr nötig, dieses und alle künftigen getaggten Releases werden automatisch mit npm-Provenance signiert. Keine funktionalen Änderungen/API-Änderungen.",
-        "ru": "Включены автоматические релизы на npm через GitHub Actions с использованием npm Trusted Publishing (OIDC) - больше не требуется ручная публикация, этот и все будущие релизы с тегами автоматически подписываются npm provenance. Без функциональных изменений.",
-        "pt": "Ativados os lançamentos automáticos no npm via GitHub Actions usando npm Trusted Publishing (OIDC) - já não é necessária a publicação manual, esta e todas as futuras versões com tag são automaticamente assinadas com npm provenance. Sem alterações funcionais/de API.",
-        "nl": "Geautomatiseerde npm-releases via GitHub Actions ingeschakeld met npm Trusted Publishing (OIDC) - handmatig publiceren is niet meer nodig, deze en alle toekomstige getagde releases worden automatisch ondertekend met npm provenance. Geen functionele/API-wijzigingen.",
-        "fr": "Publications npm automatisées via GitHub Actions activées grâce à npm Trusted Publishing (OIDC) - plus besoin de publier manuellement, cette version et toutes les futures versions taguées sont automatiquement signées avec la provenance npm. Aucun changement fonctionnel/API.",
-        "it": "Abilitate le release npm automatizzate tramite GitHub Actions usando npm Trusted Publishing (OIDC) - non è più necessaria la pubblicazione manuale, questa e tutte le future release taggate vengono firmate automaticamente con la provenance npm. Nessuna modifica funzionale/API.",
-        "es": "Se habilitaron los lanzamientos automáticos de npm mediante GitHub Actions usando npm Trusted Publishing (OIDC) - ya no es necesario publicar manualmente, esta y todas las futuras versiones etiquetadas se firman automáticamente con la procedencia de npm. Sin cambios funcionales/de API.",
-        "pl": "Włączono automatyczne wydania npm za pośrednictwem GitHub Actions przy użyciu npm Trusted Publishing (OIDC) - ręczna publikacja nie jest już konieczna, to i wszystkie przyszłe otagowane wydania są automatycznie podpisywane provenance npm. Brak zmian funkcjonalnych/API.",
-        "uk": "Увімкнено автоматичні релізи npm через GitHub Actions за допомогою npm Trusted Publishing (OIDC) - ручна публікація більше не потрібна, цей і всі майбутні релізи з тегами автоматично підписуються npm provenance. Без функціональних змін.",
-        "zh-cn": "已通过 GitHub Actions 使用 npm Trusted Publishing（OIDC）启用自动化 npm 发布——不再需要手动发布，此版本及所有未来的带标签版本都将自动附带 npm provenance 签名。无功能/API 变更。"
-      },
-      "0.8.4": {
-        "en": "Cleanup release addressing the ioBroker adapter store checker findings, no functional/behavioral changes. Updated fast-xml-parser 4.5.7 -> 5.9.3, eslint, mocha, chai and the testing-action-check GitHub Action (verified identical XML parsing output for the zrap API response shapes used by this adapter). Removed devDependencies already bundled by @iobroker/testing. Fixed jsonConfig.json i18n declaration (was 'true' without an admin/i18n directory) and added missing translations for the work area 'kind' dropdown options. Added package-lock.json and aligned dependabot.yml/auto-merge workflow with the current ioBroker-Bot templates.",
-        "de": "Aufräum-Release zur Behebung der ioBroker-Store-Checker-Befunde, keine funktionalen/verhaltensändernden Anpassungen. fast-xml-parser 4.5.7 -> 5.9.3, eslint, mocha, chai sowie die testing-action-check GitHub Action aktualisiert (identische XML-Parser-Ausgabe für die von diesem Adapter genutzten zrap-API-Antwortformate verifiziert). Bereits über @iobroker/testing enthaltene devDependencies entfernt. jsonConfig.json-i18n-Deklaration korrigiert (stand auf 'true' ohne admin/i18n-Verzeichnis) und fehlende Übersetzungen der Mähbereich-\"kind\"-Dropdown-Optionen ergänzt. package-lock.json hinzugefügt und dependabot.yml/Auto-Merge-Workflow an die aktuellen ioBroker-Bot-Vorlagen angeglichen.",
-        "ru": "Релиз для устранения замечаний проверки репозитория ioBroker, без функциональных изменений. Обновлены fast-xml-parser (4.5.7 -> 5.9.3), eslint, mocha, chai и GitHub Action testing-action-check (проверен идентичный результат разбора XML для форматов ответов API zrap, используемых адаптером). Удалены devDependencies, уже включённые в @iobroker/testing. Исправлена декларация i18n в jsonConfig.json (была 'true' без каталога admin/i18n), добавлены недостающие переводы для выпадающего списка 'kind'. Добавлен package-lock.json, dependabot.yml/workflow автослияния приведены в соответствие с актуальными шаблонами ioBroker-Bot.",
-        "pt": "Versão de limpeza para resolver os problemas do verificador da loja de adaptadores ioBroker, sem alterações funcionais/de comportamento. Atualizados fast-xml-parser (4.5.7 -> 5.9.3), eslint, mocha, chai e a GitHub Action testing-action-check (saída de análise XML idêntica verificada para os formatos de resposta da API zrap usados por este adaptador). Removidas devDependencies já incluídas em @iobroker/testing. Corrigida a declaração i18n em jsonConfig.json (estava 'true' sem diretório admin/i18n) e adicionadas traduções em falta para as opções do menu 'kind'. Adicionado package-lock.json e dependabot.yml/workflow de auto-merge alinhados com os modelos atuais do ioBroker-Bot.",
-        "nl": "Opschoonrelease voor de bevindingen van de ioBroker adapter store checker, geen functionele/gedragswijzigingen. fast-xml-parser (4.5.7 -> 5.9.3), eslint, mocha, chai en de testing-action-check GitHub Action bijgewerkt (identieke XML-parseeruitvoer geverifieerd voor de door deze adapter gebruikte zrap API-antwoordformaten). devDependencies die al door @iobroker/testing worden meegeleverd verwijderd. i18n-declaratie in jsonConfig.json gecorrigeerd (stond op 'true' zonder admin/i18n-map) en ontbrekende vertalingen voor de 'kind'-keuzelijst toegevoegd. package-lock.json toegevoegd en dependabot.yml/auto-merge workflow afgestemd op de huidige ioBroker-Bot-sjablonen.",
-        "fr": "Version de nettoyage traitant les remarques du vérificateur du dépôt d'adaptateurs ioBroker, sans changement fonctionnel/de comportement. Mise à jour de fast-xml-parser (4.5.7 -> 5.9.3), eslint, mocha, chai et de l'action GitHub testing-action-check (sortie d'analyse XML identique vérifiée pour les formats de réponse de l'API zrap utilisés par cet adaptateur). Suppression des devDependencies déjà incluses par @iobroker/testing. Correction de la déclaration i18n dans jsonConfig.json (était 'true' sans répertoire admin/i18n) et ajout des traductions manquantes pour la liste déroulante 'kind'. Ajout de package-lock.json et alignement du workflow dependabot.yml/auto-merge sur les modèles standard actuels d'ioBroker-Bot.",
-        "it": "Versione di pulizia per risolvere le segnalazioni del checker dello store degli adattatori ioBroker, senza modifiche funzionali/comportamentali. Aggiornati fast-xml-parser (4.5.7 -> 5.9.3), eslint, mocha, chai e la GitHub Action testing-action-check (verificato output di parsing XML identico per i formati di risposta dell'API zrap usati da questo adattatore). Rimosse le devDependencies già incluse in @iobroker/testing. Corretta la dichiarazione i18n in jsonConfig.json (era 'true' senza directory admin/i18n) e aggiunte le traduzioni mancanti per le opzioni del menu a tendina 'kind'. Aggiunto package-lock.json e allineati dependabot.yml/workflow di auto-merge ai modelli standard attuali di ioBroker-Bot.",
-        "es": "Versión de limpieza que aborda los hallazgos del verificador de la tienda de adaptadores ioBroker, sin cambios funcionales/de comportamiento. Se actualizaron fast-xml-parser (4.5.7 -> 5.9.3), eslint, mocha, chai y la GitHub Action testing-action-check (se verificó una salida de análisis XML idéntica para los formatos de respuesta de la API zrap utilizados por este adaptador). Se eliminaron devDependencies ya incluidas en @iobroker/testing. Se corrigió la declaración i18n en jsonConfig.json (estaba en 'true' sin directorio admin/i18n) y se añadieron las traducciones faltantes para las opciones del menú desplegable 'kind'. Se añadió package-lock.json y se alinearon dependabot.yml/el flujo de auto-merge con las plantillas estándar actuales de ioBroker-Bot.",
-        "pl": "Wydanie porządkujące, usuwające uwagi weryfikatora repozytorium adapterów ioBroker, bez zmian funkcjonalnych/behawioralnych. Zaktualizowano fast-xml-parser (4.5.7 -> 5.9.3), eslint, mocha, chai oraz akcję GitHub testing-action-check (zweryfikowano identyczny wynik parsowania XML dla formatów odpowiedzi API zrap używanych przez ten adapter). Usunięto devDependencies już zawarte w @iobroker/testing. Poprawiono deklarację i18n w jsonConfig.json (była ustawiona na 'true' bez katalogu admin/i18n) i dodano brakujące tłumaczenia dla listy rozwijanej 'kind'. Dodano package-lock.json oraz dostosowano dependabot.yml/workflow auto-merge do aktualnych standardowych szablonów ioBroker-Bot.",
-        "uk": "Реліз для усунення зауважень перевірки репозиторію ioBroker, без функціональних змін. Оновлено fast-xml-parser (4.5.7 -> 5.9.3), eslint, mocha, chai та GitHub Action testing-action-check (перевірено ідентичний результат розбору XML для форматів відповідей API zrap, які використовує цей адаптер). Видалено devDependencies, які вже включені до @iobroker/testing. Виправлено декларацію i18n у jsonConfig.json (була 'true' без каталогу admin/i18n), додано відсутні переклади для випадаючого списку 'kind'. Додано package-lock.json, dependabot.yml/workflow автозлиття узгоджено з актуальними шаблонами ioBroker-Bot.",
-        "zh-cn": "清理版本，修复 ioBroker 适配器商店检查器发现的问题，无功能/行为变更。更新了 fast-xml-parser（4.5.7 -> 5.9.3）、eslint、mocha、chai 及 testing-action-check GitHub Action（已验证该适配器所用 zrap API 响应格式的 XML 解析输出保持一致）。移除了 @iobroker/testing 已包含的 devDependencies。修正了 jsonConfig.json 中的 i18n 声明（之前为 'true' 但缺少 admin/i18n 目录），并为「kind」下拉选项补充了缺失的翻译。新增了 package-lock.json，并将 dependabot.yml/自动合并工作流与当前 ioBroker-Bot 标准模板对齐。"
-      },
-      "0.8.3": {
-        "en": "CI workflow activated (lint + tests on every push/PR via GitHub Actions), removed redundant duplicate icon file at repo root (only admin/zeptrion.png is used), cleaned up outdated publish instructions in README",
-        "de": "CI-Workflow aktiviert (Lint + Tests bei jedem Push/PR via GitHub Actions), redundante doppelte Icon-Datei im Repo-Root entfernt (nur admin/zeptrion.png wird verwendet), veraltete Publish-Anleitung im README bereinigt",
-        "ru": "Активирован CI-воркфлоу (линтинг + тесты при каждом push/PR через GitHub Actions), удалён избыточный дублирующий файл значка в корне репозитория (используется только admin/zeptrion.png), очищены устаревшие инструкции по публикации в README",
-        "pt": "Fluxo de trabalho CI ativado (lint + testes em cada push/PR via GitHub Actions), removido o ficheiro de ícone duplicado redundante na raiz do repositório (apenas admin/zeptrion.png é usado), limpas as instruções de publicação desatualizadas no README",
-        "nl": "CI-workflow geactiveerd (lint + tests bij elke push/PR via GitHub Actions), overbodig dubbel icoonbestand in de repo-root verwijderd (alleen admin/zeptrion.png wordt gebruikt), verouderde publicatie-instructies in de README opgeschoond",
-        "fr": "Workflow CI activé (lint + tests à chaque push/PR via GitHub Actions), suppression du fichier icône dupliqué redondant à la racine du dépôt (seul admin/zeptrion.png est utilisé), nettoyage des instructions de publication obsolètes dans le README",
-        "it": "Workflow CI attivato (lint + test a ogni push/PR tramite GitHub Actions), rimosso il file icona duplicato ridondante nella root del repository (viene usato solo admin/zeptrion.png), ripulite le istruzioni di pubblicazione obsolete nel README",
-        "es": "Flujo de trabajo CI activado (lint + pruebas en cada push/PR mediante GitHub Actions), eliminado el archivo de icono duplicado redundante en la raíz del repositorio (solo se usa admin/zeptrion.png), limpiadas las instrucciones de publicación obsoletas en el README",
-        "pl": "Aktywowano workflow CI (lint + testy przy każdym push/PR przez GitHub Actions), usunięto zbędny zduplikowany plik ikony w katalogu głównym repozytorium (używany jest tylko admin/zeptrion.png), wyczyszczono nieaktualne instrukcje publikacji w README",
-        "uk": "Активовано CI-воркфлоу (лінтинг + тести під час кожного push/PR через GitHub Actions), видалено надлишковий дубльований файл значка в корені репозиторію (використовується лише admin/zeptrion.png), очищено застарілі інструкції з публікації в README",
-        "zh-cn": "启用CI工作流(每次push/PR通过GitHub Actions执行lint和测试),删除仓库根目录下冗余的重复图标文件(仅使用admin/zeptrion.png),清理README中过时的发布说明"
-      },
-      "0.8.2": {
-        "en": "Per-channel motor travel time override (new 'Travel/ch (s)' column and CSV column): 2K/4K devices where individual channels have different shutter travel times can now be configured correctly - previously only one travel time applied to all channels of a device",
-        "de": "Motor-Laufzeit jetzt auch pro Kanal einstellbar (neue Spalte 'Laufzeit/Kanal (s)' und CSV-Spalte): 2K/4K-Geräte, bei denen einzelne Kanäle unterschiedliche Storen-Laufzeiten haben, lassen sich jetzt korrekt konfigurieren - bisher galt nur eine Laufzeit für alle Kanäle eines Geräts",
-        "ru": "Индивидуальное время хода мотора для каждого канала (новый столбец 'Время/канал (с)' и столбец CSV): устройства 2K/4K, у которых отдельные каналы имеют разное время хода штор, теперь можно настроить корректно - ранее для всех каналов устройства применялось только одно время хода",
-        "pt": "Substituição do tempo de percurso do motor por canal (nova coluna 'Percurso/canal (s)' e coluna CSV): dispositivos 2K/4K com canais que têm tempos de percurso do estore diferentes agora podem ser configurados corretamente - anteriormente apenas um tempo de percurso era aplicado a todos os canais de um dispositivo",
-        "nl": "Override van de motor-looptijd per kanaal (nieuwe kolom 'Looptijd/kanaal (s)' en CSV-kolom): 2K/4K-apparaten waarbij afzonderlijke kanalen verschillende looptijden voor de zonwering hebben, kunnen nu correct worden geconfigureerd - voorheen gold slechts één looptijd voor alle kanalen van een apparaat",
-        "fr": "Dépassement de la durée de course du moteur par canal (nouvelle colonne « Course/canal (s) » et colonne CSV) : les appareils 2K/4K dont les canaux ont des durées de course de volet différentes peuvent désormais être configurés correctement - auparavant, une seule durée de course s'appliquait à tous les canaux d'un appareil",
-        "it": "Sovrascrittura del tempo di corsa del motore per canale (nuova colonna 'Corsa/canale (s)' e colonna CSV): i dispositivi 2K/4K con canali che hanno tempi di corsa della tapparella diversi possono ora essere configurati correttamente - in precedenza veniva applicato un solo tempo di corsa a tutti i canali di un dispositivo",
-        "es": "Anulación del tiempo de recorrido del motor por canal (nueva columna 'Recorrido/canal (s)' y columna CSV): los dispositivos 2K/4K con canales que tienen tiempos de recorrido de persiana diferentes ahora se pueden configurar correctamente - anteriormente solo se aplicaba un único tiempo de recorrido a todos los canales de un dispositivo",
-        "pl": "Nadpisanie czasu pracy silnika dla poszczególnych kanałów (nowa kolumna 'Czas/kanał (s)' oraz kolumna CSV): urządzenia 2K/4K, w których poszczególne kanały mają różne czasy pracy rolety, można teraz poprawnie skonfigurować - wcześniej dla wszystkich kanałów urządzenia obowiązywał tylko jeden czas pracy",
-        "uk": "Індивідуальний час ходу мотора для кожного каналу (новий стовпець 'Час/канал (с)' та стовпець CSV): пристрої 2K/4K, у яких окремі канали мають різний час ходу штор, тепер можна налаштувати коректно - раніше для всіх каналів пристрою застосовувався лише один час ходу",
-        "zh-cn": "支持按通道单独设置电机运行时间(新增\"运行时间/通道(秒)\"列及CSV列):对于各通道卷帘运行时间不同的2K/4K设备,现在可以正确配置——此前一台设备的所有通道只能使用同一个运行时间"
-      }
-    },
-    "titleLang": {
-      "en": "Feller zeptrion / zApp",
-      "de": "Feller zeptrion / zApp",
-      "ru": "Feller zeptrion / zApp",
-      "pt": "Feller zeptrion / zApp",
-      "nl": "Feller zeptrion / zApp",
-      "fr": "Feller zeptrion / zApp",
-      "it": "Feller zeptrion / zApp",
-      "es": "Feller zeptrion / zApp",
-      "pl": "Feller zeptrion / zApp",
-      "uk": "Feller zeptrion / zApp",
-      "zh-cn": "Feller zeptrion / zApp"
-    },
-    "desc": {
-      "en": "Control Feller zeptrion WLAN actuators (zApp-Gateway / zApp-Booster) for lights and shutters via the zrap web service API. Includes a hail-alarm collective command to close all configured shutters at once.",
-      "de": "Steuerung von Feller zeptrion WLAN-Aktoren (zApp-Gateway / zApp-Booster) für Licht und Storen über die zrap Webservice API. Enthält einen Sammelbefehl zum sofortigen Schliessen aller konfigurierten Storen (z.B. für Hagelalarm).",
-      "ru": "Управление WLAN-актуаторами Feller zeptrion (zApp-Gateway / zApp-Booster) для освещения и штор через веб-сервис API zrap. Включает групповую команду тревоги по граду для немедленного закрытия всех настроенных штор.",
-      "pt": "Controlo de atuadores WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) para luzes e estores através da API do serviço web zrap. Inclui um comando coletivo de alarme de granizo para fechar imediatamente todos os estores configurados.",
-      "nl": "Besturing van Feller zeptrion WLAN-actuatoren (zApp-Gateway / zApp-Booster) voor verlichting en zonwering via de zrap webservice-API. Bevat een collectief hagelalarm-commando om alle geconfigureerde zonwering direct te sluiten.",
-      "fr": "Contrôle des actionneurs WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) pour lumières et volets via l'API web service zrap. Inclut une commande collective d'alarme grêle pour fermer tous les volets configurés en une fois.",
-      "it": "Controllo degli attuatori WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) per luci e tapparelle tramite l'API web service zrap. Include un comando collettivo di allarme grandine per chiudere subito tutte le tapparelle configurate.",
-      "es": "Control de actuadores WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) para luces y persianas mediante la API del servicio web zrap. Incluye un comando colectivo de alarma de granizo para cerrar de inmediato todas las persianas configuradas.",
-      "pl": "Sterowanie aktuatorami WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) do oświetlenia i rolet za pomocą interfejsu API usługi sieciowej zrap. Zawiera zbiorczą komendę alarmu gradowego do natychmiastowego zamknięcia wszystkich skonfigurowanych rolet.",
-      "uk": "Керування WLAN-актуаторами Feller zeptrion (zApp-Gateway / zApp-Booster) для освітлення та штор через веб-сервіс API zrap. Містить групову команду тривоги про град для негайного закриття всіх налаштованих штор.",
-      "zh-cn": "通过 zrap 网络服务 API 控制 Feller zeptrion WLAN 执行器(zApp-Gateway / zApp-Booster),用于灯光和卷帘。包含冰雹警报集合指令,可立即关闭所有已配置的卷帘。"
-    },
-    "authors": [
-      "Stefan Bühler <stefan.buehler46@gmail.com>"
-    ],
-    "dependencies": [
-      {
-        "js-controller": ">=6.0.11"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=7.8.23"
-      }
-    ],
-    "keywords": [
-      "feller",
-      "zeptrion",
-      "zapp",
-      "storen",
-      "shutter",
-      "wlan",
-      "hagel"
-    ],
-    "licenseInformation": {
-      "type": "free",
-      "license": "MIT"
-    },
-    "platform": "Javascript/Node.js",
-    "icon": "zeptrion.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/bueste/ioBroker.zeptrion/main/admin/zeptrion.png",
-    "readme": "https://github.com/bueste/ioBroker.zeptrion/blob/main/README.md",
-    "type": "household",
-    "mode": "daemon",
-    "compact": true,
-    "connectionType": "local",
-    "dataSource": "poll",
-    "adminUI": {
-      "config": "json"
-    },
-    "messagebox": true,
-    "loglevel": "info",
-    "stopBeforeUpdate": true,
-    "tier": 2
-  },
-  "native": {
-    "requestTimeout": 4000,
-    "useNotify": true,
-    "devices": []
-  },
-  "objects": [],
-  "instanceObjects": [
-    {
-      "_id": "info",
-      "type": "channel",
-      "common": {
-        "name": {
-          "en": "Information",
-          "de": "Information"
-        }
-      },
-      "native": {}
-    },
-    {
-      "_id": "info.connection",
-      "type": "state",
-      "common": {
-        "role": "indicator.connected",
-        "name": {
-          "en": "At least one device reachable",
-          "de": "Mindestens ein Gerät erreichbar",
-          "ru": "Доступно хотя бы одно устройство",
-          "pt": "Pelo menos um dispositivo acessível",
-          "nl": "Ten minste één apparaat bereikbaar",
-          "fr": "Au moins un appareil accessible",
-          "it": "Almeno un dispositivo raggiungibile",
-          "es": "Al menos un dispositivo accesible",
-          "pl": "Co najmniej jedno urządzenie dostępne",
-          "uk": "Принаймні один пристрій доступний",
-          "zh-cn": "至少有一个设备可访问"
+    "common": {
+        "name": "zeptrion",
+        "version": "1.0.4",
+        "news": {
+            "1.0.4": {
+                "en": "Documentation only: added a Buy Me a Coffee link next to the PayPal donate badge in README.md/README_de.md and the npm package (funding field). No functional changes.",
+                "de": "Nur Dokumentation: Buy-Me-a-Coffee-Link neben dem PayPal-Spenden-Badge in README.md/README_de.md sowie im npm-Paket (funding-Feld) ergänzt. Keine funktionalen Änderungen.",
+                "ru": "Только документация: добавлена ссылка Buy Me a Coffee рядом со значком пожертвования PayPal в README.md/README_de.md и в npm-пакете (поле funding). Без функциональных изменений.",
+                "pt": "Apenas documentação: adicionado um link Buy Me a Coffee junto ao badge de doação PayPal no README.md/README_de.md e no pacote npm (campo funding). Sem alterações funcionais.",
+                "nl": "Alleen documentatie: Buy Me a Coffee-link toegevoegd naast de PayPal-donatiebadge in README.md/README_de.md en het npm-pakket (funding-veld). Geen functionele wijzigingen.",
+                "fr": "Documentation uniquement : ajout d'un lien Buy Me a Coffee à côté du badge de don PayPal dans README.md/README_de.md et le paquet npm (champ funding). Aucun changement fonctionnel.",
+                "it": "Solo documentazione: aggiunto un link Buy Me a Coffee accanto al badge di donazione PayPal in README.md/README_de.md e nel pacchetto npm (campo funding). Nessuna modifica funzionale.",
+                "es": "Solo documentación: se añadió un enlace Buy Me a Coffee junto a la insignia de donación de PayPal en README.md/README_de.md y en el paquete npm (campo funding). Sin cambios funcionales.",
+                "pl": "Tylko dokumentacja: dodano link Buy Me a Coffee obok odznaki dotacji PayPal w README.md/README_de.md oraz w pakiecie npm (pole funding). Brak zmian funkcjonalnych.",
+                "uk": "Лише документація: додано посилання Buy Me a Coffee поруч зі значком пожертв PayPal у README.md/README_de.md та в пакеті npm (поле funding). Без функціональних змін.",
+                "zh-cn": "仅文档：在 README.md/README_de.md 及 npm 包（funding 字段）中，于 PayPal 捐赠徽章旁添加了 Buy Me a Coffee 链接。无功能变更。"
+            },
+            "1.0.3": {
+                "en": "Documentation only: fixed the PayPal donate link in README (en/de), which previously used the wrong URL format and did not work. No functional/object changes.",
+                "de": "Nur Dokumentation: den PayPal-Spenden-Link im README (en/de) korrigiert, der zuvor das falsche URL-Format hatte und nicht funktionierte. Keine funktionalen Änderungen/Objektänderungen.",
+                "ru": "Только документация: исправлена ссылка для пожертвований PayPal в README (en/de), которая ранее имела неверный формат URL и не работала. Без функциональных изменений.",
+                "pt": "Apenas documentação: corrigido o link de doação PayPal no README (en/de), que anteriormente tinha o formato de URL errado e não funcionava. Sem alterações funcionais.",
+                "nl": "Alleen documentatie: de PayPal-donatielink in README (en/de) gecorrigeerd, die voorheen het verkeerde URL-formaat had en niet werkte. Geen functionele wijzigingen.",
+                "fr": "Documentation uniquement : correction du lien de don PayPal dans le README (en/de), qui avait auparavant le mauvais format d'URL et ne fonctionnait pas. Aucun changement fonctionnel.",
+                "it": "Solo documentazione: corretto il link di donazione PayPal nel README (en/de), che in precedenza aveva il formato URL errato e non funzionava. Nessuna modifica funzionale.",
+                "es": "Solo documentación: se corrigió el enlace de donación de PayPal en el README (en/de), que anteriormente tenía el formato de URL incorrecto y no funcionaba. Sin cambios funcionales.",
+                "pl": "Tylko dokumentacja: naprawiono link do darowizn PayPal w README (en/de), który wcześniej miał zły format URL i nie działał. Brak zmian funkcjonalnych.",
+                "uk": "Лише документація: виправлено посилання для пожертв PayPal у README (en/de), яке раніше мало неправильний формат URL і не працювало. Без функціональних змін.",
+                "zh-cn": "仅文档：修正了 README（en/de）中的 PayPal 捐赠链接，此前该链接使用了错误的 URL 格式且无法正常使用。无功能变更。"
+            },
+            "1.0.2": {
+                "en": "FIX: the global (adapter-level) info.connection translations added in 1.0.1 are only synced automatically by js-controller on certain update paths (e.g. 'iobroker upgrade'), not reliably when installing via 'iobroker url' - added this to the startup migration too, so it no longer depends on that.",
+                "de": "FIX: die in 1.0.1 ergänzten Übersetzungen für das globale (adapter-eigene) info.connection werden von js-controller nur bei bestimmten Update-Wegen (z.B. 'iobroker upgrade') automatisch synchronisiert, nicht zuverlässig bei Installation via 'iobroker url' - auch in die Start-Migration aufgenommen, damit das nicht mehr davon abhängt.",
+                "ru": "ИСПРАВЛЕНИЕ: глобальные переводы info.connection, добавленные в 1.0.1, синхронизируются js-controller автоматически только при определённых способах обновления, ненадёжно при установке через 'iobroker url' - добавлено также в миграцию при запуске.",
+                "pt": "CORREÇÃO: as traduções globais de info.connection adicionadas na 1.0.1 só são sincronizadas automaticamente pelo js-controller em determinados caminhos de atualização, não de forma fiável ao instalar via 'iobroker url' - adicionado também à migração de arranque.",
+                "nl": "FIX: de globale info.connection-vertalingen toegevoegd in 1.0.1 worden alleen automatisch gesynchroniseerd door js-controller bij bepaalde update-paden, niet betrouwbaar bij installatie via 'iobroker url' - ook toegevoegd aan de opstartmigratie.",
+                "fr": "CORRECTIF : les traductions globales info.connection ajoutées en 1.0.1 ne sont synchronisées automatiquement par js-controller que sur certains chemins de mise à jour, pas de manière fiable lors d'une installation via 'iobroker url' - ajouté également à la migration au démarrage.",
+                "it": "CORREZIONE: le traduzioni globali di info.connection aggiunte nella 1.0.1 vengono sincronizzate automaticamente da js-controller solo su determinati percorsi di aggiornamento, non in modo affidabile quando si installa tramite 'iobroker url' - aggiunto anche alla migrazione all'avvio.",
+                "es": "CORRECCIÓN: las traducciones globales de info.connection añadidas en 1.0.1 solo se sincronizan automáticamente mediante js-controller en determinadas rutas de actualización, no de forma fiable al instalar mediante 'iobroker url' - añadido también a la migración de inicio.",
+                "pl": "POPRAWKA: globalne tłumaczenia info.connection dodane w 1.0.1 są automatycznie synchronizowane przez js-controller tylko przy określonych ścieżkach aktualizacji, niewiarygodnie przy instalacji przez 'iobroker url' - dodano również do migracji przy starcie.",
+                "uk": "ВИПРАВЛЕННЯ: глобальні переклади info.connection, додані в 1.0.1, синхронізуються js-controller автоматично лише за певних шляхів оновлення, ненадійно при встановленні через 'iobroker url' - додано також до міграції під час запуску.",
+                "zh-cn": "修复：1.0.1 中添加的全局 info.connection 翻译仅在特定更新路径（例如 'iobroker upgrade'）下由 js-controller 自动同步，通过 'iobroker url' 安装时并不可靠——现已同样加入启动迁移中。"
+            },
+            "1.0.1": {
+                "en": "FIX: calibrate declared role 'level' but read=false - role 'level' requires read=true per the ioBroker role catalogue. Changed to read=true and extended the startup migration to also correct existing objects still holding the old read=false. Added the missing translations for the global info.connection object (was only en/de).",
+                "de": "FIX: calibrate deklarierte Rolle 'level', aber read=false - die Rolle 'level' erfordert laut ioBroker-Rollenkatalog read=true. Auf read=true geändert und die Start-Migration erweitert, damit auch bestehende Objekte mit dem alten read=false korrigiert werden. Fehlende Übersetzungen für das globale info.connection-Objekt ergänzt (waren nur en/de).",
+                "ru": "ИСПРАВЛЕНИЕ: calibrate объявлял роль 'level', но read=false - роль 'level' требует read=true согласно каталогу ролей ioBroker. Изменено на read=true, миграция при запуске расширена. Добавлены отсутствующие переводы для глобального объекта info.connection.",
+                "pt": "CORREÇÃO: calibrate declarava a função 'level', mas read=false - a função 'level' exige read=true segundo o catálogo de funções do ioBroker. Alterado para read=true, migração de arranque estendida. Adicionadas as traduções em falta para o objeto global info.connection.",
+                "nl": "FIX: calibrate declareerde rol 'level', maar read=false - rol 'level' vereist read=true volgens de ioBroker-rolcatalogus. Gewijzigd naar read=true, opstartmigratie uitgebreid. Ontbrekende vertalingen voor het globale info.connection-object toegevoegd.",
+                "fr": "CORRECTIF : calibrate déclarait le rôle 'level', mais read=false - le rôle 'level' nécessite read=true selon le catalogue de rôles ioBroker. Changé en read=true, migration au démarrage étendue. Traductions manquantes pour l'objet global info.connection ajoutées.",
+                "it": "CORREZIONE: calibrate dichiarava il ruolo 'level', ma read=false - il ruolo 'level' richiede read=true secondo il catalogo dei ruoli di ioBroker. Cambiato in read=true, migrazione all'avvio estesa. Aggiunte le traduzioni mancanti per l'oggetto globale info.connection.",
+                "es": "CORRECCIÓN: calibrate declaraba el rol 'level', pero read=false - el rol 'level' requiere read=true según el catálogo de roles de ioBroker. Cambiado a read=true, migración de inicio ampliada. Se añadieron las traducciones faltantes para el objeto global info.connection.",
+                "pl": "POPRAWKA: calibrate deklarował rolę 'level', ale read=false - rola 'level' wymaga read=true zgodnie z katalogiem ról ioBroker. Zmieniono na read=true, rozszerzono migrację przy starcie. Dodano brakujące tłumaczenia dla globalnego obiektu info.connection.",
+                "uk": "ВИПРАВЛЕННЯ: calibrate декларував роль 'level', але read=false - роль 'level' вимагає read=true згідно з каталогом ролей ioBroker. Змінено на read=true, розширено міграцію під час запуску. Додано відсутні переклади для глобального об'єкта info.connection.",
+                "zh-cn": "修复：calibrate 声明角色为 'level'，但 read=false——根据 ioBroker 角色目录，角色 'level' 要求 read=true。已更改为 read=true，并扩展了启动迁移。补充了全局 info.connection 对象缺失的翻译。"
+            },
+            "1.0.0": {
+                "en": "First 1.0 release. FIX: the previous release corrected calibrate/ntp.per roles and the info.connection translation, but ensureState() never updates an object that already exists - so installations updated from an older version kept the old, incorrect objects forever. Added a one-time startup migration that force-corrects exactly those known objects via extendObjectAsync(), without touching anything else (including the adapter's own built-in root info.connection object). No other functional changes since 0.8.6 - the version bump to 1.0.0 reflects that the adapter has reached a stable, complete feature set (multicast command bundling, mDNS discovery, hail bulk commands, position estimation, Smartfront support, CSV import, full i18n).",
+                "de": "Erstes 1.0-Release. FIX: Das vorherige Release hat die calibrate/ntp.per-Rollen und die info.connection-Übersetzung korrigiert, aber ensureState() aktualisiert nie ein bereits existierendes Objekt - Installationen, die von einer älteren Version aktualisiert haben, behielten die alten, falschen Objekte dauerhaft. Eine einmalige Start-Migration ergänzt, die genau diese bekannten Objekte per extendObjectAsync() zwangskorrigiert, ohne sonst etwas anzufassen (auch nicht das adaptereigene, eingebaute root-info.connection-Objekt). Keine weiteren funktionalen Änderungen seit 0.8.6 - der Sprung auf 1.0.0 spiegelt wider, dass der Adapter einen stabilen, vollständigen Funktionsumfang erreicht hat (Multicast-Befehlsbündelung, mDNS-Discovery, Hagel-Sammelbefehle, Positionsschätzung, Smartfront-Unterstützung, CSV-Import, vollständige i18n).",
+                "ru": "Первый релиз 1.0. ИСПРАВЛЕНИЕ: предыдущий релиз исправил роли calibrate/ntp.per и перевод info.connection, но ensureState() никогда не обновляет уже существующий объект - поэтому установки, обновлённые с более старой версии, навсегда сохраняли старые, неверные объекты. Добавлена одноразовая миграция при запуске, принудительно исправляющая именно эти известные объекты.",
+                "pt": "Primeiro lançamento 1.0. CORREÇÃO: o lançamento anterior corrigiu as funções calibrate/ntp.per e a tradução info.connection, mas ensureState() nunca atualiza um objeto já existente - por isso as instalações atualizadas de uma versão mais antiga mantinham para sempre os objetos antigos incorretos. Adicionada uma migração única no arranque.",
+                "nl": "Eerste 1.0-release. FIX: de vorige release corrigeerde de calibrate/ntp.per-rollen en de info.connection-vertaling, maar ensureState() werkt nooit een reeds bestaand object bij - installaties bijgewerkt vanaf een oudere versie behielden dus permanent de oude, onjuiste objecten. Eenmalige opstartmigratie toegevoegd.",
+                "fr": "Première version 1.0. CORRECTIF : la version précédente a corrigé les rôles calibrate/ntp.per et la traduction info.connection, mais ensureState() ne met jamais à jour un objet déjà existant - les installations mises à jour depuis une version plus ancienne conservaient donc indéfiniment les anciens objets incorrects. Migration unique au démarrage ajoutée.",
+                "it": "Prima versione 1.0. CORREZIONE: la versione precedente ha corretto i ruoli calibrate/ntp.per e la traduzione info.connection, ma ensureState() non aggiorna mai un oggetto già esistente - le installazioni aggiornate da una versione precedente mantenevano quindi per sempre i vecchi oggetti errati. Aggiunta una migrazione una tantum all'avvio.",
+                "es": "Primera versión 1.0. CORRECCIÓN: la versión anterior corrigió los roles calibrate/ntp.per y la traducción de info.connection, pero ensureState() nunca actualiza un objeto ya existente, por lo que las instalaciones actualizadas desde una versión anterior conservaban para siempre los objetos antiguos incorrectos. Se añadió una migración única al inicio.",
+                "pl": "Pierwsze wydanie 1.0. POPRAWKA: poprzednie wydanie naprawiło role calibrate/ntp.per oraz tłumaczenie info.connection, ale ensureState() nigdy nie aktualizuje już istniejącego obiektu - instalacje zaktualizowane ze starszej wersji na stałe zachowywały więc stare, błędne obiekty. Dodano jednorazową migrację przy starcie.",
+                "uk": "Перший реліз 1.0. ВИПРАВЛЕННЯ: попередній реліз виправив ролі calibrate/ntp.per та переклад info.connection, але ensureState() ніколи не оновлює вже існуючий об'єкт - тому інсталяції, оновлені зі старішої версії, назавжди зберігали старі, неправильні об'єкти. Додано одноразову міграцію під час запуску.",
+                "zh-cn": "首个 1.0 版本。修复：上一版本修正了 calibrate/ntp.per 角色和 info.connection 翻译，但 ensureState() 从不更新已存在的对象——因此从旧版本升级的安装会永久保留旧的、不正确的对象。新增了一次性启动迁移来强制修正这些已知对象。"
+            },
+            "0.8.6": {
+                "en": "Corrected object role/type mismatches found by the ioBroker store submission's object structure check: calibrate and ntp.per used role 'value', which strictly requires read=true/write=false and does not fit these intentionally writable states - changed to role 'level'. Also added the missing full i18n translation for info.connection. No functional/API changes - purely metadata (common.role/common.name) corrections.",
+                "de": "Objekt-Rollen-/Typ-Abweichungen behoben, die beim Objektstruktur-Check der ioBroker-Store-Einreichung gefunden wurden: calibrate und ntp.per nutzten die Rolle 'value', die zwingend read=true/write=false erfordert und nicht zu diesen bewusst schreibbaren States passt - auf Rolle 'level' umgestellt. Zusätzlich die fehlende vollständige i18n-Übersetzung für info.connection ergänzt. Keine funktionalen/API-Änderungen - reine Metadaten-Korrekturen (common.role/common.name).",
+                "ru": "Исправлены несоответствия ролей/типов объектов, найденных при проверке структуры объектов для подачи в магазин ioBroker: calibrate и ntp.per использовали роль 'value', которая строго требует read=true/write=false и не подходит для этих намеренно записываемых состояний - изменено на роль 'level'. Также добавлен отсутствующий полный перевод i18n для info.connection.",
+                "pt": "Corrigidas incompatibilidades de função/tipo de objeto encontradas na verificação da estrutura de objetos da submissão à loja ioBroker: calibrate e ntp.per usavam a função 'value', que exige estritamente read=true/write=false e não se adequa a estes estados intencionalmente graváveis - alterado para a função 'level'. Também foi adicionada a tradução i18n completa em falta para info.connection.",
+                "nl": "Object rol/type-mismatches gecorrigeerd die zijn gevonden bij de objectstructuurcontrole van de ioBroker store-inzending: calibrate en ntp.per gebruikten de rol 'value', die strikt read=true/write=false vereist en niet past bij deze bewust schrijfbare states - gewijzigd naar rol 'level'. Ook de ontbrekende volledige i18n-vertaling voor info.connection toegevoegd.",
+                "fr": "Correction des incohérences de rôle/type d'objet détectées lors de la vérification de la structure des objets pour la soumission au store ioBroker : calibrate et ntp.per utilisaient le rôle 'value', qui exige strictement read=true/write=false et ne convient pas à ces états volontairement modifiables - changé en rôle 'level'. La traduction i18n complète manquante pour info.connection a également été ajoutée.",
+                "it": "Corrette le discrepanze di ruolo/tipo degli oggetti riscontrate durante il controllo della struttura degli oggetti per l'invio allo store ioBroker: calibrate e ntp.per utilizzavano il ruolo 'value', che richiede rigorosamente read=true/write=false e non si adatta a questi stati intenzionalmente scrivibili - cambiato in ruolo 'level'. Aggiunta anche la traduzione i18n completa mancante per info.connection.",
+                "es": "Se corrigieron discrepancias de rol/tipo de objeto encontradas en la verificación de estructura de objetos del envío a la tienda ioBroker: calibrate y ntp.per usaban el rol 'value', que requiere estrictamente read=true/write=false y no encaja con estos estados intencionalmente escribibles - cambiado a rol 'level'. También se añadió la traducción i18n completa faltante para info.connection.",
+                "pl": "Naprawiono niezgodności ról/typów obiektów wykryte podczas sprawdzania struktury obiektów zgłoszenia do sklepu ioBroker: calibrate i ntp.per używały roli 'value', która wymaga ściśle read=true/write=false i nie pasuje do tych celowo zapisywalnych stanów - zmieniono na rolę 'level'. Dodano również brakujące pełne tłumaczenie i18n dla info.connection.",
+                "uk": "Виправлено невідповідності ролей/типів об'єктів, знайдені під час перевірки структури об'єктів для подання до магазину ioBroker: calibrate і ntp.per використовували роль 'value', яка суворо вимагає read=true/write=false і не підходить для цих навмисно записуваних станів - змінено на роль 'level'. Також додано відсутній повний переклад i18n для info.connection.",
+                "zh-cn": "修复了在 ioBroker 商店提交的对象结构检查中发现的对象角色/类型不匹配问题：calibrate 和 ntp.per 使用了角色 'value'，该角色严格要求 read=true/write=false，不适合这些故意可写的状态——已更改为角色 'level'。同时还补充了 info.connection 缺失的完整 i18n 翻译。"
+            },
+            "0.8.5": {
+                "en": "Enabled automated npm releases via GitHub Actions using npm Trusted Publishing (OIDC) - no more manual publishing, and this and all future tagged releases are automatically signed with npm provenance. No functional/API changes.",
+                "de": "Automatisierte npm-Releases über GitHub Actions mittels npm Trusted Publishing (OIDC) aktiviert - kein manuelles Veröffentlichen mehr nötig, dieses und alle künftigen getaggten Releases werden automatisch mit npm-Provenance signiert. Keine funktionalen Änderungen/API-Änderungen.",
+                "ru": "Включены автоматические релизы на npm через GitHub Actions с использованием npm Trusted Publishing (OIDC) - больше не требуется ручная публикация, этот и все будущие релизы с тегами автоматически подписываются npm provenance. Без функциональных изменений.",
+                "pt": "Ativados os lançamentos automáticos no npm via GitHub Actions usando npm Trusted Publishing (OIDC) - já não é necessária a publicação manual, esta e todas as futuras versões com tag são automaticamente assinadas com npm provenance. Sem alterações funcionais/de API.",
+                "nl": "Geautomatiseerde npm-releases via GitHub Actions ingeschakeld met npm Trusted Publishing (OIDC) - handmatig publiceren is niet meer nodig, deze en alle toekomstige getagde releases worden automatisch ondertekend met npm provenance. Geen functionele/API-wijzigingen.",
+                "fr": "Publications npm automatisées via GitHub Actions activées grâce à npm Trusted Publishing (OIDC) - plus besoin de publier manuellement, cette version et toutes les futures versions taguées sont automatiquement signées avec la provenance npm. Aucun changement fonctionnel/API.",
+                "it": "Abilitate le release npm automatizzate tramite GitHub Actions usando npm Trusted Publishing (OIDC) - non è più necessaria la pubblicazione manuale, questa e tutte le future release taggate vengono firmate automaticamente con la provenance npm. Nessuna modifica funzionale/API.",
+                "es": "Se habilitaron los lanzamientos automáticos de npm mediante GitHub Actions usando npm Trusted Publishing (OIDC) - ya no es necesario publicar manualmente, esta y todas las futuras versiones etiquetadas se firman automáticamente con la procedencia de npm. Sin cambios funcionales/de API.",
+                "pl": "Włączono automatyczne wydania npm za pośrednictwem GitHub Actions przy użyciu npm Trusted Publishing (OIDC) - ręczna publikacja nie jest już konieczna, to i wszystkie przyszłe otagowane wydania są automatycznie podpisywane provenance npm. Brak zmian funkcjonalnych/API.",
+                "uk": "Увімкнено автоматичні релізи npm через GitHub Actions за допомогою npm Trusted Publishing (OIDC) - ручна публікація більше не потрібна, цей і всі майбутні релізи з тегами автоматично підписуються npm provenance. Без функціональних змін.",
+                "zh-cn": "已通过 GitHub Actions 使用 npm Trusted Publishing（OIDC）启用自动化 npm 发布——不再需要手动发布，此版本及所有未来的带标签版本都将自动附带 npm provenance 签名。无功能/API 变更。"
+            }
         },
-        "type": "boolean",
-        "read": true,
-        "write": false,
-        "def": false
-      },
-      "native": {}
+        "titleLang": {
+            "en": "Feller zeptrion / zApp",
+            "de": "Feller zeptrion / zApp",
+            "ru": "Feller zeptrion / zApp",
+            "pt": "Feller zeptrion / zApp",
+            "nl": "Feller zeptrion / zApp",
+            "fr": "Feller zeptrion / zApp",
+            "it": "Feller zeptrion / zApp",
+            "es": "Feller zeptrion / zApp",
+            "pl": "Feller zeptrion / zApp",
+            "uk": "Feller zeptrion / zApp",
+            "zh-cn": "Feller zeptrion / zApp"
+        },
+        "desc": {
+            "en": "Control Feller zeptrion WLAN actuators (zApp-Gateway / zApp-Booster) for lights and shutters via the zrap web service API. Includes a hail-alarm collective command to close all configured shutters at once.",
+            "de": "Steuerung von Feller zeptrion WLAN-Aktoren (zApp-Gateway / zApp-Booster) für Licht und Storen über die zrap Webservice API. Enthält einen Sammelbefehl zum sofortigen Schliessen aller konfigurierten Storen (z.B. für Hagelalarm).",
+            "ru": "Управление WLAN-актуаторами Feller zeptrion (zApp-Gateway / zApp-Booster) для освещения и штор через веб-сервис API zrap. Включает групповую команду тревоги по граду для немедленного закрытия всех настроенных штор.",
+            "pt": "Controlo de atuadores WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) para luzes e estores através da API do serviço web zrap. Inclui um comando coletivo de alarme de granizo para fechar imediatamente todos os estores configurados.",
+            "nl": "Besturing van Feller zeptrion WLAN-actuatoren (zApp-Gateway / zApp-Booster) voor verlichting en zonwering via de zrap webservice-API. Bevat een collectief hagelalarm-commando om alle geconfigureerde zonwering direct te sluiten.",
+            "fr": "Contrôle des actionneurs WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) pour lumières et volets via l'API web service zrap. Inclut une commande collective d'alarme grêle pour fermer tous les volets configurés en une fois.",
+            "it": "Controllo degli attuatori WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) per luci e tapparelle tramite l'API web service zrap. Include un comando collettivo di allarme grandine per chiudere subito tutte le tapparelle configurate.",
+            "es": "Control de actuadores WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) para luces y persianas mediante la API del servicio web zrap. Incluye un comando colectivo de alarma de granizo para cerrar de inmediato todas las persianas configuradas.",
+            "pl": "Sterowanie aktuatorami WLAN Feller zeptrion (zApp-Gateway / zApp-Booster) do oświetlenia i rolet za pomocą interfejsu API usługi sieciowej zrap. Zawiera zbiorczą komendę alarmu gradowego do natychmiastowego zamknięcia wszystkich skonfigurowanych rolet.",
+            "uk": "Керування WLAN-актуаторами Feller zeptrion (zApp-Gateway / zApp-Booster) для освітлення та штор через веб-сервіс API zrap. Містить групову команду тривоги про град для негайного закриття всіх налаштованих штор.",
+            "zh-cn": "通过 zrap 网络服务 API 控制 Feller zeptrion WLAN 执行器(zApp-Gateway / zApp-Booster),用于灯光和卷帘。包含冰雹警报集合指令,可立即关闭所有已配置的卷帘。"
+        },
+        "authors": [
+            "Stefan Bühler <stefan.buehler46@gmail.com>"
+        ],
+        "dependencies": [
+            {
+                "js-controller": ">=6.0.11"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=7.8.23"
+            }
+        ],
+        "keywords": [
+            "feller",
+            "zeptrion",
+            "zapp",
+            "storen",
+            "shutter",
+            "wlan",
+            "hagel"
+        ],
+        "licenseInformation": {
+            "type": "free",
+            "license": "MIT"
+        },
+        "platform": "Javascript/Node.js",
+        "icon": "zeptrion.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/bueste/ioBroker.zeptrion/main/admin/zeptrion.png",
+        "readme": "https://github.com/bueste/ioBroker.zeptrion/blob/main/README.md",
+        "type": "household",
+        "mode": "daemon",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "poll",
+        "adminUI": {
+            "config": "json"
+        },
+        "messagebox": true,
+        "loglevel": "info",
+        "stopBeforeUpdate": true,
+        "tier": 2
     },
-    {
-      "_id": "control",
-      "type": "channel",
-      "common": {
-        "name": {
-          "en": "Collective commands",
-          "de": "Sammelbefehle"
+    "native": {
+        "requestTimeout": 4000,
+        "useNotify": true,
+        "devices": []
+    },
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "Information",
+                    "de": "Information"
+                }
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": {
+                    "en": "At least one device reachable",
+                    "de": "Mindestens ein Gerät erreichbar",
+                    "ru": "Доступно хотя бы одно устройство",
+                    "pt": "Pelo menos um dispositivo acessível",
+                    "nl": "Ten minste één apparaat bereikbaar",
+                    "fr": "Au moins un appareil accessible",
+                    "it": "Almeno un dispositivo raggiungibile",
+                    "es": "Al menos un dispositivo accesible",
+                    "pl": "Co najmniej jedno urządzenie dostępne",
+                    "uk": "Принаймні один пристрій доступний",
+                    "zh-cn": "至少有一个设备可访问"
+                },
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "control",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "Collective commands",
+                    "de": "Sammelbefehle"
+                }
+            },
+            "native": {}
         }
-      },
-      "native": {}
-    }
-  ]
+    ]
 }

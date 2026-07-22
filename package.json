@@ -1,65 +1,62 @@
 {
-  "name": "iobroker.zeptrion",
-  "version": "1.0.3",
-  "description": "ioBroker Adapter für Feller zeptrion / zApp WLAN-Aktoren (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K) über die zrap Webservice API - inkl. Sammelbefehlen für Hagelalarm und mDNS-Discovery",
-  "author": {
-    "name": "Stefan",
-    "email": "stefan.buehler46@gmail.com"
-  },
-  "license": "MIT",
-  "homepage": "https://github.com/bueste/ioBroker.zeptrion",
-  "funding": {
-    "type": "buymeacoffee",
-    "url": "https://buymeacoffee.com/stefanbuehler"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bueste/ioBroker.zeptrion.git"
-  },
-  "bugs": {
-    "url": "https://github.com/bueste/ioBroker.zeptrion/issues"
-  },
-  "keywords": [
-    "ioBroker",
-    "feller",
-    "zeptrion",
-    "zapp",
-    "storen",
-    "rolladen",
-    "shutter",
-    "wlan",
-    "smart home",
-    "hagel"
-  ],
-  "main": "main.js",
-  "files": [
-    "admin/",
-    "main.js",
-    "lib/",
-    "io-package.json",
-    "LICENSE"
-  ],
-  "engines": {
-    "node": ">=22"
-  },
-  "dependencies": {
-    "@iobroker/adapter-core": "^3.4.2",
-    "axios": "^1.18.1",
-    "fast-xml-parser": "^5.9.3",
-    "bonjour-service": "^1.2.1"
-  },
-  "devDependencies": {
-    "@iobroker/testing": "^5.3.0",
-    "eslint": "^10.6.0",
-    "@tsconfig/node22": "^22.0.5",
-    "@types/node": "^22.20.1"
-  },
-  "scripts": {
-    "start": "node main.js",
-    "lint": "eslint . --ext .js",
-    "test:package": "mocha test/package.js --exit",
-    "test:unit": "mocha test/unit.js --exit",
-    "test:integration": "mocha test/integration.js --exit --timeout 60000",
-    "test": "npm run test:package && npm run test:unit"
-  }
+    "name": "iobroker.zeptrion",
+    "version": "1.0.4",
+    "description": "ioBroker Adapter für Feller zeptrion / zApp WLAN-Aktoren (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K) über die zrap Webservice API - inkl. Sammelbefehlen für Hagelalarm und mDNS-Discovery",
+    "author": "Stefan Bühler",
+    "license": "MIT",
+    "homepage": "https://github.com/bueste/ioBroker.zeptrion",
+    "funding": {
+        "type": "buymeacoffee",
+        "url": "https://buymeacoffee.com/stefanbuehler"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bueste/ioBroker.zeptrion.git"
+    },
+    "bugs": {
+        "url": "https://github.com/bueste/ioBroker.zeptrion/issues"
+    },
+    "keywords": [
+        "ioBroker",
+        "feller",
+        "zeptrion",
+        "zapp",
+        "storen",
+        "rolladen",
+        "shutter",
+        "wlan",
+        "smart home",
+        "hagel"
+    ],
+    "main": "main.js",
+    "files": [
+        "admin/",
+        "main.js",
+        "lib/",
+        "io-package.json",
+        "LICENSE"
+    ],
+    "engines": {
+        "node": ">=22"
+    },
+    "dependencies": {
+        "@iobroker/adapter-core": "^3.4.2",
+        "axios": "^1.18.1",
+        "fast-xml-parser": "^5.9.3",
+        "bonjour-service": "^1.2.1"
+    },
+    "devDependencies": {
+        "@iobroker/testing": "^5.3.0",
+        "eslint": "^10.6.0",
+        "@tsconfig/node22": "^22.0.5",
+        "@types/node": "^22.20.1"
+    },
+    "scripts": {
+        "start": "node main.js",
+        "lint": "eslint . --ext .js",
+        "test:package": "mocha test/package.js --exit",
+        "test:unit": "mocha test/unit.js --exit",
+        "test:integration": "mocha test/integration.js --exit --timeout 60000",
+        "test": "npm run test:package && npm run test:unit"
+    }
 }
