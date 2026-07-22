@@ -191,6 +191,10 @@ npm run test:integration   # startet echten js-controller (dauert länger)
 ```
 ## Changelog
 
+### **WORK IN PROGRESS**
+- Admin-UI: Die drei `validatorErrorText`-Meldungen sind jetzt Inline-i18n-Objekte statt reiner englischer Texte (ioBroker-Checker W5617).
+- Abhängigkeiten: Deklarierte Mindestversionen für `bonjour-service` (^1.2.1 -> ^1.4.3) und `eslint` (^10.6.0 -> ^10.7.0) angehoben; beide waren durch die bestehenden Caret-Ranges ohnehin abgedeckt, daher keine Verhaltensänderung.
+
 ### 1.0.4 (2026-07-21)
 - Nur Dokumentation: Buy-Me-a-Coffee-Link neben dem PayPal-Spenden-Badge ergänzt. Keine funktionalen Änderungen.
 
