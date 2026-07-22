@@ -7,6 +7,7 @@
 [![Tests](https://github.com/bueste/ioBroker.zeptrion/workflows/Test%20and%20Release/badge.svg)](https://github.com/bueste/ioBroker.zeptrion/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Spenden](https://img.shields.io/badge/Spenden-PayPal-blue.svg)](https://www.paypal.com/ncp/payment/TT6MTBLXX9L9U)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/stefanbuehler)
 
 Adapter für Feller **zeptrion / zApp** WLAN-Aktoren (WLAN-Nebenstelle 4K = zApp-Gateway,
 WLAN-Zwischenmodul 2K = zApp-Booster) für Licht- und Storensteuerung, basierend auf der

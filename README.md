@@ -7,6 +7,7 @@
 [![Tests](https://github.com/bueste/ioBroker.zeptrion/workflows/Test%20and%20Release/badge.svg)](https://github.com/bueste/ioBroker.zeptrion/actions)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/ncp/payment/TT6MTBLXX9L9U)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/stefanbuehler)
 
 Adapter for Feller **zeptrion / zApp** WLAN actuators (WLAN Nebenstelle 4K = zApp gateway,
 WLAN Zwischenmodul 2K = zApp booster) for light and shutter/blind control, based on the
