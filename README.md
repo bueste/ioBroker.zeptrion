@@ -192,7 +192,7 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
-### **WORK IN PROGRESS**
+### 1.0.5 (2026-07-22)
 - Admin UI: the three `validatorErrorText` messages are now inline i18n objects instead of plain English strings (ioBroker checker W5617).
 - Dependencies: raised the declared minimums for `bonjour-service` (^1.2.1 -> ^1.4.3) and `eslint` (^10.6.0 -> ^10.7.0); both were already covered by the existing caret ranges, so no behaviour changes.
 
