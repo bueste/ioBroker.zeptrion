@@ -1,5 +1,0 @@
-{
-    "Only a-z, 0-9, _ and - (or leave empty)": "Solo a-z, 0-9, _ y - (o dejar vacío)",
-    "Invalid host (no protocol, no spaces)": "Host no válido (sin protocolo, sin espacios)",
-    "Comma-separated numbers only, max 4 values (e.g. '22,28')": "Solo números separados por comas, máx. 4 valores (p. ej., '22,28')"
-}

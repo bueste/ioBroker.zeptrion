@@ -1,5 +1,0 @@
-{
-    "Only a-z, 0-9, _ and - (or leave empty)": "仅限 a-z、0-9、_ 和 -（或留空）",
-    "Invalid host (no protocol, no spaces)": "主机无效（不含协议，不含空格）",
-    "Comma-separated numbers only, max 4 values (e.g. '22,28')": "仅限逗号分隔的数字，最多 4 个值（例如 '22,28'）"
-}

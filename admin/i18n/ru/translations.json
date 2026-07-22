@@ -1,5 +1,0 @@
-{
-    "Only a-z, 0-9, _ and - (or leave empty)": "Только a-z, 0-9, _ и - (или оставьте пустым)",
-    "Invalid host (no protocol, no spaces)": "Недопустимый хост (без протокола, без пробелов)",
-    "Comma-separated numbers only, max 4 values (e.g. '22,28')": "Только числа через запятую, максимум 4 значения (например, '22,28')"
-}
