@@ -192,6 +192,9 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.6 (2026-07-22)
+- Fix: reverted validatorErrorText for id/host/travelTimeSecCh back to plain strings - the admin jsonConfig schema requires validatorErrorText to be a string, not an i18n object (E5512). The i18n conversion in 1.0.5 passed lint but failed schema validation.
+
 ### 1.0.5 (2026-07-22)
 - Admin UI: the three `validatorErrorText` messages are now inline i18n objects instead of plain English strings (ioBroker checker W5617).
 - Dependencies: raised the declared minimums for `bonjour-service` (^1.2.1 -> ^1.4.3) and `eslint` (^10.6.0 -> ^10.7.0); both were already covered by the existing caret ranges, so no behaviour changes.
@@ -213,10 +216,7 @@ npm run test:integration   # starts a real js-controller (takes longer)
 - First 1.0 release - the adapter has reached a stable, complete feature set (multicast command bundling, mDNS discovery, hail bulk commands, position estimation, Smartfront support, CSV import, full i18n).
 - FIX: the previous release corrected calibrate/ntp.per roles and the info.connection translation, but ensureState() never updates an object that already exists - so installations updated from an older version kept the old, incorrect objects forever. Added a one-time startup migration that force-corrects exactly those known objects via extendObjectAsync(), without touching anything else (including the adapter's own built-in root info.connection object).
 
-### 0.8.6 (2026-07-17)
-- Corrected object role/type mismatches found by the ioBroker store submission's object structure check: calibrate and ntp.per used role 'value', which strictly requires read=true/write=false and does not fit these intentionally writable states - changed to role 'level'. Also added the missing full i18n translation for info.connection.
-
-### 0.8.5 and older
+### 0.8.6 and older
 
 Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 

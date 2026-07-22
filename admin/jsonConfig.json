@@ -157,19 +157,7 @@
                 "zh-cn": "留空 = 根据 host 自动生成。仅允许 a-z、0-9、_ 和 -"
               },
               "validator": "!data.id || /^[a-zA-Z0-9_-]+$/.test(data.id)",
-              "validatorErrorText": {
-                "en": "Only a-z, 0-9, _ and - (or leave empty)",
-                "de": "Nur a-z, 0-9, _ und - (oder leer lassen)",
-                "ru": "Только a-z, 0-9, _ и - (или оставьте пустым)",
-                "pt": "Apenas a-z, 0-9, _ e - (ou deixe vazio)",
-                "nl": "Alleen a-z, 0-9, _ en - (of leeg laten)",
-                "fr": "Uniquement a-z, 0-9, _ et - (ou laisser vide)",
-                "it": "Solo a-z, 0-9, _ e - (o lasciare vuoto)",
-                "es": "Solo a-z, 0-9, _ y - (o dejar vacío)",
-                "pl": "Tylko a-z, 0-9, _ i - (lub pozostaw puste)",
-                "uk": "Лише a-z, 0-9, _ і - (або залиште порожнім)",
-                "zh-cn": "仅限 a-z、0-9、_ 和 -（或留空）"
-              },
+              "validatorErrorText": "Only a-z, 0-9, _ and - (or leave empty)",
               "width": "10%"
             },
             {
@@ -189,19 +177,7 @@
                 "de": "IP-Adresse / Hostname"
               },
               "validator": "!data.host || /^[a-zA-Z0-9.\\-]+$/.test(data.host)",
-              "validatorErrorText": {
-                "en": "Invalid host (no protocol, no spaces)",
-                "de": "Ungültiger Host (kein Protokoll, keine Leerzeichen)",
-                "ru": "Недопустимый хост (без протокола, без пробелов)",
-                "pt": "Host inválido (sem protocolo, sem espaços)",
-                "nl": "Ongeldige host (geen protocol, geen spaties)",
-                "fr": "Hôte invalide (pas de protocole, pas d'espaces)",
-                "it": "Host non valido (nessun protocollo, nessuno spazio)",
-                "es": "Host no válido (sin protocolo, sin espacios)",
-                "pl": "Nieprawidłowy host (bez protokołu, bez spacji)",
-                "uk": "Недійсний хост (без протоколу, без пробілів)",
-                "zh-cn": "主机无效（不含协议，不含空格）"
-              },
+              "validatorErrorText": "Invalid host (no protocol, no spaces)",
               "width": "16%"
             },
             {
@@ -348,19 +324,7 @@
                 "zh-cn": "可选：以逗号分隔的按通道覆盖设置，按顺序每个通道一个值（例如 2K 设备中通道 1 和 2 的运行时间不同，可填 \"22,28\"）。留空的项将使用 \"Motor travel (s)\"。将整个字段留空则所有通道使用相同的值。"
               },
               "validator": "!data.travelTimeSecCh || /^\\s*\\d*\\s*(,\\s*\\d*\\s*){0,3}$/.test(data.travelTimeSecCh)",
-              "validatorErrorText": {
-                "en": "Comma-separated numbers only, max 4 values (e.g. '22,28')",
-                "de": "Nur kommagetrennte Zahlen, max. 4 Werte (z. B. '22,28')",
-                "ru": "Только числа через запятую, максимум 4 значения (например, '22,28')",
-                "pt": "Apenas números separados por vírgulas, máx. 4 valores (por exemplo, '22,28')",
-                "nl": "Alleen door komma's gescheiden getallen, max. 4 waarden (bijv. '22,28')",
-                "fr": "Uniquement des nombres séparés par des virgules, 4 valeurs max. (p. ex. '22,28')",
-                "it": "Solo numeri separati da virgole, max 4 valori (ad es. '22,28')",
-                "es": "Solo números separados por comas, máx. 4 valores (p. ej., '22,28')",
-                "pl": "Tylko liczby oddzielone przecinkami, maks. 4 wartości (np. '22,28')",
-                "uk": "Лише числа через кому, максимум 4 значення (наприклад, '22,28')",
-                "zh-cn": "仅限逗号分隔的数字，最多 4 个值（例如 '22,28'）"
-              },
+              "validatorErrorText": "Comma-separated numbers only, max 4 values (e.g. '22,28')",
               "width": "9%"
             },
             {
