@@ -1,0 +1,5 @@
+{
+    "Only a-z, 0-9, _ and - (or leave empty)": "Лише a-z, 0-9, _ і - (або залиште порожнім)",
+    "Invalid host (no protocol, no spaces)": "Недійсний хост (без протоколу, без пробілів)",
+    "Comma-separated numbers only, max 4 values (e.g. '22,28')": "Лише числа через кому, максимум 4 значення (наприклад, '22,28')"
+}

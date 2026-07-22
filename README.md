@@ -192,6 +192,9 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.7 (2026-07-22)
+- Enable global i18n support (jsonConfig i18n: true) with translation files under admin/i18n/ for all 11 supported languages, resolving the checker's i18n warnings the correct way (validatorErrorText stays a plain string per schema; ioBroker resolves the translation via the files, falling back to the English text if no entry is found). Added @iobroker/adapter-dev and @alcalzone/release-script as devDependencies with translate/release npm scripts. (Migrating to @iobroker/eslint-config was evaluated but reverted: its eslint-plugin-import dependency does not yet support eslint 10.x, which broke npm install.)
+
 ### 1.0.6 (2026-07-22)
 - Fix: reverted validatorErrorText for id/host/travelTimeSecCh back to plain strings - the admin jsonConfig schema requires validatorErrorText to be a string, not an i18n object (E5512). The i18n conversion in 1.0.5 passed lint but failed schema validation.
 
@@ -212,11 +215,7 @@ npm run test:integration   # starts a real js-controller (takes longer)
 - FIX: calibrate declared role 'level' but read=false - role 'level' requires read=true per the ioBroker role catalogue. Changed to read=true and extended the startup migration to also correct existing objects still holding the old read=false.
 - Added the missing translations for the global info.connection object (was only en/de).
 
-### 1.0.0 (2026-07-17)
-- First 1.0 release - the adapter has reached a stable, complete feature set (multicast command bundling, mDNS discovery, hail bulk commands, position estimation, Smartfront support, CSV import, full i18n).
-- FIX: the previous release corrected calibrate/ntp.per roles and the info.connection translation, but ensureState() never updates an object that already exists - so installations updated from an older version kept the old, incorrect objects forever. Added a one-time startup migration that force-corrects exactly those known objects via extendObjectAsync(), without touching anything else (including the adapter's own built-in root info.connection object).
-
-### 0.8.6 and older
+### 1.0.0 and older
 
 Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 
