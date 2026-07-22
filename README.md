@@ -216,29 +216,7 @@ npm run test:integration   # starts a real js-controller (takes longer)
 ### 0.8.6 (2026-07-17)
 - Corrected object role/type mismatches found by the ioBroker store submission's object structure check: calibrate and ntp.per used role 'value', which strictly requires read=true/write=false and does not fit these intentionally writable states - changed to role 'level'. Also added the missing full i18n translation for info.connection.
 
-### 0.8.5 (2026-07-16)
-- Enabled automated npm releases via GitHub Actions using npm Trusted Publishing (OIDC) - no more manual publishing, and this and all future tagged releases are automatically signed with npm provenance. No functional/API changes.
-
-### 0.8.4 (2026-07-16)
-- Cleanup release addressing the ioBroker adapter store checker findings, no functional/behavioral changes
-- Updated fast-xml-parser 4.5.7 -> 5.9.3, eslint, mocha, chai and the testing-action-check GitHub Action (verified identical XML parsing output for the zrap API response shapes used by this adapter)
-- Removed devDependencies already bundled by @iobroker/testing
-- Fixed jsonConfig.json i18n declaration (was "true" without an admin/i18n directory) and added missing translations for the work area "kind" dropdown options
-- Added package-lock.json and aligned dependabot.yml/auto-merge workflow with the current ioBroker-Bot templates
-
-### 0.8.3 (2026-07-14)
-- CI workflow activated (lint + tests on every push/PR via GitHub Actions), removed redundant duplicate icon file at repo root (only admin/zeptrion.png is used), cleaned up outdated publish instructions in README
-
-### 0.8.2
-- Per-channel motor travel time override (new "Travel/ch (s)" column and CSV column): 2K/4K devices where individual channels have different shutter travel times can now be configured correctly - previously only one travel time applied to all channels of a device
-
-### 0.8.1
-- Channel commands (open/close/stop/dim/...) are now logged at info level on send (single and multicast), including failures on warn level - previously only system commands were logged
-
-### 0.8.0
-- Fixed orphaned states remaining after a device is removed/replaced (objects are now cleaned up on start), official Feller zeptrion logo as icon (used with permission)
-
-### 0.7.0 and older
+### 0.8.5 and older
 
 Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 
