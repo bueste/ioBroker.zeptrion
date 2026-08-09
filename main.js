@@ -94,16 +94,16 @@ const MAX_TIMED_MS = 32000;
 const DRIVE_GAP_MS = 400;
 
 const CH_BUTTONS = {
-    stop: 'Stopp',
-    on: 'Ein (100%)',
-    off: 'Aus (0%)',
-    toggle: 'Umschalten',
-    open: 'Öffnen',
-    close: 'Schliessen',
-    move_open: 'Öffnen (Taste halten)',
-    move_close: 'Schliessen (Taste halten)',
-    dim_up: 'Dimmen hoch (Taste halten)',
-    dim_down: 'Dimmen runter (Taste halten)'
+    stop: { en: 'Stop', de: 'Stopp', ru: 'Стоп', pt: 'Parar', nl: 'Stop', fr: 'Arrêt', it: 'Stop', es: 'Detener', pl: 'Stop', uk: 'Стоп', 'zh-cn': '停止' },
+    on: { en: 'On (100%)', de: 'Ein (100%)', ru: 'Вкл (100%)', pt: 'Ligado (100%)', nl: 'Aan (100%)', fr: 'Marche (100%)', it: 'Acceso (100%)', es: 'Encendido (100%)', pl: 'Wł. (100%)', uk: 'Увімк (100%)', 'zh-cn': '开 (100%)' },
+    off: { en: 'Off (0%)', de: 'Aus (0%)', ru: 'Выкл (0%)', pt: 'Desligado (0%)', nl: 'Uit (0%)', fr: 'Arrêt (0%)', it: 'Spento (0%)', es: 'Apagado (0%)', pl: 'Wył. (0%)', uk: 'Вимк (0%)', 'zh-cn': '关 (0%)' },
+    toggle: { en: 'Toggle', de: 'Umschalten', ru: 'Переключить', pt: 'Alternar', nl: 'Omschakelen', fr: 'Basculer', it: 'Commuta', es: 'Alternar', pl: 'Przełącz', uk: 'Перемкнути', 'zh-cn': '切换' },
+    open: { en: 'Open', de: 'Öffnen', ru: 'Открыть', pt: 'Abrir', nl: 'Openen', fr: 'Ouvrir', it: 'Apri', es: 'Abrir', pl: 'Otwórz', uk: 'Відкрити', 'zh-cn': '打开' },
+    close: { en: 'Close', de: 'Schliessen', ru: 'Закрыть', pt: 'Fechar', nl: 'Sluiten', fr: 'Fermer', it: 'Chiudi', es: 'Cerrar', pl: 'Zamknij', uk: 'Закрити', 'zh-cn': '关闭' },
+    move_open: { en: 'Open (hold button)', de: 'Öffnen (Taste halten)', ru: 'Открыть (удерж. кнопку)', pt: 'Abrir (manter botão)', nl: 'Openen (knop ingedrukt houden)', fr: 'Ouvrir (maintenir le bouton)', it: 'Apri (tieni premuto)', es: 'Abrir (mantener pulsado)', pl: 'Otwórz (przytrzymaj przycisk)', uk: 'Відкрити (утримувати кнопку)', 'zh-cn': '打开（长按按钮）' },
+    move_close: { en: 'Close (hold button)', de: 'Schliessen (Taste halten)', ru: 'Закрыть (удерж. кнопку)', pt: 'Fechar (manter botão)', nl: 'Sluiten (knop ingedrukt houden)', fr: 'Fermer (maintenir le bouton)', it: 'Chiudi (tieni premuto)', es: 'Cerrar (mantener pulsado)', pl: 'Zamknij (przytrzymaj przycisk)', uk: 'Закрити (утримувати кнопку)', 'zh-cn': '关闭（长按按钮）' },
+    dim_up: { en: 'Dim up (hold button)', de: 'Dimmen hoch (Taste halten)', ru: 'Увеличить яркость (удерж. кнопку)', pt: 'Aumentar luminosidade (manter botão)', nl: 'Dimmen omhoog (knop ingedrukt houden)', fr: 'Augmenter la lumière (maintenir le bouton)', it: 'Aumenta luminosità (tieni premuto)', es: 'Aumentar brillo (mantener pulsado)', pl: 'Rozjaśnij (przytrzymaj przycisk)', uk: 'Збільшити яскравість (утримувати кнопку)', 'zh-cn': '调亮（长按按钮）' },
+    dim_down: { en: 'Dim down (hold button)', de: 'Dimmen runter (Taste halten)', ru: 'Уменьшить яркость (удерж. кнопку)', pt: 'Diminuir luminosidade (manter botão)', nl: 'Dimmen omlaag (knop ingedrukt houden)', fr: 'Diminuer la lumière (maintenir le bouton)', it: 'Diminuisci luminosità (tieni premuto)', es: 'Disminuir brillo (mantener pulsado)', pl: 'Przyciemnij (przytrzymaj przycisk)', uk: 'Зменшити яскравість (утримувати кнопку)', 'zh-cn': '调暗（长按按钮）' }
 };
 
 class Zeptrion extends utils.Adapter {
@@ -233,7 +233,7 @@ class Zeptrion extends utils.Adapter {
                 usedIds.add(candidate);
                 if (!d.name) d.name = d.host;
                 cfgChanged = true;
-                this.log.info(`Geräte-ID automatisch vergeben: "${candidate}" für Host ${d.host}`);
+                this.log.info(`Device ID auto-assigned: "${candidate}" for host ${d.host}`);
             }
         }
         if (cfgChanged) {
@@ -262,7 +262,7 @@ class Zeptrion extends utils.Adapter {
             const hostKey = String(d.host).trim().toLowerCase();
             if (seenHosts.has(hostKey)) errs.push(`Host "${d.host}" ist doppelt konfiguriert`);
             if (errs.length) {
-                this.log.error(`Gerät "${d.name || d.id || d.host}" übersprungen: ${errs.join('; ')}`);
+                this.log.error(`Device "${d.name || d.id || d.host}" skipped: ${errs.join('; ')}`);
                 continue;
             }
             seenIds.add(sanId);
@@ -271,7 +271,7 @@ class Zeptrion extends utils.Adapter {
         }
 
         if (!validated.length && active.length) {
-            this.log.error('Alle konfigurierten Geräte sind ungültig - bitte Konfiguration prüfen (Test-Button verwenden).');
+            this.log.error('All configured devices are invalid - please check the configuration (use the Test button).');
         }
 
         // --- Paralleles Setup ---
@@ -281,7 +281,7 @@ class Zeptrion extends utils.Adapter {
             try {
                 await this.setupDevice(dev);
             } catch (err) {
-                this.log.error(`Gerät ${dev.id} konnte nicht initialisiert werden: ${err.message || err}`);
+                this.log.error(`Device ${dev.id} could not be initialized: ${err.message || err}`);
             }
         }));
 
@@ -292,7 +292,7 @@ class Zeptrion extends utils.Adapter {
         await this.cleanupOrphanedDevices(validated);
 
         if (!active.length) {
-            this.log.warn('Keine aktiven zeptrion Geräte konfiguriert. Bitte in der Instanz-Konfiguration Geräte anlegen oder Discovery-Button verwenden.');
+            this.log.warn('No active zeptrion devices configured. Please add devices in the instance configuration or use the Discovery button.');
         }
 
         await this.createGlobalControlObjects();
@@ -321,12 +321,12 @@ class Zeptrion extends utils.Adapter {
             }
             for (const devId of deviceIds) {
                 if (!keepIds.has(devId)) {
-                    this.log.info(`Entferne verwaistes Gerät "${devId}" (nicht mehr in der Konfiguration).`);
+                    this.log.info(`Removing orphaned device "${devId}" (no longer in the configuration).`);
                     await this.delObjectAsync(devId, { recursive: true });
                 }
             }
         } catch (err) {
-            this.log.warn(`Aufräumen verwaister Objekte fehlgeschlagen: ${err.message || err}`);
+            this.log.warn(`Cleanup of orphaned objects failed: ${err.message || err}`);
         }
     }
 
@@ -399,19 +399,19 @@ class Zeptrion extends utils.Adapter {
     async createGlobalControlObjects() {
         await this.setObjectNotExistsAsync('control', {
             type: 'channel',
-            common: { name: 'Sammelbefehle' },
+            common: { name: { en: 'Collective commands', de: 'Sammelbefehle', ru: 'Групповые команды', pt: 'Comandos coletivos', nl: 'Verzamelcommando\'s', fr: 'Commandes groupées', it: 'Comandi collettivi', es: 'Comandos colectivos', pl: 'Polecenia zbiorcze', uk: 'Групові команди', 'zh-cn': '集合命令' } },
             native: {}
         });
         await this.ensureState('control.closeAllShutters', {
-            name: 'ALLE Storen schliessen (z.B. Hagelalarm)',
+            name: { en: 'Close ALL shutters (e.g. hail alarm)', de: 'ALLE Storen schliessen (z.B. Hagelalarm)', ru: 'Закрыть ВСЕ жалюзи (напр. градовая тревога)', pt: 'Fechar TODOS os estores (p.ex. alarme de granizo)', nl: 'ALLE zonweringen sluiten (bijv. hagelalarm)', fr: 'Fermer TOUS les stores (p.ex. alarme grêle)', it: 'Chiudi TUTTE le tapparelle (es. allarme grandine)', es: 'Cerrar TODAS las persianas (p.ej. alarma de granizo)', pl: 'Zamknij WSZYSTKIE rolety (np. alarm gradowy)', uk: 'Закрити ВСІ жалюзі (напр. градова тривога)', 'zh-cn': '关闭所有卷帘（例如冰雹警报）' },
             type: 'boolean', role: 'button', read: false, write: true, def: false
         });
         await this.ensureState('control.openAllShutters', {
-            name: 'Alle Storen öffnen',
+            name: { en: 'Open all shutters', de: 'Alle Storen öffnen', ru: 'Открыть все жалюзи', pt: 'Abrir todos os estores', nl: 'Alle zonweringen openen', fr: 'Ouvrir tous les stores', it: 'Apri tutte le tapparelle', es: 'Abrir todas las persianas', pl: 'Otwórz wszystkie rolety', uk: 'Відкрити всі жалюзі', 'zh-cn': '打开所有卷帘' },
             type: 'boolean', role: 'button', read: false, write: true, def: false
         });
         await this.ensureState('control.stopAllShutters', {
-            name: 'Alle Storen stoppen',
+            name: { en: 'Stop all shutters', de: 'Alle Storen stoppen', ru: 'Остановить все жалюзи', pt: 'Parar todos os estores', nl: 'Alle zonweringen stoppen', fr: 'Arrêter tous les stores', it: 'Ferma tutte le tapparelle', es: 'Detener todas las persianas', pl: 'Zatrzymaj wszystkie rolety', uk: 'Зупинити всі жалюзі', 'zh-cn': '停止所有卷帘' },
             type: 'boolean', role: 'button', read: false, write: true, def: false
         });
     }
@@ -435,7 +435,7 @@ class Zeptrion extends utils.Adapter {
         const smartfront = devCfg.smartfront === true;
 
         if (!host) {
-            this.log.warn(`Gerät ${id}: kein Host angegeben, wird übersprungen.`);
+            this.log.warn(`Device ${id}: no host specified, skipping.`);
             return;
         }
 
@@ -468,7 +468,7 @@ class Zeptrion extends utils.Adapter {
         if (this.config.useNotify !== false) {
             this.startNotifyLoop(id);
         } else {
-            this.log.info(`[${id}] chnotify-Long-Poll per Konfiguration deaktiviert, nur Intervall-Polling aktiv.`);
+            this.log.info(`[${id}] chnotify long-poll disabled by configuration, interval polling only.`);
         }
     }
 
@@ -482,7 +482,7 @@ class Zeptrion extends utils.Adapter {
         });
 
         // --- info ---
-        await this.setObjectNotExistsAsync(`${id}.info`, { type: 'channel', common: { name: 'Geräteinformationen' }, native: {} });
+        await this.setObjectNotExistsAsync(`${id}.info`, { type: 'channel', common: { name: { en: 'Device information', de: 'Geräteinformationen', ru: 'Информация об устройстве', pt: 'Informação do dispositivo', nl: 'Apparaatinformatie', fr: 'Informations sur l\'appareil', it: 'Informazioni sul dispositivo', es: 'Información del dispositivo', pl: 'Informacje o urządzeniu', uk: 'Інформація про пристрій', 'zh-cn': '设备信息' } }, native: {} });
         await this.ensureState(`${id}.info.connection`, {
             name: {
                 en: 'Connection OK',
@@ -499,19 +499,19 @@ class Zeptrion extends utils.Adapter {
             },
             type: 'boolean', role: 'indicator.reachable', read: true, write: false, def: false
         });
-        await this.ensureState(`${id}.info.lastError`, { name: 'Letzter Fehler', type: 'string', role: 'text', read: true, write: false, def: '' });
-        await this.ensureState(`${id}.info.hw`, { name: 'Hardware-Version', type: 'string', role: 'info.hardware', read: true, write: false });
-        await this.ensureState(`${id}.info.sw`, { name: 'Software-Version', type: 'string', role: 'info.firmware', read: true, write: false });
-        await this.ensureState(`${id}.info.boot`, { name: 'Bootloader-Version', type: 'string', role: 'text', read: true, write: false });
-        await this.ensureState(`${id}.info.sn`, { name: 'Seriennummer', type: 'string', role: 'info.serial', read: true, write: false });
-        await this.ensureState(`${id}.info.sys`, { name: 'System-Name', type: 'string', role: 'text', read: true, write: false });
-        await this.ensureState(`${id}.info.type`, { name: 'Gerätetyp (Device ID)', type: 'string', role: 'text', read: true, write: false });
+        await this.ensureState(`${id}.info.lastError`, { name: { en: 'Last error', de: 'Letzter Fehler', ru: 'Последняя ошибка', pt: 'Último erro', nl: 'Laatste fout', fr: 'Dernière erreur', it: 'Ultimo errore', es: 'Último error', pl: 'Ostatni błąd', uk: 'Остання помилка', 'zh-cn': '最近错误' }, type: 'string', role: 'text', read: true, write: false, def: '' });
+        await this.ensureState(`${id}.info.hw`, { name: { en: 'Hardware version', de: 'Hardware-Version', ru: 'Версия оборудования', pt: 'Versão do hardware', nl: 'Hardwareversie', fr: 'Version matérielle', it: 'Versione hardware', es: 'Versión de hardware', pl: 'Wersja sprzętu', uk: 'Версія обладнання', 'zh-cn': '硬件版本' }, type: 'string', role: 'info.hardware', read: true, write: false });
+        await this.ensureState(`${id}.info.sw`, { name: { en: 'Software version', de: 'Software-Version', ru: 'Версия ПО', pt: 'Versão do software', nl: 'Softwareversie', fr: 'Version logicielle', it: 'Versione software', es: 'Versión de software', pl: 'Wersja oprogramowania', uk: 'Версія ПЗ', 'zh-cn': '软件版本' }, type: 'string', role: 'info.firmware', read: true, write: false });
+        await this.ensureState(`${id}.info.boot`, { name: { en: 'Bootloader version', de: 'Bootloader-Version', ru: 'Версия загрузчика', pt: 'Versão do bootloader', nl: 'Bootloaderversie', fr: 'Version du bootloader', it: 'Versione bootloader', es: 'Versión del bootloader', pl: 'Wersja bootloadera', uk: 'Версія завантажувача', 'zh-cn': '引导程序版本' }, type: 'string', role: 'text', read: true, write: false });
+        await this.ensureState(`${id}.info.sn`, { name: { en: 'Serial number', de: 'Seriennummer', ru: 'Серийный номер', pt: 'Número de série', nl: 'Serienummer', fr: 'Numéro de série', it: 'Numero di serie', es: 'Número de serie', pl: 'Numer seryjny', uk: 'Серійний номер', 'zh-cn': '序列号' }, type: 'string', role: 'info.serial', read: true, write: false });
+        await this.ensureState(`${id}.info.sys`, { name: { en: 'System name', de: 'System-Name', ru: 'Имя системы', pt: 'Nome do sistema', nl: 'Systeemnaam', fr: 'Nom du système', it: 'Nome del sistema', es: 'Nombre del sistema', pl: 'Nazwa systemu', uk: 'Ім\'я системи', 'zh-cn': '系统名称' }, type: 'string', role: 'text', read: true, write: false });
+        await this.ensureState(`${id}.info.type`, { name: { en: 'Device type (Device ID)', de: 'Gerätetyp (Device ID)', ru: 'Тип устройства (Device ID)', pt: 'Tipo de dispositivo (Device ID)', nl: 'Apparaattype (Device ID)', fr: 'Type d\'appareil (Device ID)', it: 'Tipo di dispositivo (Device ID)', es: 'Tipo de dispositivo (Device ID)', pl: 'Typ urządzenia (Device ID)', uk: 'Тип пристрою (Device ID)', 'zh-cn': '设备类型 (Device ID)' }, type: 'string', role: 'text', read: true, write: false });
         await this.ensureState(`${id}.info.oen`, { name: 'Owner Environment', type: 'string', role: 'text', read: true, write: false });
-        await this.ensureState(`${id}.info.rssi`, { name: 'Signalstärke', type: 'number', role: 'value', unit: 'dBm', read: true, write: false });
-        await this.ensureState(`${id}.info.refresh`, { name: 'Statische Infos neu laden (id/net/chdes)', type: 'boolean', role: 'button', read: false, write: true, def: false });
+        await this.ensureState(`${id}.info.rssi`, { name: { en: 'Signal strength', de: 'Signalstärke', ru: 'Мощность сигнала', pt: 'Força do sinal', nl: 'Signaalsterkte', fr: 'Force du signal', it: 'Potenza del segnale', es: 'Intensidad de la señal', pl: 'Siła sygnału', uk: 'Потужність сигналу', 'zh-cn': '信号强度' }, type: 'number', role: 'value', unit: 'dBm', read: true, write: false });
+        await this.ensureState(`${id}.info.refresh`, { name: { en: 'Reload static info (id/net/chdes)', de: 'Statische Infos neu laden (id/net/chdes)', ru: 'Перезагрузить статическую информацию (id/net/chdes)', pt: 'Recarregar informação estática (id/net/chdes)', nl: 'Statische info opnieuw laden (id/net/chdes)', fr: 'Recharger les infos statiques (id/net/chdes)', it: 'Ricarica informazioni statiche (id/net/chdes)', es: 'Recargar información estática (id/net/chdes)', pl: 'Odśwież informacje statyczne (id/net/chdes)', uk: 'Перезавантажити статичну інформацію (id/net/chdes)', 'zh-cn': '重新加载静态信息 (id/net/chdes)' }, type: 'boolean', role: 'button', read: false, write: true, def: false });
 
         // --- network (read-only Anzeige, siehe README für Gründe) ---
-        await this.setObjectNotExistsAsync(`${id}.network`, { type: 'channel', common: { name: 'Netzwerk' }, native: {} });
+        await this.setObjectNotExistsAsync(`${id}.network`, { type: 'channel', common: { name: { en: 'Network', de: 'Netzwerk', ru: 'Сеть', pt: 'Rede', nl: 'Netwerk', fr: 'Réseau', it: 'Rete', es: 'Red', pl: 'Sieć', uk: 'Мережа', 'zh-cn': '网络' } }, native: {} });
         const netFields = {
             ssid: 'SSID', ip: 'IP-Adresse', mac: 'MAC-Adresse',
             mode: 'Netzwerkmodus (0=AccessPoint, 1=Associate)', enc: 'Verschlüsselung',
@@ -522,40 +522,40 @@ class Zeptrion extends utils.Adapter {
         }
 
         // --- system ---
-        await this.setObjectNotExistsAsync(`${id}.system`, { type: 'channel', common: { name: 'Systembefehle' }, native: {} });
-        await this.ensureState(`${id}.system.reboot`, { name: 'Neustart', type: 'boolean', role: 'button', read: false, write: true, def: false });
+        await this.setObjectNotExistsAsync(`${id}.system`, { type: 'channel', common: { name: { en: 'System commands', de: 'Systembefehle', ru: 'Системные команды', pt: 'Comandos do sistema', nl: 'Systeemcommando\'s', fr: 'Commandes système', it: 'Comandi di sistema', es: 'Comandos del sistema', pl: 'Polecenia systemowe', uk: 'Системні команди', 'zh-cn': '系统命令' } }, native: {} });
+        await this.ensureState(`${id}.system.reboot`, { name: { en: 'Restart', de: 'Neustart', ru: 'Перезапуск', pt: 'Reiniciar', nl: 'Herstarten', fr: 'Redémarrer', it: 'Riavvio', es: 'Reiniciar', pl: 'Restart', uk: 'Перезапуск', 'zh-cn': '重启' }, type: 'boolean', role: 'button', read: false, write: true, def: false });
         await this.ensureState(`${id}.system.unlock`, {
-            name: 'Entriegelung für Werksreset (Sicherheitsverriegelung: muss max. 30s VOR factoryDefault auf true gesetzt werden)',
+            name: { en: 'Unlock for factory reset (safety interlock: must be set to true max. 30s BEFORE factoryDefault)', de: 'Entriegelung für Werksreset (Sicherheitsverriegelung: muss max. 30s VOR factoryDefault auf true gesetzt werden)', ru: 'Разблокировка для сброса до заводских настроек (интерлок: должно быть true не более чем за 30с ДО factoryDefault)', pt: 'Desbloqueio para reposição de fábrica (interbloqueio de segurança: deve ser definido como true no máx. 30s ANTES de factoryDefault)', nl: 'Ontgrendeling voor fabrieksreset (veiligheidsvergrendeling: moet max. 30s VOOR factoryDefault op true gezet worden)', fr: 'Déverrouillage pour réinitialisation d\'usine (verrouillage de sécurité : doit être mis à true max. 30s AVANT factoryDefault)', it: 'Sblocco per il ripristino di fabbrica (interblocco di sicurezza: deve essere impostato su true max. 30s PRIMA di factoryDefault)', es: 'Desbloqueo para restablecimiento de fábrica (enclavamiento de seguridad: debe ponerse a true máx. 30s ANTES de factoryDefault)', pl: 'Odblokowanie przywracania ustawień fabrycznych (blokada bezpieczeństwa: musi być ustawione na true maks. 30s PRZED factoryDefault)', uk: 'Розблокування для скидання до заводських налаштувань (блокування безпеки: має бути true не більше ніж за 30с ДО factoryDefault)', 'zh-cn': '解锁恢复出厂设置（安全联锁：必须在 factoryDefault 之前最多 30 秒设置为 true）' },
             type: 'boolean', role: 'button', read: false, write: true, def: false
         });
-        await this.ensureState(`${id}.system.factoryDefault`, { name: 'ACHTUNG: Werksreset - löscht ALLE Einstellungen inkl. WLAN, Gerät fällt vom Netz! Erfordert vorheriges system.unlock (30s-Fenster)', type: 'boolean', role: 'button', read: false, write: true, def: false });
-        await this.ensureState(`${id}.system.networkDefault`, { name: 'Zurück in Access-Point-Modus (Konfiguration bleibt erhalten)', type: 'boolean', role: 'button', read: false, write: true, def: false });
+        await this.ensureState(`${id}.system.factoryDefault`, { name: { en: 'WARNING: Factory reset - deletes ALL settings incl. WLAN, device will drop off the network! Requires prior system.unlock (30s window)', de: 'ACHTUNG: Werksreset - löscht ALLE Einstellungen inkl. WLAN, Gerät fällt vom Netz! Erfordert vorheriges system.unlock (30s-Fenster)', ru: 'ВНИМАНИЕ: сброс до заводских настроек - удаляет ВСЕ настройки, вкл. WLAN, устройство отключится от сети! Требуется предварительный system.unlock (окно 30с)', pt: 'ATENÇÃO: reposição de fábrica - apaga TODAS as definições incl. WLAN, o dispositivo sairá da rede! Requer system.unlock prévio (janela de 30s)', nl: 'LET OP: fabrieksreset - wist ALLE instellingen incl. WLAN, apparaat valt van het netwerk! Vereist voorafgaand system.unlock (30s-venster)', fr: 'ATTENTION : réinitialisation d\'usine - supprime TOUS les réglages, y compris le WLAN, l\'appareil sera déconnecté du réseau ! Nécessite un system.unlock préalable (fenêtre de 30s)', it: 'ATTENZIONE: ripristino di fabbrica - cancella TUTTE le impostazioni incl. WLAN, il dispositivo si disconnette dalla rete! Richiede system.unlock preventivo (finestra di 30s)', es: 'ATENCIÓN: restablecimiento de fábrica - borra TODOS los ajustes incl. WLAN, ¡el dispositivo se desconectará de la red! Requiere system.unlock previo (ventana de 30s)', pl: 'UWAGA: przywrócenie ustawień fabrycznych - usuwa WSZYSTKIE ustawienia wraz z WLAN, urządzenie odłączy się od sieci! Wymaga wcześniejszego system.unlock (okno 30s)', uk: 'УВАГА: скидання до заводських налаштувань - видаляє ВСІ налаштування, включно з WLAN, пристрій відключиться від мережі! Потрібен попередній system.unlock (вікно 30с)', 'zh-cn': '警告：恢复出厂设置 - 将删除所有设置（包括 WLAN），设备将离线！需要事先执行 system.unlock（30秒窗口）' }, type: 'boolean', role: 'button', read: false, write: true, def: false });
+        await this.ensureState(`${id}.system.networkDefault`, { name: { en: 'Back to access point mode (configuration is retained)', de: 'Zurück in Access-Point-Modus (Konfiguration bleibt erhalten)', ru: 'Вернуться в режим точки доступа (конфигурация сохраняется)', pt: 'Voltar ao modo ponto de acesso (a configuração é mantida)', nl: 'Terug naar access point-modus (configuratie blijft behouden)', fr: 'Retour en mode point d\'accès (la configuration est conservée)', it: 'Torna alla modalità access point (la configurazione viene mantenuta)', es: 'Volver al modo punto de acceso (se conserva la configuración)', pl: 'Powrót do trybu punktu dostępu (konfiguracja zostaje zachowana)', uk: 'Повернутися в режим точки доступу (конфігурація зберігається)', 'zh-cn': '返回接入点模式（保留配置）' }, type: 'boolean', role: 'button', read: false, write: true, def: false });
 
         // --- location (zrap/loc) ---
-        await this.setObjectNotExistsAsync(`${id}.location`, { type: 'channel', common: { name: 'Standort' }, native: {} });
-        await this.ensureState(`${id}.location.name`, { name: 'Standortbezeichnung (frei wählbar, z.B. "Fideris Valzigg")', type: 'string', role: 'text', read: true, write: true });
+        await this.setObjectNotExistsAsync(`${id}.location`, { type: 'channel', common: { name: { en: 'Location', de: 'Standort', ru: 'Местоположение', pt: 'Localização', nl: 'Locatie', fr: 'Emplacement', it: 'Posizione', es: 'Ubicación', pl: 'Lokalizacja', uk: 'Розташування', 'zh-cn': '位置' } }, native: {} });
+        await this.ensureState(`${id}.location.name`, { name: { en: 'Location label (freely choosable, e.g. "Fideris Valzigg")', de: 'Standortbezeichnung (frei wählbar, z.B. "Fideris Valzigg")', ru: 'Обозначение местоположения (произвольное, напр. "Fideris Valzigg")', pt: 'Designação da localização (livremente escolhível, p.ex. "Fideris Valzigg")', nl: 'Locatieomschrijving (vrij te kiezen, bijv. "Fideris Valzigg")', fr: 'Nom de l\'emplacement (libre, p.ex. "Fideris Valzigg")', it: 'Descrizione della posizione (a scelta libera, es. "Fideris Valzigg")', es: 'Nombre de la ubicación (libre, p.ej. "Fideris Valzigg")', pl: 'Nazwa lokalizacji (dowolna, np. "Fideris Valzigg")', uk: 'Позначення розташування (довільне, напр. "Fideris Valzigg")', 'zh-cn': '位置名称（可自定义，例如 "Fideris Valzigg"）' }, type: 'string', role: 'text', read: true, write: true });
 
         // --- ntp (zrap/ntp) ---
-        await this.setObjectNotExistsAsync(`${id}.ntp`, { type: 'channel', common: { name: 'NTP' }, native: {} });
-        await this.ensureState(`${id}.ntp.url`, { name: 'NTP-Server (URL/IP, max. 32 Zeichen)', type: 'string', role: 'text', read: true, write: true });
-        await this.ensureState(`${id}.ntp.per`, { name: 'Abfrageintervall in Stunden (0=deaktiviert)', type: 'number', role: 'level', read: true, write: true, min: 0, max: 255 });
+        await this.setObjectNotExistsAsync(`${id}.ntp`, { type: 'channel', common: { name: { en: 'NTP', de: 'NTP', ru: 'NTP', pt: 'NTP', nl: 'NTP', fr: 'NTP', it: 'NTP', es: 'NTP', pl: 'NTP', uk: 'NTP', 'zh-cn': 'NTP' } }, native: {} });
+        await this.ensureState(`${id}.ntp.url`, { name: { en: 'NTP server (URL/IP, max. 32 characters)', de: 'NTP-Server (URL/IP, max. 32 Zeichen)', ru: 'NTP-сервер (URL/IP, макс. 32 символа)', pt: 'Servidor NTP (URL/IP, máx. 32 caracteres)', nl: 'NTP-server (URL/IP, max. 32 tekens)', fr: 'Serveur NTP (URL/IP, max. 32 caractères)', it: 'Server NTP (URL/IP, max. 32 caratteri)', es: 'Servidor NTP (URL/IP, máx. 32 caracteres)', pl: 'Serwer NTP (URL/IP, maks. 32 znaki)', uk: 'NTP-сервер (URL/IP, макс. 32 символи)', 'zh-cn': 'NTP 服务器（URL/IP，最多 32 个字符）' }, type: 'string', role: 'text', read: true, write: true });
+        await this.ensureState(`${id}.ntp.per`, { name: { en: 'Polling interval in hours (0=disabled)', de: 'Abfrageintervall in Stunden (0=deaktiviert)', ru: 'Интервал опроса в часах (0=отключено)', pt: 'Intervalo de consulta em horas (0=desativado)', nl: 'Poll-interval in uren (0=uitgeschakeld)', fr: 'Intervalle d\'interrogation en heures (0=désactivé)', it: 'Intervallo di polling in ore (0=disattivato)', es: 'Intervalo de consulta en horas (0=desactivado)', pl: 'Interwał odpytywania w godzinach (0=wyłączone)', uk: 'Інтервал опитування в годинах (0=вимкнено)', 'zh-cn': '轮询间隔（小时，0=禁用）' }, type: 'number', role: 'level', read: true, write: true, min: 0, max: 255 });
 
         // --- date (zrap/date) ---
-        await this.setObjectNotExistsAsync(`${id}.date`, { type: 'channel', common: { name: 'Datum/Zeit' }, native: {} });
-        await this.ensureState(`${id}.date.rfc1123`, { name: 'RFC1123 Zeitstempel (muss GMT sein)', type: 'string', role: 'text', read: true, write: true });
-        await this.ensureState(`${id}.date.tz`, { name: 'Zeitzonen-Offset HHMM (z.B. +0200)', type: 'string', role: 'text', read: true, write: true });
-        await this.ensureState(`${id}.date.dst`, { name: 'Sommerzeit-Offset HHMM', type: 'string', role: 'text', read: true, write: true });
-        await this.ensureState(`${id}.date.syncNow`, { name: 'Button: Geräte-Uhrzeit mit ioBroker-Host synchronisieren', type: 'boolean', role: 'button', read: false, write: true, def: false });
+        await this.setObjectNotExistsAsync(`${id}.date`, { type: 'channel', common: { name: { en: 'Date/time', de: 'Datum/Zeit', ru: 'Дата/время', pt: 'Data/hora', nl: 'Datum/tijd', fr: 'Date/heure', it: 'Data/ora', es: 'Fecha/hora', pl: 'Data/godzina', uk: 'Дата/час', 'zh-cn': '日期/时间' } }, native: {} });
+        await this.ensureState(`${id}.date.rfc1123`, { name: { en: 'RFC1123 timestamp (must be GMT)', de: 'RFC1123 Zeitstempel (muss GMT sein)', ru: 'Метка времени RFC1123 (должна быть GMT)', pt: 'Timestamp RFC1123 (deve ser GMT)', nl: 'RFC1123-tijdstempel (moet GMT zijn)', fr: 'Horodatage RFC1123 (doit être GMT)', it: 'Timestamp RFC1123 (deve essere GMT)', es: 'Marca de tiempo RFC1123 (debe ser GMT)', pl: 'Znacznik czasu RFC1123 (musi być GMT)', uk: 'Мітка часу RFC1123 (має бути GMT)', 'zh-cn': 'RFC1123 时间戳（必须为 GMT）' }, type: 'string', role: 'text', read: true, write: true });
+        await this.ensureState(`${id}.date.tz`, { name: { en: 'Timezone offset HHMM (e.g. +0200)', de: 'Zeitzonen-Offset HHMM (z.B. +0200)', ru: 'Смещение часового пояса HHMM (напр. +0200)', pt: 'Offset de fuso horário HHMM (p.ex. +0200)', nl: 'Tijdzone-offset HHMM (bijv. +0200)', fr: 'Décalage de fuseau horaire HHMM (p.ex. +0200)', it: 'Offset fuso orario HHMM (es. +0200)', es: 'Desfase horario HHMM (p.ej. +0200)', pl: 'Przesunięcie strefy czasowej HHMM (np. +0200)', uk: 'Зміщення часового поясу HHMM (напр. +0200)', 'zh-cn': '时区偏移 HHMM（例如 +0200）' }, type: 'string', role: 'text', read: true, write: true });
+        await this.ensureState(`${id}.date.dst`, { name: { en: 'Daylight saving offset HHMM', de: 'Sommerzeit-Offset HHMM', ru: 'Смещение летнего времени HHMM', pt: 'Offset de horário de verão HHMM', nl: 'Zomertijd-offset HHMM', fr: 'Décalage heure d\'été HHMM', it: 'Offset ora legale HHMM', es: 'Desfase de horario de verano HHMM', pl: 'Przesunięcie czasu letniego HHMM', uk: 'Зміщення літнього часу HHMM', 'zh-cn': '夏令时偏移 HHMM' }, type: 'string', role: 'text', read: true, write: true });
+        await this.ensureState(`${id}.date.syncNow`, { name: { en: 'Button: synchronize device time with the ioBroker host', de: 'Button: Geräte-Uhrzeit mit ioBroker-Host synchronisieren', ru: 'Кнопка: синхронизировать время устройства с хостом ioBroker', pt: 'Botão: sincronizar hora do dispositivo com o host ioBroker', nl: 'Knop: apparaatklok synchroniseren met de ioBroker-host', fr: 'Bouton : synchroniser l\'heure de l\'appareil avec l\'hôte ioBroker', it: 'Pulsante: sincronizza l\'ora del dispositivo con l\'host ioBroker', es: 'Botón: sincronizar la hora del dispositivo con el host de ioBroker', pl: 'Przycisk: synchronizuj czas urządzenia z hostem ioBroker', uk: 'Кнопка: синхронізувати час пристрою з хостом ioBroker', 'zh-cn': '按钮：将设备时间与 ioBroker 主机同步' }, type: 'boolean', role: 'button', read: false, write: true, def: false });
 
         // --- smartfront (zapi, optional - nur bei angeschlossenem Smartfront-Taster) ---
         if (dev.cfg.smartfront) {
-            await this.setObjectNotExistsAsync(`${id}.smartfront`, { type: 'channel', common: { name: 'Smartfront' }, native: {} });
-            await this.ensureState(`${id}.smartfront.temp`, { name: 'Temperatur', type: 'number', role: 'value.temperature', unit: '°C', read: true, write: false });
-            await this.ensureState(`${id}.smartfront.lux`, { name: 'Helligkeit', type: 'number', role: 'value.brightness', unit: 'lx', read: true, write: false });
-            await this.ensureState(`${id}.smartfront.hum`, { name: 'Luftfeuchtigkeit', type: 'number', role: 'value.humidity', unit: '%', read: true, write: false });
-            await this.ensureState(`${id}.smartfront.ledState`, { name: 'Aktueller LED-Status (JSON, read-only)', type: 'string', role: 'json', read: true, write: false });
+            await this.setObjectNotExistsAsync(`${id}.smartfront`, { type: 'channel', common: { name: { en: 'Smartfront', de: 'Smartfront', ru: 'Smartfront', pt: 'Smartfront', nl: 'Smartfront', fr: 'Smartfront', it: 'Smartfront', es: 'Smartfront', pl: 'Smartfront', uk: 'Smartfront', 'zh-cn': 'Smartfront' } }, native: {} });
+            await this.ensureState(`${id}.smartfront.temp`, { name: { en: 'Temperature', de: 'Temperatur', ru: 'Температура', pt: 'Temperatura', nl: 'Temperatuur', fr: 'Température', it: 'Temperatura', es: 'Temperatura', pl: 'Temperatura', uk: 'Температура', 'zh-cn': '温度' }, type: 'number', role: 'value.temperature', unit: '°C', read: true, write: false });
+            await this.ensureState(`${id}.smartfront.lux`, { name: { en: 'Brightness', de: 'Helligkeit', ru: 'Яркость', pt: 'Luminosidade', nl: 'Helderheid', fr: 'Luminosité', it: 'Luminosità', es: 'Luminosidad', pl: 'Jasność', uk: 'Яскравість', 'zh-cn': '亮度' }, type: 'number', role: 'value.brightness', unit: 'lx', read: true, write: false });
+            await this.ensureState(`${id}.smartfront.hum`, { name: { en: 'Humidity', de: 'Luftfeuchtigkeit', ru: 'Влажность', pt: 'Humidade', nl: 'Luchtvochtigheid', fr: 'Humidité', it: 'Umidità', es: 'Humedad', pl: 'Wilgotność', uk: 'Вологість', 'zh-cn': '湿度' }, type: 'number', role: 'value.humidity', unit: '%', read: true, write: false });
+            await this.ensureState(`${id}.smartfront.ledState`, { name: { en: 'Current LED status (JSON, read-only)', de: 'Aktueller LED-Status (JSON, read-only)', ru: 'Текущий статус светодиода (JSON, только чтение)', pt: 'Estado atual do LED (JSON, só leitura)', nl: 'Huidige LED-status (JSON, alleen-lezen)', fr: 'État actuel de la LED (JSON, lecture seule)', it: 'Stato attuale del LED (JSON, sola lettura)', es: 'Estado actual del LED (JSON, solo lectura)', pl: 'Aktualny stan LED (JSON, tylko do odczytu)', uk: 'Поточний стан світлодіода (JSON, лише читання)', 'zh-cn': '当前 LED 状态（JSON，只读）' }, type: 'string', role: 'json', read: true, write: false });
             await this.ensureState(`${id}.smartfront.ledSet`, {
-                name: 'LED(s) setzen - JSON-Array wie in API-Doku 5.1.3.4, z.B. [{"id":2,"bg":"#220000"}]. Laut Doku nur "bg" (Hintergrundfarbe) unbedenklich extern setzbar.',
+                name: { en: 'Set LED(s) - JSON array as in API doc 5.1.3.4, e.g. [{"id":2,"bg":"#220000"}]. Per the docs, only "bg" (background color) is safe to set externally.', de: 'LED(s) setzen - JSON-Array wie in API-Doku 5.1.3.4, z.B. [{"id":2,"bg":"#220000"}]. Laut Doku nur "bg" (Hintergrundfarbe) unbedenklich extern setzbar.', ru: 'Установить LED - JSON-массив как в документации API 5.1.3.4, напр. [{"id":2,"bg":"#220000"}]. Согласно документации, только "bg" (цвет фона) безопасно устанавливать извне.', pt: 'Definir LED(s) - array JSON conforme doc. API 5.1.3.4, p.ex. [{"id":2,"bg":"#220000"}]. Segundo a documentação, apenas "bg" (cor de fundo) pode ser definido externamente com segurança.', nl: 'LED(s) instellen - JSON-array zoals in API-doc 5.1.3.4, bijv. [{"id":2,"bg":"#220000"}]. Volgens de documentatie is alleen "bg" (achtergrondkleur) veilig extern instelbaar.', fr: 'Définir la/les LED - tableau JSON comme dans la doc API 5.1.3.4, p.ex. [{"id":2,"bg":"#220000"}]. Selon la doc, seul "bg" (couleur de fond) peut être défini en externe sans risque.', it: 'Imposta LED - array JSON come da documentazione API 5.1.3.4, es. [{"id":2,"bg":"#220000"}]. Secondo la documentazione, solo "bg" (colore di sfondo) è sicuro da impostare esternamente.', es: 'Definir LED(s) - array JSON como en la doc. API 5.1.3.4, p.ej. [{"id":2,"bg":"#220000"}]. Según la documentación, solo "bg" (color de fondo) es seguro de establecer externamente.', pl: 'Ustaw LED - tablica JSON jak w dokumentacji API 5.1.3.4, np. [{"id":2,"bg":"#220000"}]. Wg dokumentacji tylko "bg" (kolor tła) można bezpiecznie ustawiać zewnętrznie.', uk: 'Встановити світлодіоди - JSON-масив як у документації API 5.1.3.4, напр. [{"id":2,"bg":"#220000"}]. Згідно з документацією, лише "bg" (колір фону) безпечно встановлювати ззовні.', 'zh-cn': '设置 LED - JSON 数组，格式见 API 文档 5.1.3.4，例如 [{"id":2,"bg":"#220000"}]。根据文档，仅 "bg"（背景色）可安全地从外部设置。' },
                 type: 'string', role: 'json', read: false, write: true, def: ''
             });
         }
@@ -576,17 +576,20 @@ class Zeptrion extends utils.Adapter {
             ? { stop: 'button.stop', open: 'button.open.blind', close: 'button.close.blind' }
             : {};
 
-        await this.setObjectNotExistsAsync(`${id}.channels`, { type: 'channel', common: { name: 'Kanäle' }, native: {} });
+        await this.setObjectNotExistsAsync(`${id}.channels`, { type: 'channel', common: { name: { en: 'Channels', de: 'Kanäle', ru: 'Каналы', pt: 'Canais', nl: 'Kanalen', fr: 'Canaux', it: 'Canali', es: 'Canales', pl: 'Kanały', uk: 'Канали', 'zh-cn': '通道' } }, native: {} });
         for (let n = 1; n <= channelCount; n++) {
             const ch = `${id}.channels.ch${n}`;
             await this.setObjectNotExistsAsync(ch, {
                 type: 'channel',
-                common: { name: `Kanal ${n}` },
+                common: { name: {
+                    en: `Channel ${n}`, de: `Kanal ${n}`, ru: `Канал ${n}`, pt: `Canal ${n}`, nl: `Kanaal ${n}`,
+                    fr: `Canal ${n}`, it: `Canale ${n}`, es: `Canal ${n}`, pl: `Kanał ${n}`, uk: `Канал ${n}`, 'zh-cn': `通道 ${n}`
+                } },
                 native: { channelNumber: n, host: dev.cfg.host, kind }
             });
 
             await this.ensureState(`${ch}.val`, {
-                name: 'Zustand (0-100, bei Storen meist -1=unbekannt)',
+                name: { en: 'State (0-100, for shutters usually -1=unknown)', de: 'Zustand (0-100, bei Storen meist -1=unbekannt)', ru: 'Состояние (0-100, для жалюзи обычно -1=неизвестно)', pt: 'Estado (0-100, em estores geralmente -1=desconhecido)', nl: 'Status (0-100, bij zonwering meestal -1=onbekend)', fr: 'État (0-100, pour les stores généralement -1=inconnu)', it: 'Stato (0-100, per le tapparelle solitamente -1=sconosciuto)', es: 'Estado (0-100, en persianas normalmente -1=desconocido)', pl: 'Stan (0-100, dla rolet zwykle -1=nieznany)', uk: 'Стан (0-100, для жалюзі зазвичай -1=невідомо)', 'zh-cn': '状态 (0-100，卷帘通常 -1=未知)' },
                 type: 'number', role: valRole, min: -1, max: 100, read: true, write: false
             });
 
@@ -615,7 +618,7 @@ class Zeptrion extends utils.Adapter {
                     native: {}
                 });
                 await this.ensureState(`${ch}.calibrate`, {
-                    name: 'Schätzung setzen OHNE Fahrt (z.B. nach manueller Bedienung am Wandtaster): aktuellen Ist-Zustand in % eintragen',
+                    name: { en: 'Set the estimate WITHOUT moving (e.g. after manual operation at the wall switch): enter the current actual state in %', de: 'Schätzung setzen OHNE Fahrt (z.B. nach manueller Bedienung am Wandtaster): aktuellen Ist-Zustand in % eintragen', ru: 'Установить оценку БЕЗ движения (напр. после ручного управления настенным выключателем): ввести текущее фактическое состояние в %', pt: 'Definir a estimativa SEM movimento (p.ex. após operação manual no interruptor de parede): introduzir o estado atual em %', nl: 'Schatting instellen ZONDER beweging (bijv. na handmatige bediening op de wandschakelaar): huidige werkelijke status in % invoeren', fr: 'Définir l\'estimation SANS mouvement (p.ex. après commande manuelle sur l\'interrupteur mural) : saisir l\'état réel actuel en %', it: 'Imposta la stima SENZA movimento (es. dopo comando manuale sul pulsante a muro): inserire lo stato attuale in %', es: 'Definir la estimación SIN movimiento (p.ej. tras el manejo manual en el interruptor de pared): introducir el estado actual en %', pl: 'Ustaw szacunek BEZ ruchu (np. po ręcznej obsłudze przełącznika ściennego): wpisz aktualny stan rzeczywisty w %', uk: 'Встановити оцінку БЕЗ руху (напр. після ручного керування настінним вимикачем): ввести поточний фактичний стан у %', 'zh-cn': '设置估计值但不移动（例如手动操作墙壁开关后）：输入当前实际状态百分比' },
                     type: 'number', role: 'level', min: 0, max: 100, read: true, write: true
                 });
                 await this.extendObjectAsync(`${ch}.tiltOpen`, {
@@ -640,14 +643,14 @@ class Zeptrion extends utils.Adapter {
                 });
             }
 
-            await this.ensureState(`${ch}.name`, { name: 'Kanalname (chdes)', type: 'string', role: 'text', read: true, write: true });
-            await this.ensureState(`${ch}.group`, { name: 'Gruppe (chdes)', type: 'string', role: 'text', read: true, write: true });
-            await this.ensureState(`${ch}.icon`, { name: 'Icon (chdes)', type: 'string', role: 'text', read: true, write: true });
-            await this.ensureState(`${ch}.type`, { name: 'Typ-Code (chdes)', type: 'string', role: 'text', read: true, write: true });
-            await this.ensureState(`${ch}.cat`, { name: 'Kategorie-Code (chdes)', type: 'string', role: 'text', read: true, write: true });
+            await this.ensureState(`${ch}.name`, { name: { en: 'Channel name (chdes)', de: 'Kanalname (chdes)', ru: 'Имя канала (chdes)', pt: 'Nome do canal (chdes)', nl: 'Kanaalnaam (chdes)', fr: 'Nom du canal (chdes)', it: 'Nome canale (chdes)', es: 'Nombre del canal (chdes)', pl: 'Nazwa kanału (chdes)', uk: 'Ім\'я каналу (chdes)', 'zh-cn': '通道名称 (chdes)' }, type: 'string', role: 'text', read: true, write: true });
+            await this.ensureState(`${ch}.group`, { name: { en: 'Group (chdes)', de: 'Gruppe (chdes)', ru: 'Группа (chdes)', pt: 'Grupo (chdes)', nl: 'Groep (chdes)', fr: 'Groupe (chdes)', it: 'Gruppo (chdes)', es: 'Grupo (chdes)', pl: 'Grupa (chdes)', uk: 'Група (chdes)', 'zh-cn': '分组 (chdes)' }, type: 'string', role: 'text', read: true, write: true });
+            await this.ensureState(`${ch}.icon`, { name: { en: 'Icon (chdes)', de: 'Icon (chdes)', ru: 'Иконка (chdes)', pt: 'Ícone (chdes)', nl: 'Icoon (chdes)', fr: 'Icône (chdes)', it: 'Icona (chdes)', es: 'Icono (chdes)', pl: 'Ikona (chdes)', uk: 'Іконка (chdes)', 'zh-cn': '图标 (chdes)' }, type: 'string', role: 'text', read: true, write: true });
+            await this.ensureState(`${ch}.type`, { name: { en: 'Type code (chdes)', de: 'Typ-Code (chdes)', ru: 'Код типа (chdes)', pt: 'Código de tipo (chdes)', nl: 'Typecode (chdes)', fr: 'Code de type (chdes)', it: 'Codice tipo (chdes)', es: 'Código de tipo (chdes)', pl: 'Kod typu (chdes)', uk: 'Код типу (chdes)', 'zh-cn': '类型代码 (chdes)' }, type: 'string', role: 'text', read: true, write: true });
+            await this.ensureState(`${ch}.cat`, { name: { en: 'Category code (chdes)', de: 'Kategorie-Code (chdes)', ru: 'Код категории (chdes)', pt: 'Código de categoria (chdes)', nl: 'Categoriecode (chdes)', fr: 'Code de catégorie (chdes)', it: 'Codice categoria (chdes)', es: 'Código de categoría (chdes)', pl: 'Kod kategorii (chdes)', uk: 'Код категорії (chdes)', 'zh-cn': '类别代码 (chdes)' }, type: 'string', role: 'text', read: true, write: true });
 
             await this.ensureState(`${ch}.command`, {
-                name: 'Freier Befehl (z.B. dim_2000, move_close_5000, recall_s1 …)',
+                name: { en: 'Free-text command (e.g. dim_2000, move_close_5000, recall_s1 ...)', de: 'Freier Befehl (z.B. dim_2000, move_close_5000, recall_s1 …)', ru: 'Произвольная команда (напр. dim_2000, move_close_5000, recall_s1 …)', pt: 'Comando livre (p.ex. dim_2000, move_close_5000, recall_s1 …)', nl: 'Vrije opdracht (bijv. dim_2000, move_close_5000, recall_s1 …)', fr: 'Commande libre (p.ex. dim_2000, move_close_5000, recall_s1 …)', it: 'Comando libero (es. dim_2000, move_close_5000, recall_s1 …)', es: 'Comando libre (p.ej. dim_2000, move_close_5000, recall_s1 …)', pl: 'Dowolne polecenie (np. dim_2000, move_close_5000, recall_s1 …)', uk: 'Довільна команда (напр. dim_2000, move_close_5000, recall_s1 …)', 'zh-cn': '自由命令（例如 dim_2000, move_close_5000, recall_s1 …）' },
                 type: 'string', role: 'text', read: false, write: true, def: ''
             });
 
@@ -657,9 +660,15 @@ class Zeptrion extends utils.Adapter {
                 });
             }
             for (let s = 1; s <= 4; s++) {
-                await this.ensureState(`${ch}.recall_s${s}`, { name: `Szene ${s} abrufen`, type: 'boolean', role: 'button', read: false, write: true, def: false });
-                await this.ensureState(`${ch}.store_s${s}`, { name: `Szene ${s} speichern`, type: 'boolean', role: 'button', read: false, write: true, def: false });
-                await this.ensureState(`${ch}.delete_s${s}`, { name: `Szene ${s} löschen`, type: 'boolean', role: 'button', read: false, write: true, def: false });
+                const sceneName = (verb) => ({
+                    en: `Scene ${s} ${verb.en}`, de: `Szene ${s} ${verb.de}`, ru: `Сцена ${s}: ${verb.ru}`,
+                    pt: `Cena ${s} ${verb.pt}`, nl: `Scène ${s} ${verb.nl}`, fr: `Scène ${s} ${verb.fr}`,
+                    it: `Scena ${s} ${verb.it}`, es: `Escena ${s} ${verb.es}`, pl: `Scena ${s}: ${verb.pl}`,
+                    uk: `Сцена ${s}: ${verb.uk}`, 'zh-cn': `场景 ${s} ${verb['zh-cn']}`
+                });
+                await this.ensureState(`${ch}.recall_s${s}`, { name: sceneName({ en: 'recall', de: 'abrufen', ru: 'вызвать', pt: 'chamar', nl: 'oproepen', fr: 'rappeler', it: 'richiama', es: 'recuperar', pl: 'przywołaj', uk: 'викликати', 'zh-cn': '调用' }), type: 'boolean', role: 'button', read: false, write: true, def: false });
+                await this.ensureState(`${ch}.store_s${s}`, { name: sceneName({ en: 'store', de: 'speichern', ru: 'сохранить', pt: 'guardar', nl: 'opslaan', fr: 'enregistrer', it: 'salva', es: 'guardar', pl: 'zapisz', uk: 'зберегти', 'zh-cn': '保存' }), type: 'boolean', role: 'button', read: false, write: true, def: false });
+                await this.ensureState(`${ch}.delete_s${s}`, { name: sceneName({ en: 'delete', de: 'löschen', ru: 'удалить', pt: 'eliminar', nl: 'verwijderen', fr: 'supprimer', it: 'elimina', es: 'eliminar', pl: 'usuń', uk: 'видалити', 'zh-cn': '删除' }), type: 'boolean', role: 'button', read: false, write: true, def: false });
             }
         }
     }
@@ -773,14 +782,14 @@ class Zeptrion extends utils.Adapter {
             if (chNums.length === 1) {
                 const chNum = chNums[0];
                 await this.zrapPost(id, `/zrap/chctrl/ch${chNum}`, { cmd: cmds[chNum] });
-                this.log.info(`[${id}] Kanalbefehl gesendet: ch${chNum} -> ${cmds[chNum]}`);
+                this.log.info(`[${id}] Channel command sent: ch${chNum} -> ${cmds[chNum]}`);
             } else {
                 const body = {};
                 for (const chNum of chNums) body[`cmd${chNum}`] = cmds[chNum];
                 await this.zrapPost(id, '/zrap/chctrl', body);
                 const summary = chNums.map(n => `ch${n}->${cmds[n]}`).join(', ');
-                this.log.info(`[${id}] Multicast-Befehl gesendet: ${summary}`);
-                this.log.debug(`[${id}] Multicast-Befehl gebündelt: ${JSON.stringify(body)}`);
+                this.log.info(`[${id}] Multicast command sent: ${summary}`);
+                this.log.debug(`[${id}] Multicast command bundled: ${JSON.stringify(body)}`);
             }
             for (const chNum of chNums) {
                 this.markChannelBusy(dev, chNum, cmds[chNum]);
@@ -789,7 +798,7 @@ class Zeptrion extends utils.Adapter {
             callbacks.forEach(cb => cb.resolve());
         } catch (err) {
             const summary = chNums.map(n => `ch${n}->${cmds[n]}`).join(', ');
-            this.log.warn(`[${id}] Kanalbefehl fehlgeschlagen (${summary}): ${err.message || err}`);
+            this.log.warn(`[${id}] Channel command failed (${summary}): ${err.message || err}`);
             callbacks.forEach(cb => cb.reject(err));
         }
     }
@@ -924,7 +933,7 @@ class Zeptrion extends utils.Adapter {
         if (dev.posEstimate[chNum] === undefined) {
             const refCmd = target < 50 ? 'close' : 'open';
             const refPos = target < 50 ? 0 : 100;
-            this.log.info(`[${id}] ch${chNum}: Position unbekannt - Referenzfahrt (${refCmd}, ${Math.round(travel / 1000)}s) vor Anfahrt auf ${target}%`);
+            this.log.info(`[${id}] ch${chNum}: position unknown - reference run (${refCmd}, ${Math.round(travel / 1000)}s) before moving to ${target}%`);
             await this.sendChannelCommand(id, chNum, refCmd);
             await this.delay(travel + 1000);
             if (aborted()) return;
@@ -943,14 +952,14 @@ class Zeptrion extends utils.Adapter {
         const dirCmd = deltaPct > 0 ? 'move_open' : 'move_close';
         let remainingMs = Math.round(Math.abs(deltaPct) / 100 * travel);
         if (remainingMs < MIN_TIMED_MS) {
-            this.log.debug(`[${id}] ch${chNum}: Differenz ${deltaPct}% ergäbe ${remainingMs}ms < API-Minimum ${MIN_TIMED_MS}ms - keine Fahrt`);
+            this.log.debug(`[${id}] ch${chNum}: difference ${deltaPct}% would give ${remainingMs}ms < API minimum ${MIN_TIMED_MS}ms - no movement`);
             await this.setStateAsync(`${id}.channels.ch${chNum}.setPosition`, { val: current, ack: true });
             return;
         }
 
         while (remainingMs > 0) {
             if (aborted()) {
-                this.log.debug(`[${id}] ch${chNum}: setPosition-Sequenz abgebrochen`);
+                this.log.debug(`[${id}] ch${chNum}: setPosition sequence aborted`);
                 return;
             }
             const pulse = Math.max(MIN_TIMED_MS, Math.min(remainingMs, MAX_TIMED_MS));
@@ -962,7 +971,7 @@ class Zeptrion extends utils.Adapter {
         }
         if (aborted()) return;
         await this.setStateAsync(`${id}.channels.ch${chNum}.setPosition`, { val: target, ack: true });
-        this.log.debug(`[${id}] ch${chNum}: Zielposition ${target}% angefahren (Schätzung)`);
+        this.log.debug(`[${id}] ch${chNum}: target position ${target}% reached (estimate)`);
     }
 
     // ------------------------------------------------------- statische Infos
@@ -974,7 +983,7 @@ class Zeptrion extends utils.Adapter {
 
             // Verifikation: antwortet hier wirklich ein zeptrion-Gerät?
             if (idData.sys !== undefined && String(idData.sys).toUpperCase() !== 'ZEPTRION') {
-                this.log.warn(`[${id}] Host ${dev.cfg.host} antwortet, meldet aber sys="${idData.sys}" statt "ZEPTRION" - vermutlich falsche IP oder kein zeptrion-Gerät!`);
+                this.log.warn(`[${id}] Host ${dev.cfg.host} responds, but reports sys="${idData.sys}" instead of "ZEPTRION" - likely wrong IP or not a zeptrion device!`);
             }
             // Plausibilisierung: Kanalzahl aus dem Gerätetyp ableiten (3340-4-x = 4, 3340-2-x = 2)
             const typeStr = String(idData.type ?? '');
@@ -982,7 +991,7 @@ class Zeptrion extends utils.Adapter {
             if (m) {
                 const hwChannels = parseInt(m[1], 10);
                 if (hwChannels !== dev.cfg.channels) {
-                    this.log.warn(`[${id}] Gerätetyp ${typeStr} hat ${hwChannels} Kanäle, konfiguriert sind ${dev.cfg.channels} - bitte in der Instanz-Konfiguration korrigieren.`);
+                    this.log.warn(`[${id}] Device type ${typeStr} has ${hwChannels} channels, ${dev.cfg.channels} configured - please correct in the instance configuration.`);
                 }
             }
 
@@ -1015,7 +1024,12 @@ class Zeptrion extends utils.Adapter {
                     const chName = String(chData.name ?? '').trim();
                     if (chName) {
                         await this.extendObjectAsync(`${id}.channels.ch${n}`, {
-                            common: { name: `Kanal ${n} - ${chName}` }
+                            common: { name: {
+                                en: `Channel ${n} - ${chName}`, de: `Kanal ${n} - ${chName}`, ru: `Канал ${n} - ${chName}`,
+                                pt: `Canal ${n} - ${chName}`, nl: `Kanaal ${n} - ${chName}`, fr: `Canal ${n} - ${chName}`,
+                                it: `Canale ${n} - ${chName}`, es: `Canal ${n} - ${chName}`, pl: `Kanał ${n} - ${chName}`,
+                                uk: `Канал ${n} - ${chName}`, 'zh-cn': `通道 ${n} - ${chName}`
+                            } }
                         });
                     }
                 }
@@ -1049,7 +1063,7 @@ class Zeptrion extends utils.Adapter {
             const data = await this.zrapGet(id, path);
             await apply(data);
         } catch (err) {
-            this.log.debug(`[${id}] optionaler Service ${path} nicht verfügbar/fehlgeschlagen: ${err.message || err}`);
+            this.log.debug(`[${id}] optional service ${path} unavailable/failed: ${err.message || err}`);
         }
     }
 
@@ -1069,7 +1083,7 @@ class Zeptrion extends utils.Adapter {
         await this.setStateAsync(`${id}.date.rfc1123`, { val: rfc1123, ack: true });
         await this.setStateAsync(`${id}.date.tz`, { val: tz, ack: true });
         await this.setStateAsync(`${id}.date.dst`, { val: '0000', ack: true });
-        this.log.info(`[${id}] Geräte-Zeit synchronisiert: ${rfc1123} (tz=${tz})`);
+        this.log.info(`[${id}] Device time synchronized: ${rfc1123} (tz=${tz})`);
     }
 
     // ------------------------------------------------------------- Polling
@@ -1149,7 +1163,7 @@ class Zeptrion extends utils.Adapter {
                     await this.setStateAsync(`${id}.smartfront.ledState`, { val: JSON.stringify(led), ack: true });
                 }
             } catch (err) {
-                this.log.debug(`[${id}] Smartfront (zapi) nicht verfügbar: ${err.message || err}`);
+                this.log.debug(`[${id}] Smartfront (zapi) unavailable: ${err.message || err}`);
             }
         }
     }
@@ -1206,11 +1220,11 @@ class Zeptrion extends utils.Adapter {
             dev.fails = 0;
             this.setStateChangedAsync(`${id}.info.connection`, { val: true, ack: true });
             this.setStateChangedAsync(`${id}.info.lastError`, { val: '', ack: true });
-            if (!was) this.log.info(`Gerät ${id} (${dev.cfg.host}) ist erreichbar.`);
+            if (!was) this.log.info(`Device ${id} (${dev.cfg.host}) is reachable.`);
         } else {
             dev.fails++;
             this.setStateChangedAsync(`${id}.info.connection`, { val: false, ack: true });
-            if (was) this.log.warn(`Gerät ${id} (${dev.cfg.host}) nicht mehr erreichbar.`);
+            if (was) this.log.warn(`Device ${id} (${dev.cfg.host}) no longer reachable.`);
         }
         this.updateGlobalConnection();
     }
@@ -1228,7 +1242,7 @@ class Zeptrion extends utils.Adapter {
         else if (code === 'EHOSTUNREACH') msg = 'Host nicht erreichbar (Netzwerk/Routing prüfen)';
         else if (code === 'ENOTFOUND') msg = 'Hostname/mDNS-Name nicht auflösbar';
         else if (code === 'ETIMEDOUT') msg = 'Zeitüberschreitung beim Verbindungsaufbau';
-        this.log.warn(`[${id}] Fehler bei ${context}: ${msg}`);
+        this.log.warn(`[${id}] Error during ${context}: ${msg}`);
         this.setStateAsync(`${id}.info.lastError`, { val: msg, ack: true }).catch(() => {});
         this.markConnected(id, false);
     }
@@ -1247,7 +1261,7 @@ class Zeptrion extends utils.Adapter {
             if (this.devices[devId]) {
                 this.handleDeviceError(devId, err, `onStateChange(${rel})`);
             } else {
-                this.log.warn(`Fehler bei onStateChange(${rel}): ${err.message || err}`);
+                this.log.warn(`Error in onStateChange(${rel}): ${err.message || err}`);
             }
             if (typeof state.val === 'boolean') {
                 await this.setStateAsync(idFull, { val: false, ack: true }).catch(() => {});
@@ -1289,7 +1303,7 @@ class Zeptrion extends utils.Adapter {
             if (parts[1] === 'system') {
                 if (parts[2] === 'unlock' && state.val) {
                     dev.unlockUntil = Date.now() + 30000;
-                    this.log.warn(`[${id}] Werksreset für 30 Sekunden entriegelt.`);
+                    this.log.warn(`[${id}] Factory reset unlocked for 30 seconds.`);
                     await this.setStateAsync(idFull, { val: false, ack: true });
                     return;
                 }
@@ -1301,15 +1315,15 @@ class Zeptrion extends utils.Adapter {
                         // physisch neu eingerichtet werden. Ein einzelner (versehent-
                         // licher) setState aus Script/VIS darf das nicht auslösen können.
                         if (!dev.unlockUntil || Date.now() > dev.unlockUntil) {
-                            this.log.error(`[${id}] Werksreset ABGELEHNT: zuerst ${id}.system.unlock setzen (30s-Fenster). Das Gerät würde sonst inkl. WLAN-Konfiguration gelöscht und vom Netz fallen.`);
+                            this.log.error(`[${id}] Factory reset REJECTED: set ${id}.system.unlock first (30s window). Otherwise the device incl. WLAN configuration would be wiped and drop off the network.`);
                             await this.setStateAsync(idFull, { val: false, ack: true });
                             return;
                         }
                         dev.unlockUntil = 0;
-                        this.log.warn(`[${id}] WERKSRESET wird ausgeführt - Gerät verliert alle Einstellungen inkl. WLAN!`);
+                        this.log.warn(`[${id}] FACTORY RESET is being executed - device will lose all settings incl. WLAN!`);
                     }
                     await this.zrapPost(id, '/zrap/sys', { cmd });
-                    this.log.info(`[${id}] Systembefehl gesendet: ${cmd}`);
+                    this.log.info(`[${id}] System command sent: ${cmd}`);
                     await this.setStateAsync(idFull, { val: false, ack: true });
                 }
                 return;
@@ -1376,7 +1390,7 @@ class Zeptrion extends utils.Adapter {
 
                 if (action === 'posEstimate') {
                     // read-only seit 0.5.0 - Hinweis für alte Scripts
-                    this.log.warn(`[${id}] posEstimate ist jetzt read-only. Zum Kalibrieren "calibrate", zum Anfahren "setPosition" verwenden.`);
+                    this.log.warn(`[${id}] posEstimate is now read-only. Use "calibrate" to calibrate, "setPosition" to move.`);
                     return;
                 }
 
@@ -1405,7 +1419,7 @@ class Zeptrion extends utils.Adapter {
                 if (action === 'tiltOpen' || action === 'tiltClose') {
                     if (state.val !== true) return;
                     if (!dev.cfg.tiltTimeMs) {
-                        this.log.warn(`[${id}] Kipp-Impuls nicht konfiguriert ("Kipp-Impuls (ms)" in der Geräte-Tabelle setzen, typisch 300-800ms für Rafflamellen).`);
+                        this.log.warn(`[${id}] Tilt pulse not configured (set "Tilt pulse (ms)" in the device table, typically 300-800ms for slats).`);
                         await this.setStateAsync(idFull, { val: false, ack: true });
                         return;
                     }
@@ -1497,7 +1511,7 @@ class Zeptrion extends utils.Adapter {
                         channels
                     });
                 } catch (err) {
-                    this.log.debug(`Discovery: unerwartetes/fremdes mDNS-Paket ignoriert (${err.message || err})`);
+                    this.log.debug(`Discovery: unexpected/foreign mDNS packet ignored (${err.message || err})`);
                 }
             };
 
@@ -1509,16 +1523,16 @@ class Zeptrion extends utils.Adapter {
                     try {
                         if (service && service.name && /^zapp-\d{8}$/i.test(service.name)) handle(service);
                     } catch (err) {
-                        this.log.debug(`Discovery: Fallback-Filter (_http._tcp) Fehler ignoriert (${err.message || err})`);
+                        this.log.debug(`Discovery: fallback filter (_http._tcp) error ignored (${err.message || err})`);
                     }
                 });
                 // Auch auf explizite Fehler-Events der Browser reagieren, statt sie
                 // als unhandled 'error' durchfallen zu lassen.
                 if (browserNew && typeof browserNew.on === 'function') {
-                    browserNew.on('error', err => this.log.debug(`Discovery (_zapp._tcp) Fehler: ${err.message || err}`));
+                    browserNew.on('error', err => this.log.debug(`Discovery (_zapp._tcp) error: ${err.message || err}`));
                 }
                 if (browserOld && typeof browserOld.on === 'function') {
-                    browserOld.on('error', err => this.log.debug(`Discovery (_http._tcp) Fehler: ${err.message || err}`));
+                    browserOld.on('error', err => this.log.debug(`Discovery (_http._tcp) error: ${err.message || err}`));
                 }
             } catch (err) {
                 try { bonjour.destroy(); } catch (e) { /* ignore */ }
@@ -1641,11 +1655,13 @@ class Zeptrion extends utils.Adapter {
                     await this.setForeignObjectAsync(`system.adapter.${this.namespace}`, instObj);
                 }
                 const result = `${added} von ${lines.length} Zeile(n) importiert.${added ? ' Adapter startet neu; Dialog schliessen und neu öffnen.' : ''}\n\n${report.join('\n')}`;
-                this.log.info(`CSV-Import: ${added}/${lines.length} übernommen`);
+                this.log.info(`CSV import: ${added}/${lines.length} rows imported`);
                 if (obj.callback) this.sendTo(obj.from, obj.command, { result }, obj.callback);
             } catch (err) {
+                // UI-facing text (shown in the admin config dialog) stays German for the
+                // German-speaking user base; the log entry itself must be English per checklist.
                 const msg = `CSV-Import fehlgeschlagen: ${err.message || err}`;
-                this.log.warn(msg);
+                this.log.warn(`CSV import failed: ${err.message || err}`);
                 if (obj.callback) this.sendTo(obj.from, obj.command, { error: msg }, obj.callback);
             }
             return;
@@ -1690,25 +1706,27 @@ class Zeptrion extends utils.Adapter {
                 }
             }
             const result = lines.join('\n');
-            this.log.info(`Gerätetest:\n${result}`);
+            this.log.info(`Device test:\n${result}`);
             if (obj.callback) this.sendTo(obj.from, obj.command, { result }, obj.callback);
             return;
         }
 
         if (obj.command === 'discover') {
             try {
-                this.log.info('Starte mDNS-Discovery nach zeptrion-Geräten …');
+                this.log.info('Starting mDNS discovery for zeptrion devices...');
                 const results = await this.discoverDevices(4000);
                 const added = await this.mergeDiscoveredDevices(results);
+                // UI-facing text (shown in the admin config dialog) stays German for the
+                // German-speaking user base; the log entry itself must be English per checklist.
                 const msg = `Suche abgeschlossen: ${results.length} Gerät(e) im Netz gefunden, ${added} neu (deaktiviert) übernommen. ` +
                     `Instanz-Konfiguration schliessen und neu öffnen, um sie in der Tabelle zu sehen und zu aktivieren.`;
-                this.log.info(msg);
+                this.log.info(`Discovery finished: ${results.length} device(s) found on the network, ${added} newly added (disabled).`);
                 if (obj.callback) {
                     this.sendTo(obj.from, obj.command, { result: msg, devices: results }, obj.callback);
                 }
             } catch (err) {
                 const msg = err.message || String(err);
-                this.log.warn(`Discovery fehlgeschlagen: ${msg}`);
+                this.log.warn(`Discovery failed: ${msg}`);
                 if (obj.callback) {
                     this.sendTo(obj.from, obj.command, { error: msg }, obj.callback);
                 }

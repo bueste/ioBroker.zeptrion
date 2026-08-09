@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "zeptrion",
-        "version": "1.0.7",
+        "version": "1.0.8",
         "news": {
+            "1.0.8": {
+                "en": "Fix all findings from the manual maintainer review (PR #6327): removed the manual npm installation section from README.md/README_de.md (E6012, prohibited regardless of stated intent); added a verified link to the Feller product page; translated all 40+ German log messages to English (UI-facing result text for CSV import/discovery, shown in the admin config dialog, is intentionally kept German and decoupled from the log call); converted all 50 German common.name strings (incl. the CH_BUTTONS constant and dynamic channel/scene names) to full 11-language i18n objects; completed io-package.json instanceObjects translations for 'info' and 'control' (info.connection already had all 11 languages).",
+                "de": "Behebt alle Befunde aus dem manuellen Maintainer-Review (PR #6327): manuelle npm-Installationsanleitung aus README.md/README_de.md entfernt (E6012, unabhängig von der Absicht untersagt); verifizierten Link zur Feller-Produktseite ergänzt; alle 40+ deutschen Log-Meldungen ins Englische übersetzt (UI-Feedback-Text für CSV-Import/Discovery im Admin-Dialog bewusst Deutsch belassen und vom Log-Aufruf entkoppelt); alle 50 deutschen common.name-Strings (inkl. CH_BUTTONS-Konstante und dynamischer Kanal-/Szenen-Namen) auf vollständige 11-Sprachen-i18n-Objekte umgestellt; io-package.json instanceObjects-Übersetzungen für 'info' und 'control' vervollständigt (info.connection hatte bereits alle 11 Sprachen).",
+                "ru": "Исправлены все замечания из ручного обзора мейнтейнера (PR #6327): удалена инструкция по ручной установке через npm; добавлена ссылка на страницу продукта Feller; все логи переведены на английский; все имена объектов переведены на 11 языков.",
+                "pt": "Corrigidos todos os pontos do review manual do mantenedor (PR #6327): removida a instalação manual via npm; adicionado link para a página do produto Feller; todos os logs traduzidos para inglês; todos os nomes de objetos convertidos para 11 idiomas.",
+                "nl": "Alle bevindingen uit de handmatige maintainer-review verholpen (PR #6327): handmatige npm-installatie-instructie verwijderd; link naar de Feller-productpagina toegevoegd; alle logberichten vertaald naar het Engels; alle objectnamen omgezet naar 11 talen.",
+                "fr": "Correction de tous les points du contrôle manuel du mainteneur (PR #6327) : suppression de l'installation manuelle via npm ; ajout d'un lien vers la page produit Feller ; tous les journaux traduits en anglais ; tous les noms d'objets convertis en 11 langues.",
+                "it": "Corretti tutti i rilievi della revisione manuale del maintainer (PR #6327): rimossa l'installazione manuale via npm; aggiunto link alla pagina prodotto Feller; tutti i log tradotti in inglese; tutti i nomi degli oggetti convertiti in 11 lingue.",
+                "es": "Se corrigieron todos los hallazgos de la revisión manual del mantenedor (PR #6327): se eliminó la instalación manual vía npm; se añadió un enlace a la página del producto Feller; todos los logs traducidos al inglés; todos los nombres de objetos convertidos a 11 idiomas.",
+                "pl": "Naprawiono wszystkie uwagi z ręcznego przeglądu opiekuna (PR #6327): usunięto ręczną instalację przez npm; dodano link do strony produktu Feller; wszystkie logi przetłumaczono na angielski; wszystkie nazwy obiektów przekonwertowano na 11 języków.",
+                "uk": "Виправлено всі зауваження з ручного огляду мейнтейнера (PR #6327): видалено ручну інсталяцію через npm; додано посилання на сторінку продукту Feller; усі логи перекладено англійською; усі назви об'єктів перекладено на 11 мов.",
+                "zh-cn": "修复了维护者人工审查（PR #6327）中的所有问题：移除了手动 npm 安装说明；添加了 Feller 产品页面链接；所有日志信息已翻译为英文；所有对象名称已转换为 11 种语言的 i18n 对象。"
+            },
             "1.0.7": {
                 "en": "Enable global i18n support (jsonConfig i18n: true) with translation files under admin/i18n/ for all 11 supported languages, resolving the checker's i18n warnings the correct way (validatorErrorText stays a plain string per schema; ioBroker resolves the translation via the files, falling back to the English text if no entry is found). Added @iobroker/adapter-dev and @alcalzone/release-script as devDependencies with translate/release npm scripts. (Migrating to @iobroker/eslint-config was evaluated but reverted: its eslint-plugin-import dependency does not yet support eslint 10.x, which broke npm install.)",
                 "de": "Globale i18n-Unterstützung aktiviert (jsonConfig i18n: true) mit Übersetzungsdateien unter admin/i18n/ für alle 11 unterstützten Sprachen - löst die i18n-Warnungen des Checkers auf die vorgesehene Weise (validatorErrorText bleibt gemäss Schema ein einfacher String; ioBroker löst die Übersetzung über die Dateien auf und fällt bei fehlendem Eintrag auf den englischen Text zurück). @iobroker/adapter-dev und @alcalzone/release-script als devDependencies mit translate/release-Skripten ergänzt. (Die Migration auf @iobroker/eslint-config wurde geprüft, aber zurückgenommen: dessen Abhängigkeit eslint-plugin-import unterstützt eslint 10.x noch nicht und hätte npm install gebrochen.)",
@@ -80,19 +93,6 @@
                 "pl": "POPRAWKA: globalne tłumaczenia info.connection dodane w 1.0.1 są automatycznie synchronizowane przez js-controller tylko przy określonych ścieżkach aktualizacji, niewiarygodnie przy instalacji przez 'iobroker url' - dodano również do migracji przy starcie.",
                 "uk": "ВИПРАВЛЕННЯ: глобальні переклади info.connection, додані в 1.0.1, синхронізуються js-controller автоматично лише за певних шляхів оновлення, ненадійно при встановленні через 'iobroker url' - додано також до міграції під час запуску.",
                 "zh-cn": "修复：1.0.1 中添加的全局 info.connection 翻译仅在特定更新路径（例如 'iobroker upgrade'）下由 js-controller 自动同步，通过 'iobroker url' 安装时并不可靠——现已同样加入启动迁移中。"
-            },
-            "1.0.1": {
-                "en": "FIX: calibrate declared role 'level' but read=false - role 'level' requires read=true per the ioBroker role catalogue. Changed to read=true and extended the startup migration to also correct existing objects still holding the old read=false. Added the missing translations for the global info.connection object (was only en/de).",
-                "de": "FIX: calibrate deklarierte Rolle 'level', aber read=false - die Rolle 'level' erfordert laut ioBroker-Rollenkatalog read=true. Auf read=true geändert und die Start-Migration erweitert, damit auch bestehende Objekte mit dem alten read=false korrigiert werden. Fehlende Übersetzungen für das globale info.connection-Objekt ergänzt (waren nur en/de).",
-                "ru": "ИСПРАВЛЕНИЕ: calibrate объявлял роль 'level', но read=false - роль 'level' требует read=true согласно каталогу ролей ioBroker. Изменено на read=true, миграция при запуске расширена. Добавлены отсутствующие переводы для глобального объекта info.connection.",
-                "pt": "CORREÇÃO: calibrate declarava a função 'level', mas read=false - a função 'level' exige read=true segundo o catálogo de funções do ioBroker. Alterado para read=true, migração de arranque estendida. Adicionadas as traduções em falta para o objeto global info.connection.",
-                "nl": "FIX: calibrate declareerde rol 'level', maar read=false - rol 'level' vereist read=true volgens de ioBroker-rolcatalogus. Gewijzigd naar read=true, opstartmigratie uitgebreid. Ontbrekende vertalingen voor het globale info.connection-object toegevoegd.",
-                "fr": "CORRECTIF : calibrate déclarait le rôle 'level', mais read=false - le rôle 'level' nécessite read=true selon le catalogue de rôles ioBroker. Changé en read=true, migration au démarrage étendue. Traductions manquantes pour l'objet global info.connection ajoutées.",
-                "it": "CORREZIONE: calibrate dichiarava il ruolo 'level', ma read=false - il ruolo 'level' richiede read=true secondo il catalogo dei ruoli di ioBroker. Cambiato in read=true, migrazione all'avvio estesa. Aggiunte le traduzioni mancanti per l'oggetto globale info.connection.",
-                "es": "CORRECCIÓN: calibrate declaraba el rol 'level', pero read=false - el rol 'level' requiere read=true según el catálogo de roles de ioBroker. Cambiado a read=true, migración de inicio ampliada. Se añadieron las traducciones faltantes para el objeto global info.connection.",
-                "pl": "POPRAWKA: calibrate deklarował rolę 'level', ale read=false - rola 'level' wymaga read=true zgodnie z katalogiem ról ioBroker. Zmieniono na read=true, rozszerzono migrację przy starcie. Dodano brakujące tłumaczenia dla globalnego obiektu info.connection.",
-                "uk": "ВИПРАВЛЕННЯ: calibrate декларував роль 'level', але read=false - роль 'level' вимагає read=true згідно з каталогом ролей ioBroker. Змінено на read=true, розширено міграцію під час запуску. Додано відсутні переклади для глобального об'єкта info.connection.",
-                "zh-cn": "修复：calibrate 声明角色为 'level'，但 read=false——根据 ioBroker 角色目录，角色 'level' 要求 read=true。已更改为 read=true，并扩展了启动迁移。补充了全局 info.connection 对象缺失的翻译。"
             }
         },
         "titleLang": {
@@ -178,7 +178,16 @@
             "common": {
                 "name": {
                     "en": "Information",
-                    "de": "Information"
+                    "de": "Information",
+                    "ru": "Информация",
+                    "pt": "Informação",
+                    "nl": "Informatie",
+                    "fr": "Informations",
+                    "it": "Informazioni",
+                    "es": "Información",
+                    "pl": "Informacje",
+                    "uk": "Інформація",
+                    "zh-cn": "信息"
                 }
             },
             "native": {}
@@ -214,7 +223,16 @@
             "common": {
                 "name": {
                     "en": "Collective commands",
-                    "de": "Sammelbefehle"
+                    "de": "Sammelbefehle",
+                    "ru": "Групповые команды",
+                    "pt": "Comandos coletivos",
+                    "nl": "Verzamelcommando's",
+                    "fr": "Commandes groupées",
+                    "it": "Comandi collettivi",
+                    "es": "Comandos colectivos",
+                    "pl": "Polecenia zbiorcze",
+                    "uk": "Групові команди",
+                    "zh-cn": "集合命令"
                 }
             },
             "native": {}

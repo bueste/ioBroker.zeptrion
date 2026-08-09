@@ -9,7 +9,7 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/ncp/payment/TT6MTBLXX9L9U)
 [![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/stefanbuehler)
 
-Adapter for Feller **zeptrion / zApp** WLAN actuators (WLAN Nebenstelle 4K = zApp gateway,
+Adapter for [Feller](https://www.feller.ch/) **[zeptrion / zApp](https://www.feller.ch/de/connected-buildings/zeptrion)** WLAN actuators (WLAN Nebenstelle 4K = zApp gateway,
 WLAN Zwischenmodul 2K = zApp booster) for light and shutter/blind control, based on the
 zrap web service API (Feller document 10.ZEPAPI-E.1612 / version 1.0, firmware from 01.08.18).
 
@@ -58,22 +58,6 @@ Not implemented (see "Known limitations"): write access to `zrap/net`
 (`zapi/smartbt/*`).
 
 ## Installation
-
-### a) Local/manual (before store publication)
-
-```bash
-cd /opt/iobroker/node_modules
-mkdir iobroker.zeptrion
-## copy the files of this package here
-cd iobroker.zeptrion
-npm install --production
-
-cd /opt/iobroker
-iobroker upload zeptrion
-iobroker add zeptrion
-```
-
-### b) Via the ioBroker Adapter Store (once published)
 
 Admin UI -> Adapters -> search for "zeptrion" -> Install.
 
@@ -192,6 +176,9 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.8 (2026-08-08)
+- Fix all findings from the manual maintainer review (PR #6327): removed the manual npm installation section from README.md/README_de.md (E6012, prohibited regardless of stated intent); added a verified link to the Feller product page; translated all 40+ German log messages to English (UI-facing result text for CSV import/discovery, shown in the admin config dialog, is intentionally kept German and decoupled from the log call); converted all 50 German common.name strings (incl. the CH_BUTTONS constant and dynamic channel/scene names) to full 11-language i18n objects; completed io-package.json instanceObjects translations for 'info' and 'control' (info.connection already had all 11 languages).
+
 ### 1.0.7 (2026-07-22)
 - Enable global i18n support (jsonConfig i18n: true) with translation files under admin/i18n/ for all 11 supported languages, resolving the checker's i18n warnings the correct way (validatorErrorText stays a plain string per schema; ioBroker resolves the translation via the files, falling back to the English text if no entry is found). Added @iobroker/adapter-dev and @alcalzone/release-script as devDependencies with translate/release npm scripts. (Migrating to @iobroker/eslint-config was evaluated but reverted: its eslint-plugin-import dependency does not yet support eslint 10.x, which broke npm install.)
 
@@ -211,11 +198,7 @@ npm run test:integration   # starts a real js-controller (takes longer)
 ### 1.0.2 (2026-07-17)
 - FIX: the global (adapter-level) info.connection translations added in 1.0.1 are only synced automatically by js-controller on certain update paths (e.g. 'iobroker upgrade'), not reliably when installing via 'iobroker url' - added this to the startup migration too, so it no longer depends on that.
 
-### 1.0.1 (2026-07-17)
-- FIX: calibrate declared role 'level' but read=false - role 'level' requires read=true per the ioBroker role catalogue. Changed to read=true and extended the startup migration to also correct existing objects still holding the old read=false.
-- Added the missing translations for the global info.connection object (was only en/de).
-
-### 1.0.0 and older
+### 1.0.1 and older
 
 Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 
