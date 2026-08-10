@@ -2,6 +2,13 @@
 
 Changelog entries for older releases.
 
+### 1.0.3 (2026-07-17)
+- Documentation only: fixed the PayPal donate link, which previously used the wrong URL format and did not work.
+
+### 1.0.2 and older
+
+Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
+
 ### 1.0.2 (2026-07-17)
 - FIX: the global (adapter-level) info.connection translations added in 1.0.1 are only synced automatically by js-controller on certain update paths (e.g. 'iobroker upgrade'), not reliably when installing via 'iobroker url' - added this to the startup migration too, so it no longer depends on that.
 

@@ -409,9 +409,9 @@ class Zeptrion extends utils.Adapter {
         for (const d of active) {
             const errs = this.validateDeviceRow(d);
             const sanId = this.sanitize(d.id);
-            if (seenIds.has(sanId)) errs.push(`ID "${d.id}" (sanitisiert "${sanId}") ist doppelt vergeben`);
+            if (seenIds.has(sanId)) errs.push(`ID "${d.id}" (sanitized "${sanId}") is assigned twice`);
             const hostKey = String(d.host).trim().toLowerCase();
-            if (seenHosts.has(hostKey)) errs.push(`Host "${d.host}" ist doppelt konfiguriert`);
+            if (seenHosts.has(hostKey)) errs.push(`Host "${d.host}" is configured twice`);
             if (errs.length) {
                 this.log.error(`Device "${d.name || d.id || d.host}" skipped: ${errs.join('; ')}`);
                 continue;
@@ -487,50 +487,50 @@ class Zeptrion extends utils.Adapter {
         const errs = [];
         const host = String(d.host || '').trim();
         if (!host) {
-            errs.push('Host fehlt');
+            errs.push('Host missing');
         } else if (!/^[a-zA-Z0-9.-]+$/.test(host)) {
-            errs.push(`Host "${host}" enthält ungültige Zeichen (kein http://, keine Leerzeichen, kein Port)`);
+            errs.push(`Host "${host}" contains invalid characters (no http://, no spaces, no port)`);
         } else if (/^\d+\.\d+\.\d+\.\d+$/.test(host)) {
             const octets = host.split('.').map(Number);
             if (octets.length !== 4 || octets.some(o => o < 0 || o > 255)) {
-                errs.push(`"${host}" ist keine gültige IPv4-Adresse`);
+                errs.push(`"${host}" is not a valid IPv4 address`);
             }
         }
         if (d.id && !/^[a-zA-Z0-9_-]+$/.test(String(d.id))) {
-            errs.push(`ID "${d.id}" enthält ungültige Zeichen (erlaubt: a-z, 0-9, _, -)`);
+            errs.push(`ID "${d.id}" contains invalid characters (allowed: a-z, 0-9, _, -)`);
         }
         const ch = parseInt(d.channels, 10);
         if (d.channels !== undefined && d.channels !== '' && (isNaN(ch) || ch < 1 || ch > 4)) {
-            errs.push(`Kanäle "${d.channels}" ungültig (1-4)`);
+            errs.push(`Channels "${d.channels}" invalid (1-4)`);
         }
         if (d.kind !== undefined && d.kind !== '' && !['unknown', 'blind', 'light'].includes(String(d.kind))) {
-            errs.push(`Art "${d.kind}" ungültig (unknown/blind/light)`);
+            errs.push(`Type "${d.kind}" invalid (unknown/blind/light)`);
         }
         const tt = parseInt(d.travelTimeSec, 10);
         if (d.travelTimeSec !== undefined && d.travelTimeSec !== '' && (isNaN(tt) || tt < 0 || tt > 300)) {
-            errs.push(`Laufzeit "${d.travelTimeSec}" ungültig (0-300s)`);
+            errs.push(`Runtime "${d.travelTimeSec}" invalid (0-300s)`);
         }
         if (d.travelTimeSecCh !== undefined && String(d.travelTimeSecCh).trim() !== '') {
             const parts = String(d.travelTimeSecCh).split(',').map(s => s.trim());
             if (parts.length > 4) {
-                errs.push(`Laufzeit/Kanal "${d.travelTimeSecCh}": maximal 4 Werte`);
+                errs.push(`Runtime/channel "${d.travelTimeSecCh}": maximum 4 values`);
             }
             for (const p of parts) {
                 if (p === '') continue; // leerer Eintrag = Fallback auf travelTimeSec
                 const v = parseInt(p, 10);
                 if (isNaN(v) || v < 0 || v > 300 || String(v) !== p) {
-                    errs.push(`Laufzeit/Kanal "${d.travelTimeSecCh}": Wert "${p}" ungültig (0-300, ganzzahlig)`);
+                    errs.push(`Runtime/channel "${d.travelTimeSecCh}": value "${p}" invalid (0-300, integer)`);
                     break;
                 }
             }
         }
         const tp = parseInt(d.tiltTimeMs, 10);
         if (d.tiltTimeMs !== undefined && d.tiltTimeMs !== '' && (isNaN(tp) || tp < 0 || tp > 5000)) {
-            errs.push(`Kipp-Impuls "${d.tiltTimeMs}" ungültig (0-5000ms)`);
+            errs.push(`Tilt pulse "${d.tiltTimeMs}" invalid (0-5000ms)`);
         }
         const pi = parseInt(d.pollInterval, 10);
         if (d.pollInterval !== undefined && d.pollInterval !== '' && (isNaN(pi) || pi < 5 || pi > 3600)) {
-            errs.push(`Poll-Intervall "${d.pollInterval}" ungültig (5-3600s)`);
+            errs.push(`Poll interval "${d.pollInterval}" invalid (5-3600s)`);
         }
         return errs;
     }
@@ -833,7 +833,7 @@ class Zeptrion extends utils.Adapter {
 
     async zrapGet(id, path, axiosOpts = {}) {
         const dev = this.devices[id];
-        if (!dev) throw new Error(`Unbekanntes Gerät ${id}`);
+        if (!dev) throw new Error(`Unknown device ${id}`);
         const res = await dev.client.get(path, { responseType: 'text', transformResponse: [d => d], ...axiosOpts });
         if (res.status >= 400) throw new Error(`HTTP ${res.status}`);
         if (!res.data) return {};
@@ -847,7 +847,7 @@ class Zeptrion extends utils.Adapter {
 
     async zrapPost(id, path, bodyObj) {
         const dev = this.devices[id];
-        if (!dev) throw new Error(`Unbekanntes Gerät ${id}`);
+        if (!dev) throw new Error(`Unknown device ${id}`);
         const data = Object.entries(bodyObj)
             .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
             .join('&');
@@ -863,7 +863,7 @@ class Zeptrion extends utils.Adapter {
     // 3340-2-B + Front 920-330x), daher separat und optional (Konfig-Checkbox).
     async zapiGet(id, path) {
         const dev = this.devices[id];
-        if (!dev) throw new Error(`Unbekanntes Gerät ${id}`);
+        if (!dev) throw new Error(`Unknown device ${id}`);
         const res = await dev.client.get(path);
         if (res.status >= 400) throw new Error(`HTTP ${res.status}`);
         return res.data;
@@ -871,7 +871,7 @@ class Zeptrion extends utils.Adapter {
 
     async zapiPost(id, path, jsonBody) {
         const dev = this.devices[id];
-        if (!dev) throw new Error(`Unbekanntes Gerät ${id}`);
+        if (!dev) throw new Error(`Unknown device ${id}`);
         const res = await dev.client.post(path, jsonBody, {
             headers: { 'Content-Type': 'application/json' }
         });
@@ -895,7 +895,7 @@ class Zeptrion extends utils.Adapter {
         const str = String(value ?? '');
         const bytes = Buffer.byteLength(str, 'utf8');
         if (bytes > maxBytes) {
-            throw new Error(`${fieldName}: ${bytes} Bytes überschreiten das API-Limit von ${maxBytes} Bytes (Achtung: Umlaute zählen als 2 Bytes)`);
+            throw new Error(`${fieldName}: ${bytes} bytes exceed the API limit of ${maxBytes} bytes (note: umlauts count as 2 bytes)`);
         }
         return str;
     }
@@ -908,10 +908,10 @@ class Zeptrion extends utils.Adapter {
      */
     sendChannelCommand(id, chNum, cmd) {
         if (!isValidChCmd(cmd)) {
-            return Promise.reject(new Error(`Ungültiger Kanalbefehl "${cmd}"`));
+            return Promise.reject(new Error(`Invalid channel command "${cmd}"`));
         }
         const dev = this.devices[id];
-        if (!dev) return Promise.reject(new Error(`Unbekanntes Gerät ${id}`));
+        if (!dev) return Promise.reject(new Error(`Unknown device ${id}`));
 
         return new Promise((resolve, reject) => {
             dev.pendingCmds[chNum] = cmd;
@@ -1068,7 +1068,7 @@ class Zeptrion extends utils.Adapter {
         const dev = this.devices[id];
         if (!dev) return;
         if (dev.cfg.kind !== 'blind' || !dev.cfg.travelTimeMsByCh[chNum]) {
-            throw new Error('setPosition erfordert Art=Storen und eine konfigurierte Motor-Laufzeit (>0s) für diesen Kanal');
+            throw new Error('setPosition requires Type=Shutter and a configured motor runtime (>0s) for this channel');
         }
         target = Math.max(0, Math.min(100, Math.round(Number(target))));
         const travel = dev.cfg.travelTimeMsByCh[chNum];
@@ -1393,11 +1393,11 @@ class Zeptrion extends utils.Adapter {
     handleDeviceError(id, err, context) {
         let msg = (err && err.message) || String(err);
         const code = err && err.code;
-        if (code === 'ECONNREFUSED') msg = 'Verbindung verweigert (Gerät aus oder falsche IP?)';
-        else if (code === 'ECONNABORTED') msg = 'Zeitüberschreitung (Gerät nicht erreichbar)';
-        else if (code === 'EHOSTUNREACH') msg = 'Host nicht erreichbar (Netzwerk/Routing prüfen)';
-        else if (code === 'ENOTFOUND') msg = 'Hostname/mDNS-Name nicht auflösbar';
-        else if (code === 'ETIMEDOUT') msg = 'Zeitüberschreitung beim Verbindungsaufbau';
+        if (code === 'ECONNREFUSED') msg = 'Connection refused (device off or wrong IP?)';
+        else if (code === 'ECONNABORTED') msg = 'Timeout (device not reachable)';
+        else if (code === 'EHOSTUNREACH') msg = 'Host unreachable (check network/routing)';
+        else if (code === 'ENOTFOUND') msg = 'Hostname/mDNS name could not be resolved';
+        else if (code === 'ETIMEDOUT') msg = 'Timeout while establishing the connection';
         this.log.warn(`[${id}] Error during ${context}: ${msg}`);
         this.setStateAsync(`${id}.info.lastError`, { val: msg, ack: true }).catch(() => {});
         this.markConnected(id, false);
@@ -1523,7 +1523,7 @@ class Zeptrion extends utils.Adapter {
                 try {
                     body = JSON.parse(String(state.val));
                 } catch (err) {
-                    throw new Error(`ledSet: kein gültiges JSON ("${err.message}"). Beispiel: [{"id":2,"bg":"#220000"}]`);
+                    throw new Error(`ledSet: not valid JSON ("${err.message}"). Example: [{"id":2,"bg":"#220000"}]`);
                 }
                 await this.zapiPost(id, '/zapi/smartfront/led', body);
                 await this.setStateAsync(idFull, { val: state.val, ack: true });
@@ -1634,7 +1634,7 @@ class Zeptrion extends utils.Adapter {
     discoverDevices(timeoutMs = 4000) {
         return new Promise((resolve, reject) => {
             if (!Bonjour) {
-                reject(new Error('Modul "bonjour-service" ist nicht installiert. "npm install bonjour-service" im Adapterverzeichnis ausführen.'));
+                reject(new Error('Module "bonjour-service" is not installed. Run "npm install bonjour-service" in the adapter directory.'));
                 return;
             }
             const bonjour = new Bonjour();
@@ -1742,7 +1742,7 @@ class Zeptrion extends utils.Adapter {
             try {
                 const csv = String((obj.message && obj.message.csv) || '').trim();
                 if (!csv) {
-                    if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'CSV-Feld ist leer. Format: host;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s;laufzeit_kanal_s (nur host ist Pflicht).' }, obj.callback);
+                    if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'CSV field is empty. Format: host;name;channels;type;runtime_s;tilt_ms;smartfront;poll_s;runtime_channel_s (only host is required).' }, obj.callback);
                     return;
                 }
                 const delim = csv.includes(';') ? ';' : ',';
@@ -1775,9 +1775,9 @@ class Zeptrion extends utils.Adapter {
                     if (['licht', 'lampe'].includes(row.kind)) row.kind = 'light';
 
                     const errs = this.validateDeviceRow(row);
-                    if (existingHosts.has(row.host.toLowerCase())) errs.push('Host bereits konfiguriert');
+                    if (existingHosts.has(row.host.toLowerCase())) errs.push('Host already configured');
                     if (errs.length) {
-                        report.push(`❌ Zeile ${i + 1} (${row.host || '?'}): ${errs.join('; ')}`);
+                        report.push(`❌ Row ${i + 1} (${row.host || '?'}): ${errs.join('; ')}`);
                         continue;
                     }
                     // ID aus Host ableiten, Kollisionen auflösen
@@ -1802,7 +1802,7 @@ class Zeptrion extends utils.Adapter {
                     });
                     existingHosts.add(row.host.toLowerCase());
                     existingIds.add(candidate);
-                    report.push(`✅ Zeile ${i + 1}: ${row.name || row.host} (${row.host}) als "${candidate}" übernommen`);
+                    report.push(`✅ Row ${i + 1}: ${row.name || row.host} (${row.host}) imported as "${candidate}"`);
                     added++;
                 }
 
@@ -1810,14 +1810,13 @@ class Zeptrion extends utils.Adapter {
                     instObj.native.devices = devices;
                     await this.setForeignObjectAsync(`system.adapter.${this.namespace}`, instObj);
                 }
-                const result = `${added} von ${lines.length} Zeile(n) importiert.${added ? ' Adapter startet neu; Dialog schliessen und neu öffnen.' : ''}\n\n${report.join('\n')}`;
+                const result = `${added} of ${lines.length} row(s) imported.${added ? ' Adapter restarts; close and reopen the dialog.' : ''}\n\n${report.join('\n')}`;
                 this.log.info(`CSV import: ${added}/${lines.length} rows imported`);
                 if (obj.callback) this.sendTo(obj.from, obj.command, { result }, obj.callback);
             } catch (err) {
-                // UI-facing text (shown in the admin config dialog) stays German for the
-                // German-speaking user base; the log entry itself must be English per checklist.
-                const msg = `CSV-Import fehlgeschlagen: ${err.message || err}`;
-                this.log.warn(`CSV import failed: ${err.message || err}`);
+                // All text sent to the user (log and UI dialog alike) must be English.
+                const msg = `CSV import failed: ${err.message || err}`;
+                this.log.warn(msg);
                 if (obj.callback) this.sendTo(obj.from, obj.command, { error: msg }, obj.callback);
             }
             return;
@@ -1827,7 +1826,7 @@ class Zeptrion extends utils.Adapter {
             const devicesCfg = Array.isArray(this.config.devices) ? this.config.devices : [];
             const rows = devicesCfg.filter(d => d && d.host);
             if (!rows.length) {
-                if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'Keine Geräte mit Host in der Tabelle.' }, obj.callback);
+                if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'No devices with a host in the table.' }, obj.callback);
                 return;
             }
             const lines = [];
@@ -1838,7 +1837,7 @@ class Zeptrion extends utils.Adapter {
                 if (/^\d+\.\d+\.\d+\.\d+$/.test(host)) {
                     const octets = host.split('.').map(Number);
                     if (octets.some(o => o > 255)) {
-                        lines.push(`❌ ${label} (${host}): ungültige IP-Adresse`);
+                        lines.push(`❌ ${label} (${host}): invalid IP address`);
                         continue;
                     }
                 }
@@ -1851,14 +1850,14 @@ class Zeptrion extends utils.Adapter {
                     const idData = (rootKey && parsed[rootKey]) || {};
                     if (String(idData.sys ?? '').toUpperCase() === 'ZEPTRION') {
                         const m = String(idData.type ?? '').match(/^3340-(\d)-/);
-                        const ch = m ? `, ${m[1]} Kanäle` : '';
+                        const ch = m ? `, ${m[1]} channels` : '';
                         lines.push(`✅ ${label} (${host}): zeptrion ${idData.type ?? '?'}${ch}, SW ${idData.sw ?? '?'}, SN ${idData.sn ?? '?'}`);
                     } else {
-                        lines.push(`⚠️ ${label} (${host}): antwortet, aber KEIN zeptrion-Gerät (sys="${idData.sys ?? 'unbekannt'}")`);
+                        lines.push(`⚠️ ${label} (${host}): responds, but is NOT a zeptrion device (sys="${idData.sys ?? 'unknown'}")`);
                     }
                 } catch (err) {
                     const code = err.code || (err.message || '').substring(0, 40);
-                    lines.push(`❌ ${label} (${host}): nicht erreichbar (${code})`);
+                    lines.push(`❌ ${label} (${host}): unreachable (${code})`);
                 }
             }
             const result = lines.join('\n');
@@ -1872,10 +1871,9 @@ class Zeptrion extends utils.Adapter {
                 this.log.info('Starting mDNS discovery for zeptrion devices...');
                 const results = await this.discoverDevices(4000);
                 const added = await this.mergeDiscoveredDevices(results);
-                // UI-facing text (shown in the admin config dialog) stays German for the
-                // German-speaking user base; the log entry itself must be English per checklist.
-                const msg = `Suche abgeschlossen: ${results.length} Gerät(e) im Netz gefunden, ${added} neu (deaktiviert) übernommen. ` +
-                    `Instanz-Konfiguration schliessen und neu öffnen, um sie in der Tabelle zu sehen und zu aktivieren.`;
+                // All text sent to the user (log and UI dialog alike) must be English.
+                const msg = `Discovery finished: ${results.length} device(s) found on the network, ${added} newly added (disabled). ` +
+                    `Close and reopen the instance configuration to see them in the table and enable them.`;
                 this.log.info(`Discovery finished: ${results.length} device(s) found on the network, ${added} newly added (disabled).`);
                 if (obj.callback) {
                     this.sendTo(obj.from, obj.command, { result: msg, devices: results }, obj.callback);
