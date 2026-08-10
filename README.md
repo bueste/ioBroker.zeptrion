@@ -176,6 +176,10 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.12 (2026-08-10)
+
+- Fix a real i18n gap found during independent end-to-end testing of v1.0.11: embedded field-validation messages in the CSV import report stayed English even in the localized report. validateDeviceRow() now returns structured {key, args} entries with two explicit renderers: always-English for logs, I18n.translate() for the UI. Added 13 new i18n keys across all 11 languages. Also added the missing README_de.md to package.json's "files" allowlist - npm auto-includes README.md in every package but NOT README_de.md, so it was silently absent from the published tarball. Verified end-to-end: loaded the real I18n module directly, confirmed log output stays English regardless of active UI language across EN/DE/FR/ZH, and downloaded + extracted the real published npm tarball to confirm packaging.
+
 ### 1.0.11 (2026-08-10)
 
 - Fix: v1.0.10 translated all onMessage() UI text to plain English only. Implemented full multi-language support instead, using the official @iobroker/adapter-core I18n module (reads system.config.common.language automatically, falls back to English for unsupported languages). Added a new i18n/ directory with all 11 required languages. ioBroker log entries remain English-only; only the admin-dialog result text is now localized. Also fixed a packaging bug: the new i18n/ folder was missing from package.json's "files" allowlist, which would have excluded it from the published npm package - caught via an actual npm pack + tarball-extraction test before pushing. Verified round-trip in German, English, and French.
@@ -196,11 +200,7 @@ npm run test:integration   # starts a real js-controller (takes longer)
 ### 1.0.6 (2026-07-22)
 - Fix: reverted validatorErrorText for id/host/travelTimeSecCh back to plain strings - the admin jsonConfig schema requires validatorErrorText to be a string, not an i18n object (E5512). The i18n conversion in 1.0.5 passed lint but failed schema validation.
 
-### 1.0.5 (2026-07-22)
-- Admin UI: the three `validatorErrorText` messages are now inline i18n objects instead of plain English strings (ioBroker checker W5617).
-- Dependencies: raised the declared minimums for `bonjour-service` (^1.2.1 -> ^1.4.3) and `eslint` (^10.6.0 -> ^10.7.0); both were already covered by the existing caret ranges, so no behaviour changes.
-
-### 1.0.4 and older
+### 1.0.5 and older
 
 Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 

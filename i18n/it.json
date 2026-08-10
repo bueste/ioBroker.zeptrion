@@ -12,5 +12,18 @@
     "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
     "testNotZeptrion": "⚠️ %s (%s): risponde, ma NON è un dispositivo zeptrion (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): non raggiungibile (%s)",
-    "discoveryFinished": "Ricerca completata: %s dispositivo/i trovato/i sulla rete, %s aggiunto/i di recente (disattivato/i). Chiudere e riaprire la configurazione dell'istanza per vederli nella tabella e attivarli."
+    "discoveryFinished": "Ricerca completata: %s dispositivo/i trovato/i sulla rete, %s aggiunto/i di recente (disattivato/i). Chiudere e riaprire la configurazione dell'istanza per vederli nella tabella e attivarli.",
+    "validateHostMissing": "Host mancante",
+    "validateHostInvalidChars": "L'host \"%s\" contiene caratteri non validi (nessun http://, nessuno spazio, nessuna porta)",
+    "validateHostInvalidIPv4": "\"%s\" non è un indirizzo IPv4 valido",
+    "validateIdInvalidChars": "L'ID \"%s\" contiene caratteri non validi (consentiti: a-z, 0-9, _, -)",
+    "validateChannelsInvalid": "Canali \"%s\" non validi (1-4)",
+    "validateKindInvalid": "Tipo \"%s\" non valido (unknown/blind/light)",
+    "validateRuntimeInvalid": "Tempo di funzionamento \"%s\" non valido (0-300s)",
+    "validateRuntimePerChannelMax": "Tempo di funzionamento/canale \"%s\": massimo 4 valori",
+    "validateRuntimePerChannelValueInvalid": "Tempo di funzionamento/canale \"%s\": valore \"%s\" non valido (0-300, intero)",
+    "validateTiltPulseInvalid": "Impulso di inclinazione \"%s\" non valido (0-5000ms)",
+    "validatePollIntervalInvalid": "Intervallo di polling \"%s\" non valido (5-3600s)",
+    "validateIdDuplicate": "ID \"%s\" (sanificato \"%s\") assegnato due volte",
+    "validateHostDuplicate": "Host \"%s\" configurato due volte"
 }

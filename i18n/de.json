@@ -12,5 +12,18 @@
     "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
     "testNotZeptrion": "⚠️ %s (%s): antwortet, aber KEIN zeptrion-Gerät (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): nicht erreichbar (%s)",
-    "discoveryFinished": "Suche abgeschlossen: %s Gerät(e) im Netz gefunden, %s neu (deaktiviert) übernommen. Instanz-Konfiguration schliessen und neu öffnen, um sie in der Tabelle zu sehen und zu aktivieren."
+    "discoveryFinished": "Suche abgeschlossen: %s Gerät(e) im Netz gefunden, %s neu (deaktiviert) übernommen. Instanz-Konfiguration schliessen und neu öffnen, um sie in der Tabelle zu sehen und zu aktivieren.",
+    "validateHostMissing": "Host fehlt",
+    "validateHostInvalidChars": "Host \"%s\" enthält ungültige Zeichen (kein http://, keine Leerzeichen, kein Port)",
+    "validateHostInvalidIPv4": "\"%s\" ist keine gültige IPv4-Adresse",
+    "validateIdInvalidChars": "ID \"%s\" enthält ungültige Zeichen (erlaubt: a-z, 0-9, _, -)",
+    "validateChannelsInvalid": "Kanäle \"%s\" ungültig (1-4)",
+    "validateKindInvalid": "Art \"%s\" ungültig (unknown/blind/light)",
+    "validateRuntimeInvalid": "Laufzeit \"%s\" ungültig (0-300s)",
+    "validateRuntimePerChannelMax": "Laufzeit/Kanal \"%s\": maximal 4 Werte",
+    "validateRuntimePerChannelValueInvalid": "Laufzeit/Kanal \"%s\": Wert \"%s\" ungültig (0-300, ganzzahlig)",
+    "validateTiltPulseInvalid": "Kipp-Impuls \"%s\" ungültig (0-5000ms)",
+    "validatePollIntervalInvalid": "Poll-Intervall \"%s\" ungültig (5-3600s)",
+    "validateIdDuplicate": "ID \"%s\" (sanitisiert \"%s\") ist doppelt vergeben",
+    "validateHostDuplicate": "Host \"%s\" ist doppelt konfiguriert"
 }

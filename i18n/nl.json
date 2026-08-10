@@ -12,5 +12,18 @@
     "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
     "testNotZeptrion": "⚠️ %s (%s): reageert, maar is GEEN zeptrion-apparaat (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): onbereikbaar (%s)",
-    "discoveryFinished": "Zoeken voltooid: %s apparaat/apparaten gevonden op het netwerk, %s nieuw toegevoegd (uitgeschakeld). Sluit en heropen de instantieconfiguratie om ze in de tabel te zien en in te schakelen."
+    "discoveryFinished": "Zoeken voltooid: %s apparaat/apparaten gevonden op het netwerk, %s nieuw toegevoegd (uitgeschakeld). Sluit en heropen de instantieconfiguratie om ze in de tabel te zien en in te schakelen.",
+    "validateHostMissing": "Host ontbreekt",
+    "validateHostInvalidChars": "Host \"%s\" bevat ongeldige tekens (geen http://, geen spaties, geen poort)",
+    "validateHostInvalidIPv4": "\"%s\" is geen geldig IPv4-adres",
+    "validateIdInvalidChars": "ID \"%s\" bevat ongeldige tekens (toegestaan: a-z, 0-9, _, -)",
+    "validateChannelsInvalid": "Kanalen \"%s\" ongeldig (1-4)",
+    "validateKindInvalid": "Type \"%s\" ongeldig (unknown/blind/light)",
+    "validateRuntimeInvalid": "Looptijd \"%s\" ongeldig (0-300s)",
+    "validateRuntimePerChannelMax": "Looptijd/kanaal \"%s\": maximaal 4 waarden",
+    "validateRuntimePerChannelValueInvalid": "Looptijd/kanaal \"%s\": waarde \"%s\" ongeldig (0-300, geheel getal)",
+    "validateTiltPulseInvalid": "Kantelpuls \"%s\" ongeldig (0-5000ms)",
+    "validatePollIntervalInvalid": "Poll-interval \"%s\" ongeldig (5-3600s)",
+    "validateIdDuplicate": "ID \"%s\" (opgeschoond \"%s\") dubbel toegewezen",
+    "validateHostDuplicate": "Host \"%s\" dubbel geconfigureerd"
 }

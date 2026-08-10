@@ -12,5 +12,18 @@
     "testDeviceOk": "✅ %s (%s): zeptrion %s%s, ПЗ %s, серійний № %s",
     "testNotZeptrion": "⚠️ %s (%s): відповідає, але НЕ є пристроєм zeptrion (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): недоступний (%s)",
-    "discoveryFinished": "Пошук завершено: знайдено %s пристрій(їв) у мережі, %s додано нових (вимкнено). Закрийте і знову відкрийте конфігурацію екземпляра, щоб побачити їх у таблиці та увімкнути."
+    "discoveryFinished": "Пошук завершено: знайдено %s пристрій(їв) у мережі, %s додано нових (вимкнено). Закрийте і знову відкрийте конфігурацію екземпляра, щоб побачити їх у таблиці та увімкнути.",
+    "validateHostMissing": "Відсутній хост",
+    "validateHostInvalidChars": "Хост \"%s\" містить недопустимі символи (без http://, без пробілів, без порту)",
+    "validateHostInvalidIPv4": "\"%s\" не є дійсною IPv4-адресою",
+    "validateIdInvalidChars": "ID \"%s\" містить недопустимі символи (дозволено: a-z, 0-9, _, -)",
+    "validateChannelsInvalid": "Канали \"%s\" недійсні (1-4)",
+    "validateKindInvalid": "Тип \"%s\" недійсний (unknown/blind/light)",
+    "validateRuntimeInvalid": "Час роботи \"%s\" недійсний (0-300с)",
+    "validateRuntimePerChannelMax": "Час роботи/канал \"%s\": максимум 4 значення",
+    "validateRuntimePerChannelValueInvalid": "Час роботи/канал \"%s\": значення \"%s\" недійсне (0-300, ціле число)",
+    "validateTiltPulseInvalid": "Імпульс нахилу \"%s\" недійсний (0-5000мс)",
+    "validatePollIntervalInvalid": "Інтервал опитування \"%s\" недійсний (5-3600с)",
+    "validateIdDuplicate": "ID \"%s\" (очищено \"%s\") призначено двічі",
+    "validateHostDuplicate": "Хост \"%s\" налаштовано двічі"
 }

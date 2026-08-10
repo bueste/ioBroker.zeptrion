@@ -12,5 +12,18 @@
     "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
     "testNotZeptrion": "⚠️ %s (%s): responds, but is NOT a zeptrion device (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): unreachable (%s)",
-    "discoveryFinished": "Discovery finished: %s device(s) found on the network, %s newly added (disabled). Close and reopen the instance configuration to see them in the table and enable them."
+    "discoveryFinished": "Discovery finished: %s device(s) found on the network, %s newly added (disabled). Close and reopen the instance configuration to see them in the table and enable them.",
+    "validateHostMissing": "Host missing",
+    "validateHostInvalidChars": "Host \"%s\" contains invalid characters (no http://, no spaces, no port)",
+    "validateHostInvalidIPv4": "\"%s\" is not a valid IPv4 address",
+    "validateIdInvalidChars": "ID \"%s\" contains invalid characters (allowed: a-z, 0-9, _, -)",
+    "validateChannelsInvalid": "Channels \"%s\" invalid (1-4)",
+    "validateKindInvalid": "Type \"%s\" invalid (unknown/blind/light)",
+    "validateRuntimeInvalid": "Runtime \"%s\" invalid (0-300s)",
+    "validateRuntimePerChannelMax": "Runtime/channel \"%s\" maximum 4 values",
+    "validateRuntimePerChannelValueInvalid": "Runtime/channel \"%s\": value \"%s\" invalid (0-300, integer)",
+    "validateTiltPulseInvalid": "Tilt pulse \"%s\" invalid (0-5000ms)",
+    "validatePollIntervalInvalid": "Poll interval \"%s\" invalid (5-3600s)",
+    "validateIdDuplicate": "ID \"%s\" (sanitized \"%s\") is assigned twice",
+    "validateHostDuplicate": "Host \"%s\" is configured twice"
 }

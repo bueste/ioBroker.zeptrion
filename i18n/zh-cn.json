@@ -12,5 +12,18 @@
     "testDeviceOk": "✅ %s (%s)：zeptrion %s%s，软件版本 %s，序列号 %s",
     "testNotZeptrion": "⚠️ %s (%s)：有响应，但不是 zeptrion 设备（sys=\"%s\"）",
     "testUnreachable": "❌ %s (%s)：无法访问 (%s)",
-    "discoveryFinished": "搜索完成：在网络中找到 %s 台设备，新增 %s 台（已禁用）。请关闭并重新打开实例配置，以在表格中查看并启用它们。"
+    "discoveryFinished": "搜索完成：在网络中找到 %s 台设备，新增 %s 台（已禁用）。请关闭并重新打开实例配置，以在表格中查看并启用它们。",
+    "validateHostMissing": "缺少主机",
+    "validateHostInvalidChars": "主机 \"%s\" 包含无效字符（不含 http://、不含空格、不含端口）",
+    "validateHostInvalidIPv4": "\"%s\" 不是有效的 IPv4 地址",
+    "validateIdInvalidChars": "ID \"%s\" 包含无效字符（允许：a-z、0-9、_、-）",
+    "validateChannelsInvalid": "通道 \"%s\" 无效（1-4）",
+    "validateKindInvalid": "类型 \"%s\" 无效（unknown/blind/light）",
+    "validateRuntimeInvalid": "运行时间 \"%s\" 无效（0-300秒）",
+    "validateRuntimePerChannelMax": "运行时间/通道 \"%s\"：最多 4 个值",
+    "validateRuntimePerChannelValueInvalid": "运行时间/通道 \"%s\"：值 \"%s\" 无效（0-300，整数）",
+    "validateTiltPulseInvalid": "倾斜脉冲 \"%s\" 无效（0-5000毫秒）",
+    "validatePollIntervalInvalid": "轮询间隔 \"%s\" 无效（5-3600秒）",
+    "validateIdDuplicate": "ID \"%s\"（清理后 \"%s\"）被分配两次",
+    "validateHostDuplicate": "主机 \"%s\" 被配置两次"
 }

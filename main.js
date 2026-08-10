@@ -418,11 +418,11 @@ class Zeptrion extends utils.Adapter {
         for (const d of active) {
             const errs = this.validateDeviceRow(d);
             const sanId = this.sanitize(d.id);
-            if (seenIds.has(sanId)) errs.push(`ID "${d.id}" (sanitized "${sanId}") is assigned twice`);
+            if (seenIds.has(sanId)) errs.push({ key: 'validateIdDuplicate', args: [d.id, sanId] });
             const hostKey = String(d.host).trim().toLowerCase();
-            if (seenHosts.has(hostKey)) errs.push(`Host "${d.host}" is configured twice`);
+            if (seenHosts.has(hostKey)) errs.push({ key: 'validateHostDuplicate', args: [d.host] });
             if (errs.length) {
-                this.log.error(`Device "${d.name || d.id || d.host}" skipped: ${errs.join('; ')}`);
+                this.log.error(`Device "${d.name || d.id || d.host}" skipped: ${this.renderValidationErrorsEn(errs)}`);
                 continue;
             }
             seenIds.add(sanId);
@@ -492,54 +492,85 @@ class Zeptrion extends utils.Adapter {
 
     /** Validiert eine Geräte-Zeile aus der Konfiguration/dem CSV-Import. Gibt eine
      * Liste menschenlesbarer Fehler zurück (leer = gültig). */
+    // Field-validation templates, always in English regardless of the current I18n language -
+    // used exclusively for this.log.*() output, which must stay English per the adapter checklist.
+    // Keys match the corresponding entries in i18n/<lang>.json used for the localized UI path
+    // (CSV import report) - see validateDeviceRow()/renderValidationErrorsEn()/renderValidationErrorsLocalized().
+    static VALIDATION_TEMPLATES_EN = {
+        validateHostMissing: () => 'Host missing',
+        validateHostInvalidChars: (host) => `Host "${host}" contains invalid characters (no http://, no spaces, no port)`,
+        validateHostInvalidIPv4: (host) => `"${host}" is not a valid IPv4 address`,
+        validateIdInvalidChars: (id) => `ID "${id}" contains invalid characters (allowed: a-z, 0-9, _, -)`,
+        validateChannelsInvalid: (channels) => `Channels "${channels}" invalid (1-4)`,
+        validateKindInvalid: (kind) => `Type "${kind}" invalid (unknown/blind/light)`,
+        validateRuntimeInvalid: (t) => `Runtime "${t}" invalid (0-300s)`,
+        validateRuntimePerChannelMax: (v) => `Runtime/channel "${v}" maximum 4 values`,
+        validateRuntimePerChannelValueInvalid: (v, p) => `Runtime/channel "${v}": value "${p}" invalid (0-300, integer)`,
+        validateTiltPulseInvalid: (t) => `Tilt pulse "${t}" invalid (0-5000ms)`,
+        validatePollIntervalInvalid: (t) => `Poll interval "${t}" invalid (5-3600s)`,
+        validateIdDuplicate: (id, sanId) => `ID "${id}" (sanitized "${sanId}") is assigned twice`,
+        validateHostDuplicate: (host) => `Host "${host}" is configured twice`,
+    };
+
+    // Renders validateDeviceRow() entries in English only - for this.log.*() call sites.
+    renderValidationErrorsEn(errs) {
+        return errs.map(e => Zeptrion.VALIDATION_TEMPLATES_EN[e.key](...e.args)).join('; ');
+    }
+
+    // Renders validateDeviceRow() entries in the current adapter language - for UI-facing
+    // sendTo() responses (e.g. the CSV import report).
+    renderValidationErrorsLocalized(errs) {
+        return errs.map(e => I18n.translate(e.key, ...e.args)).join('; ');
+    }
+
     validateDeviceRow(d) {
         const errs = [];
         const host = String(d.host || '').trim();
         if (!host) {
-            errs.push('Host missing');
+            errs.push({ key: 'validateHostMissing', args: [] });
         } else if (!/^[a-zA-Z0-9.-]+$/.test(host)) {
-            errs.push(`Host "${host}" contains invalid characters (no http://, no spaces, no port)`);
+            errs.push({ key: 'validateHostInvalidChars', args: [host] });
         } else if (/^\d+\.\d+\.\d+\.\d+$/.test(host)) {
             const octets = host.split('.').map(Number);
             if (octets.length !== 4 || octets.some(o => o < 0 || o > 255)) {
-                errs.push(`"${host}" is not a valid IPv4 address`);
+                errs.push({ key: 'validateHostInvalidIPv4', args: [host] });
             }
         }
         if (d.id && !/^[a-zA-Z0-9_-]+$/.test(String(d.id))) {
-            errs.push(`ID "${d.id}" contains invalid characters (allowed: a-z, 0-9, _, -)`);
+            errs.push({ key: 'validateIdInvalidChars', args: [d.id] });
         }
         const ch = parseInt(d.channels, 10);
         if (d.channels !== undefined && d.channels !== '' && (isNaN(ch) || ch < 1 || ch > 4)) {
-            errs.push(`Channels "${d.channels}" invalid (1-4)`);
+            errs.push({ key: 'validateChannelsInvalid', args: [d.channels] });
         }
         if (d.kind !== undefined && d.kind !== '' && !['unknown', 'blind', 'light'].includes(String(d.kind))) {
-            errs.push(`Type "${d.kind}" invalid (unknown/blind/light)`);
+            errs.push({ key: 'validateKindInvalid', args: [d.kind] });
         }
         const tt = parseInt(d.travelTimeSec, 10);
         if (d.travelTimeSec !== undefined && d.travelTimeSec !== '' && (isNaN(tt) || tt < 0 || tt > 300)) {
-            errs.push(`Runtime "${d.travelTimeSec}" invalid (0-300s)`);
+            errs.push({ key: 'validateRuntimeInvalid', args: [d.travelTimeSec] });
         }
         if (d.travelTimeSecCh !== undefined && String(d.travelTimeSecCh).trim() !== '') {
             const parts = String(d.travelTimeSecCh).split(',').map(s => s.trim());
             if (parts.length > 4) {
-                errs.push(`Runtime/channel "${d.travelTimeSecCh}": maximum 4 values`);
+                errs.push({ key: 'validateRuntimePerChannelMax', args: [d.travelTimeSecCh] });
             }
             for (const p of parts) {
                 if (p === '') continue; // leerer Eintrag = Fallback auf travelTimeSec
                 const v = parseInt(p, 10);
                 if (isNaN(v) || v < 0 || v > 300 || String(v) !== p) {
-                    errs.push(`Runtime/channel "${d.travelTimeSecCh}": value "${p}" invalid (0-300, integer)`);
+                    errs.push({ key: 'validateRuntimePerChannelValueInvalid', args: [d.travelTimeSecCh, p] });
                     break;
                 }
             }
         }
         const tp = parseInt(d.tiltTimeMs, 10);
         if (d.tiltTimeMs !== undefined && d.tiltTimeMs !== '' && (isNaN(tp) || tp < 0 || tp > 5000)) {
-            errs.push(`Tilt pulse "${d.tiltTimeMs}" invalid (0-5000ms)`);
+            errs.push({ key: 'validateTiltPulseInvalid', args: [d.tiltTimeMs] });
         }
         const pi = parseInt(d.pollInterval, 10);
         if (d.pollInterval !== undefined && d.pollInterval !== '' && (isNaN(pi) || pi < 5 || pi > 3600)) {
-            errs.push(`Poll interval "${d.pollInterval}" invalid (5-3600s)`);
+            errs.push({ key: 'validatePollIntervalInvalid', args: [d.pollInterval] });
         }
         return errs;
     }
@@ -1784,9 +1815,9 @@ class Zeptrion extends utils.Adapter {
                     if (['licht', 'lampe'].includes(row.kind)) row.kind = 'light';
 
                     const errs = this.validateDeviceRow(row);
-                    if (existingHosts.has(row.host.toLowerCase())) errs.push(I18n.translate('hostAlreadyConfigured'));
+                    if (existingHosts.has(row.host.toLowerCase())) errs.push({ key: 'hostAlreadyConfigured', args: [] });
                     if (errs.length) {
-                        report.push(I18n.translate('csvRowError', i + 1, row.host || '?', errs.join('; ')));
+                        report.push(I18n.translate('csvRowError', i + 1, row.host || '?', this.renderValidationErrorsLocalized(errs)));
                         continue;
                     }
                     // ID aus Host ableiten, Kollisionen auflösen
