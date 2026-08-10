@@ -1,0 +1,16 @@
+{
+    "csvFieldEmpty": "Le champ CSV est vide. Format : host;name;channels;type;runtime_s;tilt_ms;smartfront;poll_s;runtime_channel_s (seul host est requis).",
+    "hostAlreadyConfigured": "Hôte déjà configuré",
+    "csvRowError": "❌ Ligne %s (%s) : %s",
+    "csvRowImported": "✅ Ligne %s : %s (%s) importé comme \"%s\"",
+    "csvImportSummary": "%s ligne(s) sur %s importée(s).%s\n\n%s",
+    "csvImportRestartHint": " L'adaptateur redémarre ; fermez et rouvrez la boîte de dialogue.",
+    "csvImportFailed": "Échec de l'importation CSV : %s",
+    "noDevicesWithHost": "Aucun appareil avec un hôte dans le tableau.",
+    "testInvalidIp": "❌ %s (%s) : adresse IP invalide",
+    "testChannelsSuffix": ", %s canaux",
+    "testDeviceOk": "✅ %s (%s) : zeptrion %s%s, SW %s, SN %s",
+    "testNotZeptrion": "⚠️ %s (%s) : répond, mais n'est PAS un appareil zeptrion (sys=\"%s\")",
+    "testUnreachable": "❌ %s (%s) : injoignable (%s)",
+    "discoveryFinished": "Recherche terminée : %s appareil(s) trouvé(s) sur le réseau, %s nouvellement ajouté(s) (désactivé(s)). Fermez et rouvrez la configuration de l'instance pour les voir dans le tableau et les activer."
+}

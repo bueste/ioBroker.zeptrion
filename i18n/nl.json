@@ -1,0 +1,16 @@
+{
+    "csvFieldEmpty": "CSV-veld is leeg. Formaat: host;name;channels;type;runtime_s;tilt_ms;smartfront;poll_s;runtime_channel_s (alleen host is verplicht).",
+    "hostAlreadyConfigured": "Host al geconfigureerd",
+    "csvRowError": "❌ Rij %s (%s): %s",
+    "csvRowImported": "✅ Rij %s: %s (%s) geïmporteerd als \"%s\"",
+    "csvImportSummary": "%s van %s rij(en) geïmporteerd.%s\n\n%s",
+    "csvImportRestartHint": " Adapter herstart; sluit en heropen het dialoogvenster.",
+    "csvImportFailed": "CSV-import mislukt: %s",
+    "noDevicesWithHost": "Geen apparaten met een host in de tabel.",
+    "testInvalidIp": "❌ %s (%s): ongeldig IP-adres",
+    "testChannelsSuffix": ", %s kanalen",
+    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
+    "testNotZeptrion": "⚠️ %s (%s): reageert, maar is GEEN zeptrion-apparaat (sys=\"%s\")",
+    "testUnreachable": "❌ %s (%s): onbereikbaar (%s)",
+    "discoveryFinished": "Zoeken voltooid: %s apparaat/apparaten gevonden op het netwerk, %s nieuw toegevoegd (uitgeschakeld). Sluit en heropen de instantieconfiguratie om ze in de tabel te zien en in te schakelen."
+}

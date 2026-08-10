@@ -1,0 +1,16 @@
+{
+    "csvFieldEmpty": "CSV 字段为空。格式：host;name;channels;type;runtime_s;tilt_ms;smartfront;poll_s;runtime_channel_s（仅 host 为必填）。",
+    "hostAlreadyConfigured": "主机已配置",
+    "csvRowError": "❌ 第 %s 行（%s）：%s",
+    "csvRowImported": "✅ 第 %s 行：%s (%s) 已导入为 \"%s\"",
+    "csvImportSummary": "已导入 %s / %s 行。%s\n\n%s",
+    "csvImportRestartHint": " 适配器正在重启；请关闭并重新打开对话框。",
+    "csvImportFailed": "CSV 导入失败：%s",
+    "noDevicesWithHost": "表格中没有带主机的设备。",
+    "testInvalidIp": "❌ %s (%s)：无效的 IP 地址",
+    "testChannelsSuffix": "，%s 个通道",
+    "testDeviceOk": "✅ %s (%s)：zeptrion %s%s，软件版本 %s，序列号 %s",
+    "testNotZeptrion": "⚠️ %s (%s)：有响应，但不是 zeptrion 设备（sys=\"%s\"）",
+    "testUnreachable": "❌ %s (%s)：无法访问 (%s)",
+    "discoveryFinished": "搜索完成：在网络中找到 %s 台设备，新增 %s 台（已禁用）。请关闭并重新打开实例配置，以在表格中查看并启用它们。"
+}

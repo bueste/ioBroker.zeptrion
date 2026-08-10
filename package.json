@@ -1,6 +1,6 @@
 {
   "name": "iobroker.zeptrion",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "ioBroker Adapter für Feller zeptrion / zApp WLAN-Aktoren (WLAN-Nebenstelle 4K, WLAN-Zwischenmodul 2K) über die zrap Webservice API - inkl. Sammelbefehlen für Hagelalarm und mDNS-Discovery",
   "author": "Stefan Bühler",
   "license": "MIT",
@@ -33,6 +33,7 @@
     "admin/",
     "main.js",
     "lib/",
+    "i18n/",
     "io-package.json",
     "LICENSE"
   ],

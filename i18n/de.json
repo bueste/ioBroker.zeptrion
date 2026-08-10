@@ -1,0 +1,16 @@
+{
+    "csvFieldEmpty": "CSV-Feld ist leer. Format: host;name;kanäle;art;laufzeit_s;kipp_ms;smartfront;poll_s;laufzeit_kanal_s (nur host ist Pflicht).",
+    "hostAlreadyConfigured": "Host bereits konfiguriert",
+    "csvRowError": "❌ Zeile %s (%s): %s",
+    "csvRowImported": "✅ Zeile %s: %s (%s) als \"%s\" übernommen",
+    "csvImportSummary": "%s von %s Zeile(n) importiert.%s\n\n%s",
+    "csvImportRestartHint": " Adapter startet neu; Dialog schliessen und neu öffnen.",
+    "csvImportFailed": "CSV-Import fehlgeschlagen: %s",
+    "noDevicesWithHost": "Keine Geräte mit Host in der Tabelle.",
+    "testInvalidIp": "❌ %s (%s): ungültige IP-Adresse",
+    "testChannelsSuffix": ", %s Kanäle",
+    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
+    "testNotZeptrion": "⚠️ %s (%s): antwortet, aber KEIN zeptrion-Gerät (sys=\"%s\")",
+    "testUnreachable": "❌ %s (%s): nicht erreichbar (%s)",
+    "discoveryFinished": "Suche abgeschlossen: %s Gerät(e) im Netz gefunden, %s neu (deaktiviert) übernommen. Instanz-Konfiguration schliessen und neu öffnen, um sie in der Tabelle zu sehen und zu aktivieren."
+}

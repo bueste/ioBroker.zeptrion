@@ -1,0 +1,16 @@
+{
+    "csvFieldEmpty": "CSV field is empty. Format: host;name;channels;type;runtime_s;tilt_ms;smartfront;poll_s;runtime_channel_s (only host is required).",
+    "hostAlreadyConfigured": "Host already configured",
+    "csvRowError": "❌ Row %s (%s): %s",
+    "csvRowImported": "✅ Row %s: %s (%s) imported as \"%s\"",
+    "csvImportSummary": "%s of %s row(s) imported.%s\n\n%s",
+    "csvImportRestartHint": " Adapter restarts; close and reopen the dialog.",
+    "csvImportFailed": "CSV import failed: %s",
+    "noDevicesWithHost": "No devices with a host in the table.",
+    "testInvalidIp": "❌ %s (%s): invalid IP address",
+    "testChannelsSuffix": ", %s channels",
+    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
+    "testNotZeptrion": "⚠️ %s (%s): responds, but is NOT a zeptrion device (sys=\"%s\")",
+    "testUnreachable": "❌ %s (%s): unreachable (%s)",
+    "discoveryFinished": "Discovery finished: %s device(s) found on the network, %s newly added (disabled). Close and reopen the instance configuration to see them in the table and enable them."
+}

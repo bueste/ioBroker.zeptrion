@@ -1,0 +1,16 @@
+{
+    "csvFieldEmpty": "Поле CSV пустое. Формат: host;name;channels;type;runtime_s;tilt_ms;smartfront;poll_s;runtime_channel_s (обязателен только host).",
+    "hostAlreadyConfigured": "Хост уже настроен",
+    "csvRowError": "❌ Строка %s (%s): %s",
+    "csvRowImported": "✅ Строка %s: %s (%s) добавлена как \"%s\"",
+    "csvImportSummary": "%s из %s строк(и) импортировано.%s\n\n%s",
+    "csvImportRestartHint": " Адаптер перезапускается; закройте и снова откройте диалог.",
+    "csvImportFailed": "Импорт CSV не удался: %s",
+    "noDevicesWithHost": "В таблице нет устройств с указанным хостом.",
+    "testInvalidIp": "❌ %s (%s): недопустимый IP-адрес",
+    "testChannelsSuffix": ", %s каналов",
+    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, ПО %s, серийный № %s",
+    "testNotZeptrion": "⚠️ %s (%s): отвечает, но НЕ является устройством zeptrion (sys=\"%s\")",
+    "testUnreachable": "❌ %s (%s): недоступен (%s)",
+    "discoveryFinished": "Поиск завершён: найдено %s устройств(о) в сети, %s добавлено новых (отключены). Закройте и снова откройте конфигурацию экземпляра, чтобы увидеть их в таблице и включить."
+}

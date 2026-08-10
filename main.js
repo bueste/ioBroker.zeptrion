@@ -19,6 +19,7 @@
  */
 
 const utils = require('@iobroker/adapter-core');
+const { I18n } = require('@iobroker/adapter-core');
 const axios = require('axios');
 const { XMLParser } = require('fast-xml-parser');
 
@@ -353,6 +354,14 @@ class Zeptrion extends utils.Adapter {
     }
 
     async onReady() {
+        // Initializes the runtime message-translation system (i18n/*.json) - reads the ioBroker
+        // system language from system.config.common.language automatically. Used for onMessage()
+        // result text (CSV import report, device test, discovery summary) shown in the admin
+        // dialog, so German UI users get German results while everyone else gets English or their
+        // own configured language, per maintainer requirement (all user-facing text must be
+        // English or full i18n - not always German regardless of the system language).
+        await I18n.init(__dirname, this);
+
         // One-time (cheap-and-idempotent-every-startup) fix for role/name mistakes present in
         // objects created before this fix (see CHANGELOG). ensureState()/setObjectNotExistsAsync()
         // never touches an object that already exists, so simply updating the adapter does not
@@ -1742,7 +1751,7 @@ class Zeptrion extends utils.Adapter {
             try {
                 const csv = String((obj.message && obj.message.csv) || '').trim();
                 if (!csv) {
-                    if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'CSV field is empty. Format: host;name;channels;type;runtime_s;tilt_ms;smartfront;poll_s;runtime_channel_s (only host is required).' }, obj.callback);
+                    if (obj.callback) this.sendTo(obj.from, obj.command, { result: I18n.translate('csvFieldEmpty') }, obj.callback);
                     return;
                 }
                 const delim = csv.includes(';') ? ';' : ',';
@@ -1775,9 +1784,9 @@ class Zeptrion extends utils.Adapter {
                     if (['licht', 'lampe'].includes(row.kind)) row.kind = 'light';
 
                     const errs = this.validateDeviceRow(row);
-                    if (existingHosts.has(row.host.toLowerCase())) errs.push('Host already configured');
+                    if (existingHosts.has(row.host.toLowerCase())) errs.push(I18n.translate('hostAlreadyConfigured'));
                     if (errs.length) {
-                        report.push(`❌ Row ${i + 1} (${row.host || '?'}): ${errs.join('; ')}`);
+                        report.push(I18n.translate('csvRowError', i + 1, row.host || '?', errs.join('; ')));
                         continue;
                     }
                     // ID aus Host ableiten, Kollisionen auflösen
@@ -1802,7 +1811,7 @@ class Zeptrion extends utils.Adapter {
                     });
                     existingHosts.add(row.host.toLowerCase());
                     existingIds.add(candidate);
-                    report.push(`✅ Row ${i + 1}: ${row.name || row.host} (${row.host}) imported as "${candidate}"`);
+                    report.push(I18n.translate('csvRowImported', i + 1, row.name || row.host, row.host, candidate));
                     added++;
                 }
 
@@ -1810,13 +1819,15 @@ class Zeptrion extends utils.Adapter {
                     instObj.native.devices = devices;
                     await this.setForeignObjectAsync(`system.adapter.${this.namespace}`, instObj);
                 }
-                const result = `${added} of ${lines.length} row(s) imported.${added ? ' Adapter restarts; close and reopen the dialog.' : ''}\n\n${report.join('\n')}`;
+                const restartHint = added ? I18n.translate('csvImportRestartHint') : '';
+                const result = I18n.translate('csvImportSummary', added, lines.length, restartHint, report.join('\n'));
                 this.log.info(`CSV import: ${added}/${lines.length} rows imported`);
                 if (obj.callback) this.sendTo(obj.from, obj.command, { result }, obj.callback);
             } catch (err) {
-                // All text sent to the user (log and UI dialog alike) must be English.
-                const msg = `CSV import failed: ${err.message || err}`;
-                this.log.warn(msg);
+                // Log entry stays English regardless of system language; the UI-facing message
+                // is localized separately via I18n.translate().
+                this.log.warn(`CSV import failed: ${err.message || err}`);
+                const msg = I18n.translate('csvImportFailed', err.message || err);
                 if (obj.callback) this.sendTo(obj.from, obj.command, { error: msg }, obj.callback);
             }
             return;
@@ -1826,7 +1837,7 @@ class Zeptrion extends utils.Adapter {
             const devicesCfg = Array.isArray(this.config.devices) ? this.config.devices : [];
             const rows = devicesCfg.filter(d => d && d.host);
             if (!rows.length) {
-                if (obj.callback) this.sendTo(obj.from, obj.command, { result: 'No devices with a host in the table.' }, obj.callback);
+                if (obj.callback) this.sendTo(obj.from, obj.command, { result: I18n.translate('noDevicesWithHost') }, obj.callback);
                 return;
             }
             const lines = [];
@@ -1837,7 +1848,7 @@ class Zeptrion extends utils.Adapter {
                 if (/^\d+\.\d+\.\d+\.\d+$/.test(host)) {
                     const octets = host.split('.').map(Number);
                     if (octets.some(o => o > 255)) {
-                        lines.push(`❌ ${label} (${host}): invalid IP address`);
+                        lines.push(I18n.translate('testInvalidIp', label, host));
                         continue;
                     }
                 }
@@ -1850,18 +1861,18 @@ class Zeptrion extends utils.Adapter {
                     const idData = (rootKey && parsed[rootKey]) || {};
                     if (String(idData.sys ?? '').toUpperCase() === 'ZEPTRION') {
                         const m = String(idData.type ?? '').match(/^3340-(\d)-/);
-                        const ch = m ? `, ${m[1]} channels` : '';
-                        lines.push(`✅ ${label} (${host}): zeptrion ${idData.type ?? '?'}${ch}, SW ${idData.sw ?? '?'}, SN ${idData.sn ?? '?'}`);
+                        const ch = m ? I18n.translate('testChannelsSuffix', m[1]) : '';
+                        lines.push(I18n.translate('testDeviceOk', label, host, idData.type ?? '?', ch, idData.sw ?? '?', idData.sn ?? '?'));
                     } else {
-                        lines.push(`⚠️ ${label} (${host}): responds, but is NOT a zeptrion device (sys="${idData.sys ?? 'unknown'}")`);
+                        lines.push(I18n.translate('testNotZeptrion', label, host, idData.sys ?? 'unknown'));
                     }
                 } catch (err) {
                     const code = err.code || (err.message || '').substring(0, 40);
-                    lines.push(`❌ ${label} (${host}): unreachable (${code})`);
+                    lines.push(I18n.translate('testUnreachable', label, host, code));
                 }
             }
             const result = lines.join('\n');
-            this.log.info(`Device test:\n${result}`);
+            this.log.info(`Device test: ${lines.length} device(s) checked`);
             if (obj.callback) this.sendTo(obj.from, obj.command, { result }, obj.callback);
             return;
         }
@@ -1871,10 +1882,10 @@ class Zeptrion extends utils.Adapter {
                 this.log.info('Starting mDNS discovery for zeptrion devices...');
                 const results = await this.discoverDevices(4000);
                 const added = await this.mergeDiscoveredDevices(results);
-                // All text sent to the user (log and UI dialog alike) must be English.
-                const msg = `Discovery finished: ${results.length} device(s) found on the network, ${added} newly added (disabled). ` +
-                    `Close and reopen the instance configuration to see them in the table and enable them.`;
+                // Log entry stays English regardless of system language; the UI-facing message
+                // is localized separately via I18n.translate().
                 this.log.info(`Discovery finished: ${results.length} device(s) found on the network, ${added} newly added (disabled).`);
+                const msg = I18n.translate('discoveryFinished', results.length, added);
                 if (obj.callback) {
                     this.sendTo(obj.from, obj.command, { result: msg, devices: results }, obj.callback);
                 }

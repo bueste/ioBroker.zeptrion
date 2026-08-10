@@ -176,6 +176,10 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.11 (2026-08-10)
+
+- Fix: v1.0.10 translated all onMessage() UI text to plain English only. Implemented full multi-language support instead, using the official @iobroker/adapter-core I18n module (reads system.config.common.language automatically, falls back to English for unsupported languages). Added a new i18n/ directory with all 11 required languages. ioBroker log entries remain English-only; only the admin-dialog result text is now localized. Also fixed a packaging bug: the new i18n/ folder was missing from package.json's "files" allowlist, which would have excluded it from the published npm package - caught via an actual npm pack + tarball-extraction test before pushing. Verified round-trip in German, English, and French.
+
 ### 1.0.10 (2026-08-10)
 
 - Fix all remaining findings from the follow-up review: translated 18 German error messages in validateDeviceRow(), the 5 error-code-to-message translations in handleDeviceError(), 9 German strings in thrown Error objects, and the bonjour-service install-hint rejection message. Per explicit maintainer direction, all UI-facing result text in onMessage (CSV import report, device test results, discovery summary) is now English as well, superseding the earlier decision to keep it German for the target audience. No migration needed - none of these fixes touch persisted object common properties.
@@ -196,10 +200,7 @@ npm run test:integration   # starts a real js-controller (takes longer)
 - Admin UI: the three `validatorErrorText` messages are now inline i18n objects instead of plain English strings (ioBroker checker W5617).
 - Dependencies: raised the declared minimums for `bonjour-service` (^1.2.1 -> ^1.4.3) and `eslint` (^10.6.0 -> ^10.7.0); both were already covered by the existing caret ranges, so no behaviour changes.
 
-### 1.0.4 (2026-07-21)
-- Documentation only: added a Buy Me a Coffee link next to the PayPal donate badge. No functional changes.
-
-### 1.0.3 and older
+### 1.0.4 and older
 
 Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 
