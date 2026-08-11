@@ -9,7 +9,7 @@
     "noDevicesWithHost": "Brak urządzeń z hostem w tabeli.",
     "testInvalidIp": "❌ %s (%s): nieprawidłowy adres IP",
     "testChannelsSuffix": ", %s kanałów",
-    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
+    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, Nr seryjny %s",
     "testNotZeptrion": "⚠️ %s (%s): odpowiada, ale NIE jest urządzeniem zeptrion (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): niedostępny (%s)",
     "discoveryFinished": "Wyszukiwanie zakończone: znaleziono %s urządzenie(a) w sieci, dodano %s nowych (wyłączonych). Zamknij i otwórz ponownie konfigurację instancji, aby zobaczyć je w tabeli i je włączyć.",

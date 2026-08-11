@@ -9,7 +9,7 @@
     "noDevicesWithHost": "Nessun dispositivo con host nella tabella.",
     "testInvalidIp": "❌ %s (%s): indirizzo IP non valido",
     "testChannelsSuffix": ", %s canali",
-    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
+    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, N. Serie %s",
     "testNotZeptrion": "⚠️ %s (%s): risponde, ma NON è un dispositivo zeptrion (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): non raggiungibile (%s)",
     "discoveryFinished": "Ricerca completata: %s dispositivo/i trovato/i sulla rete, %s aggiunto/i di recente (disattivato/i). Chiudere e riaprire la configurazione dell'istanza per vederli nella tabella e attivarli.",

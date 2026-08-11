@@ -9,7 +9,7 @@
     "noDevicesWithHost": "Keine Geräte mit Host in der Tabelle.",
     "testInvalidIp": "❌ %s (%s): ungültige IP-Adresse",
     "testChannelsSuffix": ", %s Kanäle",
-    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
+    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, Seriennr. %s",
     "testNotZeptrion": "⚠️ %s (%s): antwortet, aber KEIN zeptrion-Gerät (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): nicht erreichbar (%s)",
     "discoveryFinished": "Suche abgeschlossen: %s Gerät(e) im Netz gefunden, %s neu (deaktiviert) übernommen. Instanz-Konfiguration schliessen und neu öffnen, um sie in der Tabelle zu sehen und zu aktivieren.",

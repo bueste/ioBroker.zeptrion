@@ -9,7 +9,7 @@
     "noDevicesWithHost": "No hay dispositivos con host en la tabla.",
     "testInvalidIp": "❌ %s (%s): dirección IP no válida",
     "testChannelsSuffix": ", %s canales",
-    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
+    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, N.º Serie %s",
     "testNotZeptrion": "⚠️ %s (%s): responde, pero NO es un dispositivo zeptrion (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): inaccesible (%s)",
     "discoveryFinished": "Búsqueda finalizada: %s dispositivo(s) encontrado(s) en la red, %s añadido(s) recientemente (desactivado). Cierre y vuelva a abrir la configuración de la instancia para verlos en la tabla y activarlos.",

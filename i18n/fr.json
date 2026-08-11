@@ -9,7 +9,7 @@
     "noDevicesWithHost": "Aucun appareil avec un hôte dans le tableau.",
     "testInvalidIp": "❌ %s (%s) : adresse IP invalide",
     "testChannelsSuffix": ", %s canaux",
-    "testDeviceOk": "✅ %s (%s) : zeptrion %s%s, SW %s, SN %s",
+    "testDeviceOk": "✅ %s (%s) : zeptrion %s%s, SW %s, N° série %s",
     "testNotZeptrion": "⚠️ %s (%s) : répond, mais n'est PAS un appareil zeptrion (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s) : injoignable (%s)",
     "discoveryFinished": "Recherche terminée : %s appareil(s) trouvé(s) sur le réseau, %s nouvellement ajouté(s) (désactivé(s)). Fermez et rouvrez la configuration de l'instance pour les voir dans le tableau et les activer.",

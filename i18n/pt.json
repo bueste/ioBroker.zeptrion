@@ -9,7 +9,7 @@
     "noDevicesWithHost": "Nenhum dispositivo com host na tabela.",
     "testInvalidIp": "❌ %s (%s): endereço IP inválido",
     "testChannelsSuffix": ", %s canais",
-    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, SN %s",
+    "testDeviceOk": "✅ %s (%s): zeptrion %s%s, SW %s, N.º Série %s",
     "testNotZeptrion": "⚠️ %s (%s): responde, mas NÃO é um dispositivo zeptrion (sys=\"%s\")",
     "testUnreachable": "❌ %s (%s): inacessível (%s)",
     "discoveryFinished": "Descoberta concluída: %s dispositivo(s) encontrado(s) na rede, %s adicionado(s) recentemente (desativado). Feche e reabra a configuração da instância para os ver na tabela e ativá-los.",
