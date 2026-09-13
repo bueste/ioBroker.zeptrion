@@ -176,6 +176,10 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.16 (2026-09-13)
+
+- Docs only: changed the contact email in the copyright lines from a personal address to iobroker@mailcarrier.ch. No functional changes.
+
 ### 1.0.15 (2026-09-13)
 
 - Fix: the v1.0.14 changelog entry itself repeated the exact same mistake it was fixing - translations were a condensed summary instead of a proper full translation. Caught by running the official repochecker locally against the live repository. Expanded to proper, complete translations. Also confirmed via the same repochecker run that the E4048, W0034, and S5026 findings from v1.0.14 are now resolved. No functional code changes.
@@ -200,10 +204,7 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 - Fix all remaining findings from the follow-up review: translated 18 German error messages in validateDeviceRow(), the 5 error-code-to-message translations in handleDeviceError(), 9 German strings in thrown Error objects, and the bonjour-service install-hint rejection message. Per explicit maintainer direction, all UI-facing result text in onMessage (CSV import report, device test results, discovery summary) is now English as well, superseding the earlier decision to keep it German for the target audience. No migration needed - none of these fixes touch persisted object common properties.
 
-### 1.0.9 (2026-08-08)
-- Fix: the common.name i18n conversion from 1.0.8 only applied to newly created objects (setObjectNotExistsAsync/ensureState never update existing ones) - any installation upgrading from <=1.0.7 kept the old plain-German name strings forever. migrateObjectRoles() now also force-corrects these on every startup via a value-based lookup table generated from the same translations already used in the object-creation code, plus dedicated regex rules for the two dynamic cases (scene button names, tilt pulse duration). Also fixes two translation gaps that were missed in 1.0.8 (network info fields and the shutter position estimate/move descriptions) which the extraction script used to build the migration table happened to catch. Verified against a live object dump (409 objects, 4 devices): corrects exactly the 385 affected objects, 0 false positives on user-configured device/room names.
-
-### 1.0.8 and older
+### 1.0.9 and older
 
 Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 
@@ -211,7 +212,7 @@ Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 
 MIT License
 
-Copyright (c) 2026 Stefan Bühler <stefan.buehler46@gmail.com>
+Copyright (c) 2026 Stefan Bühler <iobroker@mailcarrier.ch>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
