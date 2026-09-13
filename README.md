@@ -176,6 +176,10 @@ npm run test:integration   # starts a real js-controller (takes longer)
 
 ## Changelog
 
+### 1.0.14 (2026-09-13)
+
+- Docs/metadata only, no code changes: added a contact email to the copyright lines in README.md, LICENSE, and package.json's author field. Expanded the common.news translations for versions 1.0.7-1.0.13 in all 8 languages that were significantly shorter than the English original. Bumped a few devDependencies to their current recommended versions and added the release-script-plugin-manual-review plugin.
+
 ### 1.0.13 (2026-08-11)
 
 - Fix E5606 (untranslated i18n entries): testDeviceOk was never actually translated for de/es/it/nl/pl/pt (silently kept the English copy). Also fixed the identical issue in fr, missed by the checker's exact-match heuristic due to a spacing difference. Verified with a full sweep of all 11 i18n files against the English source - no other matches found.
@@ -198,10 +202,7 @@ npm run test:integration   # starts a real js-controller (takes longer)
 ### 1.0.8 (2026-08-08)
 - Fix all findings from the manual maintainer review (PR #6327): removed the manual npm installation section from README.md/README_de.md (E6012, prohibited regardless of stated intent); added a verified link to the Feller product page; translated all 40+ German log messages to English (UI-facing result text for CSV import/discovery, shown in the admin config dialog, is intentionally kept German and decoupled from the log call); converted all 50 German common.name strings (incl. the CH_BUTTONS constant and dynamic channel/scene names) to full 11-language i18n objects; completed io-package.json instanceObjects translations for 'info' and 'control' (info.connection already had all 11 languages).
 
-### 1.0.7 (2026-07-22)
-- Enable global i18n support (jsonConfig i18n: true) with translation files under admin/i18n/ for all 11 supported languages, resolving the checker's i18n warnings the correct way (validatorErrorText stays a plain string per schema; ioBroker resolves the translation via the files, falling back to the English text if no entry is found). Added @iobroker/adapter-dev and @alcalzone/release-script as devDependencies with translate/release npm scripts. (Migrating to @iobroker/eslint-config was evaluated but reverted: its eslint-plugin-import dependency does not yet support eslint 10.x, which broke npm install.)
-
-### 1.0.6 and older
+### 1.0.7 and older
 
 Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 
@@ -209,7 +210,7 @@ Older changelog entries can be found in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 
 MIT License
 
-Copyright (c) 2026 Stefan Bühler
+Copyright (c) 2026 Stefan Bühler <stefan.buehler46@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
