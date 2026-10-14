@@ -44,7 +44,7 @@
   "dependencies": {
     "@iobroker/adapter-core": "^3.4.3",
     "axios": "^1.18.1",
-    "fast-xml-parser": "^5.9.3",
+    "fast-xml-parser": "^5.11.2",
     "bonjour-service": "^1.4.3"
   },
   "devDependencies": {
