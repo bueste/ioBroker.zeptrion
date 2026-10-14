@@ -55,7 +55,7 @@
     "@iobroker/testing": "^6.2.1",
     "@tsconfig/node22": "^22.0.5",
     "@types/node": "^22.20.1",
-    "eslint": "^10.7.0",
+    "eslint": "^10.12.0",
     "@alcalzone/release-script-plugin-manual-review": "^5.2.0"
   },
   "scripts": {
